@@ -1,4 +1,4 @@
-#from kbd import db
+from kbd import db
 from datetime import datetime
 
 
@@ -104,7 +104,7 @@ class Inspections(db.Model):
     location=db.Column(db.String(20))
     date_measured=db.Column(db.DateTime(40))
     time_measure=db.Column(db.DateTime(40))
-    score=db.Column(db.Float(40))
+    score=db.Column(db.Float)
 
 class StoreAssessments(db.Model):
     __tablename__='storeassessments'
