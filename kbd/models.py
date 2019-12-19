@@ -76,3 +76,19 @@ class TacoTimes(db.Model):
     date_measured=db.Column(db.DateTime(40))
     time_measure=db.Column(db.DateTime(40))
     score=db.Column(db.DateTime(40))
+
+class BagTimes(db.Model):
+    __tablename__='bagtimes'
+    id=db.Column(db.Integer,primary_key=True)
+    week_ending=db.Column(db.DateTime(40))
+    fiscal_week=db.Column(db.Integer)
+    location=db.Column(db.String(20))
+    score=db.Column(db.DateTime(40))
+
+class FoodVariance(db.Model):
+    __tablename__='foodvariance'
+    id=db.Column(db.Integer,primary_key=True)
+    month_ending=db.Column(db.DateTime(40))
+    fiscal_month=db.Column(db.String(20))
+    location=db.Column(db.String(20))
+    score=db.Column(db.Float)
