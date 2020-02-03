@@ -4,7 +4,8 @@ import dash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+APP_ROOT = os.path.abspath(os.path.dirname(__file__))
+APP_STATIC = os.path.join(APP_ROOT, 'static')
 
 app = Flask(__name__)
 
