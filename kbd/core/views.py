@@ -12,7 +12,9 @@ def index():
 
 @core.route('/sales')
 def sales():
-    df=pd.read_csv(os.path.join(APP_STATIC, 'sales.csv'))
+    df=pd.read_csv(os.path.join(APP_STATIC, 'sales.csv'),parse_dates=['week_ending'])
+    df.reset_index()
+
     df = df.to_json()
 
     return jsonify(df)
