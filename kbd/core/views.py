@@ -14,9 +14,10 @@ def index():
 def sales():
     df=pd.read_csv(os.path.join(APP_STATIC, 'sales.csv'))
     df.reset_index()
+    #df.index.astype('int32')
     #df.drop(['week_ending','month','week_of_month','week_of_year','concept','group_meal','guest_count'],axis=1,inplace=True)
     #df.groupby(['sales']).sum()
 
     df = df.to_json()
 
-    return jsonify(df)
+    return df

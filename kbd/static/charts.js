@@ -1,4 +1,4 @@
-/*window.addEventListener('load',setup);
+window.addEventListener('load',setup);
 
 async function setup(){
   const ctx = document.getElementById('myChart').getContext('2d');
@@ -36,8 +36,8 @@ async function getData() {
   });
   return {store, sales};
 }
-*/
-window.addEventListener('load',setup);
+
+/*window.addEventListener('load',setup);
 
 async function setup(){
   const ctx = document.getElementById('myChart').getContext('2d');
@@ -65,4 +65,4 @@ async function getData() {
   const response = await fetch('127.0.0.1:5000/sales');
   const data = await response.json();
   const {store, sales} = data
-}
+}*/
