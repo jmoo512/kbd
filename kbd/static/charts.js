@@ -36,9 +36,9 @@ async function getData() {
   });
   return {store, sales};
 }
-
-/*window.addEventListener('load',setup);
-
+/*
+window.addEventListener('load',setup);
+getData()
 async function setup(){
   const ctx = document.getElementById('myChart').getContext('2d');
   const totalSales = await getData();
@@ -63,6 +63,10 @@ async function setup(){
 
 async function getData() {
   const response = await fetch('127.0.0.1:5000/sales');
-  const data = await response.json();
-  const {store, sales} = data
-}*/
+  const data = {"sales":{"MF1":"58250","MF2":"48866","MF3":"48782","MF4":"52862","MFT1":"2830","MFT2":"15458"}}
+  //const {store, sales} = data
+  console.log(data)
+  const jsonData = JSON.parse(data)
+  return jsondata
+}
+*/
