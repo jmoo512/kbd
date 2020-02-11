@@ -20,4 +20,4 @@ def sales():
 
     df = df.to_json()
 
-    return df
+    return jsonify(df)
