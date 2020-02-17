@@ -5,10 +5,10 @@ from datetime import datetime
 class CashierEfficiency(db.Model):
     __tablename__='ce'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     tm_name=db.Column(db.String(50))
     tm_sales=db.Column(db.Float)
     tm_minutes=db.Column(db.Integer)
@@ -23,20 +23,20 @@ class CashierEfficiency(db.Model):
 class GameFilm(db.Model):
     __tablename__='gamefilm'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     tm_name=db.Column(db.String(50))
     score=db.Column(db.Integer)
 
 class ToGoLabel(db.Model):
     __tablename__='tgl'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     time_measure=db.Column(db.DateTime(40))
     tm_name=db.Column(db.String(50))
     score=db.Column(db.String(25))
@@ -44,10 +44,10 @@ class ToGoLabel(db.Model):
 class GMTimes(db.Model):
     __tablename__='gmtimes'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     time_measure=db.Column(db.DateTime(40))
     order_type=db.Column(db.String(20))
     score=db.Column(db.Integer)
@@ -56,10 +56,10 @@ class GMTimes(db.Model):
 class LineTimes(db.Model):
     __tablename__='linetimes'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     am_taken=db.Column(db.Integer)
     am_out=db.Column(db.Integer)
     am_over_11=db.Column(db.Integer)
@@ -70,18 +70,18 @@ class LineTimes(db.Model):
 class TacoTimes(db.Model):
     __tablename__='tacotimes'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     time_measure=db.Column(db.DateTime(40))
     score=db.Column(db.DateTime(40))
 
 class BagTimes(db.Model):
     __tablename__='bagtimes'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
-    month_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
+    month_ending=db.Column(db.Date(40))
     fiscal_month=db.Column(db.String(20))
     location=db.Column(db.String(20))
     fiscal_week=db.Column(db.Integer)
@@ -91,7 +91,7 @@ class BagTimes(db.Model):
 class FoodVariance(db.Model):
     __tablename__='foodvariance'
     id=db.Column(db.Integer,primary_key=True)
-    month_ending=db.Column(db.DateTime(40))
+    month_ending=db.Column(db.Date(40))
     fiscal_month=db.Column(db.String(20))
     location=db.Column(db.String(20))
     score=db.Column(db.Float)
@@ -99,17 +99,17 @@ class FoodVariance(db.Model):
 class Inspections(db.Model):
     __tablename__='inspections'
     id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.DateTime(40))
+    week_ending=db.Column(db.Date(40))
     fiscal_week=db.Column(db.Integer)
     location=db.Column(db.String(20))
-    date_measured=db.Column(db.DateTime(40))
+    date_measured=db.Column(db.Date(40))
     time_measure=db.Column(db.DateTime(40))
     score=db.Column(db.Float)
 
 class StoreAssessments(db.Model):
     __tablename__='storeassessments'
     id=db.Column(db.Integer,primary_key=True)
-    month_ending=db.Column(db.DateTime(40))
+    month_ending=db.Column(db.Date(40))
     fiscal_month=db.Column(db.String(20))
     location=db.Column(db.String(20))
     score=db.Column(db.Float)
@@ -117,7 +117,7 @@ class StoreAssessments(db.Model):
 class OrderAccuracy(db.Model):
     __tablename__='orderaccuracy'
     id=db.Column(db.Integer,primary_key=True)
-    month_ending=db.Column(db.DateTime(40))
+    month_ending=db.Column(db.Date(40))
     fiscal_month=db.Column(db.String(20))
     location=db.Column(db.String(20))
     score=db.Column(db.Float)

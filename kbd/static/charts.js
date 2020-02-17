@@ -18,7 +18,17 @@ async function setup(){
         }
       ]
     },
-    options: {}
+    options: {
+      scales: {
+            yAxes: [{
+                ticks: {
+                    callback: function(value, index, values) {
+                        return '$' + value;
+                    }
+                }
+            }]
+        }
+    }
   });
 }
 
