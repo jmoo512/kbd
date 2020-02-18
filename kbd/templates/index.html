@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!--<iframe src="https://knlabor.herokuapp.com/" width=1200 height=800>--!>
+<!--<iframe src="https://knlabor.herokuapp.com/" width=1200 height=800>
 <div class="chart">
   <canvas id="myChart"></canvas>
-</div>
-<form action="/" method="post">
+</div>--!>
+<form action="{{url_for('speed.add')}}" method="post">
   {{form.csrf_token}}
   {{form.week_ending.label}}{{form.week_ending}}<br>
   {{form.fiscal_week.label}}{{form.fiscal_week}}<br>

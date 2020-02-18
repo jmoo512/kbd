@@ -13,12 +13,15 @@ class CashierEfficiency(db.Model):
     tm_minutes=db.Column(db.Integer)
     tm_efficiency=db.Column(db.Float)
 
-    def __init__(self,title,text,related_deck,related_box,related_card):
-        self.title=title
-        self.text=text
-        self.related_deck=related_deck
-        self.related_box=related_box
-        self.related_card=related_card
+    def __init__(self,week_ending, fiscal_week, location, date_measured, tm_name, tm_sales, tm_minutes, tm_efficiency):
+        self.week_ending=week_ending
+        self.fiscal_week=fiscal_week
+        self.location=location
+        self.date_measured=date_measured
+        self.tm_name=tm_name
+        self.tm_sales=tm_sales
+        self.tm_minutes=tm_minutes
+        self.tm_efficiency=tm_efficiency
 
 class GMTimes(db.Model):
     __tablename__='gmtimes'
