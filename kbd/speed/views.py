@@ -18,7 +18,7 @@ def add():
     form=CEForm()
 
     ce=CashierEfficiency(week_ending=form.week_ending.data,
-                fiscal_week=form.week_ending.data,
+                fiscal_week=form.fiscal_week.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name.data,

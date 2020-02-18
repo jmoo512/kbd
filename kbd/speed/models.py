@@ -13,7 +13,7 @@ class CashierEfficiency(db.Model):
     tm_minutes=db.Column(db.Integer)
     tm_efficiency=db.Column(db.Float)
 
-    def __init__(self,week_ending, fiscal_week, location, date_measured, tm_name, tm_sales, tm_minutes, tm_efficiency):
+    def __init__(self, week_ending, fiscal_week, location, date_measured, tm_name, tm_sales, tm_minutes, tm_efficiency):
         self.week_ending=week_ending
         self.fiscal_week=fiscal_week
         self.location=location
