@@ -6,6 +6,7 @@
   <canvas id="myChart"></canvas>
 </div>--!>
 <form action="{{url_for('speed.add')}}" method="post">
+
   {{form.csrf_token}}
   {{form.week_ending.label}}{{form.week_ending}}<br>
   {{form.fiscal_week.label}}{{form.fiscal_week}}<br>
@@ -18,6 +19,10 @@
   {{form.submit}}
 
 </form>
+
+{% for i in result %}
+{{i.tm_name}} - {{i.tm_efficiency}}<br>
+{% endfor %}
 <div class="chart">
   <canvas id="myChart2"></canvas>
 </div>

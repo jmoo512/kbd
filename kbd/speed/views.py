@@ -11,10 +11,13 @@ speed = Blueprint('speed',__name__)
 @speed.route('/speed/ce')
 def index():
     form=CEForm()
-    return render_template('index.html',form=form)
+    result=CashierEfficiency.query.all()
+    return render_template('index.html',form=form,result=result)
 
 @speed.route('/add',methods=['GET','POST'])
 def add():
+
+
     form=CEForm()
 
     ce=CashierEfficiency(week_ending=form.week_ending.data,
