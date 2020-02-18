@@ -1,4 +1,6 @@
 from kbd import app, APP_STATIC
+from kbd.models import CashierEfficiency
+from kbd.forms import CEForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
 from werkzeug import secure_filename
 import pandas as pd
@@ -8,7 +10,8 @@ core = Blueprint('core',__name__)
 
 @core.route('/')
 def index():
-    return render_template('index.html')
+    form=CEForm()
+    return render_template('index.html',form=form)
 
 @core.route('/sales')
 def sales():
