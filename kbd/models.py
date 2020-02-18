@@ -11,6 +11,8 @@ class GameFilm(db.Model):
     tm_name=db.Column(db.String(50))
     score=db.Column(db.Integer)
 
+    
+
 class ToGoLabel(db.Model):
     __tablename__='tgl'
     id=db.Column(db.Integer,primary_key=True)
