@@ -25,7 +25,9 @@ Migrate(app,db)
 
 #import blueprints
 from kbd.core.views import core
+from kbd.speed.views import speed
 
 
 #register blueprints
 app.register_blueprint(core)
+app.register_blueprint(speed)
