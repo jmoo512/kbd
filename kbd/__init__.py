@@ -1,6 +1,5 @@
 import os
 from flask import Flask
-import dash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 

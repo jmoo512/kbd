@@ -1,10 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!--<iframe src="https://knlabor.herokuapp.com/" width=1200 height=800>
+<!--<iframe src="https://knlabor.herokuapp.com/" width=1200 height=800>--!>
+  
 <div class="chart">
   <canvas id="myChart"></canvas>
-</div>--!>
+</div>
+
+
 <form action="{{url_for('speed.add')}}" method="post">
 
   {{form.csrf_token}}
@@ -23,9 +26,6 @@
 {% for i in result %}
 {{i.tm_name}} - {{i.tm_efficiency}}<br>
 {% endfor %}
-<div class="chart">
-  <canvas id="myChart2"></canvas>
-</div>
 
 
 
