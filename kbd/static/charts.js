@@ -46,37 +46,7 @@ async function getData() {
   });
   return {store, sales};
 }
-/*
-window.addEventListener('load',setup);
-getData()
-async function setup(){
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const totalSales = await getData();
-  const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: totalSales.store,
-      datasets: [
-        {
-          label: 'Store Sales',
-          data: totalSales.sales,
-          fill: false,
-          borderColor: 'rgba(255,99,132,1)',
-          backgroundColor: 'rgba(255,99,132,0.5)',
-          borderWidth: 1
-        }
-      ]
-    },
-    options: {}
-  });
-}
 
-async function getData() {
-  const response = await fetch('127.0.0.1:5000/sales');
-  const data = {"sales":{"MF1":"58250","MF2":"48866","MF3":"48782","MF4":"52862","MFT1":"2830","MFT2":"15458"}}
-  //const {store, sales} = data
-  console.log(data)
-  const jsonData = JSON.parse(data)
-  return jsondata
-}
-*/
+const newData=[10,20,30,40,50];
+
+const update = addEventListener
