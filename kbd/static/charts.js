@@ -46,7 +46,3 @@ async function getData() {
   });
   return {store, sales};
 }
-
-const newData=[10,20,30,40,50];
-
-const update = addEventListener
