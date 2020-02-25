@@ -8,6 +8,9 @@
 </div>
 
 
+
+
+{#
 <form action="{{url_for('speed.add')}}" method="post">
 
   {{form.csrf_token}}
@@ -26,6 +29,6 @@
   {% for i in result %}
   {{i.tm_name}} - {{i.tm_efficiency}}<br>
   {% endfor %}
-
+#}
 
 {% endblock %}
