@@ -5,12 +5,13 @@ const chart = new Chart(ctx, {
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: ['Week 1','Week 2','Week 3','Week 4'],
         datasets: [{
-            label: 'My First dataset',
+            label: 'Cashier Efficiency',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            data: [9.45, 9.87, 10.4, 9.99],
+            fill: false
         }]
     },
 
