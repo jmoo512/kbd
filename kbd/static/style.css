@@ -1,4 +1,26 @@
-.chart{
-  width:400px;
-  height:400px;
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #111111;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: LightSteelBlue;
+  padding: 5px;
+  margin: 3px 0px 3px 0px;
+  border-radius: 3px;
+  align-items: center;
+  border: solid 2px black;
+}
+.item{
+  padding: 5px;
+}
+
+.item-title{
 }

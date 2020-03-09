@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <div class="item-title">
+      Cashier Efficiency
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="item-title">
+      Taco Times
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="item-title">
+      OLO Times
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="item-title">
+      Bag Times
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="item-title">
+      GM Times
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="add-ce" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('speed.add')}}" method="post">
+          {{form.csrf_token}}
+          {{form.week_ending.label}}{{form.week_ending}}<br>
+          {{form.fiscal_week.label}}{{form.fiscal_week}}<br>
+          {{form.location.label}}{{form.location}}<br>
+          {{form.date_measured.label}}{{form.date_measured}}<br>
+          {{form.tm_name.label}}{{form.tm_name(size=20, maxlength=50)}}<br>
+          {{form.tm_sales.label}}{{form.tm_sales(size=5)}}<br>
+          {{form.tm_minutes.label}}{{form.tm_minutes(size=5)}}<br>
+          {{form.tm_efficiency.label}}{{form.tm_efficiency(size=5)}}<br>
+
+      </div>
+      <div class="modal-footer">
+
+        {{form.submit(class_='btn btn-primary')}}
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

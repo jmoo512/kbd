@@ -30,5 +30,5 @@ def add():
                 tm_efficiency=form.tm_efficiency.data)
     db.session.add(ce)
     db.session.commit()
-    return redirect(url_for('speed.index'))
+    return redirect(url_for('core.add'))
     return render_template('index.html',form=form)

@@ -24,3 +24,8 @@ def sales():
     df = df.to_json()
 
     return df
+
+@core.route('/add')
+def add():
+    form=CEForm()
+    return render_template('add.html',form=form)
