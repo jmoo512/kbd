@@ -85,16 +85,48 @@
       <div class="modal-body">
         <form action="{{url_for('speed.add')}}" method="post">
           {{form.csrf_token}}
-          {{form.week_ending.label}} {{form.week_ending}}<br>
+          {{form.week_ending.label}} {{form.week_ending}}
           {{form.fiscal_week.label}} {{form.fiscal_week}}<br>
-          {{form.fiscal_month.label}} {{form.fiscal_month}}<br>
+          {{form.fiscal_month.label}} {{form.fiscal_month}}
           {{form.fiscal_year.label}} {{form.fiscal_year}}<br>
-          {{form.location.label}} {{form.location}}<br>
+          {{form.location.label}} {{form.location}}
           {{form.date_measured.label}} {{form.date_measured}}<br>
-          {{form.tm_name.label}} {{form.tm_name(size=20, maxlength=50)}}<br>
-          {{form.tm_sales.label}} {{form.tm_sales(size=5)}}<br>
-          {{form.tm_minutes.label}} {{form.tm_minutes(size=5)}}<br>
-          {{form.tm_efficiency.label}} {{form.tm_efficiency(size=5)}}<br>
+          <hr>
+          <b>#1: </b>{{form.tm_name_one.label}} {{form.tm_name_one(size=15, maxlength=50)}}
+          {{form.tm_sales_one.label}} {{form.tm_sales_one(size=6)}}
+          {{form.tm_minutes_one.label}} {{form.tm_minutes_one(size=2)}}
+          {{form.tm_efficiency_one.label}} {{form.tm_efficiency_one(size=5)}}<br>
+          <hr>
+          <b>#2: </b>{{form.tm_name_two.label}} {{form.tm_name_two(size=15, maxlength=50)}}
+          {{form.tm_sales_two.label}} {{form.tm_sales_two(size=6)}}
+          {{form.tm_minutes_two.label}} {{form.tm_minutes_two(size=2)}}
+          {{form.tm_efficiency_two.label}} {{form.tm_efficiency_two(size=5)}}<br>
+          <hr>
+          <b>#3: </b>{{form.tm_name_three.label}} {{form.tm_name_three(size=15, maxlength=50)}}
+          {{form.tm_sales_three.label}} {{form.tm_sales_three(size=6)}}
+          {{form.tm_minutes_three.label}} {{form.tm_minutes_three(size=2)}}
+          {{form.tm_efficiency_three.label}} {{form.tm_efficiency_three(size=5)}}<br>
+          <hr>
+          <b>#4: </b>{{form.tm_name_four.label}} {{form.tm_name_four(size=15, maxlength=50)}}
+          {{form.tm_sales_four.label}} {{form.tm_sales_four(size=6)}}
+          {{form.tm_minutes_four.label}} {{form.tm_minutes_four(size=2)}}
+          {{form.tm_efficiency_four.label}} {{form.tm_efficiency_four(size=5)}}<br>
+          <hr>
+          <b>#5: </b>{{form.tm_name_five.label}} {{form.tm_name_five(size=15, maxlength=50)}}
+          {{form.tm_sales_five.label}} {{form.tm_sales_five(size=6)}}
+          {{form.tm_minutes_five.label}} {{form.tm_minutes_five(size=2)}}
+          {{form.tm_efficiency_five.label}} {{form.tm_efficiency_five(size=5)}}<br>
+          <hr>
+          <b>#6: </b>{{form.tm_name_six.label}} {{form.tm_name_six(size=15, maxlength=50)}}
+          {{form.tm_sales_six.label}} {{form.tm_sales_six(size=6)}}
+          {{form.tm_minutes_six.label}} {{form.tm_minutes_six(size=2)}}
+          {{form.tm_efficiency_six.label}} {{form.tm_efficiency_six(size=5)}}<br>
+          <hr>
+          <b>#7: </b>{{form.tm_name_seven.label}} {{form.tm_name_seven(size=15, maxlength=50)}}
+          {{form.tm_sales_seven.label}} {{form.tm_sales_seven(size=6)}}
+          {{form.tm_minutes_seven.label}} {{form.tm_minutes_seven(size=2)}}
+          {{form.tm_efficiency_seven.label}} {{form.tm_efficiency_seven(size=5)}}<br>
+          <hr>
           {{form.mod_one.label}} {{form.mod_one}}<br>
           {{form.mod_two.label}} {{form.mod_two}}
 
