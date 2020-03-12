@@ -17,7 +17,6 @@ def index():
 @speed.route('/add',methods=['GET','POST'])
 def add():
 
-
     form=CEForm()
 
     if form.tm_name_one.data:
