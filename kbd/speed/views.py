@@ -20,14 +20,20 @@ def add():
 
     form=CEForm()
 
-    ce=CashierEfficiency(week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
-                location=form.location.data,
-                date_measured=form.date_measured.data,
-                tm_name=form.tm_name.data,
-                tm_sales=form.tm_sales.data,
-                tm_minutes=form.tm_minutes.data,
-                tm_efficiency=form.tm_efficiency.data)
+    ce=CashierEfficiency(
+                            week_ending=form.week_ending.data,
+                            fiscal_week=form.fiscal_week.data,
+                            fiscal_month=form.fiscal_month.data,
+                            fiscal_year=form.fiscal_year.data,
+                            location=form.location.data,
+                            date_measured=form.date_measured.data,
+                            tm_name=form.tm_name.data,
+                            tm_sales=form.tm_sales.data,
+                            tm_minutes=form.tm_minutes.data,
+                            tm_efficiency=form.tm_efficiency.data,
+                            mod_one=form.mod_one.data,
+                            mod_two=form.mod_two.data
+                        )
     db.session.add(ce)
     db.session.commit()
     return redirect(url_for('core.add'))

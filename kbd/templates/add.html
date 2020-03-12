@@ -10,8 +10,8 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -24,8 +24,8 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -38,8 +38,8 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -52,8 +52,8 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -66,8 +66,8 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce">Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce">Delete</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -87,12 +87,16 @@
           {{form.csrf_token}}
           {{form.week_ending.label}} {{form.week_ending}}<br>
           {{form.fiscal_week.label}} {{form.fiscal_week}}<br>
+          {{form.fiscal_month.label}} {{form.fiscal_month}}<br>
+          {{form.fiscal_year.label}} {{form.fiscal_year}}<br>
           {{form.location.label}} {{form.location}}<br>
           {{form.date_measured.label}} {{form.date_measured}}<br>
           {{form.tm_name.label}} {{form.tm_name(size=20, maxlength=50)}}<br>
           {{form.tm_sales.label}} {{form.tm_sales(size=5)}}<br>
           {{form.tm_minutes.label}} {{form.tm_minutes(size=5)}}<br>
           {{form.tm_efficiency.label}} {{form.tm_efficiency(size=5)}}<br>
+          {{form.mod_one.label}} {{form.mod_one}}<br>
+          {{form.mod_two.label}} {{form.mod_two}}
 
       </div>
       <div class="modal-footer">

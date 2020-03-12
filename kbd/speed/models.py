@@ -14,8 +14,10 @@ class CashierEfficiency(db.Model):
     tm_sales=db.Column(db.Float)
     tm_minutes=db.Column(db.Integer)
     tm_efficiency=db.Column(db.Float)
+    mod_one=db.Column(db.String(50))
+    mod_two=db.Column(db.String(50))
 
-    def __init__(self, week_ending, fiscal_week, location, date_measured, tm_name, tm_sales, tm_minutes, tm_efficiency):
+    def __init__(self, week_ending, fiscal_week, fiscal_month, fiscal_year, location, date_measured, tm_name, tm_sales, tm_minutes, tm_efficiency, mod_one, mod_two):
         self.week_ending=week_ending
         self.fiscal_week=fiscal_week
         self.fiscal_month=fiscal_month
@@ -26,6 +28,8 @@ class CashierEfficiency(db.Model):
         self.tm_sales=tm_sales
         self.tm_minutes=tm_minutes
         self.tm_efficiency=tm_efficiency
+        self.mod_one=mod_one
+        self.mod_two=mod_two
 
 class GMTimes(db.Model):
     __tablename__='gmtimes'
