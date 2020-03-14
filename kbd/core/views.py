@@ -1,4 +1,4 @@
-from kbd import app, APP_STATIC
+from flask import current_app
 from kbd.speed.models import CashierEfficiency
 from kbd.speed.forms import CEForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
@@ -29,3 +29,7 @@ def sales():
 def add():
     form=CEForm()
     return render_template('add.html',form=form)
+
+@core.route('/dash')
+def dash():
+    return render_template('dash.html')
