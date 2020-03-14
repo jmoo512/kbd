@@ -14,7 +14,9 @@ def Add_Dash(server):
                     routes_pathname_prefix='/dash/')
 
     # Create Dash Layout
-    dash_app.layout = html.Div(children=[
+    dash_app.layout = html.Div([
+                        dcc.Location(id='url',refresh=False)]
+                        children=[
                         dcc.Graph(id='sample',
                                     figure={'data':[
                                         {'x':[1,2,3],'y':[4,1,2],'type':'bar','name':'SF'},
