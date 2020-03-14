@@ -1,4 +1,5 @@
-from kbd import app, APP_STATIC, db
+from flask import current_app
+from kbd import db
 from .models import CashierEfficiency
 from .forms import CEForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
