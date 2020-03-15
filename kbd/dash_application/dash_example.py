@@ -35,7 +35,7 @@ df.rename(columns={'week_ending':'Week Ending',
                     'mod_two':'BOH MOD'}
                     ,inplace=True)
 
-df_avg_efficiency=df.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index()
+df_avg_efficiency=df.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
 
 
 def Add_Dash(server):
