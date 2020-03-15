@@ -92,9 +92,9 @@
           {{form.location.label}} {{form.location}}
           {{form.date_measured.label}} {{form.date_measured}}<br>
           <hr>
-          <b>#1: </b>{{form.tm_name_one.label}} {{form.tm_name_one(size=15, maxlength=50)}}
+          <b>#1: </b>{{form.tm_name_one.label}} {{form.tm_name_one(size=15, maxlength=50, id='autoComplete', tabindex='1')}}
           {{form.tm_sales_one.label}} {{form.tm_sales_one(size=6)}}
-          {{form.tm_minutes_one.label}} {{form.tm_minutes_one(size=2)}}
+          {{form.tm_minutes_one.label}} {{form.tm_minutes_one(size=2)}}<br>
           {{form.tm_efficiency_one.label}} {{form.tm_efficiency_one(size=5)}}<br>
           <hr>
           <b>#2: </b>{{form.tm_name_two.label}} {{form.tm_name_two(size=15, maxlength=50)}}
