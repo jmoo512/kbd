@@ -3,9 +3,7 @@ from kbd import db
 from .models import CashierEfficiency
 from .forms import CEForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
-from werkzeug import secure_filename
-import pandas as pd
-import os
+
 
 speed = Blueprint('speed',__name__)
 

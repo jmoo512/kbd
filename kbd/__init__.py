@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
 from config import Config
 
 APP_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -16,6 +16,8 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app,db)
+    
+
 
 
     app.config.from_object(config_class)
@@ -26,9 +28,11 @@ def create_app(config_class=Config):
         #import blueprints
         from kbd.core.views import core
         from kbd.speed.views import speed
+        from kbd.sales.views import sales
         #register blueprints
         app.register_blueprint(core)
         app.register_blueprint(speed)
+        app.register_blueprint(sales)
 
         #import dash application
         from .dash_application import dash_example

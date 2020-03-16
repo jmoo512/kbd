@@ -19,11 +19,11 @@
   <div class="row">
 
     <div class="item-title">
-      Taco Times
+      Sales
     </div>
 
     <div class="item">
-      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce" disabled>Add</button>
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-sales" >Add</button>
       <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
       <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
@@ -84,56 +84,56 @@
       </div>
       <div class="modal-body">
         <form action="{{url_for('speed.add')}}" method="post">
-          {{form.csrf_token}}
-          {{form.week_ending.label}} {{form.week_ending}}
-          {{form.fiscal_week.label}} {{form.fiscal_week}}
-          {{form.fiscal_month.label}} {{form.fiscal_month}}<br>
-          {{form.fiscal_year.label}} {{form.fiscal_year}}
-          {{form.location.label}} {{form.location}}
-          {{form.date_measured.label}} {{form.date_measured}}
+          {{ceform.csrf_token}}
+          {{ceform.week_ending.label}} {{ceform.week_ending}}
+          {{ceform.fiscal_week.label}} {{ceform.fiscal_week}}
+          {{ceform.fiscal_month.label}} {{ceform.fiscal_month}}<br>
+          {{ceform.fiscal_year.label}} {{ceform.fiscal_year}}
+          {{ceform.location.label}} {{ceform.location}}
+          {{ceform.date_measured.label}} {{ceform.date_measured}}
           <hr>
-          <b>#1: </b>{{form.tm_name_one.label}} {{form.tm_name_one(size=15, maxlength=50)}}
-          {{form.tm_sales_one.label}} {{form.tm_sales_one(size=6)}}
-          {{form.tm_minutes_one.label}} {{form.tm_minutes_one(size=2)}}
-          {{form.tm_efficiency_one.label}} {{form.tm_efficiency_one(size=5)}}<br>
+          <b>#1: </b>{{ceform.tm_name_one.label}} {{ceform.tm_name_one(size=15, maxlength=50)}}
+          {{ceform.tm_sales_one.label}} {{ceform.tm_sales_one(size=6)}}
+          {{ceform.tm_minutes_one.label}} {{ceform.tm_minutes_one(size=2)}}
+          {{ceform.tm_efficiency_one.label}} {{ceform.tm_efficiency_one(size=5)}}<br>
           <hr>
-          <b>#2: </b>{{form.tm_name_two.label}} {{form.tm_name_two(size=15, maxlength=50)}}
-          {{form.tm_sales_two.label}} {{form.tm_sales_two(size=6)}}
-          {{form.tm_minutes_two.label}} {{form.tm_minutes_two(size=2)}}
-          {{form.tm_efficiency_two.label}} {{form.tm_efficiency_two(size=5)}}<br>
+          <b>#2: </b>{{ceform.tm_name_two.label}} {{ceform.tm_name_two(size=15, maxlength=50)}}
+          {{ceform.tm_sales_two.label}} {{ceform.tm_sales_two(size=6)}}
+          {{ceform.tm_minutes_two.label}} {{ceform.tm_minutes_two(size=2)}}
+          {{ceform.tm_efficiency_two.label}} {{ceform.tm_efficiency_two(size=5)}}<br>
           <hr>
-          <b>#3: </b>{{form.tm_name_three.label}} {{form.tm_name_three(size=15, maxlength=50)}}
-          {{form.tm_sales_three.label}} {{form.tm_sales_three(size=6)}}
-          {{form.tm_minutes_three.label}} {{form.tm_minutes_three(size=2)}}
-          {{form.tm_efficiency_three.label}} {{form.tm_efficiency_three(size=5)}}<br>
+          <b>#3: </b>{{ceform.tm_name_three.label}} {{ceform.tm_name_three(size=15, maxlength=50)}}
+          {{ceform.tm_sales_three.label}} {{ceform.tm_sales_three(size=6)}}
+          {{ceform.tm_minutes_three.label}} {{ceform.tm_minutes_three(size=2)}}
+          {{ceform.tm_efficiency_three.label}} {{ceform.tm_efficiency_three(size=5)}}<br>
           <hr>
-          <b>#4: </b>{{form.tm_name_four.label}} {{form.tm_name_four(size=15, maxlength=50)}}
-          {{form.tm_sales_four.label}} {{form.tm_sales_four(size=6)}}
-          {{form.tm_minutes_four.label}} {{form.tm_minutes_four(size=2)}}
-          {{form.tm_efficiency_four.label}} {{form.tm_efficiency_four(size=5)}}<br>
+          <b>#4: </b>{{ceform.tm_name_four.label}} {{ceform.tm_name_four(size=15, maxlength=50)}}
+          {{ceform.tm_sales_four.label}} {{ceform.tm_sales_four(size=6)}}
+          {{ceform.tm_minutes_four.label}} {{ceform.tm_minutes_four(size=2)}}
+          {{ceform.tm_efficiency_four.label}} {{ceform.tm_efficiency_four(size=5)}}<br>
           <hr>
-          <b>#5: </b>{{form.tm_name_five.label}} {{form.tm_name_five(size=15, maxlength=50)}}
-          {{form.tm_sales_five.label}} {{form.tm_sales_five(size=6)}}
-          {{form.tm_minutes_five.label}} {{form.tm_minutes_five(size=2)}}
-          {{form.tm_efficiency_five.label}} {{form.tm_efficiency_five(size=5)}}<br>
+          <b>#5: </b>{{ceform.tm_name_five.label}} {{ceform.tm_name_five(size=15, maxlength=50)}}
+          {{ceform.tm_sales_five.label}} {{ceform.tm_sales_five(size=6)}}
+          {{ceform.tm_minutes_five.label}} {{ceform.tm_minutes_five(size=2)}}
+          {{ceform.tm_efficiency_five.label}} {{ceform.tm_efficiency_five(size=5)}}<br>
           <hr>
-          <b>#6: </b>{{form.tm_name_six.label}} {{form.tm_name_six(size=15, maxlength=50)}}
-          {{form.tm_sales_six.label}} {{form.tm_sales_six(size=6)}}
-          {{form.tm_minutes_six.label}} {{form.tm_minutes_six(size=2)}}
-          {{form.tm_efficiency_six.label}} {{form.tm_efficiency_six(size=5)}}<br>
+          <b>#6: </b>{{ceform.tm_name_six.label}} {{ceform.tm_name_six(size=15, maxlength=50)}}
+          {{ceform.tm_sales_six.label}} {{ceform.tm_sales_six(size=6)}}
+          {{ceform.tm_minutes_six.label}} {{ceform.tm_minutes_six(size=2)}}
+          {{ceform.tm_efficiency_six.label}} {{ceform.tm_efficiency_six(size=5)}}<br>
           <hr>
-          <b>#7: </b>{{form.tm_name_seven.label}} {{form.tm_name_seven(size=15, maxlength=50)}}
-          {{form.tm_sales_seven.label}} {{form.tm_sales_seven(size=6)}}
-          {{form.tm_minutes_seven.label}} {{form.tm_minutes_seven(size=2)}}
-          {{form.tm_efficiency_seven.label}} {{form.tm_efficiency_seven(size=5)}}<br>
+          <b>#7: </b>{{ceform.tm_name_seven.label}} {{ceform.tm_name_seven(size=15, maxlength=50)}}
+          {{ceform.tm_sales_seven.label}} {{ceform.tm_sales_seven(size=6)}}
+          {{ceform.tm_minutes_seven.label}} {{ceform.tm_minutes_seven(size=2)}}
+          {{ceform.tm_efficiency_seven.label}} {{ceform.tm_efficiency_seven(size=5)}}<br>
           <hr>
-          {{form.mod_one.label}} {{form.mod_one}}
-          {{form.mod_two.label}} {{form.mod_two}}
+          {{ceform.mod_one.label}} {{ceform.mod_one}}
+          {{ceform.mod_two.label}} {{ceform.mod_two}}
 
       </div>
       <div class="modal-footer">
 
-        {{form.submit(class_='btn btn-primary')}}
+        {{ceform.submit(class_='btn btn-primary')}}
       </form>
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -142,6 +142,50 @@
   </div>
 </div>
 
+<div class="modal fade" id="add-sales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Sales</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('sales.add')}}" method="post">
+          {{sales_form.csrf_token}}
+          {{sales_form.week_ending.label}} {{sales_form.week_ending}}
+          {{sales_form.fiscal_month.label}} {{sales_form.fiscal_month}}
+          {{sales_form.fiscal_year.label}} {{sales_form.fiscal_year}}<br>
+          {{sales_form.week_of_month.label}} {{sales_form.week_of_month}}
+          {{sales_form.week_of_year.label}} {{sales_form.week_of_year(size=2)}}
+          <hr>
+          {{sales_form.concept.label}} {{sales_form.concept}}
+          {{sales_form.location.label}} {{sales_form.location}}
+          <hr>
+          {{sales_form.sales.label}} {{sales_form.sales(size=5, placeholder='$')}}
+          {{sales_form.bbq_sales.label}} {{sales_form.bbq_sales(size=5, placeholder='$')}}
+          {{sales_form.taco_sales.label}} {{sales_form.taco_sales(size=5, placeholder='$')}}
+          {{sales_form.group_meal_sales.label}} {{sales_form.group_meal_sales(size=5, placeholder='$')}}<br>
+          {{sales_form.mavn_sales.label}} {{sales_form.mavn_sales(size=5, placeholder='$')}}
+          {{sales_form.doordash_sales.label}} {{sales_form.doordash_sales(size=5, placeholder='$')}}
+          <hr>
+          {{sales_form.total_guest_count.label}} {{sales_form.total_guest_count(size=5)}}
+          {{sales_form.bbq_guest_count.label}} {{sales_form.bbq_guest_count(size=5)}}
+          {{sales_form.taco_guest_count.label}} {{sales_form.taco_guest_count(size=5)}}
 
+
+
+      </div>
+      <div class="modal-footer">
+        {{sales_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

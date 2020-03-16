@@ -1,10 +1,10 @@
 from flask import current_app
 from kbd.speed.models import CashierEfficiency
 from kbd.speed.forms import CEForm
+from kbd.sales.forms import SalesForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
 from werkzeug import secure_filename
 import pandas as pd
-import os
 
 core = Blueprint('core',__name__)
 
@@ -13,22 +13,11 @@ def index():
     form=CEForm()
     return render_template('index.html',form=form)
 
-@core.route('/sales')
-def sales():
-    df=pd.read_csv(os.path.join(APP_STATIC, 'sales.csv'))
-    df.set_index('store',inplace=True)
-    #df.index.astype('int32')
-    #df.drop(['week_ending','month','week_of_month','week_of_year','concept','group_meal','guest_count'],axis=1,inplace=True)
-    #df.groupby(['sales']).sum()
-
-    df = df.to_json()
-
-    return df
-
 @core.route('/add')
 def add():
-    form=CEForm()
-    return render_template('add.html',form=form)
+    ceform=CEForm()
+    sales_form=SalesForm()
+    return render_template('add.html',ceform=ceform, sales_form=sales_form)
 
 @core.route('/dash')
 def dash():

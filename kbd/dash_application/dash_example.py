@@ -41,8 +41,6 @@ df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North'
 
 stores=['North','South','Round Rock','620','Lamar','MF1','MF2','MF3','MF4']
 
-for i in stores:
-    print({'label':i,'value':i},)
 
 def Add_Dash(server):
     external_stylesheets = []
