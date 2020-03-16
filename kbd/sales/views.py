@@ -9,7 +9,7 @@ from flask import render_template,request,Blueprint,redirect,url_for, request, j
 
 sales=Blueprint('sales',__name__)
 
-@sales.route('/add/',methods=['POST'])
+@sales.route('/add/',methods=['POST','PATCH'])
 def add():
 
     form=SalesForm()

@@ -192,4 +192,51 @@
   </div>
 </div>
 
+<!--MODAL TO EDIT SALES-->
+
+<div class="modal fade" id="add-sales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Sales</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('sales.add')}}" method="patch">
+          {{sales_form.csrf_token}}
+          {{sales_form.week_ending.label}} {{sales_form.week_ending}}
+          {{sales_form.fiscal_month.label}} {{sales_form.fiscal_month}}
+          {{sales_form.fiscal_year.label}} {{sales_form.fiscal_year}}<br>
+          {{sales_form.week_of_month.label}} {{sales_form.week_of_month}}
+          {{sales_form.week_of_year.label}} {{sales_form.week_of_year(size=2)}}
+          <hr>
+          {{sales_form.concept.label}} {{sales_form.concept}}
+          {{sales_form.location.label}} {{sales_form.location}}
+          <hr>
+          {{sales_form.sales.label}} {{sales_form.sales(size=5, placeholder='$')}}
+          {{sales_form.bbq_sales.label}} {{sales_form.bbq_sales(size=5, placeholder='$')}}
+          {{sales_form.taco_sales.label}} {{sales_form.taco_sales(size=5, placeholder='$')}}
+          {{sales_form.group_meal_sales.label}} {{sales_form.group_meal_sales(size=5, placeholder='$')}}<br>
+          {{sales_form.mavn_sales.label}} {{sales_form.mavn_sales(size=5, placeholder='$')}}
+          {{sales_form.doordash_sales.label}} {{sales_form.doordash_sales(size=5, placeholder='$')}}
+          <hr>
+          {{sales_form.total_guest_count.label}} {{sales_form.total_guest_count(size=5)}}
+          {{sales_form.bbq_guest_count.label}} {{sales_form.bbq_guest_count(size=5)}}
+          {{sales_form.taco_guest_count.label}} {{sales_form.taco_guest_count(size=5)}}
+
+
+
+      </div>
+      <div class="modal-footer">
+        {{sales_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
