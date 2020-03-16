@@ -10,7 +10,7 @@ class Sales(db.Model):
     fiscal_year=db.Column(db.Integer)
     week_of_month=db.Column(db.Integer)
     week_of_year=db.Column(db.Integer)
-    concept=db.Column(db.String(10))
+    concept=db.Column(db.String(15))
     location=db.Column(db.String(15))
     sales=db.Column(db.Float)
     bbq_sales=db.Column(db.Float)

@@ -49,7 +49,8 @@ class SalesForm(FlaskForm):
                                                 ('MF1','MF1'),
                                                 ('MF2','MF2'),
                                                 ('MF3','MF3'),
-                                                ('MF4','MF4')
+                                                ('MF4','MF4'),
+                                                ('MFT2','MFT2')
                                             ])
     sales=FloatField('Sales')
     bbq_sales=FloatField('BBQ Sales')
