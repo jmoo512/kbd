@@ -36,7 +36,13 @@ df.rename(columns={'week_ending':'Week Ending',
                     ,inplace=True)
 
 df_avg_efficiency=df.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
+df_efficiency_trend=df.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
+df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North']
 
+stores=['North','South','Round Rock','620','Lamar','MF1','MF2','MF3','MF4']
+
+for i in stores:
+    print({'label':i,'value':i},)
 
 def Add_Dash(server):
     external_stylesheets = []
@@ -48,14 +54,42 @@ def Add_Dash(server):
                     routes_pathname_prefix='/dash/')
 
     # Create Dash Layout
-    dash_app.layout = html.Div(children=[
+    dash_app.layout = html.Div([
+                                html.Div([
+                                dcc.Dropdown(
+                                    id='store',
+                                    options=[
+                                        {'label':'North','value':'North'},
+                                        {'label':'South','value':'South'},
+                                        {'label':'Round Rock','value':'Round Rock'},
+                                        {'label':'620','value':'620'},
+                                        {'label':'Lamar','value':'Lamar'},
+                                        {'label':'MF1','value':'MF1'},
+                                        {'label':'MF2','value':'MF2'},
+                                        {'label':'MF3','value':'MF3'},
+                                        {'label':'MF4','value':'MF4'},
+                                    ],
+                                    value='North',
+                                    placeholder='Select a store'
+                                ),
                                 dcc.Graph(id='sample',
                                                 figure={'data':[
-                                                    {'x':df_avg_efficiency['Location'],'y':df_avg_efficiency['Efficiency'],'type':'bar','name':'North'}
-                                                                                                    ],
+                                                            dict(
+                                                                x=df_efficiency_trend['Week Ending'],
+                                                                y=df_efficiency_trend['Efficiency'],
+                                                                mode='lines+text',
+                                                                text=df_efficiency_trend['Efficiency'],
+                                                                textposition='top center',
+                                                                textfont=dict(
+                                                                    size=20
+                                                                ),
+                                                                tickmode='linear'
+
+                                                        )],
                                                 'layout':{
-                                                    'title':'Average Cashier Efficiency'
+                                                    'title':'Cashier Efficiency'
                                                 }})
+                                                ])
     ])
 
     return dash_app.server

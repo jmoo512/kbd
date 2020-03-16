@@ -74,7 +74,7 @@
 </div>
 
 <div class="modal fade" id="add-ce" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Cashier Efficiency</h5>
@@ -86,15 +86,15 @@
         <form action="{{url_for('speed.add')}}" method="post">
           {{form.csrf_token}}
           {{form.week_ending.label}} {{form.week_ending}}
-          {{form.fiscal_week.label}} {{form.fiscal_week}}<br>
-          {{form.fiscal_month.label}} {{form.fiscal_month}}
-          {{form.fiscal_year.label}} {{form.fiscal_year}}<br>
+          {{form.fiscal_week.label}} {{form.fiscal_week}}
+          {{form.fiscal_month.label}} {{form.fiscal_month}}<br>
+          {{form.fiscal_year.label}} {{form.fiscal_year}}
           {{form.location.label}} {{form.location}}
-          {{form.date_measured.label}} {{form.date_measured}}<br>
+          {{form.date_measured.label}} {{form.date_measured}}
           <hr>
-          <b>#1: </b>{{form.tm_name_one.label}} {{form.tm_name_one(size=15, maxlength=50, id='autoComplete', tabindex='1')}}
+          <b>#1: </b>{{form.tm_name_one.label}} {{form.tm_name_one(size=15, maxlength=50)}}
           {{form.tm_sales_one.label}} {{form.tm_sales_one(size=6)}}
-          {{form.tm_minutes_one.label}} {{form.tm_minutes_one(size=2)}}<br>
+          {{form.tm_minutes_one.label}} {{form.tm_minutes_one(size=2)}}
           {{form.tm_efficiency_one.label}} {{form.tm_efficiency_one(size=5)}}<br>
           <hr>
           <b>#2: </b>{{form.tm_name_two.label}} {{form.tm_name_two(size=15, maxlength=50)}}
@@ -127,7 +127,7 @@
           {{form.tm_minutes_seven.label}} {{form.tm_minutes_seven(size=2)}}
           {{form.tm_efficiency_seven.label}} {{form.tm_efficiency_seven(size=5)}}<br>
           <hr>
-          {{form.mod_one.label}} {{form.mod_one}}<br>
+          {{form.mod_one.label}} {{form.mod_one}}
           {{form.mod_two.label}} {{form.mod_two}}
 
       </div>

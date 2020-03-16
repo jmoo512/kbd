@@ -1,11 +1,11 @@
-#autoComplete_wrapper {
+/#autoComplete_wrapper {
   position: relative;
   display: inline-block;
 }
 
 #autoComplete {
   position: relative;
-  /*padding: 0 2rem 0 3.5rem;
+  padding: 0 2rem 0 3.5rem;
   height: 2.1rem;
   width: 6rem;
   font-size: 1.2rem;
@@ -21,26 +21,26 @@
   background-position: center;
   transition: all 0.4s ease;
   -webkit-transition: all -webkit-transform 0.4s ease;
-  text-overflow: ellipsis;*/
+  text-overflow: ellipsis;
 }
 
 #autoComplete::placeholder {
-  /*color: rgba(255, 122, 122, 0);
-  transition: all 0.3s ease;*/
+  color: rgba(255, 122, 122, 0);
+  transition: all 0.3s ease;
 }
 
 #autoComplete:hover::placeholder {
-  /*color: rgba(255, 122, 122, 0.3);
+  color: rgba(255, 122, 122, 0.3);
   transition: all 0.3s ease;
-  -webkit-transition: all -webkit-transform 0.3s ease;*/
+  -webkit-transition: all -webkit-transform 0.3s ease;
 }
 
 #autoComplete:focus::placeholder {
-  /*padding: 0.1rem 0.6rem;
+  padding: 0.1rem 0.6rem;
   font-size: 1rem;
   color: rgba(255, 122, 122, 0.3);
   transition: all 0.3s ease;
-  -webkit-transition: all -webkit-transform 0.3s ease;*/
+  -webkit-transition: all -webkit-transform 0.3s ease;
 }
 
 #autoComplete::selection {
@@ -48,12 +48,12 @@
 }
 
 #autoComplete:focus::selection {
-  /*color: #fff;
-  background-color: rgba(255, 122, 122, 1);*/
+  color: #fff;
+  background-color: rgba(255, 122, 122, 1);
 }
 
 #autoComplete:hover {
-  /*padding: 0 2rem 0 3.5rem;
+  padding: 0 2rem 0 3.5rem;
   color: rgba(255, 122, 122, 1);
   height: 3rem;
   width: 16.5rem;
@@ -61,11 +61,11 @@
   background-size: 1.7rem;
   background-position: left 1.05rem top 0.7rem;
   transition: all 0.3s ease;
-  -webkit-transition: all -webkit-transform 0.3s ease;*/
+  -webkit-transition: all -webkit-transform 0.3s ease;
 }
 
 #autoComplete:focus {
-  /*padding: 0 2rem 0 3.5rem;
+  padding: 0 2rem 0 3.5rem;
   color: rgba(255, 122, 122, 1);
   height: 3rem;
   width: 16.5rem;
@@ -73,7 +73,7 @@
   background-image: url(./images/magnifier.svg);
   background-size: 1.5rem;
   background-position: left 1.05rem top 0.8rem;
-  box-shadow: rgba(255, 122, 122, 0.1) 0px 0px 20px 5px;*/
+  box-shadow: rgba(255, 122, 122, 0.1) 0px 0px 20px 5px;
 }
 
 #autoComplete_list {
