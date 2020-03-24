@@ -16,35 +16,26 @@ def create_pandas_table(sql_query, database = conn):
     return table
 
 cur = conn.cursor()
-#ce_data = create_pandas_table("SELECT * FROM ce")
 sales_data = create_pandas_table("SELECT * FROM sales WHERE week_ending > '2017-12-31'")
 cur.close()
 conn.close()
-#df_ce=ce_data
-df_sales=sales_data
 
-#df_ce.drop(columns='id',inplace=True)
+df=sales_data
 
-#df_ce.rename(columns={'week_ending':'Week Ending',
-                    #'fiscal_week':'Fiscal Week',
-                    #'location':'Location',
-                    #'date_measured':'Date Measured',
-                    #'tm_name':'TM',
-                    #'tm_sales':'Sales',
-                    #'tm_minutes':'Minutes',
-                    #'tm_efficiency':'Efficiency',
-                    #'fiscal_month':'Month',
-                    #'fiscal_year':'Year',
-                    #'mod_one':'FOH MOD',
-                    #'mod_two':'BOH MOD'}
-                    #,inplace=True)
+#find highest year in df
+max_year=df['fiscal_year'].max()
+
+#find current week based on last entry in df
+curr_week=df[df['fiscal_year']==max_year]['week_of_year'].max()
+
+#set starting range for sales graph
+start_week=curr_week-6
 
 #df_avg_efficiency=df_ce.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
 #df_efficiency_trend=df_ce.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
-#df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North']
 
-df_sales.drop(columns=['id','fiscal_month','week_of_month','concept','bbq_sales','taco_sales','group_meal_sales','mavn_sales','doordash_sales','total_guest_count','bbq_guest_count','taco_guest_count'],inplace=True)
-df=df_sales[df_sales['location']=='183']
+
+df=df[df['location']=='183']
 df['week_ending']=df['week_ending'].astype('datetime64[ns]')
 df.sort_values(by='week_ending', inplace=True)
 df.reset_index(inplace=True)
