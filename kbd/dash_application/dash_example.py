@@ -1,4 +1,5 @@
 from dash import Dash
+from dash.dependencies import Input, Output
 import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
@@ -44,7 +45,7 @@ df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North'
 df_sales.drop(columns=['id','fiscal_month','fiscal_year','week_of_month','week_of_year','concept','bbq_sales','taco_sales','group_meal_sales','mavn_sales','doordash_sales','total_guest_count','bbq_guest_count','taco_guest_count'],inplace=True)
 df=df_sales[df_sales['location']=='183']
 df['week_ending']=df['week_ending'].astype('datetime64[ns]')
-df.sort_values(by='week_ending', inplace=True, copy=False)
+df.sort_values(by='week_ending', inplace=True)
 df.reset_index(inplace=True)
 df.drop(columns='index')
 
@@ -74,6 +75,7 @@ def Add_Dash(server):
                                         {'label':'MF2','value':'MF2'},
                                         {'label':'MF3','value':'MF3'},
                                         {'label':'MF4','value':'MF4'},
+                                        {'label':'MFT2','value':'MFT2'}
                                     ],
                                     value='North',
                                     placeholder='Select a store'
@@ -92,11 +94,25 @@ def Add_Dash(server):
                                                 ])
     ])
 
+    init_callbacks(dash_app)
     return dash_app.server
 
 def init_callbacks(dash_app):
-    @app.callback(
-        Output(component_id='sales', component_property='children'),
+    @dash_app.callback(
+        Output(component_id='sales', component_property='figure'),
         [Input(component_id='store', component_property='value')])
-    def update_sales(input_value):
-        return 'You\'ve entered "{}"'.format(input_value)
+    def update_sales(update_sales_chart):
+        df=df_sales[(df_sales['location']==update_sales_chart)]
+        df['week_ending']=df['week_ending'].astype('datetime64[ns]')
+        df.sort_values(by='week_ending', inplace=True)
+        df.reset_index(inplace=True)
+        df.drop(columns='index')
+        return {'data':[
+                    dict(
+                        x=df['week_ending'],
+                        y=df['sales'],
+                        mode='lines'
+                    )],
+                'layout':{
+                    'title':'Sales'
+                }}
