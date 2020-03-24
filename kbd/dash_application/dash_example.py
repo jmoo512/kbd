@@ -16,32 +16,32 @@ def create_pandas_table(sql_query, database = conn):
     return table
 
 cur = conn.cursor()
-ce_data = create_pandas_table("SELECT * FROM ce")
+#ce_data = create_pandas_table("SELECT * FROM ce")
 sales_data = create_pandas_table("SELECT * FROM sales WHERE week_ending > '2017-12-31'")
 cur.close()
 conn.close()
-df_ce=ce_data
+#df_ce=ce_data
 df_sales=sales_data
 
-df_ce.drop(columns='id',inplace=True)
+#df_ce.drop(columns='id',inplace=True)
 
-df_ce.rename(columns={'week_ending':'Week Ending',
-                    'fiscal_week':'Fiscal Week',
-                    'location':'Location',
-                    'date_measured':'Date Measured',
-                    'tm_name':'TM',
-                    'tm_sales':'Sales',
-                    'tm_minutes':'Minutes',
-                    'tm_efficiency':'Efficiency',
-                    'fiscal_month':'Month',
-                    'fiscal_year':'Year',
-                    'mod_one':'FOH MOD',
-                    'mod_two':'BOH MOD'}
-                    ,inplace=True)
+#df_ce.rename(columns={'week_ending':'Week Ending',
+                    #'fiscal_week':'Fiscal Week',
+                    #'location':'Location',
+                    #'date_measured':'Date Measured',
+                    #'tm_name':'TM',
+                    #'tm_sales':'Sales',
+                    #'tm_minutes':'Minutes',
+                    #'tm_efficiency':'Efficiency',
+                    #'fiscal_month':'Month',
+                    #'fiscal_year':'Year',
+                    #'mod_one':'FOH MOD',
+                    #'mod_two':'BOH MOD'}
+                    #,inplace=True)
 
-df_avg_efficiency=df_ce.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
-df_efficiency_trend=df_ce.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
-df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North']
+#df_avg_efficiency=df_ce.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
+#df_efficiency_trend=df_ce.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
+#df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North']
 
 df_sales.drop(columns=['id','fiscal_month','fiscal_year','week_of_month','week_of_year','concept','bbq_sales','taco_sales','group_meal_sales','mavn_sales','doordash_sales','total_guest_count','bbq_guest_count','taco_guest_count'],inplace=True)
 df=df_sales[df_sales['location']=='183']
@@ -76,30 +76,24 @@ def Add_Dash(server):
                                         {'label':'MF2','value':'MF2'},
                                         {'label':'MF3','value':'MF3'},
                                         {'label':'MF4','value':'MF4'},
-                                        {'label':'MFT2','value':'MFT2'}                                
-                                    ],
+                                        {'label':'MFT2','value':'MFT2'}
+                                            ],
                                     value='183',
                                     placeholder='Select a store'
                                 ),
-                                dcc.DatePickerRange(id='date_picker_range',
-                                                    start_date=dt(2018,1,1),
-                                                    end_date=dt.today(),
-                                                    min_date_allowed=dt(2017,1,1),
-                                                    max_date_allowed=dt.today()
-                                                    ),
                                 dcc.Graph(id='sales',
                                                 figure={'data':[
                                                             dict(
                                                                 x=df['week_ending'],
                                                                 y=df['sales'],
                                                                 mode='lines'
-                                                            )],
-                                                'layout':{
-                                                    'title':'Sales'
-                                                }
-                                                })
-                                                ])
-    ])
+                                                                )],
+                                                        'layout':{
+                                                            'title':'Sales'
+                                                                }
+                                                        })
+                                            ])
+                                    ])
 
     init_callbacks(dash_app)
     return dash_app.server
