@@ -43,7 +43,7 @@ df_sales=sales_data
 #df_efficiency_trend=df_ce.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
 #df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North']
 
-df_sales.drop(columns=['id','fiscal_month','fiscal_year','week_of_month','week_of_year','concept','bbq_sales','taco_sales','group_meal_sales','mavn_sales','doordash_sales','total_guest_count','bbq_guest_count','taco_guest_count'],inplace=True)
+df_sales.drop(columns=['id','fiscal_month','week_of_month','concept','bbq_sales','taco_sales','group_meal_sales','mavn_sales','doordash_sales','total_guest_count','bbq_guest_count','taco_guest_count'],inplace=True)
 df=df_sales[df_sales['location']=='183']
 df['week_ending']=df['week_ending'].astype('datetime64[ns]')
 df.sort_values(by='week_ending', inplace=True)
@@ -83,13 +83,13 @@ def Add_Dash(server):
                                 ),
                                 dcc.Graph(id='sales',
                                                 figure={'data':[
-                                                            dict(
-                                                                x=df['week_ending'],
-                                                                y=df['sales'],
-                                                                mode='lines'
-                                                                )],
+                                                            {'x':df[df['fiscal_year']==2018]['week_of_year'],'y':df[df['fiscal_year']==2018]['sales'],'type':'lines','name':'2018'},
+                                                            {'x':df[df['fiscal_year']==2019]['week_of_year'],'y':df[df['fiscal_year']==2019]['sales'],'type':'lines','name':'2019'},
+                                                            {'x':df[df['fiscal_year']==2020]['week_of_year'],'y':df[df['fiscal_year']==2020]['sales'],'type':'lines','name':'2020'}
+                                                            ],
                                                         'layout':{
-                                                            'title':'Sales'
+                                                            'title':'Weekly Sales',
+                                                            'xaxis': {'title':'Week of the Year'}
                                                                 }
                                                         })
                                             ])
@@ -109,11 +109,11 @@ def init_callbacks(dash_app):
         df.reset_index(inplace=True)
         df.drop(columns='index')
         return {'data':[
-                    dict(
-                        x=df['week_ending'],
-                        y=df['sales'],
-                        mode='lines'
-                    )],
+                    {'x':df[df['fiscal_year']==2018]['week_of_year'],'y':df[df['fiscal_year']==2018]['sales'],'type':'lines','name':'2018'},
+                    {'x':df[df['fiscal_year']==2019]['week_of_year'],'y':df[df['fiscal_year']==2019]['sales'],'type':'lines','name':'2019'},
+                    {'x':df[df['fiscal_year']==2020]['week_of_year'],'y':df[df['fiscal_year']==2020]['sales'],'type':'lines','name':'2020'}
+                    ],
                 'layout':{
-                    'title':'Sales'
+                    'title':'Weekly Sales',
+                    'xaxis': {'title':'Week of the Year'}
                 }}
