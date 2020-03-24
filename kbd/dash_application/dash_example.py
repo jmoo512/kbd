@@ -6,6 +6,7 @@ import dash_html_components as html
 import psycopg2
 import pandas as pd
 from psql_config import config
+from datetime import datetime as dt
 
 params=config()
 conn=psycopg2.connect(**params)
@@ -16,7 +17,7 @@ def create_pandas_table(sql_query, database = conn):
 
 cur = conn.cursor()
 ce_data = create_pandas_table("SELECT * FROM ce")
-sales_data = create_pandas_table("SELECT * FROM sales")
+sales_data = create_pandas_table("SELECT * FROM sales WHERE week_ending > '2017-12-31'")
 cur.close()
 conn.close()
 df_ce=ce_data
@@ -75,11 +76,17 @@ def Add_Dash(server):
                                         {'label':'MF2','value':'MF2'},
                                         {'label':'MF3','value':'MF3'},
                                         {'label':'MF4','value':'MF4'},
-                                        {'label':'MFT2','value':'MFT2'}
+                                        {'label':'MFT2','value':'MFT2'}                                
                                     ],
-                                    value='North',
+                                    value='183',
                                     placeholder='Select a store'
                                 ),
+                                dcc.DatePickerRange(id='date_picker_range',
+                                                    start_date=dt(2018,1,1),
+                                                    end_date=dt.today(),
+                                                    min_date_allowed=dt(2017,1,1),
+                                                    max_date_allowed=dt.today()
+                                                    ),
                                 dcc.Graph(id='sales',
                                                 figure={'data':[
                                                             dict(
