@@ -10,18 +10,20 @@ params=config()
 conn=psycopg2.connect(**params)
 
 def create_pandas_table(sql_query, database = conn):
-    table = pd.read_sql_query(sql_query, database, parse_dates=['week_ending','date_measured'])
+    table = pd.read_sql_query(sql_query, database)
     return table
 
 cur = conn.cursor()
 ce_data = create_pandas_table("SELECT * FROM ce")
+sales_data = create_pandas_table("SELECT * FROM sales")
 cur.close()
 conn.close()
-df=ce_data
+df_ce=ce_data
+df_sales=sales_data
 
-df.drop(columns='id',inplace=True)
+df_ce.drop(columns='id',inplace=True)
 
-df.rename(columns={'week_ending':'Week Ending',
+df_ce.rename(columns={'week_ending':'Week Ending',
                     'fiscal_week':'Fiscal Week',
                     'location':'Location',
                     'date_measured':'Date Measured',
@@ -35,11 +37,17 @@ df.rename(columns={'week_ending':'Week Ending',
                     'mod_two':'BOH MOD'}
                     ,inplace=True)
 
-df_avg_efficiency=df.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
-df_efficiency_trend=df.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
+df_avg_efficiency=df_ce.groupby(['Location'])['Efficiency'].mean().astype(float).round(2).reset_index().sort_values('Efficiency',ascending=False)
+df_efficiency_trend=df_ce.groupby(['Location','Week Ending'])['Efficiency'].mean().astype(float).round(2).reset_index()
 df_efficiency_trend=df_efficiency_trend[df_efficiency_trend['Location']=='North']
 
-stores=['North','South','Round Rock','620','Lamar','MF1','MF2','MF3','MF4']
+df_sales.drop(columns=['id','fiscal_month','fiscal_year','week_of_month','week_of_year','concept','bbq_sales','taco_sales','group_meal_sales','mavn_sales','doordash_sales','total_guest_count','bbq_guest_count','taco_guest_count'],inplace=True)
+df=df_sales[df_sales['location']=='183']
+df['week_ending']=df['week_ending'].astype('datetime64[ns]')
+df.sort_values(by='week_ending', inplace=True, copy=False)
+df.reset_index(inplace=True)
+df.drop(columns='index')
+
 
 
 def Add_Dash(server):
@@ -57,8 +65,8 @@ def Add_Dash(server):
                                 dcc.Dropdown(
                                     id='store',
                                     options=[
-                                        {'label':'North','value':'North'},
-                                        {'label':'South','value':'South'},
+                                        {'label':'North','value':'183'},
+                                        {'label':'South','value':'360'},
                                         {'label':'Round Rock','value':'Round Rock'},
                                         {'label':'620','value':'620'},
                                         {'label':'Lamar','value':'Lamar'},
@@ -70,24 +78,25 @@ def Add_Dash(server):
                                     value='North',
                                     placeholder='Select a store'
                                 ),
-                                dcc.Graph(id='sample',
+                                dcc.Graph(id='sales',
                                                 figure={'data':[
                                                             dict(
-                                                                x=df_efficiency_trend['Week Ending'],
-                                                                y=df_efficiency_trend['Efficiency'],
-                                                                mode='lines+text',
-                                                                text=df_efficiency_trend['Efficiency'],
-                                                                textposition='top center',
-                                                                textfont=dict(
-                                                                    size=20
-                                                                ),
-                                                                tickmode='linear'
-
-                                                        )],
+                                                                x=df['week_ending'],
+                                                                y=df['sales'],
+                                                                mode='lines'
+                                                            )],
                                                 'layout':{
-                                                    'title':'Cashier Efficiency'
-                                                }})
+                                                    'title':'Sales'
+                                                }
+                                                })
                                                 ])
     ])
 
     return dash_app.server
+
+def init_callbacks(dash_app):
+    @app.callback(
+        Output(component_id='sales', component_property='children'),
+        [Input(component_id='store', component_property='value')])
+    def update_sales(input_value):
+        return 'You\'ve entered "{}"'.format(input_value)

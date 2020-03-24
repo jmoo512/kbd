@@ -41,8 +41,8 @@ class SalesForm(FlaskForm):
                                                 ])
 
     location=SelectField('Location', choices=[
-                                                ('North','North'),
-                                                ('South','South'),
+                                                ('183','North'),
+                                                ('360','South'),
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
                                                 ('Lamar','Lamar'),
