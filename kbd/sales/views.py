@@ -2,7 +2,10 @@ from flask import current_app
 from kbd import db
 from .models import Sales
 from .forms import SalesForm
-from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
+from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify,Response
+import pandas as pd
+from psql_config import config
+import psycopg2
 
 
 
@@ -36,3 +39,23 @@ def add():
     db.session.commit()
 
     return redirect(url_for('core.add'))
+
+
+@sales.route('/salesdf')
+def salesdf():
+    params=config()
+    conn=psycopg2.connect(**params)
+
+
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_ending,week_of_year,location,sales, fiscal_year FROM sales WHERE week_ending > '2017-12-31'")
+    cur.close()
+    conn.close()
+
+    df=sales_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
