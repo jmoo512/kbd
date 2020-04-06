@@ -16,7 +16,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app,db)
-    
+
 
 
 
@@ -35,9 +35,7 @@ def create_app(config_class=Config):
         app.register_blueprint(sales)
 
         #import dash application
-        from .dash_application import dash_example
-        app=dash_example.Add_Dash(app)
-
+        
         return app
 
 

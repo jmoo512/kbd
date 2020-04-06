@@ -19,6 +19,6 @@ def add():
     sales_form=SalesForm()
     return render_template('add.html',ceform=ceform, sales_form=sales_form)
 
-@core.route('/dash')
+@core.route('/chartjs')
 def dash():
-    return render_template('dash.html')
+    return render_template('chartjs.html')
