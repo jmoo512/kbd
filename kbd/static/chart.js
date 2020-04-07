@@ -1,34 +1,31 @@
-let salesAPI="http://127.0.0.1:5000/salesdf"
+let salesAPI="http://127.0.0.1:5000/sales2018"
 
-function setup() {
-  fetch(salesAPI)
-    .then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log(err));
+getData()
 
+async function getData() {
+  const response = await fetch(salesAPI);
+  const data = await response.json();
+  console.log(data)
 
+  const y2018 = []
 
+  data.forEach( obj => {
+    if(obj.location === '183') {
+      y2018.push(obj)
+    }
+  })
+  console.log(y2018)
+  return y2018
 }
 
 
-setup()
 
-
-
-
-var trace1 = {
-  x: [1, 2, 3, 4],
-  y: [10, 15, 13, 17],
-  type: 'lines'
-};
-
-var trace2 = {
-  x: [1, 2, 3, 4],
-  y: [16, 5, 11, 30],
-  type: 'lines'
-
-};
-
-var data = [trace1, trace2];
-
-Plotly.newPlot('myDiv', data);
+const chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      columns: [
+        ['2018', y2018],
+        ['data2', 50, 20, 10, 40, 15, 25]
+      ]
+    }
+});

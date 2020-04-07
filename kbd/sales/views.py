@@ -7,7 +7,7 @@ import pandas as pd
 from psql_config import config
 import psycopg2
 
-
+params=config()
 
 
 sales=Blueprint('sales',__name__)
@@ -41,18 +41,47 @@ def add():
     return redirect(url_for('core.add'))
 
 
-@sales.route('/salesdf')
-def salesdf():
-    params=config()
+@sales.route('/sales2018')
+def sales2018():
     conn=psycopg2.connect(**params)
-
-
     def create_pandas_table(sql_query, database = conn):
         table = pd.read_sql_query(sql_query, database)
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_ending,week_of_year,location,sales, fiscal_year FROM sales WHERE week_ending > '2017-12-31'")
+    sales_data = create_pandas_table("SELECT week_of_year, location, sales FROM sales WHERE fiscal_year = '2018'")
+    cur.close()
+    conn.close()
+
+    df=sales_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@sales.route('/sales2019')
+def sales2019():
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_of_year, location, sales, fiscal_year FROM sales WHERE fiscal_year = '2019'")
+    cur.close()
+    conn.close()
+
+    df=sales_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@sales.route('/sales2020')
+def sales2020():
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_of_year, location, sales, fiscal_year FROM sales WHERE fiscal_year = '2020'")
     cur.close()
     conn.close()
 

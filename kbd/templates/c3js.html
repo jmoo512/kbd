@@ -2,16 +2,18 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='c3.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='chart.css')}}">
     <title></title>
   </head>
   <body>
 
-    <div id="myDiv">
+    <div id="chart">
 
     </div>
 
+    <script src="{{url_for('static',filename='d3.min.js')}}" charset="utf-8"></script>
+    <script src="{{url_for('static',filename='c3.min.js')}}"></script>
     <script src="{{url_for('static',filename='chart.js')}}"></script>
 
 
