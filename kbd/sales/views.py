@@ -41,15 +41,16 @@ def add():
     return redirect(url_for('core.add'))
 
 
-@sales.route('/sales2018')
-def sales2018():
+@sales.route('/sales2018/<chosen_location>')
+def sales2018(chosen_location):
+    print(chosen_location)
     conn=psycopg2.connect(**params)
     def create_pandas_table(sql_query, database = conn):
         table = pd.read_sql_query(sql_query, database)
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, location, sales FROM sales WHERE fiscal_year = '2018'")
+    sales_data = create_pandas_table("SELECT week_of_year, sales FROM sales WHERE location = '" + chosen_location + "' AND fiscal_year = '2018'")
     cur.close()
     conn.close()
 
