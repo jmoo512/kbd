@@ -21,16 +21,27 @@ function selectStore() {
   }
 
   let y2018;
-
   getData().then( tmpArray => y2018 = tmpArray ).catch( e => console.error(e));
   console.log(y2018);
 
-  const chart = c3.generate({
-    bindto: '#chart',
-    data: {
-      columns: [
-        ['2018', 2,3,4,5,6]
-      ]
-    }
-  });
+  chart.flush()
+  chart.load({
+        columns: [
+          ['data1', 4,5,6,7,8],
+          ['2018', 5,6,7,8,9]
+        ]
+    });
+
+
 }
+
+
+
+const chart = c3.generate({
+  bindto: '#chart',
+  data: {
+    columns: [
+      ['2018', 2,3,4,5,6]
+    ]
+  }
+});
