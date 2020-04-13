@@ -18,14 +18,14 @@ async function getData() {
 }
 
 let y2018
-//getData().then( result => y2018 = result ).catch( e => console.error(e))
+getData().then( result => y2018 ).catch( e => console.error(e))
 console.log(y2018Sales)
 
 const chart = c3.generate({
   bindto: '#chart',
   data: {
     columns: [
-      ['2018', y2018Sales]
+      ['2018', 2,3,4,4,5]
     ]
   }
 });
