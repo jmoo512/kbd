@@ -10,19 +10,19 @@ function selectStore() {
     const response = await fetch(salesAPI);
     const data = await response.json();
 
-    const tmpArray = [];
-
+    let tmpSales = [];
     data.forEach( obj => {
-      tmpArray.push(obj.sales);
+      tmpSales.push(obj.sales);
     });
-    console.log(tmpArray);
-    return tmpArray;
+    console.log(tmpSales);
+    return tmpSales;
 
   }
 
-  let y2018;
-  getData().then( tmpArray => y2018 = tmpArray ).catch( e => console.error(e));
-  console.log(y2018);
+  let ySales
+
+  getData().then( sales => ySales = sales ).catch( e => console.error(e));
+  console.log(ySales)
 
   chart.flush()
   chart.load({
@@ -41,7 +41,7 @@ const chart = c3.generate({
   bindto: '#chart',
   data: {
     columns: [
-      ['2018', 2,3,4,5,6]
+
     ]
   }
 });

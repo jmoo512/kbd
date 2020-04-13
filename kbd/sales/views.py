@@ -43,7 +43,6 @@ def add():
 
 @sales.route('/sales2018/<chosen_location>')
 def sales2018(chosen_location):
-    print(chosen_location)
     conn=psycopg2.connect(**params)
     def create_pandas_table(sql_query, database = conn):
         table = pd.read_sql_query(sql_query, database)
