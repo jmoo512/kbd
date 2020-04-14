@@ -49,7 +49,7 @@ def sales2018(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales FROM sales WHERE location = '" + chosen_location + "' AND fiscal_year = '2018'")
+    sales_data = create_pandas_table("SELECT week_of_year, sales,total_guest_count FROM sales WHERE location = '" + chosen_location + "' AND fiscal_year = '2019'")
     cur.close()
     conn.close()
 

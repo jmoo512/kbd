@@ -4,14 +4,15 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{url_for('static',filename='c3.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='chart.css')}}">
-    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Sales & Guest Count</title>
   </head>
   <body>
     <div class="form-div">
       <form id="store-picker" class="" action="index.html" method="post">
         <select id="store-select">
           <option value="none" selected disabled hidden>
-          Select an Location</option> 
+          Select an Location</option>
           <option value="183">North</option>
           <option value="360">South</option>
           <option value="Round Rock">Round Rock</option>
@@ -19,13 +20,39 @@
       </form>
       <p id="chosen-store"></p>
     </div>
-    <div id="chart">
+
+    <div class="chart-grid">
+
+
+          <div id="sales-chart" class="chart">
+          </div>
+
+          <div id="guest-count-chart" class="chart">
+          </div>
+
+          <div id="sales-data" class="data-box">Sales Data
+          </div>
+
+          <div id="guest-count-data" class="data-box">Guest Count Data
+          </div>
+
+          <div id="total-sales-chart" class="chart">
+          </div>
+
+          <div id="total-guest-count-chart" class="chart">
+          </div>
+
+          <div id="totl-sales-data" class="data-box">Total Sales Data
+          </div>
+
+          <div id="totl-guest-count-data" class="data-box">Total Guest Count Data
+          </div>
 
     </div>
 
-    <script src="{{url_for('static',filename='d3.min.js')}}" charset="utf-8"></script>
-    <script src="{{url_for('static',filename='c3.min.js')}}"></script>
-    <script src="{{url_for('static',filename='chart.js')}}"></script>
+  <script src="{{url_for('static',filename='d3.min.js')}}" charset="utf-8"></script>
+  <script src="{{url_for('static',filename='c3.min.js')}}"></script>
+  <script src="{{url_for('static',filename='chart.js')}}"></script>
 
 
   </body>

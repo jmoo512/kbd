@@ -1,4 +1,81 @@
-#chart{
-  height: 400px;
-  width: 600px;
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.chart-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 30px 1fr 30px;
+  grid-gap: 5px;
+  width: auto;
+  max-width: 1400px;
+}
+
+#sales-chart {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+#guest-count-chart {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+#total-sales-chart{
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+#total-guest-count-chart {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+#sales-data {
+  grid-column: 1 / 2;
+  grid-row: 2/ 3;
+}
+
+#guest-count-data {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+#total-sales-data {
+  grid-column: 1 / 2;
+  grid-row: 3/ 4;
+}
+
+#total-guest-count-data {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.chart, .data-box{
+  border: solid 2px;
+  border-color: Black;
+  border-radius: 3px;
+  background-color: LightSteelBlue;
+}
+
+.data-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c3-line {
+  stroke-width: 3px;
+}
+
+.c3-title, .data-box {
+  font-size: 18px;
+  font-family: Montserrat;
+  font-weight: bold;
+}
+
+@media print{
+  .form-div{
+    display: none;
+  }
 }

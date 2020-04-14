@@ -11,37 +11,92 @@ function selectStore() {
     const data = await response.json();
 
     let tmpSales = [];
+    let tmpGC = [];
     data.forEach( obj => {
       tmpSales.push(obj.sales);
+      tmpGC.push(obj.total_guest_count);
     });
     console.log(tmpSales);
-    return tmpSales;
+    console.log(tmpGC);
+    return {tmpSales,tmpGC};
 
   }
 
   let ySales
+  let yGC
 
-  getData().then( sales => ySales = sales ).catch( e => console.error(e));
-  console.log(ySales)
+  getData().then(salesResult => ySales = salesResult ).then(gcResult => yGC = gcResult ).catch( e => console.error(e));
+  console.log(ySales);
+  console.log(yGC);
 
-  chart.flush()
-  chart.load({
+  salesChart.flush();
+  gcChart.flush();
+  salesChart.load({
         columns: [
-          ['data1', 4,5,6,7,8],
-          ['2018', 5,6,7,8,9]
+          ['data1', 2,6,2,8,4],
+          ['2019', 5,6,7,8,9]
         ]
     });
 
+  gcChart.load({
+        columns: [
+          ['data2', 4,7,2,8,3],
+          ['2019', 8,3,5,0,1]
+        ]
+    });
+
+  totalSalesChart.load({
+        columns: [
+          ['data3', 4,7,3,9,1],
+          ['2019', 8,3,5,0,1]
+        ]
+    });
+
+  totalGCChart.load({
+        columns: [
+          ['data4', 2,8,9,5,3],
+          ['2019', 8,3,5,0,1]
+        ]
+    });
 
 }
 
-
-
-const chart = c3.generate({
-  bindto: '#chart',
+const salesChart = c3.generate({
+  bindto: '#sales-chart',
   data: {
-    columns: [
+    columns: []
+  },
+  title: {
+    text: "Weekly Sales"
+  }
+});
 
-    ]
+const gcChart = c3.generate({
+  bindto: '#guest-count-chart',
+  data: {
+    columns: []
+  },
+  title: {
+    text: "Weekly Guest Count"
+  }
+});
+
+const totalSalesChart = c3.generate({
+  bindto: '#total-sales-chart',
+  data: {
+    columns: []
+  },
+  title: {
+    text: "Total Weekly Sales"
+  }
+});
+
+const totalGCChart = c3.generate({
+  bindto: '#total-guest-count-chart',
+  data: {
+    columns: []
+  },
+  title: {
+    text: "Total Weekly Guest Count"
   }
 });
