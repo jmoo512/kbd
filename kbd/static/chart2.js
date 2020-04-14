@@ -1,56 +1,47 @@
-document.getElementById("store-select").addEventListener("change",updateCharts);
-
-async function getData(api) {
-  //console.log(api);
-  const response = await fetch(api);
-  const data = await response.json();
-
-  let tmpSales = [];
-  let tmpGC = [];
-
-  data.forEach( obj => {
-    tmpSales.push(obj.sales);
-    tmpGC.push(obj.total_guest_count);
-  });
-  //console.log(tmpSales);
-  //console.log(tmpGC);
-  return {tmpSales,tmpGC};
-}
+document.getElementById("store-select").addEventListener("change",selectStore);
 
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = store + " selected";
+
   let salesAPI="http://127.0.0.1:5000/sales2018/" + store
-  //console.log(salesAPI)
 
-  return salesAPI
-}
+  async function getData() {
+    const response = await fetch(salesAPI);
+    const data = await response.json();
 
-async function updateCharts () {
-  const getAPI = await selectStore();
-  const data = await getData(getAPI);
+    let tmpSales = [];
+    let tmpGC = [];
+    data.forEach( obj => {
+      tmpSales.push(obj.sales);
+      tmpGC.push(obj.total_guest_count);
+    });
+    console.log(tmpSales);
+    console.log(tmpGC);
+    return {tmpSales,tmpGC};
 
-  let chartSales = data.tmpSales
-  let maxSales = Math.max(chartSales)
-  console.log(maxSales)
-  //console.log(chartSales)
+  }
 
-  let chartGC = data.tmpGC
-  //console.log(chartGC)
+  let ySales
+  let yGC
 
-  await salesChart.unload();
-  await salesChart.axis.range({max: 300000, min: 0});
-  await gcChart.unload();
+  const getSales = getData().then( ySales = getSales.tmpSales).then( yGC = getSales.tmpGC ).catch( e => console.error(e));
+  console.log(ySales);
+  console.log(yGC);
 
+  salesChart.flush();
+  gcChart.flush();
   salesChart.load({
         columns: [
-          chartSales
+          ['data1', 2,6,2,8,4],
+          ['2019', 5,6,7,8,9]
         ]
     });
 
   gcChart.load({
         columns: [
-          chartGC
+          ['data2', 4,7,2,8,3],
+          ['2019', 8,3,5,0,1]
         ]
     });
 
@@ -67,7 +58,9 @@ async function updateCharts () {
           ['2019', 8,3,5,0,1]
         ]
     });
+
 }
+
 const salesChart = c3.generate({
   bindto: '#sales-chart',
   data: {
