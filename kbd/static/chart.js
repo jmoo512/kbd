@@ -31,6 +31,8 @@ async function updateCharts () {
   const data = await getData(getAPI);
 
   let chartSales = data.tmpSales
+  console.log(chartSales)
+  console.log(typeof chartSales)
   let maxSales = Math.max(chartSales)
   console.log(maxSales)
   //console.log(chartSales)
