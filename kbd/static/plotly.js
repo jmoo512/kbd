@@ -35,26 +35,34 @@ async function updateCharts () {
   let chartGC = data.tmpGC;
   let weeks = data.tmpWeeks;
 
-  let trace = {
+  let sales = {
     x: weeks,
     y: chartSales,
     mode: 'lines'
   };
 
-  let updatedData = [trace]
+  let updatedSales = [sales]
 
-  Plotly.react('sales-chart', updatedData)
+  let gc = {
+    x: weeks,
+    y: chartGC,
+    mode: 'lines'
+  }
+
+  let updatedGC = [gc]
+
+  Plotly.react('sales-chart', updatedSales)
+  Plotly.react('guest-count-chart', updatedGC)
   console.log(data)
 
   }
 
 let startingData = []
 
-Plotly.newPlot( 'sales-chart', startingData);
+let layout =  {
+    title: 'Always Display the Modebar',
+    showlegend: false}
 
-Plotly.newPlot( 'guest-count-chart', [{
-  x: [1,6,3,8,7],
-  y: [3,4,8,5,6]
-}],{
-  margin: {t: 0}
-})
+Plotly.newPlot( 'sales-chart', startingData, layout, {displayModeBar: true});
+
+Plotly.newPlot( 'guest-count-chart', startingData, layout, {displayModeBar: true});
