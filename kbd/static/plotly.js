@@ -7,21 +7,21 @@ async function getData(api) {
 
   let tmpSales = [];
   let tmpGC = [];
+  let tmpWeeks = [];
 
   data.forEach( obj => {
     tmpSales.push(obj.sales);
     tmpGC.push(obj.total_guest_count);
+    tmpWeeks.push(obj.week_of_year);
   });
-  //console.log(tmpSales);
-  //console.log(tmpGC);
-  return {tmpSales,tmpGC};
+
+  return {tmpSales,tmpGC,tmpWeeks};
 }
 
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = store + " selected";
   let salesAPI="http://127.0.0.1:5000/sales2018/" + store
-  //console.log(salesAPI)
 
   return salesAPI
 }
@@ -30,44 +30,25 @@ async function updateCharts () {
   const getAPI = await selectStore();
   const data = await getData(getAPI);
 
-  let tempChartSales = data.tmpSales
-  let chartSales = ['2018']
-  tempChartSales.forEach( obj => {(chartSales.push(obj))})
-  //console.log(chartSales)
-  //console.log(typeof chartSales)
-  //let maxSales = Math.max(chartSales)
-  //console.log(maxSales)
-  //console.log(chartSales)
 
-  let tempChartGC = data.tmpGC
-  let chartGC = ['2018']
-  tempChartGC.forEach( obj => {(chartGC.push(obj))})
-  //console.log(chartGC)
+  let chartSales = data.tmpSales;
+  let chartGC = data.tmpGC;
+  let weeks = data.tmpWeeks;
 
-  await salesChart.unload();
-  await salesChart.axis.range({max: 300000, min: 0});
-  await gcChart.unload();
+  let trace = {
+    x: [5, 3, 4, 5],
+    y: [1, 5, 1, 9],
+    mode: 'lines'
+  };
 
-  salesChart.load({
-        columns: [
-          chartSales
-        ]
-    });
+  let data2 = [trace]
 
-  gcChart.load({
-        columns: [
-          chartGC
-        ]
-    });
+  Plotly.react('sales-chart', data2)
+  console.log(data2)
+
   }
 
-let trace2 = {
-  x: [2, 3, 4, 5],
-  y: [16, 5, 11, 9],
-  mode: 'lines'
-};
-
-let data = [trace2]
+let data = []
 
 Plotly.newPlot( 'sales-chart', data);
 
