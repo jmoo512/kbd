@@ -36,21 +36,21 @@ async function updateCharts () {
   let weeks = data.tmpWeeks;
 
   let trace = {
-    x: [5, 3, 4, 5],
-    y: [1, 5, 1, 9],
+    x: weeks,
+    y: chartSales,
     mode: 'lines'
   };
 
-  let data2 = [trace]
+  let updatedData = [trace]
 
-  Plotly.react('sales-chart', data2)
-  console.log(data2)
+  Plotly.react('sales-chart', updatedData)
+  console.log(data)
 
   }
 
-let data = []
+let startingData = []
 
-Plotly.newPlot( 'sales-chart', data);
+Plotly.newPlot( 'sales-chart', startingData);
 
 Plotly.newPlot( 'guest-count-chart', [{
   x: [1,6,3,8,7],
