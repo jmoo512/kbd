@@ -1,5 +1,8 @@
+//Add event listener to selector to call update functionality
+
 document.getElementById("store-select").addEventListener("change",updateCharts);
 
+//grab data from api
 async function getData(api) {
   //console.log(api);
   const response = await fetch(api);
@@ -18,6 +21,7 @@ async function getData(api) {
   return {tmpSales,tmpGC,tmpWeeks};
 }
 
+//use selector to modify api address per store selected
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = store + " selected";
@@ -26,10 +30,10 @@ function selectStore() {
   return salesAPI
 }
 
+//update charts based on selected store
 async function updateCharts () {
   const getAPI = await selectStore();
   const data = await getData(getAPI);
-
 
   let chartSales = data.tmpSales;
   let chartGC = data.tmpGC;
@@ -40,7 +44,6 @@ async function updateCharts () {
     y: chartSales,
     mode: 'lines'
   };
-
   let updatedSales = [sales]
 
   let gc = {
@@ -48,7 +51,6 @@ async function updateCharts () {
     y: chartGC,
     mode: 'lines'
   }
-
   let updatedGC = [gc]
 
   Plotly.react('sales-chart', updatedSales)
@@ -58,11 +60,9 @@ async function updateCharts () {
   }
 
 let startingData = []
+let layout =  {}
 
-let layout =  {
-    title: 'Always Display the Modebar',
-    showlegend: false}
-
+//instantiate empty charts to DOM
 Plotly.newPlot( 'sales-chart', startingData, layout, {displayModeBar: true});
 
 Plotly.newPlot( 'guest-count-chart', startingData, layout, {displayModeBar: true});
