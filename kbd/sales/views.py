@@ -56,35 +56,3 @@ def sales2018(chosen_location):
     df=sales_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
-
-@sales.route('/sales2019')
-def sales2019():
-    conn=psycopg2.connect(**params)
-    def create_pandas_table(sql_query, database = conn):
-        table = pd.read_sql_query(sql_query, database)
-        return table
-
-    cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, location, sales, fiscal_year FROM sales WHERE fiscal_year = '2019'")
-    cur.close()
-    conn.close()
-
-    df=sales_data
-
-    return Response(df.to_json(orient="records"), mimetype='application/json')
-
-@sales.route('/sales2020')
-def sales2020():
-    conn=psycopg2.connect(**params)
-    def create_pandas_table(sql_query, database = conn):
-        table = pd.read_sql_query(sql_query, database)
-        return table
-
-    cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, location, sales, fiscal_year FROM sales WHERE fiscal_year = '2020'")
-    cur.close()
-    conn.close()
-
-    df=sales_data
-
-    return Response(df.to_json(orient="records"), mimetype='application/json')

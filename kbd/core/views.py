@@ -20,5 +20,9 @@ def add():
     return render_template('add.html',ceform=ceform, sales_form=sales_form)
 
 @core.route('/c3js')
-def dash():
+def c3():
     return render_template('c3js.html')
+
+@core.route('/plotlyjs')
+def plotly():
+    return render_template('/plotlyjs.html')

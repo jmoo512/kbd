@@ -59,57 +59,21 @@ async function updateCharts () {
           chartGC
         ]
     });
-
-  totalSalesChart.load({
-        columns: [
-          ['data3', 4,7,3,9,1],
-          ['2019', 8,3,5,0,1]
-        ]
-    });
-
-  totalGCChart.load({
-        columns: [
-          ['data4', 2,8,9,5,3],
-          ['2019', 8,3,5,0,1]
-        ]
-    });
-}
-const salesChart = c3.generate({
-  bindto: '#sales-chart',
-  data: {
-    columns: []
-  },
-  title: {
-    text: "Weekly Sales"
   }
-});
 
-const gcChart = c3.generate({
-  bindto: '#guest-count-chart',
-  data: {
-    columns: []
-  },
-  title: {
-    text: "Weekly Guest Count"
-  }
-});
+let trace2 = {
+  x: [2, 3, 4, 5],
+  y: [16, 5, 11, 9],
+  mode: 'lines'
+};
 
-const totalSalesChart = c3.generate({
-  bindto: '#total-sales-chart',
-  data: {
-    columns: []
-  },
-  title: {
-    text: "Total Weekly Sales"
-  }
-});
+let data = [trace2]
 
-const totalGCChart = c3.generate({
-  bindto: '#total-guest-count-chart',
-  data: {
-    columns: []
-  },
-  title: {
-    text: "Total Weekly Guest Count"
-  }
-});
+Plotly.newPlot( 'sales-chart', data);
+
+Plotly.newPlot( 'guest-count-chart', [{
+  x: [1,6,3,8,7],
+  y: [3,4,8,5,6]
+}],{
+  margin: {t: 0}
+})
