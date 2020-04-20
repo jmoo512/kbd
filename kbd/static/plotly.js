@@ -13,9 +13,11 @@ async function getData(api) {
   let tmpWeeks = [];
 
   data.forEach( obj => {
+    if (obj.fiscal_year === 2020){
     tmpSales.push(obj.sales);
     tmpGC.push(obj.total_guest_count);
     tmpWeeks.push(obj.week_of_year);
+  }
   });
 
   return {tmpSales,tmpGC,tmpWeeks};

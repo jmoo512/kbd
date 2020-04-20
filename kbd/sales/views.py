@@ -49,10 +49,28 @@ def sales2018(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales,total_guest_count FROM sales WHERE location = '" + chosen_location + "' AND fiscal_year = '2018'")
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE location = '" + chosen_location + "'")
     cur.close()
     conn.close()
 
     df=sales_data
 
+    df.fillna(0,inplace=True)
+
+    #find current year
+    current_year=df['fiscal_year'].max()
+
+    #find current week based on last entry in df
+    curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+
+    df=df[(df['week_of_year'] >= curr_week-4) & (df['week_of_year'] <= curr_week+4)]
+
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@sales.route('/salesdf/')
+def salesdf():
+
+    q=Sales.query.all()
+    sales_df = pd.read_sql(q,con=db.engine)
+
+    return Response(sales_df.to_json(orient="records"), mimetype='application/json')
