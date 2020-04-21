@@ -4,7 +4,6 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 
 //grab data from api
 async function getData(api) {
-  //console.log(api);
   const response = await fetch(api);
   const data = await response.json();
 
@@ -27,7 +26,6 @@ async function getData(api) {
       tmpSales20.push(obj.sales);
       tmpGC20.push(obj.total_guest_count)
     }
-
 
     tmpWeeks.push(obj.week_of_year);
 
