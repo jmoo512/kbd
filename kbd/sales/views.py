@@ -63,6 +63,6 @@ def sales2018(chosen_location):
     #find current week based on last entry in df
     curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
 
-    df=df[(df['week_of_year'] >= curr_week-4) & (df['week_of_year'] <= curr_week+4)]
+    df=df[(df['week_of_year'] >= curr_week-6) & (df['week_of_year'] <= curr_week+6)]
 
     return Response(df.to_json(orient="records"), mimetype='application/json')

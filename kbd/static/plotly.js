@@ -11,7 +11,8 @@ async function getData(api) {
   let tmpSales18 = [];
   let tmpSales19 = [];
   let tmpSales20 = [];
-  let tmpGC = [];
+  let tmpGC19 = [];
+  let tmpGC20 = [];
   let tmpWeeks = [];
 
   data.forEach( obj => {
@@ -20,19 +21,19 @@ async function getData(api) {
     }
     if (obj.fiscal_year === 2019){
       tmpSales19.push(obj.sales);
+      tmpGC19.push(obj.total_guest_count)
     }
     if (obj.fiscal_year === 2020){
       tmpSales20.push(obj.sales);
+      tmpGC20.push(obj.total_guest_count)
     }
 
-    if (obj.fiscal_year === 2018){
-      tmpGC.push(obj.total_guest_count);
-    }
+
     tmpWeeks.push(obj.week_of_year);
 
   });
 
-  return {tmpSales18, tmpSales19, tmpSales20 ,tmpGC, tmpWeeks};
+  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks};
 }
 
 //use selector to modify api address per store selected
@@ -52,7 +53,8 @@ async function updateCharts () {
   let chartSales18 = data.tmpSales18;
   let chartSales19 = data.tmpSales19;
   let chartSales20 = data.tmpSales20;
-  let chartGC = data.tmpGC;
+  let chartGC19 = data.tmpGC19;
+  let chartGC20 = data.tmpGC20;
   let weeks = data.tmpWeeks;
 
   let sales18 = {
@@ -78,12 +80,21 @@ async function updateCharts () {
 
   let updatedSales = [sales18, sales19, sales20]
 
-  let gc = {
+    let gc19 = {
     x: weeks,
-    y: chartGC,
-    mode: 'lines'
+    y: chartGC19,
+    mode: 'lines',
+    name: '2019'
   }
-  let updatedGC = [gc]
+
+  let gc20 = {
+    x: weeks,
+    y: chartGC20,
+    mode: 'lines',
+    name: '2020'
+  }
+
+  let updatedGC = [gc19, gc20]
 
   Plotly.react('sales-chart', updatedSales)
   Plotly.react('guest-count-chart', updatedGC)
