@@ -49,7 +49,7 @@ def sales2018(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE location = '" + chosen_location + "'")
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE location = '" + chosen_location + "' ORDER BY fiscal_year, week_of_year")
     cur.close()
     conn.close()
 
@@ -66,11 +66,3 @@ def sales2018(chosen_location):
     df=df[(df['week_of_year'] >= curr_week-4) & (df['week_of_year'] <= curr_week+4)]
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
-
-@sales.route('/salesdf/')
-def salesdf():
-
-    q=Sales.query.all()
-    sales_df = pd.read_sql(q,con=db.engine)
-
-    return Response(sales_df.to_json(orient="records"), mimetype='application/json')
