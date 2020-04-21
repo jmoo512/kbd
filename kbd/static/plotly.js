@@ -8,19 +8,31 @@ async function getData(api) {
   const response = await fetch(api);
   const data = await response.json();
 
-  let tmpSales = [];
+  let tmpSales18 = [];
+  let tmpSales19 = [];
+  let tmpSales20 = [];
   let tmpGC = [];
   let tmpWeeks = [];
 
   data.forEach( obj => {
+    if (obj.fiscal_year === 2018){
+      tmpSales18.push(obj.sales);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpSales19.push(obj.sales);
+    }
     if (obj.fiscal_year === 2020){
-    tmpSales.push(obj.sales);
-    tmpGC.push(obj.total_guest_count);
+      tmpSales20.push(obj.sales);
+    }
+
+    if (obj.fiscal_year === 2018){
+      tmpGC.push(obj.total_guest_count);
+    }
     tmpWeeks.push(obj.week_of_year);
-  }
+
   });
 
-  return {tmpSales,tmpGC,tmpWeeks};
+  return {tmpSales18, tmpSales19, tmpSales20 ,tmpGC, tmpWeeks};
 }
 
 //use selector to modify api address per store selected
@@ -37,16 +49,34 @@ async function updateCharts () {
   const getAPI = await selectStore();
   const data = await getData(getAPI);
 
-  let chartSales = data.tmpSales;
+  let chartSales18 = data.tmpSales18;
+  let chartSales19 = data.tmpSales19;
+  let chartSales20 = data.tmpSales20;
   let chartGC = data.tmpGC;
   let weeks = data.tmpWeeks;
 
-  let sales = {
+  let sales18 = {
     x: weeks,
-    y: chartSales,
-    mode: 'lines'
+    y: chartSales18,
+    mode: 'lines',
+    name: '2018'
   };
-  let updatedSales = [sales]
+
+  let sales19 = {
+    x: weeks,
+    y: chartSales19,
+    mode: 'lines',
+    name: '2019'
+  };
+
+  let sales20 = {
+    x: weeks,
+    y: chartSales20,
+    mode: 'lines',
+    name: '2020'
+  };
+
+  let updatedSales = [sales18, sales19, sales20]
 
   let gc = {
     x: weeks,
