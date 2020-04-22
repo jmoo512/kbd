@@ -46,8 +46,25 @@ function selectStore() {
 
 let layout =  {
   autosize: false,
-  paper_bgcolor: 'LightSteelBlue',
-  plot_bgcolor: 'LightSteelBlue'
+  paper_bgcolor: '#313131',
+  plot_bgcolor: '#313131',
+  xaxis: {
+    tickcolor: '#FFF',
+    tickfont: {
+      color: "#FFF"
+    },
+  },
+  yaxis: {
+    tickcolor: '#FFF',
+    tickfont: {
+      color: "#FFF"
+    },
+  },
+  legend: {
+    font: {
+      color: '#FFF'
+    }
+  }
 }
 
 let config = {responsive: true, displayModeBar: true}
@@ -68,6 +85,10 @@ async function updateCharts () {
     x: weeks,
     y: chartSales18,
     mode: 'lines',
+    line: {
+      color: '#ca3e47',
+      width: 2,
+    },
     name: '2018'
   };
 
@@ -75,6 +96,10 @@ async function updateCharts () {
     x: weeks,
     y: chartSales19,
     mode: 'lines',
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
     name: '2019'
   };
 
@@ -82,6 +107,10 @@ async function updateCharts () {
     x: weeks,
     y: chartSales20,
     mode: 'lines',
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
     name: '2020'
   };
 
