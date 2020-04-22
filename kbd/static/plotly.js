@@ -2,6 +2,7 @@
 
 document.getElementById("store-select").addEventListener("change",updateCharts);
 
+
 //grab data from api
 async function getData(api) {
   const response = await fetch(api);
@@ -13,6 +14,8 @@ async function getData(api) {
   let tmpGC19 = [];
   let tmpGC20 = [];
   let tmpWeeks = [];
+  let tmpPctSales = []
+  let tmpPctGC = []
 
   data.forEach( obj => {
     if (obj.fiscal_year === 2018){
@@ -24,20 +27,22 @@ async function getData(api) {
     }
     if (obj.fiscal_year === 2020){
       tmpSales20.push(obj.sales);
-      tmpGC20.push(obj.total_guest_count)
+      tmpGC20.push(obj.total_guest_count);
+      tmpPctSales.push(obj.percent_sales);
+      tmpPctGC.push(obj.percent_guest_count)
     }
 
     tmpWeeks.push(obj.week_of_year);
 
   });
 
-  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks};
+  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks, tmpPctSales, tmpPctGC};
 }
 
 //use selector to modify api address per store selected
 function selectStore() {
   let store = document.getElementById("store-select").value;
-  document.getElementById("chosen-store").innerHTML = 'Week of ' + store + " selected";
+  document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
   let salesAPI="http://127.0.0.1:5000/sales2018/" + store
 
   return salesAPI
@@ -80,6 +85,8 @@ async function updateCharts () {
   let chartGC19 = data.tmpGC19;
   let chartGC20 = data.tmpGC20;
   let weeks = data.tmpWeeks;
+  let pctSales = data.tmpPctSales;
+  let pctGC = data.tmpPctGC
 
   let sales18 = {
     x: weeks,
@@ -119,14 +126,24 @@ async function updateCharts () {
     let gc19 = {
     x: weeks,
     y: chartGC19,
-    mode: 'lines',
+    mode: 'lines'
+    ,
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
     name: '2019'
   }
 
   let gc20 = {
     x: weeks,
     y: chartGC20,
-    mode: 'lines',
+    mode: 'lines'
+    ,
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
     name: '2020'
   }
 
@@ -136,7 +153,18 @@ async function updateCharts () {
   Plotly.react('guest-count-chart', updatedGC, layout, config)
   console.log(data)
 
-  }
+  let currentWeek = weeks[weeks.length-1]
+  let currentSales = chartSales20[chartSales20.length-1]
+  let currentGC = chartGC20[chartGC20.length-1]
+  let currentPctSales = pctSales[pctSales.length-1]
+  let currentPctGC = pctGC[pctGC.length-1]
+
+  document.getElementById("sales-data").innerHTML = 'Sales: $' + currentSales + ' | Growth: ' + currentPctSales + '%'
+  document.getElementById("guest-count-data").innerHTML = 'Guest Count: ' + currentGC + ' | Growth: ' + currentPctGC + '%'
+
+}
+
+
 
 
 let startingData = []

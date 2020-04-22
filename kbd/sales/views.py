@@ -49,7 +49,7 @@ def sales2018(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE location = '" + chosen_location + "' ORDER BY fiscal_year, week_of_year")
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
     cur.close()
     conn.close()
 
@@ -64,5 +64,9 @@ def sales2018(chosen_location):
     curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
 
     df=df[(df['week_of_year'] >= curr_week-6) & (df['week_of_year'] <= curr_week+6)]
+
+    df['percent_sales']=df['sales'].pct_change().round(4)*100
+    df['percent_guest_count']=df['total_guest_count'].pct_change().round(4)*100
+    df.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
