@@ -4,3 +4,4 @@ venv
 .env
 database.ini
 *.ipynb
+.ipynb_checkpoints
