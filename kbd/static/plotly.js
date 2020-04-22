@@ -37,11 +37,20 @@ async function getData(api) {
 //use selector to modify api address per store selected
 function selectStore() {
   let store = document.getElementById("store-select").value;
-  document.getElementById("chosen-store").innerHTML = store + " selected";
+  document.getElementById("chosen-store").innerHTML = 'Week of ' + store + " selected";
   let salesAPI="http://127.0.0.1:5000/sales2018/" + store
 
   return salesAPI
 }
+
+
+let layout =  {
+  autosize: false,
+  paper_bgcolor: 'LightSteelBlue',
+  plot_bgcolor: 'LightSteelBlue'
+}
+
+let config = {responsive: true, displayModeBar: true}
 
 //update charts based on selected store
 async function updateCharts () {
@@ -94,16 +103,17 @@ async function updateCharts () {
 
   let updatedGC = [gc19, gc20]
 
-  Plotly.react('sales-chart', updatedSales)
-  Plotly.react('guest-count-chart', updatedGC)
+  Plotly.react('sales-chart', updatedSales, layout, config)
+  Plotly.react('guest-count-chart', updatedGC, layout, config)
   console.log(data)
 
   }
 
+
 let startingData = []
-let layout =  {}
 
 //instantiate empty charts to DOM
-Plotly.newPlot( 'sales-chart', startingData, layout, {displayModeBar: true});
-
-Plotly.newPlot( 'guest-count-chart', startingData, layout, {displayModeBar: true});
+Plotly.newPlot( 'sales-chart', startingData, layout, config);
+Plotly.newPlot( 'guest-count-chart', startingData, layout, config);
+Plotly.newPlot( 'total-sales-chart', startingData, layout, config);
+Plotly.newPlot( 'total-guest-count-chart', startingData, layout, config);

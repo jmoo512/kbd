@@ -2,6 +2,21 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.header{
+  display: flex;
+  flex-flow: row nowrap;
+  width: auto;
+  max-width: 1400px;
+  justify-content: center;
+  align-items: center;
+}
+
+#chosen-store{
+  width: 100%;
+  margin: 5px;
+  text-align: center;
+  background-color: LightSteelBlue;
+}
 .chart-grid{
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -51,7 +66,7 @@ body {
   grid-row: 3 / 4;
 }
 
-.chart, .data-box{
+.chart, .data-box, #chosen-store{
   border: solid 2px;
   border-color: Black;
   border-radius: 3px;
@@ -68,7 +83,7 @@ body {
   stroke-width: 3px;
 }
 
-.c3-title, .data-box {
+.data-box, #chosen-store {
   font-size: 18px;
   font-family: Montserrat;
   font-weight: bold;
