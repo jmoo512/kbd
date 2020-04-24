@@ -3,5 +3,3 @@ venv
 .DS_Store
 .env
 database.ini
-*.ipynb
-.ipynb_checkpoints
