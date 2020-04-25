@@ -4,7 +4,7 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 
 
 //grab data from api
-async function getData(api) {
+async function getSalesData(api) {
   const response = await fetch(api);
   const data = await response.json();
 
@@ -23,7 +23,7 @@ async function getData(api) {
     }
     if (obj.fiscal_year === 2019){
       tmpSales19.push(obj.sales);
-      tmpGC19.push(obj.total_guest_count)
+      tmpGC19.push(obj.total_guest_count);
     }
     if (obj.fiscal_year === 2020){
       tmpSales20.push(obj.sales);
@@ -39,13 +39,42 @@ async function getData(api) {
   return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks, tmpPctSales, tmpPctGC};
 }
 
+async function getCumulData(api) {
+  const response = await fetch(api);
+  const data = await response.json();
+  console.log(data)
+
+  let tmpCumul18 = []
+  let tmpCumul19 = []
+  let tmpCumul20 = []
+
+  data.forEach( obj => {
+    if (obj.fiscal_year === 2018){
+      tmpCumul18.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpCumul19.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpCumul20.push(obj.cumulative);
+    }
+
+
+  });
+
+  console.log(tmpCumul18, tmpCumul19, tmpCumul20)
+
+  return {tmpCumul18, tmpCumul19, tmpCumul20};
+}
+
 //use selector to modify api address per store selected
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
-  let salesAPI="http://127.0.0.1:5000/sales2018/" + store
+  let salesAPI="http://127.0.0.1:5000/sales/" + store
+  let cumulAPI="http://127.0.0.1:5000/cumul/" + store
 
-  return salesAPI
+  return {salesAPI, cumulAPI}
 }
 
 
@@ -86,16 +115,20 @@ let config = {responsive: true, displayModeBar: true}
 //update charts based on selected store
 async function updateCharts () {
   const getAPI = await selectStore();
-  const data = await getData(getAPI);
+  const salesData = await getSalesData(getAPI.salesAPI);
+  const cumulData = await getCumulData(getAPI.cumulAPI);
 
-  let chartSales18 = data.tmpSales18;
-  let chartSales19 = data.tmpSales19;
-  let chartSales20 = data.tmpSales20;
-  let chartGC19 = data.tmpGC19;
-  let chartGC20 = data.tmpGC20;
-  let weeks = data.tmpWeeks;
-  let pctSales = data.tmpPctSales;
-  let pctGC = data.tmpPctGC
+  let chartSales18 = salesData.tmpSales18;
+  let chartSales19 = salesData.tmpSales19;
+  let chartSales20 = salesData.tmpSales20;
+  let chartGC19 = salesData.tmpGC19;
+  let chartGC20 = salesData.tmpGC20;
+  let weeks = salesData.tmpWeeks;
+  let pctSales = salesData.tmpPctSales;
+  let pctGC = salesData.tmpPctGC;
+  let chartCumul18 = cumulData.tmpCumul18;
+  let chartCumul19 = cumulData.tmpCumul19;
+  let chartCumul20 = cumulData.tmpCumul20;
 
   let sales18 = {
     x: weeks,
@@ -158,9 +191,47 @@ async function updateCharts () {
 
   let updatedGC = [gc19, gc20]
 
+  let cumul18 = {
+    x: weeks,
+    y: chartCumul18,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#ca3e47',
+      width: 2,
+    },
+    name: '2018'
+  }
+
+  let cumul19 = {
+    x: weeks,
+    y: chartCumul19,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  }
+
+  let cumul20 = {
+    x: weeks,
+    y: chartCumul20,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  }
+
+  let updatedCumul = [cumul18, cumul19, cumul20]
+
   Plotly.react('sales-chart', updatedSales, layout, config)
   Plotly.react('guest-count-chart', updatedGC, layout, config)
-  console.log(data)
+  Plotly.react('cumul-sales-chart', updatedCumul, layout, config)
 
   let currentWeek = weeks[weeks.length-1]
   let currentSales = chartSales20[chartSales20.length-1]

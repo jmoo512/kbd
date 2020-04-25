@@ -41,8 +41,9 @@ def add():
     return redirect(url_for('core.add'))
 
 
-@sales.route('/sales2018/<chosen_location>')
-def sales2018(chosen_location):
+@sales.route('/sales/<chosen_location>')
+def sales_gc(chosen_location):
+
     conn=psycopg2.connect(**params)
     def create_pandas_table(sql_query, database = conn):
         table = pd.read_sql_query(sql_query, database)
@@ -69,4 +70,54 @@ def sales2018(chosen_location):
     df['percent_guest_count']=df['total_guest_count'].pct_change().round(4)*100
     df.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
+
+
+
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@sales.route('/cumul/<chosen_location>')
+def cumul(chosen_location):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_of_year, sales, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
+    cur.close()
+    conn.close()
+
+
+
+    df=sales_data
+
+    df.fillna(0,inplace=True)
+
+    #find current year
+    current_year=df['fiscal_year'].max()
+
+    #find current week based on last entry in df
+    curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+
+    df_cumul=df.groupby(['fiscal_year','week_of_year'])['sales'].sum().reset_index()
+
+    df_cumul_2018=df_cumul[df_cumul['fiscal_year']==2018]
+    df_cumul_2018['cumulative']=df_cumul_2018['sales'].cumsum()
+    df_cumul_2018=df_cumul_2018[(df_cumul_2018['week_of_year'] >= curr_week-4) & (df_cumul_2018['week_of_year'] <= curr_week+4)]
+    df_cumul_2018.drop(columns=['sales'],inplace=True)
+
+    df_cumul_2019=df_cumul[df_cumul['fiscal_year']==2019]
+    df_cumul_2019['cumulative']=df_cumul_2019['sales'].cumsum()
+    df_cumul_2019=df_cumul_2019[(df_cumul_2019['week_of_year'] >= curr_week-4) & (df_cumul_2019['week_of_year'] <= curr_week+4)]
+    df_cumul_2019.drop(columns=['sales'],inplace=True)
+
+    df_cumul_2020=df_cumul[df_cumul['fiscal_year']==2020]
+    df_cumul_2020['cumulative']=df_cumul_2020['sales'].cumsum()
+    df_cumul_2020=df_cumul_2020[(df_cumul_2020['week_of_year'] >= curr_week-4) & (df_cumul_2020['week_of_year'] <= curr_week+4)]
+    df_cumul_2020.drop(columns=['sales'],inplace=True)
+
+    frames = [df_cumul_2018, df_cumul_2019, df_cumul_2020]
+    result=pd.concat(frames)
+
+    return Response(result.to_json(orient="records"), mimetype='application/json')
