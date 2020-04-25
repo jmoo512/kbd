@@ -53,6 +53,15 @@ let layout =  {
   autosize: false,
   paper_bgcolor: '#313131',
   plot_bgcolor: '#313131',
+  width: 500,
+  height: 400,
+  margin: {
+    l: 50,
+    r: 50,
+    b: 50,
+    t: 50,
+    pad: 5
+  },
   xaxis: {
     tickcolor: '#FFF',
     tickfont: {
@@ -172,5 +181,7 @@ let startingData = []
 //instantiate empty charts to DOM
 Plotly.newPlot( 'sales-chart', startingData, layout, config);
 Plotly.newPlot( 'guest-count-chart', startingData, layout, config);
+Plotly.newPlot( 'cumul-sales-chart', startingData, layout, config);
 Plotly.newPlot( 'total-sales-chart', startingData, layout, config);
 Plotly.newPlot( 'total-guest-count-chart', startingData, layout, config);
+Plotly.newPlot( 'total-cumul-sales-chart', startingData, layout, config);
