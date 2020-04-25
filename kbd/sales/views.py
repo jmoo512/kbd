@@ -120,4 +120,8 @@ def cumul(chosen_location):
     frames = [df_cumul_2018, df_cumul_2019, df_cumul_2020]
     result=pd.concat(frames)
 
+    result.sort_values(by=['week_of_year','fiscal_year'],inplace=True)
+    result['percent_cumul']=result['cumulative'].pct_change().round(4)*100
+    result.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
+
     return Response(result.to_json(orient="records"), mimetype='application/json')

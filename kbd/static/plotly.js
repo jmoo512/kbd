@@ -42,11 +42,11 @@ async function getSalesData(api) {
 async function getCumulData(api) {
   const response = await fetch(api);
   const data = await response.json();
-  console.log(data)
-
+  
   let tmpCumul18 = []
   let tmpCumul19 = []
   let tmpCumul20 = []
+  let tmpPctCumul = []
 
   data.forEach( obj => {
     if (obj.fiscal_year === 2018){
@@ -57,14 +57,13 @@ async function getCumulData(api) {
     }
     if (obj.fiscal_year === 2020){
       tmpCumul20.push(obj.cumulative);
+      tmpPctCumul.push(obj.percent_cumul)
     }
 
 
   });
 
-  console.log(tmpCumul18, tmpCumul19, tmpCumul20)
-
-  return {tmpCumul18, tmpCumul19, tmpCumul20};
+  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
 }
 
 //use selector to modify api address per store selected
@@ -126,6 +125,7 @@ async function updateCharts () {
   let weeks = salesData.tmpWeeks;
   let pctSales = salesData.tmpPctSales;
   let pctGC = salesData.tmpPctGC;
+  let pctCumul = cumulData.tmpPctCumul
   let chartCumul18 = cumulData.tmpCumul18;
   let chartCumul19 = cumulData.tmpCumul19;
   let chartCumul20 = cumulData.tmpCumul20;
@@ -238,10 +238,11 @@ async function updateCharts () {
   let currentGC = chartGC20[chartGC20.length-1]
   let currentPctSales = pctSales[pctSales.length-1]
   let currentPctGC = pctGC[pctGC.length-1]
+  let currentCumul = pctCumul[pctCumul.length-1]
 
   document.getElementById("sales-data").innerHTML = 'Sales: $' + currentSales + ' | Growth: ' + currentPctSales + '%'
   document.getElementById("guest-count-data").innerHTML = 'Guest Count: ' + currentGC + ' | Growth: ' + currentPctGC + '%'
-
+  document.getElementById("cumul-sales-data").innerHTML = 'Cumulative Sales Growth: ' + currentCumul + '%';
 }
 
 
