@@ -101,7 +101,7 @@ async function getCumulData(api) {
 }
 
 async function getTotalSales() {
-  const response = await fetch('http://127.0.0.1:5000/total_sales');
+  const response = await fetch('/total_sales');
   const data = await response.json();
 
   let tmpSales18 = [];
@@ -110,6 +110,8 @@ async function getTotalSales() {
   let tmpGC19 = [];
   let tmpGC20 = [];
   let tmpWeeks = [];
+  let tmpPctSales = [];
+  let tmpPctGC = [];
 
   data.forEach (obj => {
     if (obj.fiscal_year === 2018){
@@ -122,22 +124,25 @@ async function getTotalSales() {
     if (obj.fiscal_year === 2020){
       tmpSales20.push(obj.sales);
       tmpGC20.push(obj.total_guest_count);
+      tmpPctSales.push(obj.percent_sales);
+      tmpPctGC.push(obj.percent_guest_count);
     };
 
     tmpWeeks.push(obj.week_of_year);
   });
 
-  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20}
+  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20, tmpPctSales, tmpPctGC}
 }
 
-/*async function getTotalCumul() {
-  const response = await fetch(api);
+async function getTotalCumul() {
+  const response = await fetch('/total_cumul');
   const data = await response.json();
 
   let tmpCumul18 = []
   let tmpCumul19 = []
   let tmpCumul20 = []
   let tmpPctCumul = []
+  let tmpWeeks = []
 
   data.forEach( obj => {
     if (obj.fiscal_year === 2018){
@@ -151,18 +156,17 @@ async function getTotalSales() {
       tmpPctCumul.push(obj.percent_cumul)
     }
 
-
   });
 
   return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
-}*/
+}
 
 //use selector to modify api address per store selected
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
-  let salesAPI="http://127.0.0.1:5000/sales/" + store
-  let cumulAPI="http://127.0.0.1:5000/cumul/" + store
+  let salesAPI="/sales/" + store
+  let cumulAPI="/cumul/" + store
 
   return {salesAPI, cumulAPI}
 }
@@ -304,6 +308,7 @@ async function updateCharts () {
 
 async function populateBaseCharts() {
   const salesData = await getTotalSales();
+  const cumulData = await getTotalCumul();
 
   let weeks = salesData.tmpWeeks;
   let chartSales18 = salesData.tmpSales18;
@@ -311,6 +316,12 @@ async function populateBaseCharts() {
   let chartSales20 = salesData.tmpSales20;
   let chartGC19 = salesData.tmpGC19;
   let chartGC20 = salesData.tmpGC20;
+  let chartCumul18 = cumulData.tmpCumul18;
+  let chartCumul19 = cumulData.tmpCumul19;
+  let chartCumul20 = cumulData.tmpCumul20;
+  let pctSales = salesData.tmpPctSales;
+  let pctGC = salesData.tmpPctGC;
+  let pctCumul = cumulData.tmpPctCumul;
 
 
   let sales18 = {
@@ -346,6 +357,8 @@ async function populateBaseCharts() {
     name: '2020'
   };
 
+  totalSales = [sales18, sales19, sales20]
+
   let gc19 = {
     x: weeks,
     y: chartGC19,
@@ -368,13 +381,58 @@ async function populateBaseCharts() {
     name: '2020'
   };
 
-  totalSales = [sales18, sales19, sales20]
   totalGC = [gc19, gc20]
+
+  let cumul18 = {
+    x: weeks,
+    y: chartCumul18,
+    mode: 'lines',
+    line: {
+      color: '#ca3e47',
+      width: 2,
+    },
+    name: '2018'
+  };
+
+  let cumul19 = {
+    x: weeks,
+    y: chartCumul19,
+    mode: 'lines',
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  };
+
+  let cumul20 = {
+    x: weeks,
+    y: chartCumul20,
+    mode: 'lines',
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  };
+
+  totalCumul = [cumul18, cumul19, cumul20]
 
 
   Plotly.newPlot( 'total-sales-chart', totalSales, layout, config);
   Plotly.newPlot( 'total-guest-count-chart', totalGC, layout, config);
-  Plotly.newPlot( 'total-cumul-sales-chart', startingData, layout, config);
+  Plotly.newPlot( 'total-cumul-sales-chart', totalCumul, layout, config);
+
+  let currentSales = chartSales20[chartSales20.length-1]
+  let currentGC = chartGC20[chartGC20.length-1]
+  let currentPctSales = pctSales[pctSales.length-1]
+  let currentPctGC = pctGC[pctGC.length-1]
+  let currentCumul = pctCumul[pctCumul.length-1]
+
+  document.getElementById("total-sales-data").innerHTML = 'KN Sales: $' + currentSales + ' | ' + currentPctSales + '%'
+  document.getElementById("total-guest-count-data").innerHTML = 'KN Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
+  document.getElementById("total-cumul-sales-data").innerHTML = 'KN YTD Growth: ' + currentCumul + '%';
+
 
 }
 
