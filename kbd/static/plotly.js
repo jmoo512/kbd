@@ -1,6 +1,151 @@
-//Add event listener to selector to call update functionality
+//Add event listener to selector to call update functions
 
 document.getElementById("store-select").addEventListener("change",updateCharts);
+
+
+
+//use selector to modify api address per store selected
+function selectStore() {
+  let store = document.getElementById("store-select").value;
+  document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
+  let salesAPI="/sales/" + store
+  let cumulAPI="/cumul/" + store
+
+  return {salesAPI, cumulAPI}
+}
+
+
+//grab sales and guest count data from api
+async function getSalesData(api) {
+  const response = await fetch(api);
+  const data = await response.json();
+
+  let tmpSales18 = [];
+  let tmpSales19 = [];
+  let tmpSales20 = [];
+  let tmpGC19 = [];
+  let tmpGC20 = [];
+  let tmpWeeks = [];
+  let tmpPctSales = []
+  let tmpPctGC = []
+
+  data.forEach( obj => {
+    if (obj.fiscal_year === 2018){
+      tmpSales18.push(obj.sales);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpSales19.push(obj.sales);
+      tmpGC19.push(obj.total_guest_count);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpSales20.push(obj.sales);
+      tmpGC20.push(obj.total_guest_count);
+      tmpPctSales.push(obj.percent_sales);
+      tmpPctGC.push(obj.percent_guest_count)
+    }
+
+    tmpWeeks.push(obj.week_of_year);
+
+  });
+
+  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks, tmpPctSales, tmpPctGC};
+}
+
+//grab cumulative sales data from api
+
+async function getCumulData(api) {
+  const response = await fetch(api);
+  const data = await response.json();
+
+  let tmpCumul18 = []
+  let tmpCumul19 = []
+  let tmpCumul20 = []
+  let tmpPctCumul = []
+
+  data.forEach( obj => {
+    if (obj.fiscal_year === 2018){
+      tmpCumul18.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpCumul19.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpCumul20.push(obj.cumulative);
+      tmpPctCumul.push(obj.percent_cumul)
+    }
+
+
+  });
+
+  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
+}
+
+//grab total sales and guest count data from api
+
+async function getTotalSales() {
+  const response = await fetch('/total_sales');
+  const data = await response.json();
+
+  let tmpSales18 = [];
+  let tmpSales19 = [];
+  let tmpSales20 = [];
+  let tmpGC19 = [];
+  let tmpGC20 = [];
+  let tmpWeeks = [];
+  let tmpPctSales = [];
+  let tmpPctGC = [];
+
+  data.forEach (obj => {
+    if (obj.fiscal_year === 2018){
+      tmpSales18.push(obj.sales);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpSales19.push(obj.sales);
+      tmpGC19.push(obj.total_guest_count);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpSales20.push(obj.sales);
+      tmpGC20.push(obj.total_guest_count);
+      tmpPctSales.push(obj.percent_sales);
+      tmpPctGC.push(obj.percent_guest_count);
+    };
+
+    tmpWeeks.push(obj.week_of_year);
+  });
+
+  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20, tmpPctSales, tmpPctGC}
+}
+
+//grab total cumulative sales from api
+
+async function getTotalCumul() {
+  const response = await fetch('/total_cumul');
+  const data = await response.json();
+
+  let tmpCumul18 = []
+  let tmpCumul19 = []
+  let tmpCumul20 = []
+  let tmpPctCumul = []
+  let tmpWeeks = []
+
+  data.forEach( obj => {
+    if (obj.fiscal_year === 2018){
+      tmpCumul18.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpCumul19.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpCumul20.push(obj.cumulative);
+      tmpPctCumul.push(obj.percent_cumul)
+    }
+
+  });
+
+  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
+}
+
+//default layout for charts
 
 let layout =  {
   autosize: false,
@@ -37,142 +182,8 @@ let layout =  {
 let config = {responsive: true, displayModeBar: true}
 
 
-//grab data from api
-async function getSalesData(api) {
-  const response = await fetch(api);
-  const data = await response.json();
 
-  let tmpSales18 = [];
-  let tmpSales19 = [];
-  let tmpSales20 = [];
-  let tmpGC19 = [];
-  let tmpGC20 = [];
-  let tmpWeeks = [];
-  let tmpPctSales = []
-  let tmpPctGC = []
-
-  data.forEach( obj => {
-    if (obj.fiscal_year === 2018){
-      tmpSales18.push(obj.sales);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpSales19.push(obj.sales);
-      tmpGC19.push(obj.total_guest_count);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpSales20.push(obj.sales);
-      tmpGC20.push(obj.total_guest_count);
-      tmpPctSales.push(obj.percent_sales);
-      tmpPctGC.push(obj.percent_guest_count)
-    }
-
-    tmpWeeks.push(obj.week_of_year);
-
-  });
-
-  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks, tmpPctSales, tmpPctGC};
-}
-
-async function getCumulData(api) {
-  const response = await fetch(api);
-  const data = await response.json();
-
-  let tmpCumul18 = []
-  let tmpCumul19 = []
-  let tmpCumul20 = []
-  let tmpPctCumul = []
-
-  data.forEach( obj => {
-    if (obj.fiscal_year === 2018){
-      tmpCumul18.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpCumul19.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpCumul20.push(obj.cumulative);
-      tmpPctCumul.push(obj.percent_cumul)
-    }
-
-
-  });
-
-  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
-}
-
-async function getTotalSales() {
-  const response = await fetch('/total_sales');
-  const data = await response.json();
-
-  let tmpSales18 = [];
-  let tmpSales19 = [];
-  let tmpSales20 = [];
-  let tmpGC19 = [];
-  let tmpGC20 = [];
-  let tmpWeeks = [];
-  let tmpPctSales = [];
-  let tmpPctGC = [];
-
-  data.forEach (obj => {
-    if (obj.fiscal_year === 2018){
-      tmpSales18.push(obj.sales);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpSales19.push(obj.sales);
-      tmpGC19.push(obj.total_guest_count);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpSales20.push(obj.sales);
-      tmpGC20.push(obj.total_guest_count);
-      tmpPctSales.push(obj.percent_sales);
-      tmpPctGC.push(obj.percent_guest_count);
-    };
-
-    tmpWeeks.push(obj.week_of_year);
-  });
-
-  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20, tmpPctSales, tmpPctGC}
-}
-
-async function getTotalCumul() {
-  const response = await fetch('/total_cumul');
-  const data = await response.json();
-
-  let tmpCumul18 = []
-  let tmpCumul19 = []
-  let tmpCumul20 = []
-  let tmpPctCumul = []
-  let tmpWeeks = []
-
-  data.forEach( obj => {
-    if (obj.fiscal_year === 2018){
-      tmpCumul18.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpCumul19.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpCumul20.push(obj.cumulative);
-      tmpPctCumul.push(obj.percent_cumul)
-    }
-
-  });
-
-  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
-}
-
-//use selector to modify api address per store selected
-function selectStore() {
-  let store = document.getElementById("store-select").value;
-  document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
-  let salesAPI="/sales/" + store
-  let cumulAPI="/cumul/" + store
-
-  return {salesAPI, cumulAPI}
-}
-
-
-//update charts based on selected store
+//update store level charts based on selected store
 async function updateCharts () {
   const getAPI = await selectStore();
   const salesData = await getSalesData(getAPI.salesAPI);
@@ -306,6 +317,7 @@ async function updateCharts () {
   document.getElementById("cumul-sales-data").innerHTML = 'YTD Sales Growth: ' + currentCumul + '%';
 }
 
+//load company level charts on page load
 async function populateBaseCharts() {
   const salesData = await getTotalSales();
   const cumulData = await getTotalCumul();
@@ -436,11 +448,13 @@ async function populateBaseCharts() {
 
 }
 
-
+//array for empty data for store level charts
 let startingData = []
 
 //instantiate empty charts to DOM
 Plotly.newPlot( 'sales-chart', startingData, layout, config);
 Plotly.newPlot( 'guest-count-chart', startingData, layout, config);
 Plotly.newPlot( 'cumul-sales-chart', startingData, layout, config);
+
+//call function to instantiate company level charts on page load
 populateBaseCharts()
