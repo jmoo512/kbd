@@ -70,9 +70,6 @@ def sales_gc(chosen_location):
     df['percent_guest_count']=df['total_guest_count'].pct_change().round(4)*100
     df.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
-
-
-
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
 @sales.route('/cumul/<chosen_location>')

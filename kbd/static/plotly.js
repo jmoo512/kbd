@@ -42,7 +42,7 @@ async function getSalesData(api) {
 async function getCumulData(api) {
   const response = await fetch(api);
   const data = await response.json();
-  
+
   let tmpCumul18 = []
   let tmpCumul19 = []
   let tmpCumul20 = []
@@ -64,6 +64,36 @@ async function getCumulData(api) {
   });
 
   return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
+}
+
+async function getTotalSales() {
+  const response = await fetch('http://127.0.0.1:5000/total_sales');
+  const data = await response.json();
+
+  let tmpSales18 = [];
+  let tmpSales19 = [];
+  let tmpSales20 = [];
+  let tmpGC19 = [];
+  let tmpGC20 = [];
+  let tmpWeeks = [];
+
+  data.forEach (obj => {
+    if (obj.fiscal_year === 2018){
+      tmpSales18.push(obj.sales);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpSales19.push(obj.sales);
+      tmpGC19.push(obj.total_guest_count);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpSales20.push(obj.sales);
+      tmpGC20.push(obj.total_guest_count);
+    };
+
+    tmpWeeks.push(obj.week_of_year);
+  });
+
+  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks}
 }
 
 //use selector to modify api address per store selected
@@ -245,7 +275,55 @@ async function updateCharts () {
   document.getElementById("cumul-sales-data").innerHTML = 'Cumulative Sales Growth: ' + currentCumul + '%';
 }
 
+async function populateBaseCharts() {
+  const salesData = await getTotalSales();
 
+  let weeks = salesData.tmpWeeks;
+  let chartSales18 = salesData.tmpSales18;
+  let chartSales19 = salesData.tmpSales19;
+  let chartSales20 = salesData.tmpSales20;
+
+
+  let sales18 = {
+    x: weeks,
+    y: chartSales18,
+    mode: 'lines',
+    line: {
+      color: '#ca3e47',
+      width: 2,
+    },
+    name: '2018'
+  };
+
+  let sales19 = {
+    x: weeks,
+    y: chartSales19,
+    mode: 'lines',
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  };
+
+  let sales20 = {
+    x: weeks,
+    y: chartSales20,
+    mode: 'lines',
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  };
+
+  totalSales = [sales18, sales19, sales20]
+
+  Plotly.newPlot( 'total-sales-chart', totalSales, layout, config);
+  Plotly.newPlot( 'total-guest-count-chart', startingData, layout, config);
+  Plotly.newPlot( 'total-cumul-sales-chart', startingData, layout, config);
+
+}
 
 
 let startingData = []
@@ -254,6 +332,4 @@ let startingData = []
 Plotly.newPlot( 'sales-chart', startingData, layout, config);
 Plotly.newPlot( 'guest-count-chart', startingData, layout, config);
 Plotly.newPlot( 'cumul-sales-chart', startingData, layout, config);
-Plotly.newPlot( 'total-sales-chart', startingData, layout, config);
-Plotly.newPlot( 'total-guest-count-chart', startingData, layout, config);
-Plotly.newPlot( 'total-cumul-sales-chart', startingData, layout, config);
+populateBaseCharts()
