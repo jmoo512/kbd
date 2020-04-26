@@ -125,3 +125,49 @@ def cumul(chosen_location):
     result.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
     return Response(result.to_json(orient="records"), mimetype='application/json')
+
+@sales.route('/total_sales')
+def total_sales():
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 ORDER BY week_of_year, fiscal_year")
+    cur.close()
+    conn.close()
+
+    df=sales_data
+
+    df.fillna(0,inplace=True)
+
+    #find current year
+    current_year=df['fiscal_year'].max()
+
+    #find current week based on last entry in df
+    curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+
+    df=df[(df['week_of_year'] >= curr_week-6) & (df['week_of_year'] <= curr_week+6)]
+
+
+    df_agg_sales=df.groupby(['fiscal_year','week_of_year'])['sales'].sum().reset_index()
+    df_agg_gc=df.groupby(['fiscal_year','week_of_year'])['total_guest_count'].sum().reset_index()
+
+    df_agg_sales.sort_values(by=['week_of_year','fiscal_year'],inplace=True)
+    df_agg_gc.sort_values(by=['week_of_year','fiscal_year'],inplace=True)
+
+    df_agg_sales['percent_sales']=df_agg_sales['sales'].pct_change().round(4)*100
+    df_agg_gc['percent_guest_count']=df_agg_gc['total_guest_count'].pct_change().round(4)*100
+    df_agg_sales.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
+    df_agg_gc.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
+
+    df_total=df_agg_sales.join(df_agg_gc, lsuffix='_l',rsuffix='_r')
+
+    df_total.drop(columns=['fiscal_year_r','week_of_year_r'],inplace=True)
+    df_total.rename(columns={'fiscal_year_l':'fiscal_year','week_of_year_l':'week_of_year'},inplace=True)
+
+
+
+    return Response(df_total.to_json(orient="records"), mimetype='application/json')
