@@ -202,6 +202,10 @@ async function updateCharts () {
   let chartCumul19 = cumulData.tmpCumul19;
   let chartCumul20 = cumulData.tmpCumul20;
 
+  pctSales = pctSales.map(i => i + '%')
+  pctGC = pctGC.map(i => i + '%')
+  pctCumul = pctCumul.map(i => i + '%')
+
   let sales18 = {
     x: weeks,
     y: chartSales18,
@@ -232,7 +236,8 @@ async function updateCharts () {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctSales
   };
 
   let updatedSales = [sales18, sales19, sales20]
@@ -258,7 +263,8 @@ async function updateCharts () {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctGC
   }
 
   let updatedGC = [gc19, gc20]
@@ -296,7 +302,8 @@ async function updateCharts () {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctCumul
   }
 
   let updatedCumul = [cumul18, cumul19, cumul20]
