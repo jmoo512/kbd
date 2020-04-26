@@ -2,6 +2,40 @@
 
 document.getElementById("store-select").addEventListener("change",updateCharts);
 
+let layout =  {
+  autosize: false,
+  paper_bgcolor: '#313131',
+  plot_bgcolor: '#313131',
+  width: 500,
+  height: 400,
+  margin: {
+    l: 50,
+    r: 50,
+    b: 50,
+    t: 50,
+    pad: 5
+  },
+  xaxis: {
+    tickcolor: '#FFF',
+    tickfont: {
+      color: "#FFF"
+    },
+  },
+  yaxis: {
+    tickcolor: '#FFF',
+    tickfont: {
+      color: "#FFF"
+    },
+  },
+  legend: {
+    font: {
+      color: '#FFF'
+    }
+  }
+}
+
+let config = {responsive: true, displayModeBar: true}
+
 
 //grab data from api
 async function getSalesData(api) {
@@ -93,8 +127,35 @@ async function getTotalSales() {
     tmpWeeks.push(obj.week_of_year);
   });
 
-  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks}
+  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20}
 }
+
+/*async function getTotalCumul() {
+  const response = await fetch(api);
+  const data = await response.json();
+
+  let tmpCumul18 = []
+  let tmpCumul19 = []
+  let tmpCumul20 = []
+  let tmpPctCumul = []
+
+  data.forEach( obj => {
+    if (obj.fiscal_year === 2018){
+      tmpCumul18.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2019){
+      tmpCumul19.push(obj.cumulative);
+    }
+    if (obj.fiscal_year === 2020){
+      tmpCumul20.push(obj.cumulative);
+      tmpPctCumul.push(obj.percent_cumul)
+    }
+
+
+  });
+
+  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
+}*/
 
 //use selector to modify api address per store selected
 function selectStore() {
@@ -106,40 +167,6 @@ function selectStore() {
   return {salesAPI, cumulAPI}
 }
 
-
-let layout =  {
-  autosize: false,
-  paper_bgcolor: '#313131',
-  plot_bgcolor: '#313131',
-  width: 500,
-  height: 400,
-  margin: {
-    l: 50,
-    r: 50,
-    b: 50,
-    t: 50,
-    pad: 5
-  },
-  xaxis: {
-    tickcolor: '#FFF',
-    tickfont: {
-      color: "#FFF"
-    },
-  },
-  yaxis: {
-    tickcolor: '#FFF',
-    tickfont: {
-      color: "#FFF"
-    },
-  },
-  legend: {
-    font: {
-      color: '#FFF'
-    }
-  }
-}
-
-let config = {responsive: true, displayModeBar: true}
 
 //update charts based on selected store
 async function updateCharts () {
@@ -282,6 +309,8 @@ async function populateBaseCharts() {
   let chartSales18 = salesData.tmpSales18;
   let chartSales19 = salesData.tmpSales19;
   let chartSales20 = salesData.tmpSales20;
+  let chartGC19 = salesData.tmpGC19;
+  let chartGC20 = salesData.tmpGC20;
 
 
   let sales18 = {
@@ -317,10 +346,34 @@ async function populateBaseCharts() {
     name: '2020'
   };
 
+  let gc19 = {
+    x: weeks,
+    y: chartGC19,
+    mode: 'lines',
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  };
+
+  let gc20 = {
+    x: weeks,
+    y: chartGC20,
+    mode: 'lines',
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  };
+
   totalSales = [sales18, sales19, sales20]
+  totalGC = [gc19, gc20]
+
 
   Plotly.newPlot( 'total-sales-chart', totalSales, layout, config);
-  Plotly.newPlot( 'total-guest-count-chart', startingData, layout, config);
+  Plotly.newPlot( 'total-guest-count-chart', totalGC, layout, config);
   Plotly.newPlot( 'total-cumul-sales-chart', startingData, layout, config);
 
 }
