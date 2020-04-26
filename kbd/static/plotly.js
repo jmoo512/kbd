@@ -297,9 +297,9 @@ async function updateCharts () {
   let currentPctGC = pctGC[pctGC.length-1]
   let currentCumul = pctCumul[pctCumul.length-1]
 
-  document.getElementById("sales-data").innerHTML = 'Sales: $' + currentSales + ' | Growth: ' + currentPctSales + '%'
-  document.getElementById("guest-count-data").innerHTML = 'Guest Count: ' + currentGC + ' | Growth: ' + currentPctGC + '%'
-  document.getElementById("cumul-sales-data").innerHTML = 'Cumulative Sales Growth: ' + currentCumul + '%';
+  document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
+  document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
+  document.getElementById("cumul-sales-data").innerHTML = 'YTD Sales Growth: ' + currentCumul + '%';
 }
 
 async function populateBaseCharts() {
