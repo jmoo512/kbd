@@ -342,6 +342,10 @@ async function populateBaseCharts() {
   let pctGC = salesData.tmpPctGC;
   let pctCumul = cumulData.tmpPctCumul;
 
+  pctSales = pctSales.map(i => i + '%')
+  pctGC = pctGC.map(i => i + '%')
+  pctCumul = pctCumul.map(i => i + '%')
+
 
   let sales18 = {
     x: weeks,
@@ -373,7 +377,8 @@ async function populateBaseCharts() {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctSales
   };
 
   totalSales = [sales18, sales19, sales20]
@@ -397,7 +402,8 @@ async function populateBaseCharts() {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctGC
   };
 
   totalGC = [gc19, gc20]
@@ -432,7 +438,8 @@ async function populateBaseCharts() {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctCumul
   };
 
   totalCumul = [cumul18, cumul19, cumul20]

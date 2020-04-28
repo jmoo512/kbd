@@ -2,6 +2,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
+from flask_login import LoginManager
 from config import Config
 
 APP_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -9,6 +10,7 @@ APP_STATIC = os.path.join(APP_ROOT, 'static')
 
 db = SQLAlchemy()
 migrate = Migrate()
+login=LoginManager()
 
 def create_app(config_class=Config):
 
@@ -16,6 +18,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app,db)
+    #login.init_app(app)
 
 
 
@@ -35,7 +38,7 @@ def create_app(config_class=Config):
         app.register_blueprint(sales)
 
         #import dash application
-        
+
         return app
 
 

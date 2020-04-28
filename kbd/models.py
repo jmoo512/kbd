@@ -1,5 +1,18 @@
 from kbd import db
 from datetime import datetime
+from flask_login import UserMixin
+from app import login
+
+#@login.user_loader
+#def load_user(id):
+#    return Users.query.get(int(id))
+
+class Users(UserMixin, db.Model):
+    __tablename__='users'
+    id=db.Column(db.Integer,primary_key=True)
+    email=db.Column(db.String(50), unique=True)
+    username=db.Column(db.String(20), unique=True)
+    hashed_password=db.Column(db.String(256))
 
 class GameFilm(db.Model):
     __tablename__='gamefilm'
@@ -10,8 +23,6 @@ class GameFilm(db.Model):
     date_measured=db.Column(db.Date)
     tm_name=db.Column(db.String(50))
     score=db.Column(db.Integer)
-
-    
 
 class ToGoLabel(db.Model):
     __tablename__='tgl'
