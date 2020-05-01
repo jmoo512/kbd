@@ -26,3 +26,7 @@ def c3():
 @core.route('/plotlyjs')
 def plotly():
     return render_template('/plotlyjs.html')
+
+@core.route('/store_weekly')
+def store_weekly():
+    return render_template('store_weekly.html')
