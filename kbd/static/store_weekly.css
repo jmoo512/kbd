@@ -6,7 +6,7 @@ body {
 .header{
   display: flex;
   flex-flow: row nowrap;
-  width: 10.5in;
+  width: 1000px;
   justify-content: center;
   align-items: center;
 }
@@ -27,13 +27,11 @@ body {
 
 .grid{
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: 3fr auto 2fr auto 1fr;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(3, 1fr 25px);
   grid-gap: 5px;
-  width: 11in;
-  max-width: 1500px;
-  height: 8in;
-  max-height: 900;
+  width: 1100px;
+  height: 850px;
 }
 
 #sales-chart {
@@ -48,7 +46,7 @@ body {
 
 #sales-data {
   grid-column: 1 / 4;
-  grid-row: 2/ 3;
+  grid-row: 2 / 3;
 }
 
 #guest-count-data {
@@ -86,10 +84,24 @@ body {
   grid-row: 4 / 5;
 }
 
+#bullet-container{
+  grid-column: 7 / 8;
+  grid-row: 1 / 7;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+/*
+#insp-data-card{
+  grid-column: 7 / 8;
+  grid-row: 2 / 3;
+}
+
 #insp-chart{
-  grid-column: 7 / 10;
+  grid-column: 7 / 8;
   grid-row: 1 / 2;
 }
+*/
 
 @media print{
   .form-div{

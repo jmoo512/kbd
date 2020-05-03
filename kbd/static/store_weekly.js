@@ -147,12 +147,12 @@ async function getTotalCumul() {
 
 //default layout for charts
 
-let layout =  {
+let layout1 =  {
   autosize: true,
   paper_bgcolor: '#313131',
   plot_bgcolor: '#313131',
-  //width: 500,
-  //height: 400,
+  width: 370,
+  height: 260,
   margin: {
     l: 50,
     r: 50,
@@ -179,6 +179,37 @@ let layout =  {
   }
 }
 
+let layout2 =  {
+  autosize: true,
+  paper_bgcolor: '#313131',
+  plot_bgcolor: '#313131',
+  width: 245,
+  height: 260,
+  margin: {
+    l: 50,
+    r: 50,
+    b: 50,
+    t: 50,
+    pad: 5
+  },
+  xaxis: {
+    tickcolor: '#FFF',
+    tickfont: {
+      color: "#FFF"
+    },
+  },
+  yaxis: {
+    tickcolor: '#FFF',
+    tickfont: {
+      color: "#FFF"
+    },
+  },
+  legend: {
+    font: {
+      color: '#FFF'
+    }
+  }
+}
 let config = {responsive: true, displayModeBar: false}
 
 
@@ -308,9 +339,9 @@ async function updateCharts () {
 
   let updatedCumul = [cumul18, cumul19, cumul20]
 
-  Plotly.react('sales-chart', updatedSales, layout, config)
-  Plotly.react('guest-count-chart', updatedGC, layout, config)
-  Plotly.react('cumul-sales-chart', updatedCumul, layout, config)
+  Plotly.react('sales-chart', updatedSales, layout1, config)
+  Plotly.react('guest-count-chart', updatedGC, layout1, config)
+  Plotly.react('cumul-sales-chart', updatedCumul, layout1, config)
 
   let currentWeek = weeks[weeks.length-1]
   let currentSales = chartSales20[chartSales20.length-1]
@@ -445,8 +476,8 @@ async function populateBaseCharts() {
   totalCumul = [cumul18, cumul19, cumul20]
 
 
-  Plotly.newPlot( 'total-sales-chart', totalSales, layout, config);
-  Plotly.newPlot( 'total-guest-count-chart', totalGC, layout, config);
+  Plotly.newPlot( 'total-sales-chart', totalSales, layout1, config);
+  Plotly.newPlot( 'total-guest-count-chart', totalGC, layout1, config);
   Plotly.newPlot( 'total-cumul-sales-chart', totalCumul, layout, config);
 
   let currentSales = chartSales20[chartSales20.length-1]
@@ -466,11 +497,11 @@ async function populateBaseCharts() {
 let startingData = []
 
 //instantiate empty charts to DOM
-Plotly.newPlot( 'sales-chart', startingData, layout, config);
-Plotly.newPlot( 'guest-count-chart', startingData, layout, config);
-Plotly.newPlot( 'bbq-chart', startingData, layout, config);
-Plotly.newPlot( 'tacos-chart', startingData, layout, config);
-Plotly.newPlot( 'bbqgo-chart', startingData, layout, config);
+Plotly.newPlot( 'sales-chart', startingData, layout1, config);
+Plotly.newPlot( 'guest-count-chart', startingData, layout1, config);
+Plotly.newPlot( 'bbq-chart', startingData, layout2, config);
+Plotly.newPlot( 'tacos-chart', startingData, layout2, config);
+Plotly.newPlot( 'bbqgo-chart', startingData, layout2, config);
 
 var inspData = [
   {
@@ -478,10 +509,10 @@ var inspData = [
     mode: "number+gauge+delta",
     value: 3.62,
     domain: { x: [0, 1], y: [0, 0.25] },
-    title: { text: "Inspections",
+    //title: { text: "Inspections",
             //position: "top",
-            font: {size: 12}
-   },
+    //        font: {size: 12}
+   //},
     delta: { reference: 3.5 },
     gauge: {
       shape: "bullet",
@@ -495,60 +526,15 @@ var inspData = [
         { range: [0, 3.5], color: "lightgray" },
       ]
     }
-  },
-  {
-    type: "indicator",
-    mode: "number+gauge+delta",
-    value: 3.62,
-    domain: { x: [0, 1], y: [0.35, 0.55] },
-    title: { text: "Inspections",
-            //position: "top",
-            font: {size: 12}
-   },
-    delta: { reference: 3.5 },
-    gauge: {
-      shape: "bullet",
-      axis: { range: [null, 4] },
-      //threshold: {
-      //  line: { color: "red", width: 2 },
-      //  thickness: 0.75,
-      //  value: 280
-      //},
-      steps: [
-        { range: [0, 3.5], color: "lightgray" },
-      ]
-    }
-  },{
-    type: "indicator",
-    mode: "number+gauge+delta",
-    value: 3.62,
-    domain: { x: [0, 1], y: [0.65, 0.85] },
-    title: { text: "Inspections",
-            //position: "top",
-            font: {size: 12}
-   },
-    delta: { reference: 3.5 },
-    gauge: {
-      shape: "bullet",
-      axis: { range: [null, 4] },
-      //threshold: {
-      //  line: { color: "red", width: 2 },
-      //  thickness: 0.75,
-      //  value: 280
-      //},
-      steps: [
-        { range: [0, 3.5], color: "lightgray" },
-      ]
-    }
-  },
+  }
 ];
 
 var inspLayout = { width: 350,
-  height: 425,
+  height: 125,
   margin: {
-    l: 80,
-    r: 0,
-    b: 5,
+    l: 5,
+    r: 5,
+    b: 10,
     t: 5,
     pad: 3
   }
