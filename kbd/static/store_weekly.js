@@ -472,6 +472,46 @@ Plotly.newPlot( 'bbq-chart', startingData, layout, config);
 Plotly.newPlot( 'tacos-chart', startingData, layout, config);
 Plotly.newPlot( 'bbqgo-chart', startingData, layout, config);
 
+var inspData = [
+  {
+    type: "indicator",
+    mode: "number+gauge+delta",
+    value: 3.62,
+    domain: { x: [0, 1], y: [0, 1] },
+    title: { text: "Inspections",
+            //position: "top",
+            font: {size: 12}
+   },
+    delta: { reference: 3.5 },
+    gauge: {
+      shape: "bullet",
+      axis: { range: [null, 4] },
+      //threshold: {
+      //  line: { color: "red", width: 2 },
+      //  thickness: 0.75,
+      //  value: 280
+      //},
+      steps: [
+        { range: [0, 3.5], color: "lightgray" },
+      ]
+    }
+  }
+];
+
+var inspLayout = { width: 350,
+  height: 75,
+  margin: {
+    l: 80,
+    r: 0,
+    b: 5,
+    t: 5,
+    pad: 3
+  }
+ };
+var inspConfig = { responsive: true };
+
+Plotly.newPlot('insp-chart', inspData, inspLayout, inspConfig);
+
 
 //call function to instantiate company level charts on page load
 populateBaseCharts()

@@ -6,8 +6,7 @@ body {
 .header{
   display: flex;
   flex-flow: row nowrap;
-  width: auto;
-  max-width: 75vw;
+  width: 10.5in;
   justify-content: center;
   align-items: center;
 }
@@ -19,14 +18,21 @@ body {
   background-color: LightSteelBlue;
 }
 
+.data-box, #chosen-store{
+  border: solid 2px;
+  border-color: Black;
+  border-radius: 3px;
+  background-color: LightSteelBlue;
+}
+
 .grid{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: 3fr auto 2fr auto 1fr;
   grid-gap: 5px;
-  width: auto;
+  width: 11in;
   max-width: 1500px;
-  height: auto;
+  height: 8in;
   max-height: 900;
 }
 
@@ -78,6 +84,11 @@ body {
 #bbqgo-data {
   grid-column: 5 / 7;
   grid-row: 4 / 5;
+}
+
+#insp-chart{
+  grid-column: 7 / 10;
+  grid-row: 1 / 2;
 }
 
 @media print{
