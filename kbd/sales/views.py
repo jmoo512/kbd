@@ -63,9 +63,11 @@ def sales_gc(chosen_location):
 
     #find current week based on last entry in df
     curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+    beg_week=curr_week-6
+    end_week=curr_week+6
 
     #set range of weeks for chart view
-    df=df[(df['week_of_year'] >= curr_week-6) & (df['week_of_year'] <= curr_week+6)]
+    df=df[(df['week_of_year'] >= beg_week) & (df['week_of_year'] <= end_week)]
 
     #calculate percent change in sales and guest count
     df['percent_sales']=df['sales'].pct_change().round(4)*100
@@ -99,23 +101,25 @@ def cumul(chosen_location):
 
     #find current week based on last entry in df
     curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+    beg_week=curr_week-6
+    end_week=curr_week+6
 
     df_cumul=df.groupby(['fiscal_year','week_of_year'])['sales'].sum().reset_index()
 
     #break into 3 different dfs to calculate cumulative sales per year
     df_cumul_2018=df_cumul[df_cumul['fiscal_year']==2018]
     df_cumul_2018['cumulative']=df_cumul_2018['sales'].cumsum()
-    df_cumul_2018=df_cumul_2018[(df_cumul_2018['week_of_year'] >= curr_week-4) & (df_cumul_2018['week_of_year'] <= curr_week+4)]
+    df_cumul_2018=df_cumul_2018[(df_cumul_2018['week_of_year'] >= beg_week) & (df_cumul_2018['week_of_year'] <= end_week)]
     df_cumul_2018.drop(columns=['sales'],inplace=True)
 
     df_cumul_2019=df_cumul[df_cumul['fiscal_year']==2019]
     df_cumul_2019['cumulative']=df_cumul_2019['sales'].cumsum()
-    df_cumul_2019=df_cumul_2019[(df_cumul_2019['week_of_year'] >= curr_week-4) & (df_cumul_2019['week_of_year'] <= curr_week+4)]
+    df_cumul_2019=df_cumul_2019[(df_cumul_2019['week_of_year'] >= beg_week) & (df_cumul_2019['week_of_year'] <= end_week)]
     df_cumul_2019.drop(columns=['sales'],inplace=True)
 
     df_cumul_2020=df_cumul[df_cumul['fiscal_year']==2020]
     df_cumul_2020['cumulative']=df_cumul_2020['sales'].cumsum()
-    df_cumul_2020=df_cumul_2020[(df_cumul_2020['week_of_year'] >= curr_week-4) & (df_cumul_2020['week_of_year'] <= curr_week+4)]
+    df_cumul_2020=df_cumul_2020[(df_cumul_2020['week_of_year'] >= beg_week) & (df_cumul_2020['week_of_year'] <= end_week)]
     df_cumul_2020.drop(columns=['sales'],inplace=True)
 
     #concatenate above dataframs
@@ -151,9 +155,11 @@ def total_sales():
 
     #find current week based on last entry in df
     curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+    beg_week=curr_week-6
+    end_week=curr_week+6
 
     #set range of weeks for chart view
-    df=df[(df['week_of_year'] >= curr_week-6) & (df['week_of_year'] <= curr_week+6)]
+    df=df[(df['week_of_year'] >= beg_week) & (df['week_of_year'] <= end_week)]
 
     #split df in pieace, group and aggregate sales and guest counts
     df_agg_sales=df.groupby(['fiscal_year','week_of_year'])['sales'].sum().reset_index()
@@ -201,23 +207,25 @@ def total_cumul():
 
     #find current week based on last entry in df
     curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+    beg_week=curr_week-6
+    end_week=curr_week+6
 
     df_cumul=df.groupby(['fiscal_year','week_of_year'])['sales'].sum().reset_index()
 
     #split into dfs by year, calculate cumulative sales by year
     df_cumul_2018=df_cumul[df_cumul['fiscal_year']==2018]
     df_cumul_2018['cumulative']=df_cumul_2018['sales'].cumsum()
-    df_cumul_2018=df_cumul_2018[(df_cumul_2018['week_of_year'] >= curr_week-4) & (df_cumul_2018['week_of_year'] <= curr_week+4)]
+    df_cumul_2018=df_cumul_2018[(df_cumul_2018['week_of_year'] >= beg_week) & (df_cumul_2018['week_of_year'] <= end_week)]
     df_cumul_2018.drop(columns=['sales'],inplace=True)
 
     df_cumul_2019=df_cumul[df_cumul['fiscal_year']==2019]
     df_cumul_2019['cumulative']=df_cumul_2019['sales'].cumsum()
-    df_cumul_2019=df_cumul_2019[(df_cumul_2019['week_of_year'] >= curr_week-4) & (df_cumul_2019['week_of_year'] <= curr_week+4)]
+    df_cumul_2019=df_cumul_2019[(df_cumul_2019['week_of_year'] >= beg_week) & (df_cumul_2019['week_of_year'] <= end_week)]
     df_cumul_2019.drop(columns=['sales'],inplace=True)
 
     df_cumul_2020=df_cumul[df_cumul['fiscal_year']==2020]
     df_cumul_2020['cumulative']=df_cumul_2020['sales'].cumsum()
-    df_cumul_2020=df_cumul_2020[(df_cumul_2020['week_of_year'] >= curr_week-4) & (df_cumul_2020['week_of_year'] <= curr_week+4)]
+    df_cumul_2020=df_cumul_2020[(df_cumul_2020['week_of_year'] >= beg_week) & (df_cumul_2020['week_of_year'] <= end_week)]
     df_cumul_2020.drop(columns=['sales'],inplace=True)
 
     #concatanate dfs
