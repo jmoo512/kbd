@@ -502,13 +502,16 @@ Plotly.newPlot( 'guest-count-chart', startingData, layout1, config);
 Plotly.newPlot( 'bbq-chart', startingData, layout2, config);
 Plotly.newPlot( 'tacos-chart', startingData, layout2, config);
 Plotly.newPlot( 'bbqgo-chart', startingData, layout2, config);
+Plotly.newPlot( 'olo-chart', startingData, layout2, config);
+Plotly.newPlot( 'dd-chart', startingData, layout2, config);
+Plotly.newPlot( 'olo-dd-pie-chart', startingData, layout2, config);
 
 var inspData = [
   {
     type: "indicator",
     mode: "number+gauge+delta",
     value: 3.62,
-    domain: { x: [0, 1], y: [0, 0.25] },
+    domain: { x: [0, 1], y: [0, 1] },
     //title: { text: "Inspections",
             //position: "top",
     //        font: {size: 12}
@@ -529,19 +532,44 @@ var inspData = [
   }
 ];
 
+var ceData = [
+  {
+    type: "indicator",
+    mode: "number+gauge+delta",
+    value: 10.27,
+    number: {prefix: "$"},
+    domain: { x: [0, 1], y: [0, 1] },
+    title: { text: "Inspections"},
+    delta: { reference: 10.87 },
+    gauge: {
+      shape: "bullet",
+      axis: { range: [null, 13] },
+      //threshold: {
+      //  line: { color: "red", width: 2 },
+      //  thickness: 0.75,
+      //  value: 280
+      //},
+      steps: [
+        { range: [0, 10.87], color: "lightgray" },
+      ]
+    }
+  }
+];
+
 var inspLayout = { width: 350,
-  height: 125,
+  height: 100,
   margin: {
     l: 5,
     r: 5,
-    b: 10,
+    b: 30,
     t: 5,
-    pad: 3
+    pad: 5
   }
  };
 var inspConfig = { responsive: true };
 
 Plotly.newPlot('insp-chart', inspData, inspLayout, inspConfig);
+Plotly.newPlot('ce-chart', ceData, inspLayout, inspConfig);
 
 //call function to instantiate company level charts on page load
 populateBaseCharts()
