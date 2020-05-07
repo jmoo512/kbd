@@ -3,9 +3,16 @@
 
 <!--<iframe src="https://knlabor.herokuapp.com/" width=1200 height=800>--!>
 
-{% for i in result %}
-  {{i.date_measured}} - {{i.tm_name}} - {{i.tm_efficiency}}<br>
-{% endfor %}
+<div class="">
+  {% if current_user.is_anonymous %}
+    <a href="{{url_for('core.login')}}">Login</a>
+  {% else %}
+    <a href="{{url_for('core.plotly')}}">Weekly Sales and Guest Count</a><br>
+    <a href="{{url_for('core.store_weekly')}}">Weekly Store Charts</a><br>
+    <a href="{{url_for('core.logout')}}">Logout</a>
+  {% endif %}
+
+</div>
 
 
 {% endblock %}
