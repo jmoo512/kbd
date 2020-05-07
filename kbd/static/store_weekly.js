@@ -570,7 +570,7 @@ var accidentData = [
     delta: { reference: 1987 },
     gauge: {
       shape: "bullet",
-      axis: { range: [null, 1987] },
+      axis: { range: [null, 2000] },
       //threshold: {
       //  line: { color: "red", width: 2 },
       //  thickness: 0.75,
