@@ -3,6 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager
+from flask_cors import CORS
 from config import Config
 
 APP_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -12,6 +13,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 login=LoginManager()
 login.login_view = 'core.login'
+cors=CORS()
 
 def create_app(config_class=Config):
 
@@ -20,6 +22,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     migrate.init_app(app,db)
     login.init_app(app)
+    cors.init_app(app)
 
 
 
