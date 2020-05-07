@@ -173,6 +173,10 @@ let layout1 =  {
     },
   },
   legend: {
+    orientation:"h",
+    x:0,
+    xanchor:"left",
+    y:1.3,
     font: {
       color: '#FFF'
     }
@@ -556,6 +560,29 @@ var ceData = [
   }
 ];
 
+var accidentData = [
+  {
+    type: "indicator",
+    mode: "number+gauge+delta",
+    value: 546,
+    domain: { x: [0, 1], y: [0, 1] },
+    title: { text: "Days Accident Free"},
+    delta: { reference: 1987 },
+    gauge: {
+      shape: "bullet",
+      axis: { range: [null, 1987] },
+      //threshold: {
+      //  line: { color: "red", width: 2 },
+      //  thickness: 0.75,
+      //  value: 280
+      //},
+      steps: [
+        { range: [0, 1987], color: "lightgray" },
+      ]
+    }
+  }
+];
+
 var inspLayout = { width: 350,
   height: 100,
   margin: {
@@ -570,6 +597,7 @@ var inspConfig = { responsive: true };
 
 Plotly.newPlot('insp-chart', inspData, inspLayout, inspConfig);
 Plotly.newPlot('ce-chart', ceData, inspLayout, inspConfig);
+Plotly.newPlot('accident-chart', accidentData, inspLayout, inspConfig);
 
 //call function to instantiate company level charts on page load
 populateBaseCharts()
