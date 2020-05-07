@@ -237,3 +237,40 @@ def total_cumul():
     result.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
     return Response(result.to_json(orient="records"), mimetype='application/json')
+
+
+#api for weekly store sales and guest count
+@sales.route('/weekly/<chosen_location>')
+def weekly(chosen_location):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, mavn_sales, doordash_sales, bbq_guest_count, taco_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
+    cur.close()
+    conn.close()
+
+    df=sales_data
+
+    df.fillna(0,inplace=True)
+
+    #find current year
+    current_year=df['fiscal_year'].max()
+
+    #find current week based on last entry in df
+    curr_week=df[df['fiscal_year']==current_year]['week_of_year'].max()
+    beg_week=curr_week-6
+    end_week=curr_week+6
+
+    #set range of weeks for chart view
+    df=df[(df['week_of_year'] >= beg_week) & (df['week_of_year'] <= end_week)]
+
+    #calculate percent change in sales and guest count
+    df['percent_sales']=df['sales'].pct_change().round(4)*100
+    df['percent_guest_count']=df['total_guest_count'].pct_change().round(4)*100
+    df.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')

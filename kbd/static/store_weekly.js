@@ -8,10 +8,9 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
-  let salesAPI="/sales/" + store
-  let cumulAPI="/cumul/" + store
+  let salesAPI="/weekly/" + store
 
-  return {salesAPI, cumulAPI}
+  return {salesAPI}
 }
 
 
@@ -25,6 +24,14 @@ async function getSalesData(api) {
   let tmpSales20 = [];
   let tmpGC19 = [];
   let tmpGC20 = [];
+  let tmpBBQGC19 = [];
+  let tmpBBQGC20 = [];
+  let tmpTacoGC19 = [];
+  let tmpTacoGC20 = [];
+  let tmpOloSales19 = [];
+  let tmpOloSales20 = [];
+  let tmpDoorDash19 = [];
+  let tmpDoorDash20 = [];
   let tmpWeeks = [];
   let tmpPctSales = []
   let tmpPctGC = []
@@ -36,114 +43,30 @@ async function getSalesData(api) {
     if (obj.fiscal_year === 2019){
       tmpSales19.push(obj.sales);
       tmpGC19.push(obj.total_guest_count);
+      tmpBBQGC19.push(obj.bbq_guest_count);
+      tmpTacoGC19.push(obj.taco_guest_count);
+      tmpOloSales19.push(obj.mavn_sales);
+      tmpDoorDash19.push(obj.doordash_sales);
     }
     if (obj.fiscal_year === 2020){
       tmpSales20.push(obj.sales);
       tmpGC20.push(obj.total_guest_count);
       tmpPctSales.push(obj.percent_sales);
-      tmpPctGC.push(obj.percent_guest_count)
-    }
-
-    tmpWeeks.push(obj.week_of_year);
-
-  });
-
-  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks, tmpPctSales, tmpPctGC};
-}
-
-//grab cumulative sales data from api
-
-async function getCumulData(api) {
-  const response = await fetch(api);
-  const data = await response.json();
-
-  let tmpCumul18 = []
-  let tmpCumul19 = []
-  let tmpCumul20 = []
-  let tmpPctCumul = []
-
-  data.forEach( obj => {
-    if (obj.fiscal_year === 2018){
-      tmpCumul18.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpCumul19.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpCumul20.push(obj.cumulative);
-      tmpPctCumul.push(obj.percent_cumul)
-    }
-
-
-  });
-
-  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
-}
-
-//grab total sales and guest count data from api
-
-async function getTotalSales() {
-  const response = await fetch('/total_sales');
-  const data = await response.json();
-
-  let tmpSales18 = [];
-  let tmpSales19 = [];
-  let tmpSales20 = [];
-  let tmpGC19 = [];
-  let tmpGC20 = [];
-  let tmpWeeks = [];
-  let tmpPctSales = [];
-  let tmpPctGC = [];
-
-  data.forEach (obj => {
-    if (obj.fiscal_year === 2018){
-      tmpSales18.push(obj.sales);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpSales19.push(obj.sales);
-      tmpGC19.push(obj.total_guest_count);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpSales20.push(obj.sales);
-      tmpGC20.push(obj.total_guest_count);
-      tmpPctSales.push(obj.percent_sales);
+      tmpBBQGC20.push(obj.bbq_guest_count);
+      tmpTacoGC20.push(obj.taco_guest_count);
       tmpPctGC.push(obj.percent_guest_count);
-    };
+      tmpOloSales20.push(obj.mavn_sales);
+      tmpDoorDash20.push(obj.doordash_sales);
+    }
 
     tmpWeeks.push(obj.week_of_year);
-  });
-
-  return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20, tmpPctSales, tmpPctGC}
-}
-
-//grab total cumulative sales from api
-
-async function getTotalCumul() {
-  const response = await fetch('/total_cumul');
-  const data = await response.json();
-
-  let tmpCumul18 = []
-  let tmpCumul19 = []
-  let tmpCumul20 = []
-  let tmpPctCumul = []
-  let tmpWeeks = []
-
-  data.forEach( obj => {
-    if (obj.fiscal_year === 2018){
-      tmpCumul18.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2019){
-      tmpCumul19.push(obj.cumulative);
-    }
-    if (obj.fiscal_year === 2020){
-      tmpCumul20.push(obj.cumulative);
-      tmpPctCumul.push(obj.percent_cumul)
-    }
 
   });
 
-  return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
+  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC};
 }
+
+
 
 //default layout for charts
 
@@ -222,24 +145,28 @@ let config = {responsive: true, displayModeBar: false}
 async function updateCharts () {
   const getAPI = await selectStore();
   const salesData = await getSalesData(getAPI.salesAPI);
-  const cumulData = await getCumulData(getAPI.cumulAPI);
 
   let chartSales18 = salesData.tmpSales18;
   let chartSales19 = salesData.tmpSales19;
   let chartSales20 = salesData.tmpSales20;
   let chartGC19 = salesData.tmpGC19;
   let chartGC20 = salesData.tmpGC20;
+  let chartBBQGC19 = salesData.tmpBBQGC19;
+  let chartBBQGC20 = salesData.tmpBBQGC20;
+  let chartTacoGC19 = salesData.tmpTacoGC19;
+  let chartTacoGC20 = salesData.tmpTacoGC20;
+  let chartOloSales19 = salesData.tmpOloSales19;
+  let chartOloSales20 = salesData.tmpOloSales20;
+  let chartDoorDash19 = salesData.tmpDoorDash19;
+  let chartDoorDash20 = salesData.tmpDoorDash20;
   let weeks = salesData.tmpWeeks;
   let pctSales = salesData.tmpPctSales;
   let pctGC = salesData.tmpPctGC;
-  let pctCumul = cumulData.tmpPctCumul
-  let chartCumul18 = cumulData.tmpCumul18;
-  let chartCumul19 = cumulData.tmpCumul19;
-  let chartCumul20 = cumulData.tmpCumul20;
+
 
   pctSales = pctSales.map(i => i + '%')
   pctGC = pctGC.map(i => i + '%')
-  pctCumul = pctCumul.map(i => i + '%')
+
 
   let sales18 = {
     x: weeks,
@@ -277,7 +204,7 @@ async function updateCharts () {
 
   let updatedSales = [sales18, sales19, sales20]
 
-    let gc19 = {
+  let gc19 = {
     x: weeks,
     y: chartGC19,
     mode: 'lines'
@@ -304,21 +231,9 @@ async function updateCharts () {
 
   let updatedGC = [gc19, gc20]
 
-  let cumul18 = {
+  let bbqgc19 = {
     x: weeks,
-    y: chartCumul18,
-    mode: 'lines'
-    ,
-    line: {
-      color: '#ca3e47',
-      width: 2,
-    },
-    name: '2018'
-  }
-
-  let cumul19 = {
-    x: weeks,
-    y: chartCumul19,
+    y: chartBBQGC19,
     mode: 'lines'
     ,
     line: {
@@ -328,174 +243,120 @@ async function updateCharts () {
     name: '2019'
   }
 
-  let cumul20 = {
+  let bbqgc20 = {
     x: weeks,
-    y: chartCumul20,
+    y: chartBBQGC20,
     mode: 'lines'
     ,
     line: {
       color: '#47ca3e',
       width: 2,
     },
-    name: '2020',
-    text: pctCumul
+    name: '2020'
   }
 
-  let updatedCumul = [cumul18, cumul19, cumul20]
+  let updatedBBQGC = [bbqgc19, bbqgc20]
+
+  let tacogc19 = {
+    x: weeks,
+    y: chartTacoGC19,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  }
+
+  let tacogc20 = {
+    x: weeks,
+    y: chartTacoGC20,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  }
+
+  let updatedTacoGC = [tacogc19, tacogc20]
+
+  let oloSales19 = {
+    x: weeks,
+    y: chartOloSales19,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  }
+
+  let oloSales20 = {
+    x: weeks,
+    y: chartOloSales20,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  }
+
+  let updatedOloSales = [oloSales19, oloSales20]
+
+  let doorDash19 = {
+    x: weeks,
+    y: chartDoorDash19,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#cac13e',
+      width: 2,
+    },
+    name: '2019'
+  }
+
+  let doorDash20 = {
+    x: weeks,
+    y: chartDoorDash20,
+    mode: 'lines'
+    ,
+    line: {
+      color: '#47ca3e',
+      width: 2,
+    },
+    name: '2020'
+  }
+
+  let updatedDoorDash = [doorDash19, doorDash20]
+
+
 
   Plotly.react('sales-chart', updatedSales, layout1, config)
   Plotly.react('guest-count-chart', updatedGC, layout1, config)
-  Plotly.react('cumul-sales-chart', updatedCumul, layout1, config)
+  Plotly.react('bbq-chart', updatedBBQGC, layout1, config)
+  Plotly.react('tacos-chart', updatedTacoGC, layout1, config)
+  Plotly.react('olo-chart', updatedOloSales, layout1, config)
+  Plotly.react('dd-chart', updatedDoorDash, layout1, config)
+
 
   let currentWeek = weeks[weeks.length-1]
   let currentSales = chartSales20[chartSales20.length-1]
   let currentGC = chartGC20[chartGC20.length-1]
   let currentPctSales = pctSales[pctSales.length-1]
   let currentPctGC = pctGC[pctGC.length-1]
-  let currentCumul = pctCumul[pctCumul.length-1]
+
 
   document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
   document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
-  document.getElementById("cumul-sales-data").innerHTML = 'YTD Sales Growth: ' + currentCumul + '%';
-}
-
-//load company level charts on page load
-async function populateBaseCharts() {
-  const salesData = await getTotalSales();
-  const cumulData = await getTotalCumul();
-
-  let weeks = salesData.tmpWeeks;
-  let chartSales18 = salesData.tmpSales18;
-  let chartSales19 = salesData.tmpSales19;
-  let chartSales20 = salesData.tmpSales20;
-  let chartGC19 = salesData.tmpGC19;
-  let chartGC20 = salesData.tmpGC20;
-  let chartCumul18 = cumulData.tmpCumul18;
-  let chartCumul19 = cumulData.tmpCumul19;
-  let chartCumul20 = cumulData.tmpCumul20;
-  let pctSales = salesData.tmpPctSales;
-  let pctGC = salesData.tmpPctGC;
-  let pctCumul = cumulData.tmpPctCumul;
-
-  pctSales = pctSales.map(i => i + '%')
-  pctGC = pctGC.map(i => i + '%')
-  pctCumul = pctCumul.map(i => i + '%')
-
-
-  let sales18 = {
-    x: weeks,
-    y: chartSales18,
-    mode: 'lines',
-    line: {
-      color: '#ca3e47',
-      width: 2,
-    },
-    name: '2018'
-  };
-
-  let sales19 = {
-    x: weeks,
-    y: chartSales19,
-    mode: 'lines',
-    line: {
-      color: '#cac13e',
-      width: 2,
-    },
-    name: '2019'
-  };
-
-  let sales20 = {
-    x: weeks,
-    y: chartSales20,
-    mode: 'lines',
-    line: {
-      color: '#47ca3e',
-      width: 2,
-    },
-    name: '2020',
-    text: pctSales
-  };
-
-  totalSales = [sales18, sales19, sales20]
-
-  let gc19 = {
-    x: weeks,
-    y: chartGC19,
-    mode: 'lines',
-    line: {
-      color: '#cac13e',
-      width: 2,
-    },
-    name: '2019'
-  };
-
-  let gc20 = {
-    x: weeks,
-    y: chartGC20,
-    mode: 'lines',
-    line: {
-      color: '#47ca3e',
-      width: 2,
-    },
-    name: '2020',
-    text: pctGC
-  };
-
-  totalGC = [gc19, gc20]
-
-  let cumul18 = {
-    x: weeks,
-    y: chartCumul18,
-    mode: 'lines',
-    line: {
-      color: '#ca3e47',
-      width: 2,
-    },
-    name: '2018'
-  };
-
-  let cumul19 = {
-    x: weeks,
-    y: chartCumul19,
-    mode: 'lines',
-    line: {
-      color: '#cac13e',
-      width: 2,
-    },
-    name: '2019'
-  };
-
-  let cumul20 = {
-    x: weeks,
-    y: chartCumul20,
-    mode: 'lines',
-    line: {
-      color: '#47ca3e',
-      width: 2,
-    },
-    name: '2020',
-    text: pctCumul
-  };
-
-  totalCumul = [cumul18, cumul19, cumul20]
-
-
-  Plotly.newPlot( 'total-sales-chart', totalSales, layout1, config);
-  Plotly.newPlot( 'total-guest-count-chart', totalGC, layout1, config);
-  Plotly.newPlot( 'total-cumul-sales-chart', totalCumul, layout, config);
-
-  let currentSales = chartSales20[chartSales20.length-1]
-  let currentGC = chartGC20[chartGC20.length-1]
-  let currentPctSales = pctSales[pctSales.length-1]
-  let currentPctGC = pctGC[pctGC.length-1]
-  let currentCumul = pctCumul[pctCumul.length-1]
-
-  document.getElementById("total-sales-data").innerHTML = 'KN Sales: $' + currentSales + ' | ' + currentPctSales + '%'
-  document.getElementById("total-guest-count-data").innerHTML = 'KN Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
-  document.getElementById("total-cumul-sales-data").innerHTML = 'KN YTD Growth: ' + currentCumul + '%';
-
 
 }
+
 
 //array for empty data for store level charts
 let startingData = []
@@ -503,12 +364,10 @@ let startingData = []
 //instantiate empty charts to DOM
 Plotly.newPlot( 'sales-chart', startingData, layout1, config);
 Plotly.newPlot( 'guest-count-chart', startingData, layout1, config);
-Plotly.newPlot( 'bbq-chart', startingData, layout2, config);
-Plotly.newPlot( 'tacos-chart', startingData, layout2, config);
-Plotly.newPlot( 'bbqgo-chart', startingData, layout2, config);
-Plotly.newPlot( 'olo-chart', startingData, layout2, config);
-Plotly.newPlot( 'dd-chart', startingData, layout2, config);
-Plotly.newPlot( 'olo-dd-pie-chart', startingData, layout2, config);
+Plotly.newPlot( 'bbq-chart', startingData, layout1, config);
+Plotly.newPlot( 'tacos-chart', startingData, layout1, config);
+Plotly.newPlot( 'olo-chart', startingData, layout1, config);
+Plotly.newPlot( 'dd-chart', startingData, layout1, config);
 
 var inspData = [
   {
@@ -598,6 +457,3 @@ var inspConfig = { responsive: true };
 Plotly.newPlot('insp-chart', inspData, inspLayout, inspConfig);
 Plotly.newPlot('ce-chart', ceData, inspLayout, inspConfig);
 Plotly.newPlot('accident-chart', accidentData, inspLayout, inspConfig);
-
-//call function to instantiate company level charts on page load
-populateBaseCharts()
