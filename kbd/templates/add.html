@@ -33,44 +33,17 @@
   <div class="row">
 
     <div class="item-title">
-      OLO Times
+      Inspections
     </div>
 
     <div class="item">
-      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce" disabled>Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-insp">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-insp" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-insp" disabled>Delete</button>
     </div>
 
   </div>
 
-  <div class="row">
-
-    <div class="item-title">
-      Bag Times
-    </div>
-
-    <div class="item">
-      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce" disabled>Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
-    </div>
-
-  </div>
-
-  <div class="row">
-
-    <div class="item-title">
-      etc.
-    </div>
-
-    <div class="item">
-      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce" disabled>Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
-    </div>
-
-  </div>
 </div>
 
 <!--MODAL TO ADD CASHIER EFFICIENCY-->
@@ -144,6 +117,47 @@
   </div>
 </div>
 
+<!--MODAL TO ADD INSP-->
+
+<div class="modal fade" id="add-insp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Sales</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('sales.add')}}" method="post">
+          {{insp_form.csrf_token}}
+          {{insp_form.week_ending.label}} {{insp_form.week_ending}}
+          {{insp_form.fiscal_month.label}} {{insp_form.fiscal_month}}
+          {{insp_form.fiscal_year.label}} {{insp_form.fiscal_year}}<br>
+          {{insp_form.week_of_month.label}} {{insp_form.week_of_month}}
+          {{insp_form.week_of_year.label}} {{insp_form.week_of_year(size=2)}}
+          <hr>
+          {{insp_form.concept.label}} {{insp_form.concept}}
+          {{insp_form.location.label}} {{insp_form.location}}
+          <hr>
+          {{insp_form.date_measured.label}} {{insp_form.date_measured}}
+          {{insp_form.score.label}} {{insp_form.score(size=5)}}
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        {{sales_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--MODAL TO ADD SALES-->
 
 <div class="modal fade" id="add-sales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -192,51 +206,4 @@
   </div>
 </div>
 
-<!--MODAL TO EDIT SALES-->
-
-<div class="modal fade" id="add-sales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Sales</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{url_for('sales.add')}}" method="patch">
-          {{sales_form.csrf_token}}
-          {{sales_form.week_ending.label}} {{sales_form.week_ending}}
-          {{sales_form.fiscal_month.label}} {{sales_form.fiscal_month}}
-          {{sales_form.fiscal_year.label}} {{sales_form.fiscal_year}}<br>
-          {{sales_form.week_of_month.label}} {{sales_form.week_of_month}}
-          {{sales_form.week_of_year.label}} {{sales_form.week_of_year(size=2)}}
-          <hr>
-          {{sales_form.concept.label}} {{sales_form.concept}}
-          {{sales_form.location.label}} {{sales_form.location}}
-          <hr>
-          {{sales_form.sales.label}} {{sales_form.sales(size=5, placeholder='$')}}
-          {{sales_form.bbq_sales.label}} {{sales_form.bbq_sales(size=5, placeholder='$')}}
-          {{sales_form.taco_sales.label}} {{sales_form.taco_sales(size=5, placeholder='$')}}
-          {{sales_form.group_meal_sales.label}} {{sales_form.group_meal_sales(size=5, placeholder='$')}}<br>
-          {{sales_form.mavn_sales.label}} {{sales_form.mavn_sales(size=5, placeholder='$')}}
-          {{sales_form.doordash_sales.label}} {{sales_form.doordash_sales(size=5, placeholder='$')}}
-          <hr>
-          {{sales_form.total_guest_count.label}} {{sales_form.total_guest_count(size=5)}}
-          {{sales_form.bbq_guest_count.label}} {{sales_form.bbq_guest_count(size=5)}}
-          {{sales_form.taco_guest_count.label}} {{sales_form.taco_guest_count(size=5)}}
-
-
-
-      </div>
-      <div class="modal-footer">
-        {{sales_form.submit(class_='btn btn-primary')}}
-
-      </form>
-
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 {% endblock %}

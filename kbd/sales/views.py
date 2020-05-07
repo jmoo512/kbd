@@ -271,6 +271,10 @@ def weekly(chosen_location):
     #calculate percent change in sales and guest count
     df['percent_sales']=df['sales'].pct_change().round(4)*100
     df['percent_guest_count']=df['total_guest_count'].pct_change().round(4)*100
+    df['percent_bbq']=df['bbq_guest_count'].pct_change().round(4)*100
+    df['percent_tacos']=df['taco_guest_count'].pct_change().round(4)*100
+    df['percent_olo']=df['mavn_sales'].pct_change().round(4)*100
+    df['percent_doordash']=df['doordash_sales'].pct_change().round(4)*100
     df.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
     return Response(df.to_json(orient="records"), mimetype='application/json')

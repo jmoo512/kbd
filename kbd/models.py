@@ -51,16 +51,6 @@ class FoodVariance(db.Model):
     location=db.Column(db.String(20))
     score=db.Column(db.Float)
 
-class Inspections(db.Model):
-    __tablename__='inspections'
-    id=db.Column(db.Integer,primary_key=True)
-    week_ending=db.Column(db.Date)
-    fiscal_week=db.Column(db.Integer)
-    location=db.Column(db.String(20))
-    date_measured=db.Column(db.Date)
-    time_measure=db.Column(db.DateTime(40))
-    score=db.Column(db.Float)
-
 class StoreAssessments(db.Model):
     __tablename__='storeassessments'
     id=db.Column(db.Integer,primary_key=True)

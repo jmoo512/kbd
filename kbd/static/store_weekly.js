@@ -350,10 +350,18 @@ async function updateCharts () {
   let currentGC = chartGC20[chartGC20.length-1]
   let currentPctSales = pctSales[pctSales.length-1]
   let currentPctGC = pctGC[pctGC.length-1]
+  let currentBBQGC = chartBBQGC20[chartBBQGC20.length-1]
+  let currentTacoGC = chartTacoGC20[chartTacoGC20.length-1]
+  let currentOlo = chartOloSales20[chartOloSales20.length-1]
+  let currentDoorDash = chartDoorDash20[chartDoorDash20.length-1]
 
 
   document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
   document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
+  document.getElementById("bbq-data").innerHTML = ' BBQ Guest Count: ' + currentBBQGC
+  document.getElementById("tacos-data").innerHTML = ' Taco Guest Count: ' + currentTacoGC
+  document.getElementById("olo-data").innerHTML = ' OLO Sales: $' + currentOlo
+  document.getElementById("dd-data").innerHTML = ' DoorDash Sales: $' + currentDoorDash
 
 }
 

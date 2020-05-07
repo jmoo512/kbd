@@ -4,6 +4,8 @@ from kbd.speed.forms import CEForm
 from kbd.sales.forms import SalesForm
 from kbd.models import Users
 from kbd.core.forms import LoginForm
+from kbd.clean.forms import InspForm
+from kbd.clean.models import Inspections
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 import pandas as pd
@@ -19,7 +21,8 @@ def index():
 def add():
     ceform=CEForm()
     sales_form=SalesForm()
-    return render_template('add.html',ceform=ceform, sales_form=sales_form)
+    insp_form=InspForm()
+    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form)
 
 @core.route('/c3js')
 def c3():
