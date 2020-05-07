@@ -1,4 +1,5 @@
 from flask import current_app
+from flask_login import login_required
 from kbd import db
 from .models import Sales
 from .forms import SalesForm
@@ -13,6 +14,7 @@ params=config()
 sales=Blueprint('sales',__name__)
 
 @sales.route('/add/',methods=['POST','PATCH'])
+@login_required
 def add():
 
     form=SalesForm()
@@ -42,6 +44,7 @@ def add():
 
 #api for store level sales and guest count
 @sales.route('/sales/<chosen_location>')
+@login_required
 def sales_gc(chosen_location):
 
     conn=psycopg2.connect(**params)
@@ -78,6 +81,7 @@ def sales_gc(chosen_location):
 
 #api for store level cumulative sales
 @sales.route('/cumul/<chosen_location>')
+@login_required
 def cumul(chosen_location):
 
     conn=psycopg2.connect(**params)
@@ -134,6 +138,7 @@ def cumul(chosen_location):
 
 #api to gather company level sales and guest counts
 @sales.route('/total_sales')
+@login_required
 def total_sales():
 
     conn=psycopg2.connect(**params)
@@ -186,6 +191,7 @@ def total_sales():
 
 #api for company level cumulative sales
 @sales.route('/total_cumul')
+@login_required
 def total_cumul():
 
     conn=psycopg2.connect(**params)
@@ -241,6 +247,7 @@ def total_cumul():
 
 #api for weekly store sales and guest count
 @sales.route('/weekly/<chosen_location>')
+@login_required
 def weekly(chosen_location):
 
     conn=psycopg2.connect(**params)

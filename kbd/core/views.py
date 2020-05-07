@@ -9,15 +9,16 @@ from kbd.clean.models import Inspections
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 import pandas as pd
+from flask_login import login_required
 
 core = Blueprint('core',__name__)
 
 @core.route('/')
 def index():
-    form=CEForm()
-    return render_template('index.html',form=form)
+    return render_template('index.html')
 
 @core.route('/add')
+@login_required
 def add():
     ceform=CEForm()
     sales_form=SalesForm()
@@ -29,10 +30,12 @@ def c3():
     return render_template('c3js.html')
 
 @core.route('/plotlyjs')
+@login_required
 def plotly():
     return render_template('/plotlyjs.html')
 
 @core.route('/store_weekly')
+@login_required
 def store_weekly():
     return render_template('store_weekly.html')
 

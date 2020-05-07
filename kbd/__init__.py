@@ -11,7 +11,7 @@ APP_STATIC = os.path.join(APP_ROOT, 'static')
 db = SQLAlchemy()
 migrate = Migrate()
 login=LoginManager()
-login.login_view = 'login'
+login.login_view = 'core.login'
 
 def create_app(config_class=Config):
 
