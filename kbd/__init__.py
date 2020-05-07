@@ -11,6 +11,7 @@ APP_STATIC = os.path.join(APP_ROOT, 'static')
 db = SQLAlchemy()
 migrate = Migrate()
 login=LoginManager()
+login.login_view = 'login'
 
 def create_app(config_class=Config):
 
@@ -18,7 +19,7 @@ def create_app(config_class=Config):
 
     db.init_app(app)
     migrate.init_app(app,db)
-    #login.init_app(app)
+    login.init_app(app)
 
 
 
@@ -37,7 +38,7 @@ def create_app(config_class=Config):
         app.register_blueprint(speed)
         app.register_blueprint(sales)
 
-        #import dash application
+
 
         return app
 

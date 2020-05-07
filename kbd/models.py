@@ -1,11 +1,9 @@
-from kbd import db
+from kbd import db, login
 from datetime import datetime
 from flask_login import UserMixin
-from app import login
+from werkzeug.security import generate_password_hash, check_password_hash
 
-#@login.user_loader
-#def load_user(id):
-#    return Users.query.get(int(id))
+
 
 class Users(UserMixin, db.Model):
     __tablename__='users'
@@ -13,6 +11,16 @@ class Users(UserMixin, db.Model):
     email=db.Column(db.String(50), unique=True)
     username=db.Column(db.String(20), unique=True)
     hashed_password=db.Column(db.String(256))
+
+    def set_password(self, password):
+        self.hashed_password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.hashed_password, password)
+
+@login.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
 
 class GameFilm(db.Model):
     __tablename__='gamefilm'
