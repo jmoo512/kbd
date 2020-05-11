@@ -4,6 +4,12 @@ from kbd import db
 from .models import Inspections
 from .forms import InspForm
 from flask import render_template,Blueprint,redirect,url_for
+import pandas as pd
+from psql_config import config
+import psycopg2
+
+params=config()
+
 
 clean=Blueprint('clean',__name__)
 
@@ -29,3 +35,16 @@ def clean_add():
     db.session.commit()
 
     return redirect(url_for('core.add'))
+
+@clean.route('/insp/<chosen_location')
+def insp(chosen_location):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
+    cur.close()
+    conn.close()
