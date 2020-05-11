@@ -13,9 +13,9 @@ params=config()
 
 sales=Blueprint('sales',__name__)
 
-@sales.route('/add/',methods=['POST','PATCH'])
-@login_required
-def add():
+@sales.route('/sales_add/',methods=['POST'])
+#@login_required
+def sales_add():
 
     form=SalesForm()
 

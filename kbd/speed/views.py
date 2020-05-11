@@ -13,8 +13,8 @@ def index():
     result=CashierEfficiency.query.all()
     return render_template('index.html',form=form,result=result)
 
-@speed.route('/add',methods=['GET','POST'])
-def add():
+@speed.route('/ce_add',methods=['GET','POST'])
+def ce_add():
 
     form=CEForm()
 

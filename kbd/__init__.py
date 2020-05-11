@@ -36,10 +36,12 @@ def create_app(config_class=Config):
         from kbd.core.views import core
         from kbd.speed.views import speed
         from kbd.sales.views import sales
+        from kbd.clean.views import clean
         #register blueprints
         app.register_blueprint(core)
         app.register_blueprint(speed)
         app.register_blueprint(sales)
+        app.register_blueprint(clean)
 
 
 

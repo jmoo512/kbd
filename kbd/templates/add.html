@@ -39,7 +39,7 @@
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-insp">Add</button>
       <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-insp" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-insp" disabled>Delete</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-insp" disabled>Delete</button>
     </div>
 
   </div>
@@ -58,7 +58,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url_for('speed.add')}}" method="post">
+        <form action="{{url_for('speed.ce_add')}}" method="post">
           {{ceform.csrf_token}}
           {{ceform.week_ending.label}} {{ceform.week_ending}}
           {{ceform.fiscal_week.label}} {{ceform.fiscal_week}}
@@ -117,47 +117,6 @@
   </div>
 </div>
 
-<!--MODAL TO ADD INSP-->
-
-<div class="modal fade" id="add-insp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Sales</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="{{url_for('sales.add')}}" method="post">
-          {{insp_form.csrf_token}}
-          {{insp_form.week_ending.label}} {{insp_form.week_ending}}
-          {{insp_form.fiscal_month.label}} {{insp_form.fiscal_month}}
-          {{insp_form.fiscal_year.label}} {{insp_form.fiscal_year}}<br>
-          {{insp_form.week_of_month.label}} {{insp_form.week_of_month}}
-          {{insp_form.week_of_year.label}} {{insp_form.week_of_year(size=2)}}
-          <hr>
-          {{insp_form.concept.label}} {{insp_form.concept}}
-          {{insp_form.location.label}} {{insp_form.location}}
-          <hr>
-          {{insp_form.date_measured.label}} {{insp_form.date_measured}}
-          {{insp_form.score.label}} {{insp_form.score(size=5)}}
-
-
-
-
-      </div>
-      <div class="modal-footer">
-        {{sales_form.submit(class_='btn btn-primary')}}
-
-      </form>
-
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!--MODAL TO ADD SALES-->
 
 <div class="modal fade" id="add-sales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -170,7 +129,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url_for('sales.add')}}" method="post">
+        <form action="{{url_for('sales.sales_add')}}" method="post">
           {{sales_form.csrf_token}}
           {{sales_form.week_ending.label}} {{sales_form.week_ending}}
           {{sales_form.fiscal_month.label}} {{sales_form.fiscal_month}}
@@ -197,6 +156,44 @@
       </div>
       <div class="modal-footer">
         {{sales_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL TO ADD INSP-->
+
+<div class="modal fade" id="add-insp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Inspection</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('clean.clean_add')}}" method="post">
+          {{insp_form.csrf_token}}
+          {{insp_form.week_ending.label}} {{insp_form.week_ending}}
+          {{insp_form.fiscal_month.label}} {{insp_form.fiscal_month}}
+          {{insp_form.fiscal_year.label}} {{insp_form.fiscal_year}}<br>
+          {{insp_form.week_of_month.label}} {{insp_form.week_of_month}}
+          {{insp_form.week_of_year.label}} {{insp_form.week_of_year(size=2)}}
+          <hr>
+          {{insp_form.concept.label}} {{insp_form.concept}}
+          {{insp_form.location.label}} {{insp_form.location}}
+          <hr>
+          {{insp_form.date_measured.label}} {{insp_form.date_measured}}
+          {{insp_form.score.label}} {{insp_form.score(size=5)}}
+
+      </div>
+      <div class="modal-footer">
+        {{insp_form.submit(class_='btn btn-primary')}}
 
       </form>
 
