@@ -390,24 +390,24 @@ async function updateCharts () {
   let inspFig = [
     {
       type: "indicator",
-      mode: "number+gauge+delta",
+      mode: "number+gauge",
       value: inspAvgWeek,
       domain: { x: [0, 1], y: [0, 1] },
       //title: { text: "Inspections",
               //position: "top",
       //        font: {size: 12}
      //},
-      delta: { reference: inspAvgMonth },
+      //delta: { reference: inspAvgMonth },
       gauge: {
         shape: "bullet",
-        axis: { range: [null, 4] },
+        axis: { range: [3, 4] },
         //threshold: {
         //  line: { color: "red", width: 2 },
         //  thickness: 0.75,
         //  value: 280
         //},
         steps: [
-          { range: [0, inspAvgMonth], color: "lightgray" },
+          { range: [3, inspAvgMonth], color: "lightgray" },
         ]
       }
     }
@@ -472,7 +472,7 @@ var ceData = [
     delta: { reference: 10.87 },
     gauge: {
       shape: "bullet",
-      axis: { range: [null, 13] },
+      axis: { range: [null, 15] },
       //threshold: {
       //  line: { color: "red", width: 2 },
       //  thickness: 0.75,
