@@ -3,7 +3,7 @@ from flask_login import login_required
 from kbd import db
 from .models import Inspections
 from .forms import InspForm
-from flask import render_template,Blueprint,redirect,url_for
+from flask import render_template,Blueprint,redirect,url_for,jsonify,Response
 import pandas as pd
 from psql_config import config
 import psycopg2
@@ -36,7 +36,7 @@ def clean_add():
 
     return redirect(url_for('core.add'))
 
-@clean.route('/insp/<chosen_location')
+@clean.route('/insp/<chosen_location>')
 def insp(chosen_location):
 
     conn=psycopg2.connect(**params)
@@ -45,6 +45,10 @@ def insp(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
+    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, score FROM inspections WHERE fiscal_year=(SELECT MAX(fiscal_year) FROM inspections) AND fiscal_month=(SELECT MAX(fiscal_month) FROM inspections) AND location = '" + chosen_location + "'")
     cur.close()
     conn.close()
+
+    df=insp_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')

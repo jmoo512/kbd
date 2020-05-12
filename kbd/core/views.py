@@ -18,7 +18,7 @@ def index():
     return render_template('index.html')
 
 @core.route('/add')
-@login_required
+#@login_required
 def add():
     ceform=CEForm()
     sales_form=SalesForm()
@@ -30,12 +30,12 @@ def c3():
     return render_template('c3js.html')
 
 @core.route('/plotlyjs')
-@login_required
+#@login_required
 def plotly():
     return render_template('/plotlyjs.html')
 
 @core.route('/store_weekly')
-@login_required
+#@login_required
 def store_weekly():
     return render_template('store_weekly.html')
 
