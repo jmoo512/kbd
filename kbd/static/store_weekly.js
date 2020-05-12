@@ -449,6 +449,10 @@ async function updateCharts () {
 
 //array for empty data for store level charts
 let startingData = []
+let startingBulletData = [{
+  type: "indicator",
+  mode: "number+gauge",
+  gauge: {shape: "bullet"}}]
 
 //instantiate empty charts to DOM
 Plotly.newPlot( 'sales-chart', startingData, layout1, config);
@@ -457,7 +461,7 @@ Plotly.newPlot( 'bbq-chart', startingData, layout1, config);
 Plotly.newPlot( 'tacos-chart', startingData, layout1, config);
 Plotly.newPlot( 'olo-chart', startingData, layout1, config);
 Plotly.newPlot( 'dd-chart', startingData, layout1, config);
-Plotly.newPlot('insp-chart', startingData, inspLayout, config);
+Plotly.newPlot('insp-chart', startingBulletData, inspLayout, config);
 
 
 

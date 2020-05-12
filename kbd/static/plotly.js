@@ -173,13 +173,16 @@ let layout =  {
     },
   },
   legend: {
+    orientation:"h",
+    x:0,
+    xanchor:"left",
+    y:1.3,
     font: {
       color: '#FFF'
-    }
-  }
+    }}
 }
 
-let config = {responsive: true, displayModeBar: true}
+let config = {responsive: true, displayModeBar: false}
 
 
 
