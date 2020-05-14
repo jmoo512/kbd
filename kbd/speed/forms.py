@@ -30,7 +30,7 @@ class CEForm(FlaskForm):
     fiscal_year=SelectField('Fiscal Year', choices=[('2020','2020')])
     location=SelectField('Location', choices=[
                                                 ('183','North'),
-                                                ('South','South'),
+                                                ('360','South'),
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
                                                 ('Lamar','Lamar'),

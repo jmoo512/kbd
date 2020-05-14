@@ -10,8 +10,9 @@ function selectStore() {
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
   let salesAPI="/weekly/" + store
   let inspAPI="/insp/" + store
+  let ceAPI="/ce/" + store
 
-  return {salesAPI, inspAPI}
+  return {salesAPI, inspAPI, ceAPI}
 }
 
 
@@ -87,7 +88,7 @@ async function getInspData(api) {
   let sum1 = tmpInspTotal.reduce((a, b) => a + b, 0);
   let tmpInspAvg = (sum1 / tmpInspTotal.length) || 0;
   let inspAvg = tmpInspAvg.toFixed(2);
-  console.log(inspAvg)
+
 
   data.forEach( obj => {
     if (obj.week_of_month === currWeek){
@@ -98,9 +99,51 @@ async function getInspData(api) {
   let sum2 = tmpInspWeek.reduce((a, b) => a + b, 0);
   let tmpInspWeekAvg = (sum2 / tmpInspWeek.length) || 0;
   let inspWeekAvg = tmpInspWeekAvg.toFixed(2);
-  console.log(inspWeekAvg)
+
 
   return {inspAvg, inspWeekAvg};
+}
+
+//grab ce data from api
+async function getCEData(api) {
+  const response = await fetch(api);
+  const data = await response.json();
+
+
+  let tmpMinutesTotal = [];
+  let tmpDollarsTotal = [];
+  let tmpMinutesWeek = [];
+  let tmpDollarsWeek = [];
+  let tmpWeek = [];
+
+  data.forEach(obj => {
+    tmpMinutesTotal.push(obj.tm_minutes);
+    tmpDollarsTotal.push(obj.tm_sales);
+    tmpWeek.push(obj.week_of_month);
+  });
+
+  let currWeek = Math.max.apply(null, tmpWeek)
+
+  let sumMinutesTotal = tmpMinutesTotal.reduce((a, b) => a + b, 0);
+  let sumDollarsTotal = tmpDollarsTotal.reduce((a, b) => a + b, 0);
+  let tmpCEAvg = (sumDollarsTotal / sumMinutesTotal) || 0;
+  let ceAvgMonth = tmpCEAvg.toFixed(2);
+  console.log(ceAvgMonth)
+
+  data.forEach( obj => {
+    if (obj.week_of_month === currWeek){
+      tmpMinutesWeek.push(obj.tm_minutes);
+      tmpDollarsWeek.push(obj.tm_sales);
+    }
+  });
+
+  let sumMinutesWeek = tmpMinutesWeek.reduce((a, b) => a + b, 0);
+  let sumDollarsWeek = tmpDollarsWeek.reduce((a, b) => a + b, 0);
+  let tmpCeWeekAvg = (sumDollarsWeek / sumMinutesWeek) || 0;
+  let ceAvgWeek = tmpCeWeekAvg.toFixed(2);
+  console.log(ceAvgWeek)
+
+  return {ceAvgMonth, ceAvgWeek};
 }
 
 
@@ -195,6 +238,7 @@ async function updateCharts () {
   const getAPI = await selectStore();
   const salesData = await getSalesData(getAPI.salesAPI);
   const inspData = await getInspData(getAPI.inspAPI);
+  const ceData = await getCEData(getAPI.ceAPI);
 
   let chartSales18 = salesData.tmpSales18;
   let chartSales19 = salesData.tmpSales19;
@@ -214,6 +258,8 @@ async function updateCharts () {
   let pctGC = salesData.tmpPctGC;
   let inspAvgMonth = inspData.inspAvg;
   let inspAvgWeek = inspData.inspWeekAvg;
+  let ceAvgMonth = ceData.ceAvgMonth;
+  let ceAvgWeek = ceData.ceAvgWeek;
 
 
   pctSales = pctSales.map(i => i + '%')
@@ -413,7 +459,32 @@ async function updateCharts () {
     }
   ];
 
-
+  let ceFig = [
+    {
+      type: "indicator",
+      mode: "number+gauge",
+      value: ceAvgWeek,
+      number: {prefix: "$"},
+      domain: { x: [0, 1], y: [0, 1] },
+      //title: { text: "Inspections",
+              //position: "top",
+      //        font: {size: 12}
+     //},
+      //delta: { reference: inspAvgMonth },
+      gauge: {
+        shape: "bullet",
+        axis: { range: [7, 15] },
+        //threshold: {
+        //  line: { color: "red", width: 2 },
+        //  thickness: 0.75,
+        //  value: 280
+        //},
+        steps: [
+          { range: [7, ceAvgMonth], color: "lightgray" },
+        ]
+      }
+    }
+  ];
 
   Plotly.react('sales-chart', updatedSales, layout1, config)
   Plotly.react('guest-count-chart', updatedGC, layout1, config)
@@ -422,6 +493,7 @@ async function updateCharts () {
   Plotly.react('olo-chart', updatedOloSales, layout1, config)
   Plotly.react('dd-chart', updatedDoorDash, layout1, config)
   Plotly.newPlot('insp-chart', inspFig, inspLayout, config);
+  Plotly.newPlot('ce-chart', ceFig, inspLayout, config);
 
 
   let currentWeek = weeks[weeks.length-1]
@@ -442,6 +514,7 @@ async function updateCharts () {
   document.getElementById("olo-data").innerHTML = 'OLO Sales: $' + currentOlo
   document.getElementById("dd-data").innerHTML = 'DoorDash Sales: $' + currentDoorDash
   document.getElementById("insp-data-card").innerHTML = 'Inspections: Week - ' + inspAvgWeek + ' | MTD - ' + inspAvgMonth
+  document.getElementById("ce-data-card").innerHTML = 'Efficiency: Week - $' + ceAvgWeek + ' | MTD - $' + ceAvgMonth
 
 
 }
@@ -461,33 +534,9 @@ Plotly.newPlot( 'bbq-chart', startingData, layout1, config);
 Plotly.newPlot( 'tacos-chart', startingData, layout1, config);
 Plotly.newPlot( 'olo-chart', startingData, layout1, config);
 Plotly.newPlot( 'dd-chart', startingData, layout1, config);
-Plotly.newPlot('insp-chart', startingBulletData, inspLayout, config);
+Plotly.newPlot( 'insp-chart', startingBulletData, inspLayout, config);
+Plotly.newPlot( 'ce-chart', startingBulletData, inspLayout, config);
 
-
-
-var ceData = [
-  {
-    type: "indicator",
-    mode: "number+gauge+delta",
-    value: 10.27,
-    number: {prefix: "$"},
-    domain: { x: [0, 1], y: [0, 1] },
-    title: { text: "Inspections"},
-    delta: { reference: 10.87 },
-    gauge: {
-      shape: "bullet",
-      axis: { range: [null, 15] },
-      //threshold: {
-      //  line: { color: "red", width: 2 },
-      //  thickness: 0.75,
-      //  value: 280
-      //},
-      steps: [
-        { range: [0, 10.87], color: "lightgray" },
-      ]
-    }
-  }
-];
 
 var accidentData = [
   {
@@ -525,5 +574,4 @@ var inspLayout = { width: 350,
 var inspConfig = { responsive: true };
 
 
-Plotly.newPlot('ce-chart', ceData, inspLayout, inspConfig);
 Plotly.newPlot('accident-chart', accidentData, inspLayout, inspConfig);
