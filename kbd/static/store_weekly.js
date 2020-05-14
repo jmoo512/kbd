@@ -6,6 +6,7 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 
 //use selector to modify api address per store selected
 function selectStore() {
+  let baseAPI
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
   let salesAPI="/weekly/" + store
@@ -128,7 +129,6 @@ async function getCEData(api) {
   let sumDollarsTotal = tmpDollarsTotal.reduce((a, b) => a + b, 0);
   let tmpCEAvg = (sumDollarsTotal / sumMinutesTotal) || 0;
   let ceAvgMonth = tmpCEAvg.toFixed(2);
-  console.log(ceAvgMonth)
 
   data.forEach( obj => {
     if (obj.week_of_month === currWeek){
@@ -141,19 +141,24 @@ async function getCEData(api) {
   let sumDollarsWeek = tmpDollarsWeek.reduce((a, b) => a + b, 0);
   let tmpCeWeekAvg = (sumDollarsWeek / sumMinutesWeek) || 0;
   let ceAvgWeek = tmpCeWeekAvg.toFixed(2);
-  console.log(ceAvgWeek)
 
   return {ceAvgMonth, ceAvgWeek};
 }
 
-
+//colors object
+let colors = {
+  "2018":"#ca3e47",
+  "2019":"#cac13e",
+  "2020":"#47ca3e",
+  "bgColor":"#313131"
+  }
 
 //default layout for charts
 
 let layout1 =  {
   autosize: true,
-  paper_bgcolor: '#313131',
-  plot_bgcolor: '#313131',
+  paper_bgcolor: colors['bgColor'],
+  plot_bgcolor: colors['bgColor'],
   width: 370,
   height: 260,
   margin: {
@@ -188,8 +193,8 @@ let layout1 =  {
 
 let layout2 =  {
   autosize: true,
-  paper_bgcolor: '#313131',
-  plot_bgcolor: '#313131',
+  paper_bgcolor: colors['bgColor'],
+  plot_bgcolor: colors['bgColor'],
   width: 245,
   height: 260,
   margin: {
@@ -265,13 +270,12 @@ async function updateCharts () {
   pctSales = pctSales.map(i => i + '%')
   pctGC = pctGC.map(i => i + '%')
 
-
   let sales18 = {
     x: weeks,
     y: chartSales18,
     mode: 'lines',
     line: {
-      color: '#ca3e47',
+      color: colors['2018'],
       width: 2,
     },
     name: '2018'
@@ -282,7 +286,7 @@ async function updateCharts () {
     y: chartSales19,
     mode: 'lines',
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -293,7 +297,7 @@ async function updateCharts () {
     y: chartSales20,
     mode: 'lines',
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -308,7 +312,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -320,7 +324,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -335,7 +339,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -347,7 +351,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020'
@@ -361,7 +365,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -373,7 +377,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020'
@@ -387,7 +391,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -399,7 +403,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020'
@@ -413,7 +417,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -425,7 +429,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020'
@@ -453,8 +457,9 @@ async function updateCharts () {
         //  value: 280
         //},
         steps: [
-          { range: [3, inspAvgMonth], color: "lightgray" },
-        ]
+          { range: [3, inspAvgMonth], color: colors['bgColor'] },
+        ],
+        bar: { color: colors['2019'] }
       }
     }
   ];
@@ -473,15 +478,16 @@ async function updateCharts () {
       //delta: { reference: inspAvgMonth },
       gauge: {
         shape: "bullet",
-        axis: { range: [7, 15] },
+        axis: { range: [7, ceAvgWeek * 1.1] },
         //threshold: {
         //  line: { color: "red", width: 2 },
         //  thickness: 0.75,
         //  value: 280
         //},
         steps: [
-          { range: [7, ceAvgMonth], color: "lightgray" },
-        ]
+          { range: [7, ceAvgMonth], color: colors['bgColor'] },
+        ],
+        bar: { color: colors['2019'] }
       }
     }
   ];
