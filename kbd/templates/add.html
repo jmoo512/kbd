@@ -61,8 +61,9 @@
         <form action="{{url_for('speed.ce_add')}}" method="post">
           {{ceform.csrf_token}}
           {{ceform.week_ending.label}} {{ceform.week_ending}}
-          {{ceform.fiscal_week.label}} {{ceform.fiscal_week}}
-          {{ceform.fiscal_month.label}} {{ceform.fiscal_month}}<br>
+          {{ceform.week_of_month.label}} {{ceform.week_of_month}}
+          {{ceform.fiscal_month.label}} {{ceform.fiscal_month}}
+          <br>
           {{ceform.fiscal_year.label}} {{ceform.fiscal_year}}
           {{ceform.location.label}} {{ceform.location}}
           {{ceform.date_measured.label}} {{ceform.date_measured}}

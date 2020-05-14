@@ -6,7 +6,7 @@ from wtforms.fields.html5 import DateField
 
 class CEForm(FlaskForm):
     week_ending=DateField('Week Ending', format='%Y-%m-%d')
-    fiscal_week=SelectField('Fiscal Week', choices=[
+    week_of_month=SelectField('Week of Month', choices=[
                                                     ('1','1'),
                                                     ('2','2'),
                                                     ('3','3'),
@@ -14,18 +14,18 @@ class CEForm(FlaskForm):
                                                     ('5','5')
                                                 ])
     fiscal_month=SelectField('Fiscal Month', choices=[
-                                                        ('January','January'),
-                                                        ('February','February'),
-                                                        ('March','March'),
-                                                        ('April','April'),
-                                                        ('May','May'),
-                                                        ('June','June'),
-                                                        ('July','July'),
-                                                        ('August','Augst'),
-                                                        ('September','September'),
-                                                        ('October','October'),
-                                                        ('November','November'),
-                                                        ('December','December')
+                                                        ('01','January'),
+                                                        ('02','February'),
+                                                        ('03','March'),
+                                                        ('04','April'),
+                                                        ('05','May'),
+                                                        ('06','June'),
+                                                        ('07','July'),
+                                                        ('08','Augst'),
+                                                        ('09','September'),
+                                                        ('10','October'),
+                                                        ('11','November'),
+                                                        ('12','December')
                                                     ])
     fiscal_year=SelectField('Fiscal Year', choices=[('2020','2020')])
     location=SelectField('Location', choices=[

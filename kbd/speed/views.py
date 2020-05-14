@@ -13,6 +13,23 @@ def index():
     result=CashierEfficiency.query.all()
     return render_template('index.html',form=form,result=result)
 
+@speed.route('/ce/<chosen_location>')
+def ce(chosen_location):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    ce_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, score FROM inspections WHERE fiscal_year=(SELECT MAX(fiscal_year) FROM inspections) AND fiscal_month=(SELECT MAX(fiscal_month) FROM inspections) AND location = '" + chosen_location + "'")
+    cur.close()
+    conn.close()
+
+    df=ce_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
+
 @speed.route('/ce_add',methods=['GET','POST'])
 def ce_add():
 
@@ -21,9 +38,9 @@ def ce_add():
     if form.tm_name_one.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_one.data,
@@ -38,9 +55,9 @@ def ce_add():
     if form.tm_name_two.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_two.data,
@@ -55,9 +72,9 @@ def ce_add():
     if form.tm_name_three.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_three.data,
@@ -72,9 +89,9 @@ def ce_add():
     if form.tm_name_four.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_four.data,
@@ -89,9 +106,9 @@ def ce_add():
     if form.tm_name_five.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_five.data,
@@ -106,9 +123,9 @@ def ce_add():
     if form.tm_name_six.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_six.data,
@@ -123,9 +140,9 @@ def ce_add():
     if form.tm_name_seven.data:
         ce=CashierEfficiency(
                 week_ending=form.week_ending.data,
-                fiscal_week=form.fiscal_week.data,
                 fiscal_month=form.fiscal_month.data,
                 fiscal_year=form.fiscal_year.data,
+                week_of_month=form.week_of_month.data,
                 location=form.location.data,
                 date_measured=form.date_measured.data,
                 tm_name=form.tm_name_seven.data,
