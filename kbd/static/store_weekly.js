@@ -156,7 +156,7 @@ let colors = {
 //default layout for charts
 
 let layout1 =  {
-  autosize: true,
+  //autosize: true,
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
   width: 370,
@@ -192,7 +192,7 @@ let layout1 =  {
 }
 
 let layout2 =  {
-  autosize: true,
+  //autosize: true,
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
   width: 245,
@@ -459,7 +459,7 @@ async function updateCharts () {
         steps: [
           { range: [3, inspAvgMonth], color: colors['bgColor'] },
         ],
-        bar: { color: colors['2019'] }
+        bar: { color: colors['2020'] }
       }
     }
   ];
@@ -475,7 +475,7 @@ async function updateCharts () {
               //position: "top",
       //        font: {size: 12}
      //},
-      //delta: { reference: inspAvgMonth },
+      //delta: { reference: ceAvgMonth },
       gauge: {
         shape: "bullet",
         axis: { range: [7, ceAvgWeek * 1.1] },
@@ -487,7 +487,7 @@ async function updateCharts () {
         steps: [
           { range: [7, ceAvgMonth], color: colors['bgColor'] },
         ],
-        bar: { color: colors['2019'] }
+        bar: { color: colors['2020'] }
       }
     }
   ];
