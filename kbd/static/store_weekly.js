@@ -6,7 +6,7 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 
 //use selector to modify api address per store selected
 function selectStore() {
-  let baseAPI
+  let baseAPI = "http://127.0.0.1:5000"
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
   let salesAPI="/weekly/" + store
