@@ -38,6 +38,8 @@ async function getSalesData(api) {
   let tmpWeeks = [];
   let tmpPctSales = []
   let tmpPctGC = []
+  let tmpPctBBQGC = []
+  let tmpPctTacosGC = []
 
   data.forEach( obj => {
     if (obj.fiscal_year === 2018){
@@ -58,6 +60,8 @@ async function getSalesData(api) {
       tmpBBQGC20.push(obj.bbq_guest_count);
       tmpTacoGC20.push(obj.taco_guest_count);
       tmpPctGC.push(obj.percent_guest_count);
+      tmpPctBBQGC.push(obj.percent_bbq);
+      tmpPctTacosGC.push(obj.percent_tacos);
       tmpOloSales20.push(obj.mavn_sales);
       tmpDoorDash20.push(obj.doordash_sales);
     }
@@ -66,7 +70,7 @@ async function getSalesData(api) {
 
   });
 
-  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC};
+  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC, tmpPctBBQGC, tmpPctTacosGC};
 }
 
 //grab inspection data from api
@@ -262,6 +266,8 @@ async function updateCharts () {
   let weeks = salesData.tmpWeeks;
   let pctSales = salesData.tmpPctSales;
   let pctGC = salesData.tmpPctGC;
+  let pctBBQGC = salesData.tmpPctBBQGC;
+  let pctTacosGC  = salesData.tmpPctTacosGC;
   let inspAvgMonth = inspData.inspAvg;
   let inspAvgWeek = inspData.inspWeekAvg;
   let ceAvgMonth = ceData.ceAvgMonth;
@@ -270,6 +276,8 @@ async function updateCharts () {
 
   pctSales = pctSales.map(i => i + '%')
   pctGC = pctGC.map(i => i + '%')
+  pctBBQGC = pctBBQGC.map(i => i + '%')
+  pctTacosGC = pctTacosGC.map(i => i + '%')
 
   let sales18 = {
     x: weeks,
@@ -355,7 +363,8 @@ async function updateCharts () {
       color: colors['2020'],
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctBBQGC
   }
 
   let updatedBBQGC = [bbqgc19, bbqgc20]
@@ -381,7 +390,8 @@ async function updateCharts () {
       color: colors['2020'],
       width: 2,
     },
-    name: '2020'
+    name: '2020',
+    text: pctTacosGC
   }
 
   let updatedTacoGC = [tacogc19, tacogc20]
@@ -512,18 +522,21 @@ async function updateCharts () {
   let currentPctGC = pctGC[pctGC.length-1]
   let currentBBQGC = chartBBQGC20[chartBBQGC20.length-1]
   let currentTacoGC = chartTacoGC20[chartTacoGC20.length-1]
+  let currentPctBBQGC = pctBBQGC[pctBBQGC.length-1]
+  let currentPctTacosGC = pctTacosGC[pctTacosGC.length-1]
   let currentOlo = chartOloSales20[chartOloSales20.length-1]
   let currentDoorDash = chartDoorDash20[chartDoorDash20.length-1]
 
 
   document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
   document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
-  document.getElementById("bbq-data").innerHTML = 'BBQ Guest Count: ' + currentBBQGC
-  document.getElementById("tacos-data").innerHTML = 'Taco Guest Count: ' + currentTacoGC
+  document.getElementById("bbq-data").innerHTML = 'BBQ Guest Count: ' + currentBBQGC + ' | ' + currentPctBBQGC + '%'
+  document.getElementById("tacos-data").innerHTML = 'Taco Guest Count: ' + currentTacoGC + ' | ' + currentPctTacosGC + '%'
   document.getElementById("olo-data").innerHTML = 'OLO Sales: $' + currentOlo
   document.getElementById("dd-data").innerHTML = 'DoorDash Sales: $' + currentDoorDash
   document.getElementById("insp-data-card").innerHTML = 'Inspections: Week - ' + inspAvgWeek + ' | MTD - ' + inspAvgMonth
   document.getElementById("ce-data-card").innerHTML = 'Efficiency: Week - $' + ceAvgWeek + ' | MTD - $' + ceAvgMonth
+
 
 
 }

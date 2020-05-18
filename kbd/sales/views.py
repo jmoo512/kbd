@@ -53,7 +53,7 @@ def sales_gc(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, bbq_guest_count, taco_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
     cur.close()
     conn.close()
 
@@ -75,6 +75,8 @@ def sales_gc(chosen_location):
     #calculate percent change in sales and guest count
     df['percent_sales']=df['sales'].pct_change().round(4)*100
     df['percent_guest_count']=df['total_guest_count'].pct_change().round(4)*100
+    df['percent_bbq']=df['bbq_guest_count'].pct_change().round(4)*100
+    df['percent_tacos']=df['taco_guest_count'].pct_change().round(4)*100
     df.sort_values(by=['fiscal_year','week_of_year'],inplace=True)
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
