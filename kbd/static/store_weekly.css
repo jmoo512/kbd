@@ -1,6 +1,6 @@
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: White;
+  background-color: #393e46;
 }
 
 
@@ -16,14 +16,14 @@ body {
   width: 100%;
   margin: 5px;
   text-align: center;
-  background-color: LightSteelBlue;
+  background-color: #00adb5;
 }
 
 .data-box, #chosen-store{
   border: solid 2px;
   border-color: Black;
   border-radius: 3px;
-  background-color: LightSteelBlue;
+  background-color: #00adb5;
   height: 25px;
 }
 

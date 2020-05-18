@@ -150,7 +150,8 @@ let colors = {
   "2018":"#ca3e47",
   "2019":"#cac13e",
   "2020":"#47ca3e",
-  "bgColor":"#313131"
+  "bgColor":"#222831",
+  "tickColor":"#eeeeee"
   }
 
 //default layout for charts
@@ -169,15 +170,15 @@ let layout1 =  {
     pad: 5
   },
   xaxis: {
-    tickcolor: '#FFF',
+    tickcolor: colors['tickColor'],
     tickfont: {
-      color: "#FFF"
+      color: colors['tickColor']
     },
   },
   yaxis: {
-    tickcolor: '#FFF',
+    tickcolor: colors['tickColor'],
     tickfont: {
-      color: "#FFF"
+      color: colors['tickColor']
     },
   },
   legend: {
@@ -186,7 +187,7 @@ let layout1 =  {
     xanchor:"left",
     y:1.3,
     font: {
-      color: '#FFF'
+      color: colors['tickColor']
     }
   }
 }
@@ -205,20 +206,20 @@ let layout2 =  {
     pad: 5
   },
   xaxis: {
-    tickcolor: '#FFF',
+    tickcolor: colors['tickColor'],
     tickfont: {
-      color: "#FFF"
+      color: colors['tickColor']
     },
   },
   yaxis: {
-    tickcolor: '#FFF',
+    tickcolor: colors['tickColor'],
     tickfont: {
-      color: "#FFF"
+      color: colors['tickColor']
     },
   },
   legend: {
     font: {
-      color: '#FFF'
+      color: colors['tickColor']
     }
   }
 }
@@ -479,6 +480,7 @@ async function updateCharts () {
       gauge: {
         shape: "bullet",
         axis: { range: [7, ceAvgWeek * 1.1] },
+        bgcolor: colors['bgColor'],
         //threshold: {
         //  line: { color: "red", width: 2 },
         //  thickness: 0.75,
@@ -487,6 +489,7 @@ async function updateCharts () {
         steps: [
           { range: [7, ceAvgMonth], color: colors['bgColor'] },
         ],
+
         bar: { color: colors['2020'] }
       }
     }
