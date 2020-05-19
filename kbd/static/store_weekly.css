@@ -29,7 +29,7 @@ body {
 
 .grid{
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(3, 1fr 25px);
   grid-gap: 5px;
   width: 1100px;
@@ -96,9 +96,19 @@ body {
   grid-row: 6 / 7;
 }
 
+#ratio-chart {
+  grid-column: 7 / 10;
+  grid-row: 5 / 6;
+}
+
+#ratio-data {
+  grid-column: 7 / 10;
+  grid-row: 6 / 7;
+}
+
 #bullet-container{
-  grid-column: 7 / 8;
-  grid-row: 1 / 7;
+  grid-column: 7 / 10;
+  grid-row: 1 / 5;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;

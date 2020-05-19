@@ -40,6 +40,10 @@ async function getSalesData(api) {
   let tmpPctGC = []
   let tmpPctBBQGC = []
   let tmpPctTacosGC = []
+  let tmpBBQRatio = []
+  let tmpTacosRatio = []
+  let tmpOloRatio = []
+  let tmpDoorDashRatio = []
 
   data.forEach( obj => {
     if (obj.fiscal_year === 2018){
@@ -64,13 +68,19 @@ async function getSalesData(api) {
       tmpPctTacosGC.push(obj.percent_tacos);
       tmpOloSales20.push(obj.mavn_sales);
       tmpDoorDash20.push(obj.doordash_sales);
+      tmpBBQRatio.push(obj.bbq_sales / obj.sales);
+      tmpTacosRatio.push(obj.taco_sales / obj.sales);
+      tmpOloRatio.push(obj.mavn_sales / obj.sales);
+      tmpDoorDashRatio.push(obj.doordash_sales / obj.sales);
     }
 
     tmpWeeks.push(obj.week_of_year);
 
   });
 
-  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC, tmpPctBBQGC, tmpPctTacosGC};
+  console.log(tmpOloRatio)
+
+  return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC, tmpPctBBQGC, tmpPctTacosGC, tmpBBQRatio, tmpTacosRatio, tmpOloRatio, tmpDoorDashRatio};
 }
 
 //grab inspection data from api
@@ -154,6 +164,7 @@ let colors = {
   "2018":"#ca3e47",
   "2019":"#cac13e",
   "2020":"#47ca3e",
+  "orange":"#FF8C00",
   "bgColor":"#222831",
   "tickColor":"#eeeeee"
   }
@@ -263,6 +274,10 @@ async function updateCharts () {
   let chartOloSales20 = salesData.tmpOloSales20;
   let chartDoorDash19 = salesData.tmpDoorDash19;
   let chartDoorDash20 = salesData.tmpDoorDash20;
+  let bbqRatio = salesData.tmpBBQRatio;
+  let tacosRatio = salesData.tmpTacosRatio;
+  let oloRatio = salesData.tmpOloRatio;
+  let doorDashRatio = salesData.tmpDoorDashRatio;
   let weeks = salesData.tmpWeeks;
   let pctSales = salesData.tmpPctSales;
   let pctGC = salesData.tmpPctGC;
@@ -274,10 +289,18 @@ async function updateCharts () {
   let ceAvgWeek = ceData.ceAvgWeek;
 
 
-  pctSales = pctSales.map(i => i + '%')
-  pctGC = pctGC.map(i => i + '%')
-  pctBBQGC = pctBBQGC.map(i => i + '%')
-  pctTacosGC = pctTacosGC.map(i => i + '%')
+
+  pctSales = pctSales.map(i => i + '%');
+  pctGC = pctGC.map(i => i + '%');
+  pctBBQGC = pctBBQGC.map(i => i + '%');
+  pctTacosGC = pctTacosGC.map(i => i + '%');
+  bbqRatio = bbqRatio.map(i => parseFloat(i).toFixed(2)*100);
+  tacosRatio = tacosRatio.map(i => parseFloat(i).toFixed(2)*100);
+  oloRatio = oloRatio.map(i => parseFloat(i).toFixed(2)*100);
+  doorDashRatio = doorDashRatio.map(i => parseFloat(i).toFixed(2)*100);
+
+
+
 
   let sales18 = {
     x: weeks,
@@ -448,6 +471,56 @@ async function updateCharts () {
 
   let updatedDoorDash = [doorDash19, doorDash20]
 
+  let oloRatios = {
+    x: weeks,
+    y: oloRatio,
+    mode: 'lines'
+    ,
+    line: {
+      color: colors['2019'],
+      width: 2,
+    },
+    name: 'OLO'
+  }
+
+  let doorDashRatios = {
+    x: weeks,
+    y: doorDashRatio,
+    mode: 'lines'
+    ,
+    line: {
+      color: colors['orange'],
+      width: 2,
+    },
+    name: 'DoorDash'
+  }
+
+  let bbqRatios = {
+    x: weeks,
+    y: bbqRatio,
+    mode: 'lines'
+    ,
+    line: {
+      color: colors['2018'],
+      width: 2,
+    },
+    name: 'BBQ'
+  }
+
+  let tacoRatios = {
+    x: weeks,
+    y: tacosRatio,
+    mode: 'lines'
+    ,
+    line: {
+      color: colors['2020'],
+      width: 2,
+    },
+    name: 'Tacos'
+  }
+
+  let updatedRatios = [oloRatios, doorDashRatios, bbqRatios, tacoRatios]
+
   let inspFig = [
     {
       type: "indicator",
@@ -513,6 +586,7 @@ async function updateCharts () {
   Plotly.react('dd-chart', updatedDoorDash, layout1, config)
   Plotly.newPlot('insp-chart', inspFig, inspLayout, config);
   Plotly.newPlot('ce-chart', ceFig, inspLayout, config);
+  Plotly.react('ratio-chart', updatedRatios, layout1, config)
 
 
   let currentWeek = weeks[weeks.length-1]
@@ -526,6 +600,10 @@ async function updateCharts () {
   let currentPctTacosGC = pctTacosGC[pctTacosGC.length-1]
   let currentOlo = chartOloSales20[chartOloSales20.length-1]
   let currentDoorDash = chartDoorDash20[chartDoorDash20.length-1]
+  let currentBBQPct = bbqRatio[bbqRatio.length-1]
+  let currentTacosPct = tacosRatio[tacosRatio.length-1]
+  let currentOloPct = oloRatio[oloRatio.length-1]
+  let currentDoorDashPct = doorDashRatio[doorDashRatio.length-1]
 
 
   document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
@@ -536,9 +614,7 @@ async function updateCharts () {
   document.getElementById("dd-data").innerHTML = 'DoorDash Sales: $' + currentDoorDash
   document.getElementById("insp-data-card").innerHTML = 'Inspections: Week - ' + inspAvgWeek + ' | MTD - ' + inspAvgMonth
   document.getElementById("ce-data-card").innerHTML = 'Efficiency: Week - $' + ceAvgWeek + ' | MTD - $' + ceAvgMonth
-
-
-
+  document.getElementById("ratio-data").innerHTML = 'BBQ: ' + currentBBQPct + '% | Tacos: ' + currentTacosPct + '% | OLO: ' + currentOloPct + '% | DD: ' + currentDoorDashPct + '%'
 }
 
 
@@ -558,6 +634,7 @@ Plotly.newPlot( 'olo-chart', startingData, layout1, config);
 Plotly.newPlot( 'dd-chart', startingData, layout1, config);
 Plotly.newPlot( 'insp-chart', startingBulletData, inspLayout, config);
 Plotly.newPlot( 'ce-chart', startingBulletData, inspLayout, config);
+Plotly.newPlot( 'ratio-chart', startingData, layout1, config);
 
 
 var accidentData = [

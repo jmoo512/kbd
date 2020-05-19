@@ -258,7 +258,7 @@ def weekly(chosen_location):
         return table
 
     cur = conn.cursor()
-    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, mavn_sales, doordash_sales, bbq_guest_count, taco_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
+    sales_data = create_pandas_table("SELECT week_of_year, sales, total_guest_count, mavn_sales, doordash_sales, bbq_sales, taco_sales, bbq_guest_count, taco_guest_count, fiscal_year FROM sales WHERE fiscal_year > 2017 AND location = '" + chosen_location + "' ORDER BY week_of_year, fiscal_year")
     cur.close()
     conn.close()
 
