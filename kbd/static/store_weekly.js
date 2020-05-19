@@ -175,7 +175,7 @@ let layout1 =  {
   //autosize: true,
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
-  width: 370,
+  width: 390,
   height: 260,
   margin: {
     l: 50,
@@ -211,7 +211,7 @@ let layout2 =  {
   //autosize: true,
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
-  width: 245,
+  width: 390,
   height: 260,
   margin: {
     l: 50,
@@ -660,7 +660,7 @@ var accidentData = [
   }
 ];
 
-var inspLayout = { width: 350,
+var inspLayout = { width: 390,
   height: 100,
   margin: {
     l: 5,
