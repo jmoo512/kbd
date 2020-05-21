@@ -37,6 +37,8 @@ body {
   height: 850px;
 }
 
+
+
 #sales-chart {
   grid-column: 1 / 4;
   grid-row: 1 / 2;
@@ -121,6 +123,7 @@ body {
   justify-content: center;
   padding-bottom: 50px;
 }
+
 
 /*
 #insp-data-card{
