@@ -12,7 +12,7 @@ function selectStore() {
   let inspAPI="/insp/" + store
   let ceAPI="/ce/" + store
 
-  return {salesAPI, inspAPI, ceAPI}
+  return {inspAPI, ceAPI}
 }
 
 
@@ -25,12 +25,15 @@ async function getInspData(api) {
   let tmpInspTotal = [];
   let tmpInspWeek = [];
   let tmpWeek = [];
+  let tmpWeeks = [];
 
   data.forEach(obj => {
     tmpInspTotal.push(obj.score);
     tmpWeek.push(obj.week_of_month);
+    tmpWeeks.push(obj.week_of_year);
   });
 
+  console.log(tmpWeeks);
   let currWeek = Math.max.apply(null, tmpWeek)
 
   let sum1 = tmpInspTotal.reduce((a, b) => a + b, 0);
@@ -49,7 +52,7 @@ async function getInspData(api) {
   let inspWeekAvg = tmpInspWeekAvg.toFixed(2);
 
 
-  return {inspAvg, inspWeekAvg};
+  return {inspAvg, inspWeekAvg, tmpWeeks};
 }
 
 //grab ce data from api
@@ -102,8 +105,9 @@ let colors = {
   "grey":"#484848"
   }
 
-//default layout for charts
 
+
+//default layout for charts
 let chartLayout =  {
   autosize: true,
   paper_bgcolor: colors['bgColor'],
@@ -154,48 +158,30 @@ async function updateCharts () {
   const inspData = await getInspData(getAPI.inspAPI);
   const ceData = await getCEData(getAPI.ceAPI);
 
+  let weeks = inspData.tmpWeeks;
   let inspAvgMonth = inspData.inspAvg;
   let inspAvgWeek = inspData.inspWeekAvg;
   let ceAvgMonth = ceData.ceAvgMonth;
   let ceAvgWeek = ceData.ceAvgWeek;
 
-  let ceFig = [
-    {
-      type: "indicator",
-      mode: "number+gauge",
-      value: ceAvgWeek,
-      number: {prefix: "$"},
-      domain: { x: [0, 1], y: [0, 1] },
-      //title: { text: "Inspections",
-              //position: "top",
-      //        font: {size: 12}
-     //},
-      //delta: { reference: ceAvgMonth },
-      gauge: {
-        shape: "bullet",
-        axis: { range: [7, ceAvgWeek * 1.1] },
-        bgcolor: colors['bgColor'],
-        //threshold: {
-        //  line: { color: "red", width: 2 },
-        //  thickness: 0.75,
-        //  value: 280
-        //},
-        steps: [
-          { range: [7, ceAvgMonth], color: colors['bgColor'] },
-        ],
-
-        bar: { color: colors['2020'] }
-      }
-    }
-  ];
+  let inspChartData = {
+    x: weeks,
+    y: inspAvgWeek,
+    mode: 'lines'
+    ,
+    line: {
+      color: colors['blue'],
+      width: 2,
+    },
+  }
 
 
-  Plotly.newPlot('insp-chart', inspFig, inspLayout, config);
+  Plotly.react('insp-chart', inspChartData, chartLayout, config);
 
   //let currentWeek = weeks[weeks.length-1]
 
 
-  document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
+  //document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
 }
 
 
@@ -203,4 +189,4 @@ async function updateCharts () {
 let startingData = []
 
 //instantiate empty charts to DOM
-Plotly.newPlot( 'insp-chart', startingData, layout1, config);
+Plotly.newPlot( 'insp-chart', startingData, chartLayout, config);

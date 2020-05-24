@@ -584,8 +584,8 @@ async function updateCharts () {
   Plotly.react('tacos-chart', updatedTacoGC, layout1, config)
   Plotly.react('olo-chart', updatedOloSales, layout1, config)
   Plotly.react('dd-chart', updatedDoorDash, layout1, config)
-  Plotly.newPlot('insp-chart', inspFig, inspLayout, config);
-  Plotly.newPlot('ce-chart', ceFig, inspLayout, config);
+  Plotly.react('insp-chart', inspFig, inspLayout, config);
+  Plotly.react('ce-chart', ceFig, inspLayout, config);
   Plotly.react('ratio-chart', updatedRatios, layout1, config)
 
 
