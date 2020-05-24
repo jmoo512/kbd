@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='main-style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='mf-kbds.css')}}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>Mighty Fine KBDs</title>
+  </head>
+  <body>
+
+    <div class="grid">
+
+    <div class="header">
+      <div class="form-div">
+        <form id="store-picker" class="" action="index.html" method="post">
+          <select id="store-select">
+            <option value="none" selected disabled hidden>
+            Select an Location</option>
+            <option value="MF1">MF1</option>
+            <option value="MF2">MF2</option>
+            <option value="MF3">MF3</option>
+            <option value="MF4">MF4</option>
+            <option value="MFT2">MF Trailer</option>
+          </select>
+        </form>
+      </div>
+      <div id="chosen-store"><<< Select a location</div>
+    </div>
+
+    <div class="data-box" id="insp-box">
+      <div class="data-card" id="insp-data-card">
+
+      </div>
+      
+      <div class="chart" id="insp-chart">
+
+      </div>
+
+    </div>
+
+
+
+    </div>
+
+
+
+<script src="{{url_for('static',filename='mf_kbds.js')}}"></script>
+
+
+</body>
+</html>

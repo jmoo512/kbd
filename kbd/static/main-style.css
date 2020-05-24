@@ -1,0 +1,11 @@
+:root {
+  --bg: #dadada;
+  --text: #20283e;
+  --blue: #488a99;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}

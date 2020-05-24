@@ -39,6 +39,10 @@ def plotly():
 def store_weekly():
     return render_template('store_weekly.html')
 
+@core.route('/mf_kbds')
+def mf_kbds():
+    return render_template('mf_kbds.html')
+
 @core.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

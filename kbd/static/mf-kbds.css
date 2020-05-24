@@ -1,0 +1,55 @@
+.grid {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+
+}
+
+.header{
+  display: flex;
+  flex-flow: row nowrap;
+  width: auto;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
+
+#chosen-store{
+  width: 100%;
+  margin: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: var(--text);
+  background-color: var(--blue);
+}
+
+.data-box {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+#insp-box {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+
+
+
+
+
+
+
+
+
+@media print{
+  .form-div{
+    display: none;
+  }
+}
