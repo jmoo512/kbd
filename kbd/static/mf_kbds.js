@@ -124,11 +124,11 @@ let chartLayout =  {
 }
 
 let sparkLayout =  {
-  autosize: true,
+  //autosize: true,
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
-  //width: 390,
-  //height: 260,
+  width: 300,
+  height: 100,
   //margin: {
     //l: 50,
     //r: 50,
@@ -137,9 +137,22 @@ let sparkLayout =  {
     //pad: 5
   //},
   xaxis: {
-
+    autorange: true,
+    showgrid: false,
+    zeroline: false,
+    showline: false,
+    autotick: true,
+    ticks: '',
+    showticklabels: false
   },
   yaxis: {
+    autorange: true,
+    showgrid: false,
+    zeroline: false,
+    showline: false,
+    autotick: true,
+    ticks: '',
+    showticklabels: false
   },
   legend: {
   }
@@ -170,13 +183,13 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: colors['blue'],
+      color: colors['yellow'],
       width: 2,
     },
   }
 
 
-  Plotly.react('insp-chart', inspChartData, chartLayout, config);
+  Plotly.react('insp-chart', inspChartData, sparkLayout, config);
 
   //let currentWeek = weeks[weeks.length-1]
 
@@ -189,4 +202,4 @@ async function updateCharts () {
 let startingData = []
 
 //instantiate empty charts to DOM
-Plotly.newPlot( 'insp-chart', startingData, chartLayout, config);
+Plotly.newPlot( 'insp-chart', startingData, sparkLayout, config);

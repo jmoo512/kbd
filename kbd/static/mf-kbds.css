@@ -1,8 +1,14 @@
+body {
+  background-color: White;
+}
+
 .grid {
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, 1fr);
+  background-color: var(--bg);
+
 
 }
 
@@ -30,13 +36,62 @@
 
 .data-box {
   display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  margin: 3px;
+}
+
+.data-box-header {
+  background-color: var(--blue);
+  color: var(--text);
+  font-size: 28px;
+  font-weight: bold;
+  padding-left: 3px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.data-row {
+  display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+}
+
+.data-card {
+  background-color: White;
+  border-radius: 3px;
+  height: 100px;
+  width: 33%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.big-number{
+  height: 65%;
+  font-size: 36px;
+}
+
+.little-number {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 20px;
+}
+
+.chart {
+  margin: 0px 5px;
+  border-radius: 3px;
 }
 
 #insp-box {
   grid-column: 1/2;
   grid-row: 2/3;
+}
+
+#ce-box {
+  grid-column: 1/2;
+  grid-row: 3/4;
 }
 
 
