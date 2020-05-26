@@ -100,8 +100,8 @@ let colors = {
 
 let sparkLayout =  {
   //autosize: true,
-  paper_bgcolor: colors['bgColor'],
-  plot_bgcolor: colors['bgColor'],
+  paper_bgcolor: '#FFFFFF',
+  plot_bgcolor: '#FFFFFF',
   width: 300,
   height: 100,
   margin: {
