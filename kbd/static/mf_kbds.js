@@ -47,7 +47,7 @@ async function getInspData(api) {
   //find current quarter from array of weeks in dataset
   let currQuarter = Math.max.apply(null, tmpQuarters)
 
-  //find weekly average
+  //find current week average
   data.forEach(obj => {
     if (obj.week_of_year === currWeek){
       tmpWeekScores.push(obj.score)
@@ -57,7 +57,7 @@ async function getInspData(api) {
   let tmpWeekInspAvg = (sum1 / tmpWeekScores.length) || 0;
   let weekInspAvg = tmpWeekInspAvg.toFixed(2);
 
-  //find monthly average
+  //find current month average
   data.forEach(obj => {
     if (obj.fiscal_month == currMonth){
       tmpMonthScores.push(obj.score)
@@ -68,7 +68,7 @@ async function getInspData(api) {
   let tmpMonthInspAvg = (sum2 / tmpMonthScores.length) || 0;
   let monthInspAvg = tmpMonthInspAvg.toFixed(2);
 
-  //find quarterly average
+  //find current quarter average
   data.forEach(obj => {
     if (obj.quarter == currQuarter){
       tmpQuarterScores.push(obj.score)
@@ -78,6 +78,11 @@ async function getInspData(api) {
   let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
   let tmpQuarterInspAvg = (sum2 / tmpQuarterScores.length) || 0;
   let quarterInsvpAvg = tmpQuarterInspAvg.toFixed(2);
+
+  //find weekly averages
+  console.log(tmpWeekOfYear)
+  uniqueWeeks = _.uniq(tmpWeekOfYear)
+  console.log(uniqueWeeks)
 
   return {weekInspAvg, monthInspAvg, quarterInsvpAvg, tmpScores, tmpWeekOfYear};
 }
@@ -145,9 +150,6 @@ async function updateCharts () {
   let inspAvgWeek = inspData.weekInspAvg;
   let inspAvgMonth = inspData.monthInspAvg;
   let inspAvgQuarter = inspData.quarterInsvpAvg;
-
-  console.log(weeks)
-  console.log(scores)
 
   let inspChartData = {
     x: weeks,
