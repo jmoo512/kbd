@@ -103,7 +103,7 @@ let sparkLayout =  {
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
   width: 300,
-  height: 300,
+  height: 100,
   margin: {
     l: 10,
     r: 10,
@@ -113,21 +113,21 @@ let sparkLayout =  {
   },
   xaxis: {
     //autorange: true,
-    //showgrid: false,
-    //zeroline: false,
-    //showline: false,
-  //  autotick: true,
-  //  ticks: '',
-  //  showticklabels: false
+    showgrid: false,
+    zeroline: false,
+    showline: false,
+    autotick: true,
+    ticks: '',
+    showticklabels: false
   },
   yaxis: {
     //autorange: true,
-  //  showgrid: false,
-    //zeroline: false,
-    //showline: false,
-    //autotick: true,
-    //ticks: '',
-    //showticklabels: false
+    showgrid: false,
+    zeroline: false,
+    showline: false,
+    autotick: true,
+    ticks: '',
+    showticklabels: false
   },
   legend: {
   }
