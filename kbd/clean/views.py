@@ -45,7 +45,7 @@ def insp(chosen_location):
         return table
 
     cur = conn.cursor()
-    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, score FROM inspections WHERE fiscal_year=(SELECT MAX(fiscal_year) FROM inspections) AND fiscal_month=(SELECT MAX(fiscal_month) FROM inspections) AND location = '" + chosen_location + "'")
+    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, score FROM inspections WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM inspections) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 

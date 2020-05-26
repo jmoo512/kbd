@@ -51,6 +51,13 @@ body {
   margin-bottom: 5px;
 }
 
+.data-box-title {
+  color: var(--text);
+  font-size: 20px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+
 .data-row {
   display: flex;
   flex-flow: row nowrap;

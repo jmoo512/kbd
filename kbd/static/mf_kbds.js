@@ -10,9 +10,8 @@ function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
   let inspAPI="/insp/" + store
-  let ceAPI="/ce/" + store
 
-  return {inspAPI, ceAPI}
+  return {inspAPI}
 }
 
 
@@ -21,78 +20,66 @@ async function getInspData(api) {
   const response = await fetch(api);
   const data = await response.json();
 
-
-  let tmpInspTotal = [];
+  let tmpScores = [];
+  let tmpWeekOfYear = [];
+  let tmpMonths = [];
+  let tmpQuarters = [];
   let tmpInspWeek = [];
-  let tmpWeek = [];
-  let tmpWeeks = [];
+  let tmpWeekOfMonth = [];
+  let tmpWeekScores = [];
+  let tmpMonthScores = [];
+  let tmpQuarterScores = [];
 
   data.forEach(obj => {
-    tmpInspTotal.push(obj.score);
-    tmpWeek.push(obj.week_of_month);
-    tmpWeeks.push(obj.week_of_year);
+    tmpScores.push(obj.score);
+    tmpWeekOfMonth.push(obj.week_of_month);
+    tmpWeekOfYear.push(obj.week_of_year);
+    tmpMonths.push(obj.fiscal_month);
+    tmpQuarters.push(obj.quarter);
   });
 
-  console.log(tmpWeeks);
-  let currWeek = Math.max.apply(null, tmpWeek)
+  //find current week from array of weeks in dataset
+  let currWeek = Math.max.apply(null, tmpWeekOfYear)
 
-  let sum1 = tmpInspTotal.reduce((a, b) => a + b, 0);
-  let tmpInspAvg = (sum1 / tmpInspTotal.length) || 0;
-  let inspAvg = tmpInspAvg.toFixed(2);
+  //find current month from array of weeks in dataset
+  let currMonth = Math.max.apply(null, tmpMonths)
 
+  //find current quarter from array of weeks in dataset
+  let currQuarter = Math.max.apply(null, tmpQuarters)
 
-  data.forEach( obj => {
-    if (obj.week_of_month === currWeek){
-      tmpInspWeek.push(obj.score)
-    }
-  });
-
-  let sum2 = tmpInspWeek.reduce((a, b) => a + b, 0);
-  let tmpInspWeekAvg = (sum2 / tmpInspWeek.length) || 0;
-  let inspWeekAvg = tmpInspWeekAvg.toFixed(2);
-
-
-  return {inspAvg, inspWeekAvg, tmpWeeks};
-}
-
-//grab ce data from api
-async function getCEData(api) {
-  const response = await fetch(api);
-  const data = await response.json();
-
-
-  let tmpMinutesTotal = [];
-  let tmpDollarsTotal = [];
-  let tmpMinutesWeek = [];
-  let tmpDollarsWeek = [];
-  let tmpWeek = [];
-
+  //find weekly average
   data.forEach(obj => {
-    tmpMinutesTotal.push(obj.tm_minutes);
-    tmpDollarsTotal.push(obj.tm_sales);
-    tmpWeek.push(obj.week_of_month);
-  });
-
-  let currWeek = Math.max.apply(null, tmpWeek)
-
-  let sumMinutesTotal = tmpMinutesTotal.reduce((a, b) => a + b, 0);
-  let sumDollarsTotal = tmpDollarsTotal.reduce((a, b) => a + b, 0);
-  let tmpCEAvg = (sumDollarsTotal / sumMinutesTotal) || 0;
-  let ceAvgMonth = tmpCEAvg.toFixed(2);
-
-  data.forEach( obj => {
-    if (obj.week_of_month === currWeek){
-      tmpMinutesWeek.push(obj.tm_minutes);
-      tmpDollarsWeek.push(obj.tm_sales);
+    if (obj.week_of_year === currWeek){
+      tmpWeekScores.push(obj.score)
     }
-  });
+  })
+  let sum1 = tmpWeekScores.reduce((a, b) => a + b, 0);
+  let tmpWeekInspAvg = (sum1 / tmpWeekScores.length) || 0;
+  let weekInspAvg = tmpWeekInspAvg.toFixed(2);
 
-  let sumMinutesWeek = tmpMinutesWeek.reduce((a, b) => a + b, 0);
-  let sumDollarsWeek = tmpDollarsWeek.reduce((a, b) => a + b, 0);
-  let tmpCeWeekAvg = (sumDollarsWeek / sumMinutesWeek) || 0;
-  let ceAvgWeek = tmpCeWeekAvg.toFixed(2);
+  //find monthly average
+  data.forEach(obj => {
+    if (obj.fiscal_month == currMonth){
+      tmpMonthScores.push(obj.score)
+    }
+  })
 
-  return {ceAvgMonth, ceAvgWeek};
+  let sum2 = tmpMonthScores.reduce((a,b) => a + b, 0);
+  let tmpMonthInspAvg = (sum2 / tmpMonthScores.length) || 0;
+  let monthInspAvg = tmpMonthInspAvg.toFixed(2);
+
+  //find quarterly average
+  data.forEach(obj => {
+    if (obj.quarter == currQuarter){
+      tmpQuarterScores.push(obj.score)
+    }
+  })
+
+  let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
+  let tmpQuarterInspAvg = (sum2 / tmpQuarterScores.length) || 0;
+  let quarterInsvpAvg = tmpQuarterInspAvg.toFixed(2);
+
+  return {weekInspAvg, monthInspAvg, quarterInsvpAvg, tmpScores, tmpWeekOfYear};
 }
 
 //colors object
@@ -106,62 +93,45 @@ let colors = {
   }
 
 
-
-//default layout for charts
-let chartLayout =  {
-  autosize: true,
-  paper_bgcolor: colors['bgColor'],
-  plot_bgcolor: colors['bgColor'],
-  xaxis: {
-  },
-  yaxis: {
-  },
-  legend: {
-    font: {
-      color: colors['text']
-    }
-  }
-}
-
 let sparkLayout =  {
   //autosize: true,
   paper_bgcolor: colors['bgColor'],
   plot_bgcolor: colors['bgColor'],
   width: 300,
-  height: 100,
-  //margin: {
-    //l: 50,
-    //r: 50,
-    //b: 50,
-    //t: 50,
-    //pad: 5
-  //},
+  height: 300,
+  margin: {
+    l: 10,
+    r: 10,
+    b: 10,
+    t: 10,
+    pad: 5
+  },
   xaxis: {
-    autorange: true,
-    showgrid: false,
-    zeroline: false,
-    showline: false,
-    autotick: true,
-    ticks: '',
-    showticklabels: false
+    //autorange: true,
+    //showgrid: false,
+    //zeroline: false,
+    //showline: false,
+  //  autotick: true,
+  //  ticks: '',
+  //  showticklabels: false
   },
   yaxis: {
-    autorange: true,
-    showgrid: false,
-    zeroline: false,
-    showline: false,
-    autotick: true,
-    ticks: '',
-    showticklabels: false
+    //autorange: true,
+  //  showgrid: false,
+    //zeroline: false,
+    //showline: false,
+    //autotick: true,
+    //ticks: '',
+    //showticklabels: false
   },
   legend: {
   }
 }
 
 
-
-
-let config = {responsive: true, displayModeBar: false}
+let config = {//responsive: true,
+              displayModeBar: false
+}
 
 
 
@@ -169,32 +139,37 @@ let config = {responsive: true, displayModeBar: false}
 async function updateCharts () {
   const getAPI = await selectStore();
   const inspData = await getInspData(getAPI.inspAPI);
-  const ceData = await getCEData(getAPI.ceAPI);
 
-  let weeks = inspData.tmpWeeks;
-  let inspAvgMonth = inspData.inspAvg;
-  let inspAvgWeek = inspData.inspWeekAvg;
-  let ceAvgMonth = ceData.ceAvgMonth;
-  let ceAvgWeek = ceData.ceAvgWeek;
+  let weeks = inspData.tmpWeekOfYear;
+  let scores = inspData.tmpScores;
+  let inspAvgWeek = inspData.weekInspAvg;
+  let inspAvgMonth = inspData.monthInspAvg;
+  let inspAvgQuarter = inspData.quarterInsvpAvg;
+
+  console.log(weeks)
+  console.log(scores)
 
   let inspChartData = {
     x: weeks,
-    y: inspAvgWeek,
-    mode: 'lines'
-    ,
+    y: scores,
+    mode: 'lines',
     line: {
       color: colors['yellow'],
       width: 2,
     },
   }
 
+  inspSpark = [inspChartData]
 
-  Plotly.react('insp-chart', inspChartData, sparkLayout, config);
+
+  Plotly.react('insp-chart', inspSpark, sparkLayout, config);
 
   //let currentWeek = weeks[weeks.length-1]
 
 
-  //document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
+  document.getElementById("insp-week-card").innerHTML = inspAvgWeek + ' Wk';
+  document.getElementById("insp-month-card").innerHTML = inspAvgMonth + ' Mo';
+  document.getElementById("insp-q-card").innerHTML = inspAvgQuarter + ' Q';
 }
 
 
