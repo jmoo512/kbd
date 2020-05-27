@@ -178,6 +178,7 @@ async function updateCharts () {
     line: {
       color: colors['yellow'],
       width: 2,
+      shape: 'spline'
     },
   }
 
