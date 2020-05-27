@@ -80,11 +80,29 @@ async function getInspData(api) {
   let quarterInsvpAvg = tmpQuarterInspAvg.toFixed(2);
 
   //find weekly averages
-  console.log(tmpWeekOfYear)
-  uniqueWeeks = _.uniq(tmpWeekOfYear)
-  console.log(uniqueWeeks)
+  uniqueWeeks = _.uniq(tmpWeekOfYear, true)
 
-  return {weekInspAvg, monthInspAvg, quarterInsvpAvg, tmpScores, tmpWeekOfYear};
+  let tmpWeekAvgScores = [];
+
+  uniqueWeeks.forEach(week => {
+    let tempScores = [];
+    data.forEach(obj => {
+
+      if (obj.week_of_year === week) {
+        tempScores.push(obj.score);
+        }
+      })
+
+      let sum4 = _.sum(tempScores)
+      console.log(sum4)
+      let tempWeekInspAvg = (sum4 / tempScores.length) || 0;
+      let tempWeekInspAvgRound = tempWeekInspAvg.toFixed(2)
+      tmpWeekAvgScores.push(tempWeekInspAvgRound)
+  })
+
+  console.log(tmpWeekAvgScores)
+
+  return {weekInspAvg, monthInspAvg, quarterInsvpAvg, tmpScores, tmpWeekOfYear, uniqueWeeks, tmpWeekAvgScores};
 }
 
 //colors object
@@ -145,11 +163,12 @@ async function updateCharts () {
   const getAPI = await selectStore();
   const inspData = await getInspData(getAPI.inspAPI);
 
-  let weeks = inspData.tmpWeekOfYear;
-  let scores = inspData.tmpScores;
+  let weeks = inspData.uniqueWeeks;
+  let scores = inspData.tmpWeekAvgScores;
   let inspAvgWeek = inspData.weekInspAvg;
   let inspAvgMonth = inspData.monthInspAvg;
   let inspAvgQuarter = inspData.quarterInsvpAvg;
+  
 
   let inspChartData = {
     x: weeks,
