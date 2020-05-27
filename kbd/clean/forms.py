@@ -35,6 +35,13 @@ class InspForm(FlaskForm):
 
     week_of_year=IntegerField('Week of Year')
 
+    quarter=SelectField('Quarter', choices=[
+                                                        ('1','1'),
+                                                        ('2','2'),
+                                                        ('3','3'),
+                                                        ('4','4')
+                                                ])
+
     concept=SelectField('Concept', choices=[
                                                 ('Rudy\'s','Rudy\'s'),
                                                 ('Mighty Fine','Mighty Fine')

@@ -122,6 +122,7 @@ let sparkLayout =  {
   plot_bgcolor: '#FFFFFF',
   width: 300,
   height: 100,
+  hovermode: false,
   margin: {
     l: 10,
     r: 10,
@@ -168,7 +169,7 @@ async function updateCharts () {
   let inspAvgWeek = inspData.weekInspAvg;
   let inspAvgMonth = inspData.monthInspAvg;
   let inspAvgQuarter = inspData.quarterInsvpAvg;
-  
+
 
   let inspChartData = {
     x: weeks,

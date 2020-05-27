@@ -29,7 +29,8 @@ def clean_add():
             fiscal_month=form.fiscal_month.data,
             fiscal_year=form.fiscal_year.data,
             week_of_month=form.week_of_month.data,
-            week_of_year=form.week_of_year.data
+            week_of_year=form.week_of_year.data,
+            quarter=form.quarter.data
         )
     db.session.add(insp)
     db.session.commit()

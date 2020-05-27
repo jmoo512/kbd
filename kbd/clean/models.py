@@ -16,12 +16,13 @@ class Inspections(db.Model):
     date_measured=db.Column(db.Date)
     score=db.Column(db.Float)
 
-    def __init__(self, week_ending, fiscal_month, fiscal_year, week_of_month, week_of_year, concept, location, date_measured, score):
+    def __init__(self, week_ending, fiscal_month, fiscal_year, week_of_month, week_of_year, quarter, concept, location, date_measured, score):
         self.week_ending=week_ending
         self.fiscal_month=fiscal_month
         self.fiscal_year=fiscal_year
         self.week_of_month=week_of_month
         self.week_of_year=week_of_year
+        self.quarter=quarter
         self.concept=concept
         self.location=location
         self.date_measured=date_measured
