@@ -201,3 +201,4 @@ let startingData = []
 
 //instantiate empty charts to DOM
 Plotly.newPlot( 'insp-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'tx-hosp-chart', startingData, sparkLayout, config);
