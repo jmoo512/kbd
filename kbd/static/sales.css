@@ -25,7 +25,7 @@ body {
   width: auto;
   max-width: 400px;
   height: auto;
-  
+
 }
 
 .chart, .data-box, #chosen-store{
@@ -113,7 +113,6 @@ body {
     display: flex;
     flex-flow: row nowrap;
     width: auto;
-    max-width: 1025px;
     justify-content: center;
     align-items: center;
   }
@@ -131,7 +130,6 @@ body {
     grid-template-rows: 1fr auto 1fr auto 1fr auto;
     grid-gap: 5px;
     width: auto;
-    max-width: 1025px;
     height: auto;
     max-height: 900;
   }
@@ -201,8 +199,7 @@ body {
   .header{
     display: flex;
     flex-flow: row nowrap;
-    width: auto;
-    max-width: 1500px;
+    width: 95vw;
     justify-content: center;
     align-items: center;
   }
@@ -214,13 +211,13 @@ body {
     border-color: var(--text);
     background-color: var(--blue);
   }
+
   .chart-grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr auto 1fr auto;
     grid-gap: 5px;
     width: auto;
-    max-width: 1500px;
     height: auto;
     max-height: 900;
   }
