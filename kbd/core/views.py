@@ -43,6 +43,11 @@ def store_weekly():
 def mf_kbds():
     return render_template('mf_kbds.html')
 
+@core.route('/rudys_kbds')
+def rudys_kbds():
+    return render_template('rudys_kbds.html')
+
+
 @core.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

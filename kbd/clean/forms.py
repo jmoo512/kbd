@@ -43,7 +43,7 @@ class InspForm(FlaskForm):
                                                 ])
 
     concept=SelectField('Concept', choices=[
-                                                ('Rudy\'s','Rudy\'s'),
+                                                ('Rudys','Rudy\'s'),
                                                 ('Mighty Fine','Mighty Fine')
                                                 ])
 
