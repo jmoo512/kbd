@@ -145,12 +145,26 @@ async function getTotalCumul() {
   return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
 }
 
+
+//colors object
+let colors = {
+  "red":"#ac3e31",
+  "yellow":"#dbae58",
+  "blue":"#488a99",
+  "bgColor":"#dadada",
+  "text":"#20283e",
+  "grey":"#484848",
+  "2018":"#ac3e31",
+  "2019":"#dbae58",
+  "2020":"#47ca3e"
+  }
+
 //default layout for charts
 
 let layout =  {
-  autosize: false,
-  paper_bgcolor: '#313131',
-  plot_bgcolor: '#313131',
+  autosize: true,
+  paper_bgcolor: colors['grey'],
+  plot_bgcolor: colors['grey'],
   width: 500,
   height: 400,
   margin: {
@@ -214,7 +228,7 @@ async function updateCharts () {
     y: chartSales18,
     mode: 'lines',
     line: {
-      color: '#ca3e47',
+      color: colors['2018'],
       width: 2,
     },
     name: '2018'
@@ -225,7 +239,7 @@ async function updateCharts () {
     y: chartSales19,
     mode: 'lines',
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -236,7 +250,7 @@ async function updateCharts () {
     y: chartSales20,
     mode: 'lines',
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -251,7 +265,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -263,7 +277,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -278,7 +292,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#ca3e47',
+      color: colors['2018'],
       width: 2,
     },
     name: '2018'
@@ -290,7 +304,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -302,7 +316,7 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -355,7 +369,7 @@ async function populateBaseCharts() {
     y: chartSales18,
     mode: 'lines',
     line: {
-      color: '#ca3e47',
+      color: colors['2018'],
       width: 2,
     },
     name: '2018'
@@ -366,7 +380,7 @@ async function populateBaseCharts() {
     y: chartSales19,
     mode: 'lines',
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -377,7 +391,7 @@ async function populateBaseCharts() {
     y: chartSales20,
     mode: 'lines',
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -391,7 +405,7 @@ async function populateBaseCharts() {
     y: chartGC19,
     mode: 'lines',
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -402,7 +416,7 @@ async function populateBaseCharts() {
     y: chartGC20,
     mode: 'lines',
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',
@@ -416,7 +430,7 @@ async function populateBaseCharts() {
     y: chartCumul18,
     mode: 'lines',
     line: {
-      color: '#ca3e47',
+      color: colors['2018'],
       width: 2,
     },
     name: '2018'
@@ -427,7 +441,7 @@ async function populateBaseCharts() {
     y: chartCumul19,
     mode: 'lines',
     line: {
-      color: '#cac13e',
+      color: colors['2019'],
       width: 2,
     },
     name: '2019'
@@ -438,7 +452,7 @@ async function populateBaseCharts() {
     y: chartCumul20,
     mode: 'lines',
     line: {
-      color: '#47ca3e',
+      color: colors['2020'],
       width: 2,
     },
     name: '2020',

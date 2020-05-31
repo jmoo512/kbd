@@ -29,10 +29,10 @@ def add():
 def c3():
     return render_template('c3js.html')
 
-@core.route('/plotlyjs')
+@core.route('/sales')
 #@login_required
-def plotly():
-    return render_template('/plotlyjs.html')
+def sales():
+    return render_template('/sales.html')
 
 @core.route('/store_weekly')
 #@login_required
