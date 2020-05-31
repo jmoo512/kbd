@@ -75,6 +75,10 @@ body {
   align-items: center;
 }
 
+.data-card-header{
+  font-size: 20px;
+  text-decoration: underline;
+}
 .big-number{
   height: 65%;
   font-size: 36px;

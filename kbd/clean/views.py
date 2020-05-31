@@ -53,3 +53,20 @@ def insp(chosen_location):
     df=insp_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@clean.route('/insp_concept/<chosen_concept>')
+def insp_concept(chosen_concept):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, score FROM inspections WHERE concept = '" + chosen_concept + "' AND quarter=(SELECT MAX(quarter) FROM inspections) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    cur.close()
+    conn.close()
+
+    df=insp_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
