@@ -88,8 +88,10 @@ body {
 }
 
 .little-number {
+  width: 100%;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-around;
   font-size: 20px;
 }
 

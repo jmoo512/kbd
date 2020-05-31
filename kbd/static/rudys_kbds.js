@@ -184,6 +184,9 @@ let colors = {
   "grey":"#484848"
   }
 
+let ranges = {
+  "insp":[3.4, 4.0],
+}
 
 let sparkLayout =  {
   //autosize: true,
@@ -206,7 +209,8 @@ let sparkLayout =  {
     showline: false,
     autotick: true,
     ticks: '',
-    showticklabels: false
+    showticklabels: false,
+
   },
   yaxis: {
     //autorange: true,
@@ -215,14 +219,15 @@ let sparkLayout =  {
     showline: false,
     autotick: true,
     ticks: '',
-    showticklabels: false
+    showticklabels: false,
+    //range: ranges["insp"]
   },
   legend: {
   }
 }
 
 
-let config = {//responsive: true,
+let config = {responsive: true,
               displayModeBar: false
 }
 
