@@ -1,6 +1,7 @@
 from flask import current_app
 from flask_login import login_required
 from kbd import db
+from kbd.models import FiscalCalendar
 from .models import Sales
 from .forms import SalesForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify,Response
@@ -17,15 +18,26 @@ sales=Blueprint('sales',__name__)
 #@login_required
 def sales_add():
 
+
+
+
     form=SalesForm()
+
+    if form.location.data in ['183','360','Round Rock','620','Lamar']:
+        concept='Rudys'
+    else:
+        concept='Mighty Fine'
+
+    print(form.week_ending.data)
+    calendar=FiscalCalendar.query.filter(FiscalCalendar.week_ending==form.week_ending.data).first_or_404()
 
     sales=Sales(
             week_ending=form.week_ending.data,
-            fiscal_month=form.fiscal_month.data,
-            fiscal_year=form.fiscal_year.data,
-            week_of_month=form.week_of_month.data,
-            week_of_year=form.week_of_year.data,
-            concept=form.concept.data,
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            concept=concept,
             location=form.location.data,
             sales=form.sales.data,
             bbq_sales=form.bbq_sales.data,

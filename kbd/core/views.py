@@ -2,7 +2,7 @@ from flask import current_app
 from kbd.speed.models import CashierEfficiency
 from kbd.speed.forms import CEForm
 from kbd.sales.forms import SalesForm
-from kbd.models import Users
+from kbd.models import Users, FiscalCalendar
 from kbd.core.forms import LoginForm
 from kbd.clean.forms import InspForm
 from kbd.clean.models import Inspections
@@ -23,6 +23,7 @@ def add():
     ceform=CEForm()
     sales_form=SalesForm()
     insp_form=InspForm()
+
     return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form)
 
 @core.route('/c3js')

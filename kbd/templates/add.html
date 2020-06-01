@@ -133,12 +133,6 @@
         <form action="{{url_for('sales.sales_add')}}" method="post">
           {{sales_form.csrf_token}}
           {{sales_form.week_ending.label}} {{sales_form.week_ending}}
-          {{sales_form.fiscal_month.label}} {{sales_form.fiscal_month}}
-          {{sales_form.fiscal_year.label}} {{sales_form.fiscal_year}}<br>
-          {{sales_form.week_of_month.label}} {{sales_form.week_of_month}}
-          {{sales_form.week_of_year.label}} {{sales_form.week_of_year(size=2)}}
-          <hr>
-          {{sales_form.concept.label}} {{sales_form.concept}}
           {{sales_form.location.label}} {{sales_form.location}}
           <hr>
           {{sales_form.sales.label}} {{sales_form.sales(size=5, placeholder='$')}}

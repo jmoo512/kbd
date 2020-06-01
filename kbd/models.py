@@ -58,3 +58,15 @@ class OrderAccuracy(db.Model):
     fiscal_month=db.Column(db.String(20))
     location=db.Column(db.String(20))
     score=db.Column(db.Float)
+
+class FiscalCalendar(db.Model):
+    __tablename__='fiscalcalendar'
+    id=db.Column(db.Integer,primary_key=True)
+    date=db.Column(db.Date)
+    week_ending=db.Column(db.Date)
+    fiscal_year=db.Column(db.Integer)
+    fiscal_quarter=db.Column(db.Integer)
+    fiscal_month=db.Column(db.String(20))
+    fiscal_week=db.Column(db.Integer)
+    week_of_month=db.Column(db.Integer)
+    day_of_week=db.Column(db.String(15))
