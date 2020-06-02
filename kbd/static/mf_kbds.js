@@ -38,6 +38,7 @@ async function getInspData(api) {
     tmpQuarters.push(obj.quarter);
   });
 
+
   //find current week from array of weeks in dataset
   let currWeek = Math.max.apply(null, tmpWeekOfYear)
 
@@ -76,8 +77,9 @@ async function getInspData(api) {
   })
 
   let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
-  let tmpQuarterInspAvg = (sum2 / tmpQuarterScores.length) || 0;
+  let tmpQuarterInspAvg = (sum3 / tmpQuarterScores.length) || 0;
   let quarterInspAvg = tmpQuarterInspAvg.toFixed(2);
+
 
   //find weekly averages
   uniqueWeeks = _.uniq(tmpWeekOfYear, true)
@@ -165,7 +167,7 @@ async function getInspConceptData() {
   })
 
   let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
-  let tmpQuarterInspAvg = (sum2 / tmpQuarterScores.length) || 0;
+  let tmpQuarterInspAvg = (sum3 / tmpQuarterScores.length) || 0;
   let quarterInspAvg = tmpQuarterInspAvg.toFixed(2);
 
   console.log(weekInspAvg, monthInspAvg, quarterInspAvg)

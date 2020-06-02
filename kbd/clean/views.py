@@ -1,6 +1,7 @@
 from flask import current_app
 from flask_login import login_required
 from kbd import db
+from kbd.models import FiscalCalendar
 from .models import Inspections
 from .forms import InspForm
 from flask import render_template,Blueprint,redirect,url_for,jsonify,Response
@@ -20,17 +21,24 @@ def clean_add():
 
     form=InspForm()
 
+    if form.location.data in ['183','360','Round Rock','620','Lamar']:
+        concept='Rudys'
+    else:
+        concept='Mighty Fine'
+
+    calendar=FiscalCalendar.query.filter(FiscalCalendar.date==form.date_measured.data).first_or_404()
+
     insp=Inspections(
-            week_ending=form.week_ending.data,
+            week_ending=calendar.week_ending,
             location=form.location.data,
             date_measured=form.date_measured.data,
             score=form.score.data,
-            concept=form.concept.data,
-            fiscal_month=form.fiscal_month.data,
-            fiscal_year=form.fiscal_year.data,
-            week_of_month=form.week_of_month.data,
-            week_of_year=form.week_of_year.data,
-            quarter=form.quarter.data
+            concept=concept,
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter
         )
     db.session.add(insp)
     db.session.commit()

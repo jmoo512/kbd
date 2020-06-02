@@ -28,7 +28,6 @@ def sales_add():
     else:
         concept='Mighty Fine'
 
-    print(form.week_ending.data)
     calendar=FiscalCalendar.query.filter(FiscalCalendar.week_ending==form.week_ending.data).first_or_404()
 
     sales=Sales(
