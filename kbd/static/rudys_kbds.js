@@ -76,7 +76,7 @@ async function getInspData(api) {
   })
 
   let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
-  let tmpQuarterInspAvg = (sum2 / tmpQuarterScores.length) || 0;
+  let tmpQuarterInspAvg = (sum3 / tmpQuarterScores.length) || 0;
   let quarterInspAvg = tmpQuarterInspAvg.toFixed(2);
 
   //find weekly averages
@@ -165,7 +165,7 @@ async function getInspConceptData() {
   })
 
   let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
-  let tmpQuarterInspAvg = (sum2 / tmpQuarterScores.length) || 0;
+  let tmpQuarterInspAvg = (sum3 / tmpQuarterScores.length) || 0;
   let quarterInspAvg = tmpQuarterInspAvg.toFixed(2);
 
   console.log(weekInspAvg, monthInspAvg, quarterInspAvg)

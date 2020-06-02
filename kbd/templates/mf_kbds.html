@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+{% extends "base.html" %}
+{% block link %}
     <link rel="stylesheet" href="{{url_for('static',filename='main-style.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='kbds.css')}}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <title>Mighty Fine KBDs</title>
-  </head>
-  <body>
+{% endblock %}
 
+{% block title %}<title>Mighty Fine KBDs</title>{% endblock %}
+
+{% block content %}
     <div class="grid">
 
     <div class="header">
@@ -131,11 +130,9 @@
 
     </div>
     </div>
+{% endblock %}
 
-
+{% block js %}
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
 <script src="{{url_for('static',filename='mf_kbds.js')}}"></script>
-
-
-</body>
-</html>
+{% endblock %}

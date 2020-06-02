@@ -2,11 +2,41 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    {% block title %}{% endblock %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    {% block link %} {% endblock %}
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <!--<a class="navbar-brand" href="#">Navbar</a>-->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('core.sales')}}">Sales</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('core.store_weekly')}}">Sales Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('core.rudys_kbds')}}">Rudy's KBDs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('core.mf_kbds')}}">Mighty Fine KBDs</a>
+          </li>
+        </ul>
+
+
+      </div>
+
+
+    </nav>
+
     {% block content %}
 
     {% endblock %}
@@ -16,5 +46,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
     <script src="{{url_for('static',filename='index.js')}}"></script>
+    {% block js %} {% endblock %}
   </body>
 </html>
