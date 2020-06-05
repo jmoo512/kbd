@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block link %}
+    <link rel="stylesheet" href="{{url_for('static',filename='main-style.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='store_weekly.css')}}">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
@@ -32,90 +33,63 @@
     </div>
 
     <div class="grid">
+      <div class="content">
 
 
-          <div id="sales-chart" class="chart">
+
+        <div class="content-box">
+            <div id="sales-chart" class="chart">
+            </div>
+            <div id="sales-data" class="data-box">Weekly Sales
+            </div>
           </div>
 
-          <div id="guest-count-chart" class="chart">
+          <div class="content-box">
+            <div id="guest-count-chart" class="chart">
+            </div>
+            <div id="guest-count-data" class="data-box">Weekly Guest Count
+            </div>
           </div>
 
-          <div id="sales-data" class="data-box">Weekly Sales
-          </div>
-
-          <div id="guest-count-data" class="data-box">Weekly Guest Count
-          </div>
-
-          <div id="bbq-chart" class="chart">
-          </div>
-
-          <div id="tacos-chart" class="chart">
-          </div>
-
-          <div id="bbq-data" class="data-box">BBQ Guest Count
-          </div>
-
-          <div id="tacos-data" class="data-box">Tacos Guest Count
-          </div>
-
-          <div id="olo-chart" class="chart">
-          </div>
-
-          <div id="dd-chart" class="chart">
-          </div>
-
-          <div id="olo-data" class="data-box">OLO Sales
-          </div>
-
-          <div id="dd-data" class="data-box">DoorDash Sales
-          </div>
-
-          <div id="ratio-chart" class="chart">
-          </div>
-
-          <div id="ratio-data" class="data-box">OLO % | DoorDash %
-          </div>
-
-
-        <div id="bullet-container">
-
-          <div class="bullet-item">
-
-            <div id="insp-chart" class="chart">
+            <div class="content-box">
+              <div id="bbq-chart" class="chart">
+              </div>
+              <div id="bbq-data" class="data-box">BBQ Guest Count
+              </div>
             </div>
 
-            <div id="insp-data-card" class="data-box">Inspections
+          <div class="content-box">
+            <div id="tacos-chart" class="chart">
             </div>
+            <div id="tacos-data" class="data-box">Tacos Guest Count
+            </div>
+            </div>
+
+          <div class="content-box">
+            <div id="olo-chart" class="chart">
+            </div>
+            <div id="olo-data" class="data-box">OLO Sales
+            </div>
+            </div>
+
+          <div class="content-box">
+            <div id="dd-chart" class="chart">
+            </div>
+            <div id="dd-data" class="data-box">DoorDash Sales
+            </div>
+            </div>
+
+        <div class="content-box">
+            <div id="ratio-chart" class="chart">
+            </div>
+            <div id="ratio-data" class="data-box">OLO % | DoorDash %
+            </div>
+            </div>
+
 
           </div>
 
-          <div class="bullet-item">
-
-            <div id="ce-chart" class="chart">
-            </div>
-
-            <div id="ce-data-card" class="data-box">Cashier Efficiency
-            </div>
-
-          </div>
-
-          <div class="bullet-item">
-
-            <div id="accident-chart" class="chart">
-            </div>
-
-            <div id="accident-data-card" class="data-box">Days Accident Free - 546 | Record 1987
-            </div>
-
-          </div>
-
-        </div>
-
-
-
-
-
-    </div>
+      </div>
 
     {% endblock %}
 

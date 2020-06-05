@@ -166,7 +166,7 @@ let layout =  {
   paper_bgcolor: colors['grey'],
   plot_bgcolor: colors['grey'],
   width: 500,
-  height: 400,
+  height: 350,
   margin: {
     l: 50,
     r: 50,

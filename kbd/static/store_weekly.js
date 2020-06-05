@@ -161,20 +161,24 @@ async function getCEData(api) {
 
 //colors object
 let colors = {
-  "2018":"#ca3e47",
-  "2019":"#cac13e",
+  "red":"#ac3e31",
+  "yellow":"#dbae58",
+  "blue":"#488a99",
+  "bgColor":"#dadada",
+  "text":"#20283e",
+  "grey":"#484848",
+  "2018":"#ac3e31",
+  "2019":"#dbae58",
   "2020":"#47ca3e",
-  "orange":"#FF8C00",
-  "bgColor":"#222831",
-  "tickColor":"#eeeeee"
+  "tickColor":"#FFF"
   }
 
 //default layout for charts
 
 let layout1 =  {
   //autosize: true,
-  paper_bgcolor: colors['bgColor'],
-  plot_bgcolor: colors['bgColor'],
+  paper_bgcolor: colors['grey'],
+  plot_bgcolor: colors['grey'],
   width: 390,
   height: 260,
   margin: {
@@ -209,8 +213,8 @@ let layout1 =  {
 
 let layout2 =  {
   //autosize: true,
-  paper_bgcolor: colors['bgColor'],
-  plot_bgcolor: colors['bgColor'],
+  paper_bgcolor: colors['grey'],
+  plot_bgcolor: colors['grey'],
   width: 390,
   height: 260,
   margin: {
@@ -584,8 +588,6 @@ async function updateCharts () {
   Plotly.react('tacos-chart', updatedTacoGC, layout1, config)
   Plotly.react('olo-chart', updatedOloSales, layout1, config)
   Plotly.react('dd-chart', updatedDoorDash, layout1, config)
-  Plotly.react('insp-chart', inspFig, inspLayout, config);
-  Plotly.react('ce-chart', ceFig, inspLayout, config);
   Plotly.react('ratio-chart', updatedRatios, layout1, config)
 
 
@@ -612,8 +614,6 @@ async function updateCharts () {
   document.getElementById("tacos-data").innerHTML = 'Taco Guest Count: ' + currentTacoGC + ' | ' + currentPctTacosGC + '%'
   document.getElementById("olo-data").innerHTML = 'OLO Sales: $' + currentOlo
   document.getElementById("dd-data").innerHTML = 'DoorDash Sales: $' + currentDoorDash
-  document.getElementById("insp-data-card").innerHTML = 'Inspections: Week - ' + inspAvgWeek + ' | MTD - ' + inspAvgMonth
-  document.getElementById("ce-data-card").innerHTML = 'Efficiency: Week - $' + ceAvgWeek + ' | MTD - $' + ceAvgMonth
   document.getElementById("ratio-data").innerHTML = 'BBQ: ' + currentBBQPct + '% | Tacos: ' + currentTacosPct + '% | OLO: ' + currentOloPct + '% | DD: ' + currentDoorDashPct + '%'
 }
 
@@ -632,8 +632,6 @@ Plotly.newPlot( 'bbq-chart', startingData, layout1, config);
 Plotly.newPlot( 'tacos-chart', startingData, layout1, config);
 Plotly.newPlot( 'olo-chart', startingData, layout1, config);
 Plotly.newPlot( 'dd-chart', startingData, layout1, config);
-Plotly.newPlot( 'insp-chart', startingBulletData, inspLayout, config);
-Plotly.newPlot( 'ce-chart', startingBulletData, inspLayout, config);
 Plotly.newPlot( 'ratio-chart', startingData, layout1, config);
 
 
@@ -671,6 +669,3 @@ var inspLayout = { width: 390,
   }
  };
 var inspConfig = { responsive: true };
-
-
-Plotly.newPlot('accident-chart', accidentData, inspLayout, inspConfig);
