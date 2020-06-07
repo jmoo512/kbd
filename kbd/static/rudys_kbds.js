@@ -277,6 +277,11 @@ let startingData = []
 //instantiate empty charts to DOM
 Plotly.newPlot( 'insp-chart', startingData, sparkLayout, config);
 Plotly.newPlot( 'tx-hosp-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'taco-times-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'cu-times-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'acc-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
 
 async function populateBaseCharts () {
   const inspConceptData = await getInspConceptData();

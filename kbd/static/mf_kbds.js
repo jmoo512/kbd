@@ -274,6 +274,10 @@ let startingData = []
 //instantiate empty charts to DOM
 Plotly.newPlot( 'insp-chart', startingData, sparkLayout, config);
 Plotly.newPlot( 'tx-hosp-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'bag-times-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'ce-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'acc-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
 
 async function populateBaseCharts () {
   const inspConceptData = await getInspConceptData();
