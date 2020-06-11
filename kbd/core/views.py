@@ -6,6 +6,8 @@ from kbd.models import Users, FiscalCalendar
 from kbd.core.forms import LoginForm
 from kbd.clean.forms import InspForm
 from kbd.clean.models import Inspections
+from kbd.txh.models import GameFilm
+from kbd.txh.forms import GFForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 import pandas as pd
@@ -23,8 +25,9 @@ def add():
     ceform=CEForm()
     sales_form=SalesForm()
     insp_form=InspForm()
+    gf_form=GFForm()
 
-    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form)
+    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form, gf_form=gf_form)
 
 @core.route('/c3js')
 def c3():

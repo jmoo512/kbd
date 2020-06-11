@@ -44,6 +44,20 @@
 
   </div>
 
+  <div class="row">
+
+    <div class="item-title">
+      Game Films
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-gf">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-gf" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-gf" disabled>Delete</button>
+    </div>
+
+  </div>
+
 </div>
 
 <!--MODAL TO ADD CASHIER EFFICIENCY-->
@@ -181,6 +195,37 @@
       </div>
       <div class="modal-footer">
         {{insp_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL TO ADD GF-->
+
+<div class="modal fade" id="add-gf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Game Film</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('txh.gf_add')}}" method="post">
+          {{gf_form.csrf_token}}
+          {{gf_form.date_measured.label}} {{gf_form.date_measured}}
+          {{gf_form.location.label}} {{gf_form.location}}
+          {{gf_form.type.label}} {{gf_form.type}}
+          {{gf_form.score.label}} {{gf_form.score(size=5)}}
+
+      </div>
+      <div class="modal-footer">
+        {{gf_form.submit(class_='btn btn-primary')}}
 
       </form>
 
