@@ -4,6 +4,7 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 
 
 
+
 //use selector to modify api address per store selected
 function selectStore() {
   let baseAPI = "http://127.0.0.1:5000"
@@ -321,11 +322,26 @@ let ranges = {
   "gf":[60,100]
 }
 
+function updateChartWidth(width) {
+
+  if (width.matches) {
+    let chartWidth = 200;
+  } else {
+    let chartWidth = 300;
+  }
+  return chartWidth
+}
+
+let width = window.matchMedia("(max-width: 1150px)")
+
+updateChartWidth(width);
+width.addListener(updateChartWidth);
+
 let inspLayout =  {
   //autosize: true,
   paper_bgcolor: '#FFFFFF',
   plot_bgcolor: '#FFFFFF',
-  width: 300,
+  width: updateChartWidth.chartWidth,
   height: 100,
   hovermode: false,
   margin: {
@@ -364,7 +380,7 @@ let gfLayout =  {
   //autosize: true,
   paper_bgcolor: '#FFFFFF',
   plot_bgcolor: '#FFFFFF',
-  width: 300,
+  width: width,
   height: 100,
   hovermode: false,
   margin: {
@@ -486,7 +502,6 @@ async function populateBaseCharts () {
   let inspConceptAvgQuarter = inspConceptData.quarterInspAvg;
 
   let gfConceptAvgMonth = gfConceptData.monthGFAvg;
-  console.log(gfConceptAvgMonth)
   let gfConceptAvgQuarter = gfConceptData.quarterGFAvg;
 
 
