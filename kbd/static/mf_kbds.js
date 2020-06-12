@@ -412,15 +412,15 @@ let colors = {
   }
 
   let ranges = {
-    "insp":[3.4, 4.0],
+    "insp":[3.4, 3.8],
     "gf":[60,100]
   }
 
   let inspLayout =  {
-    //autosize: true,
+    autosize: true,
     paper_bgcolor: '#FFFFFF',
     plot_bgcolor: '#FFFFFF',
-    width: 300,
+    //width: 300,
     height: 100,
     hovermode: false,
     margin: {
@@ -456,10 +456,10 @@ let colors = {
   }
 
   let gfLayout =  {
-    //autosize: true,
+    autosize: true,
     paper_bgcolor: '#FFFFFF',
     plot_bgcolor: '#FFFFFF',
-    width: 300,
+    //width: 300,
     height: 100,
     hovermode: false,
     margin: {

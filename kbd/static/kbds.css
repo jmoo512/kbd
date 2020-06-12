@@ -97,7 +97,7 @@ body {
   background-color: White;
   border-radius: 3px;
   height: 100px;
-  width: 33%;
+  width: 32%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -125,6 +125,7 @@ body {
 .chart {
   margin: 0px 5px;
   border-radius: 3px;
+  width: 32%;
 }
 
 .footer {
@@ -177,6 +178,37 @@ body {
 
   .data-card {
     padding: 10px;
+  }
+
+}
+
+@media only screen and (max-width: 556px){
+
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "nav"
+      "header"
+      "left-col"
+      "right-col"
+      "footer";
+  }
+
+  .big-number{
+    font-size: 20px;
+  }
+
+  .little-number {
+    font-size: 16px;
+  }
+
+  .data-card-header{
+    font-size: 16px;
+  }
+
+  .data-card {
+    padding: 4px;
   }
 
 }

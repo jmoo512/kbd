@@ -318,30 +318,15 @@ let colors = {
   }
 
 let ranges = {
-  "insp":[3.4, 4.0],
+  "insp":[3.4, 3.8],
   "gf":[60,100]
 }
 
-function updateChartWidth(width) {
-
-  if (width.matches) {
-    let chartWidth = 200;
-  } else {
-    let chartWidth = 300;
-  }
-  return chartWidth
-}
-
-let width = window.matchMedia("(max-width: 1150px)")
-
-updateChartWidth(width);
-width.addListener(updateChartWidth);
-
 let inspLayout =  {
-  //autosize: true,
+  autosize: true,
   paper_bgcolor: '#FFFFFF',
   plot_bgcolor: '#FFFFFF',
-  width: updateChartWidth.chartWidth,
+  //width: 300,
   height: 100,
   hovermode: false,
   margin: {
@@ -377,10 +362,10 @@ let inspLayout =  {
 }
 
 let gfLayout =  {
-  //autosize: true,
+  autosize: true,
   paper_bgcolor: '#FFFFFF',
   plot_bgcolor: '#FFFFFF',
-  width: width,
+  //width: 300,
   height: 100,
   hovermode: false,
   margin: {
