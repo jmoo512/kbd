@@ -495,7 +495,7 @@ let colors = {
   }
 
 
-let config = {//responsive: true,
+let config = {responsive: true,
               displayModeBar: false
 }
 
