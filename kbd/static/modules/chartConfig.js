@@ -52,48 +52,48 @@ let inspLayout =  {
     }
   }
 
-  let gfLayout =  {
-      autosize: true,
-      paper_bgcolor: '#FFFFFF',
-      plot_bgcolor: '#FFFFFF',
-      //width: 300,
-      height: 100,
-      hovermode: false,
-      margin: {
-        l: 30,
-        r: 10,
-        b: 10,
-        t: 10,
-        pad: 5
-      },
-      xaxis: {
-        //autorange: true,
-        showgrid: false,
-        zeroline: false,
-        showline: false,
-        autotick: true,
-        ticks: '',
-        showticklabels: false,
+let gfLayout =  {
+    autosize: true,
+    paper_bgcolor: '#FFFFFF',
+    plot_bgcolor: '#FFFFFF',
+    //width: 300,
+    height: 100,
+    hovermode: false,
+    margin: {
+      l: 30,
+      r: 10,
+      b: 10,
+      t: 10,
+      pad: 5
+    },
+    xaxis: {
+      //autorange: true,
+      showgrid: false,
+      zeroline: false,
+      showline: false,
+      autotick: true,
+      ticks: '',
+      showticklabels: false,
 
-      },
-      yaxis: {
-        //autorange: true,
-        showgrid: false,
-        zeroline: false,
-        showline: false,
-        autotick: false,
-        dtick: 20,
-        ticks: '',
-        showticklabels: true,
-        range: ranges["gf"]
-      },
-      legend: {
-      }
+    },
+    yaxis: {
+      //autorange: true,
+      showgrid: false,
+      zeroline: false,
+      showline: false,
+      autotick: false,
+      dtick: 20,
+      ticks: '',
+      showticklabels: true,
+      range: ranges["gf"]
+    },
+    legend: {
     }
+  }
 
 
-  let config = {responsive: true,
-                displayModeBar: false
-              }
+let config = {responsive: true,
+              displayModeBar: false
+            }
 
 export {colors, ranges, inspLayout, gfLayout, config}
