@@ -58,6 +58,20 @@
 
   </div>
 
+  <div class="row">
+
+    <div class="item-title">
+      Taco Times
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-taco">Add</button>
+      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-taco" disabled>Edit</button>
+      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-taco" disabled>Delete</button>
+    </div>
+
+  </div>
+
 </div>
 
 <!--MODAL TO ADD CASHIER EFFICIENCY-->
@@ -226,6 +240,57 @@
       </div>
       <div class="modal-footer">
         {{gf_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL TO ADD TACO TIMES-->
+
+<div class="modal fade" id="add-taco" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Taco Times</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('speed.taco_add')}}" method="post">
+          {{taco_form.csrf_token}}
+          {{taco_form.location.label}} {{taco_form.location}}
+          <hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_one.label}} {{taco_form.min_one(value=0, size=3)}} {{taco_form.sec_one.label}} {{taco_form.sec_one(size=3)}}
+          <!--<hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_two.label}} {{taco_form.min_two(value=0, size=3)}} {{taco_form.sec_two.label}} {{taco_form.sec_two(size=3)}}
+          <hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_three.label}} {{taco_form.min_three(value=0, size=3)}} {{taco_form.sec_three.label}} {{taco_form.sec_three(size=3)}}
+          <hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_four.label}} {{taco_form.min_four(value=0, size=3)}} {{taco_form.sec_four.label}} {{taco_form.sec_four(size=3)}}
+          <hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_five.label}} {{taco_form.min_five(value=0, size=3)}} {{taco_form.sec_five.label}} {{taco_form.sec_five(size=3)}}
+          <hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_six.label}} {{taco_form.min_six(value=0, size=3)}} {{taco_form.sec_six.label}} {{taco_form.sec_six(size=3)}}
+          <hr>
+          {{taco_form.date_measured.label}} {{taco_form.date_measured}}
+          {{taco_form.min_seven.label}} {{taco_form.min_seven(value=0, size=3)}} {{taco_form.sec_seven.label}} {{taco_form.sec_seven(size=3)}}-->
+
+
+
+      </div>
+      <div class="modal-footer">
+        {{taco_form.submit(class_='btn btn-primary')}}
 
       </form>
 

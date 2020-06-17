@@ -1,6 +1,6 @@
 from flask import current_app
 from kbd.speed.models import CashierEfficiency
-from kbd.speed.forms import CEForm
+from kbd.speed.forms import CEForm, TacoForm
 from kbd.sales.forms import SalesForm
 from kbd.models import Users, FiscalCalendar
 from kbd.core.forms import LoginForm
@@ -26,8 +26,9 @@ def add():
     sales_form=SalesForm()
     insp_form=InspForm()
     gf_form=GFForm()
+    taco_form=TacoForm()
 
-    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form, gf_form=gf_form)
+    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form, gf_form=gf_form, taco_form=taco_form)
 
 @core.route('/c3js')
 def c3():

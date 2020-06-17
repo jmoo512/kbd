@@ -71,3 +71,33 @@ class CEForm(FlaskForm):
     mod_one=StringField('FOH MOD: ')
     mod_two=StringField('BOH MOD: ')
     submit=SubmitField('Add')
+
+
+class TacoForm(FlaskForm):
+    date_measured=DateField('Date Measured', format='%Y-%m-%d')
+    location=SelectField('Location', choices=[
+                                                ('183','North'),
+                                                ('360','South'),
+                                                ('Round Rock','Round Rock'),
+                                                ('620','620'),
+                                                ('Lamar','Lamar'),
+                                                ('MF1','MF1'),
+                                                ('MF2','MF2'),
+                                                ('MF3','MF3'),
+                                                ('MF4','MF4')
+                                            ])
+    min_one=IntegerField('Min: ')
+    sec_one=IntegerField('Sec: ')
+    min_two=IntegerField('Min: ')
+    sec_two=IntegerField('Sec: ')
+    min_three=IntegerField('Min: ')
+    sec_three=IntegerField('Sec: ')
+    min_four=IntegerField('Min: ')
+    sec_four=IntegerField('Sec: ')
+    min_five=IntegerField('Min: ')
+    sec_five=IntegerField('Sec: ')
+    min_six=IntegerField('Min: ')
+    sec_six=IntegerField('Sec: ')
+    min_seven=IntegerField('Min: ')
+    sec_seven=IntegerField('Sec: ')
+    submit=SubmitField('Add')

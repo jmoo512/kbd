@@ -63,11 +63,16 @@ class TacoTimes(db.Model):
     __tablename__='tacotimes'
     id=db.Column(db.Integer,primary_key=True)
     week_ending=db.Column(db.Date)
-    fiscal_week=db.Column(db.Integer)
+    fiscal_month=db.Column(db.String(20))
+    fiscal_year=db.Column(db.Integer)
+    week_of_month=db.Column(db.Integer)
+    week_of_year=db.Column(db.Integer)
+    quarter=db.Column(db.Integer)
+    concept=db.Column(db.String(20))
     location=db.Column(db.String(20))
     date_measured=db.Column(db.Date)
-    time_measure=db.Column(db.DateTime(40))
     score=db.Column(db.DateTime(40))
+    time_in_seconds=db.Column(db.Integer)
 
 class BagTimes(db.Model):
     __tablename__='bagtimes'

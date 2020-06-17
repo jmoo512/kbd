@@ -1,7 +1,8 @@
 from flask import current_app
 from kbd import db
-from .models import CashierEfficiency
-from .forms import CEForm
+from kbd.models import FiscalCalendar
+from .models import CashierEfficiency, TacoTimes
+from .forms import CEForm, TacoForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify,Response
 import pandas as pd
 from psql_config import config
@@ -34,6 +35,126 @@ def ce(chosen_location):
     df=ce_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@speed.route('/taco_add',methods=['GET','POST'])
+def taco_add():
+    form=TacoForm()
+
+    calendar=FiscalCalendar.query.filter(FiscalCalendar.date==form.date_measured.data).first_or_404()
+
+    if form.sec_one.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_one.data*60)+form.sec_one.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    if form.sec_two.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_two.data*60)+form.sec_two.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    if form.sec_three.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_three.data*60)+form.sec_three.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    if form.sec_four.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_four.data*60)+form.sec_four.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    if form.sec_five.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_five.data*60)+form.sec_five.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    if form.sec_six.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_six.data*60)+form.sec_six.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    if form.sec_seven.data:
+        taco=TacoTimes(
+            time_in_seconds=(form.min_seven.data*60)+form.sec_seven.data,
+            date_measured=form.date_measured.data,
+            location=form.location.data,
+            concept='Rudys',
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_ending=calendar.week_ending
+        )
+        db.session.add(taco)
+        db.session.commit()
+
+    return redirect(url_for('core.add'))
 
 @speed.route('/ce_add',methods=['GET','POST'])
 def ce_add():
