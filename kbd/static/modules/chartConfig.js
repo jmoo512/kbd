@@ -60,7 +60,7 @@ let gfLayout =  {
     height: 100,
     hovermode: false,
     margin: {
-      l: 30,
+      l: 32,
       r: 10,
       b: 10,
       t: 10,
@@ -96,4 +96,9 @@ let config = {responsive: true,
               displayModeBar: false
             }
 
-export {colors, ranges, inspLayout, gfLayout, config}
+let staticConfig = {responsive: true,
+                    displayModeBar: false,
+                    staticPlot: true
+            }
+
+export {colors, ranges, inspLayout, gfLayout, config, staticConfig}
