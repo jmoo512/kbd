@@ -40,8 +40,6 @@ body {
   width: auto;
   justify-content: flex-start;
   align-items: center;
-  grid-column: 1/3;
-  grid-row: 1/2;
 }
 
 #chosen-store{
@@ -246,7 +244,7 @@ body {
   .form-div{
     display: none;
   }
-  
+
   .grid {
     width: 1056px;
     height: 816px;

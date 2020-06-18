@@ -3,9 +3,13 @@ let colors = {
   "red":"#ac3e31",
   "yellow":"#dbae58",
   "blue":"#488a99",
+  "green":"#47ca3e",
   "bgColor":"#dadada",
   "text":"#20283e",
-  "grey":"#484848"
+  "grey":"#484848",
+  "2018":"#ac3e31",
+  "2019":"#dbae58",
+  "2020":"#47ca3e"
   }
 
 let ranges = {

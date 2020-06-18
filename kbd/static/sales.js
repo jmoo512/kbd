@@ -1,3 +1,5 @@
+import {colors, ranges, inspLayout, gfLayout, config, staticConfig} from './modules/chartConfig.js'
+
 //Add event listener to selector to call update functions
 
 document.getElementById("store-select").addEventListener("change",updateCharts);
@@ -146,18 +148,6 @@ async function getTotalCumul() {
 }
 
 
-//colors object
-let colors = {
-  "red":"#ac3e31",
-  "yellow":"#dbae58",
-  "blue":"#488a99",
-  "bgColor":"#dadada",
-  "text":"#20283e",
-  "grey":"#484848",
-  "2018":"#ac3e31",
-  "2019":"#dbae58",
-  "2020":"#47ca3e"
-  }
 
 //default layout for charts
 
@@ -165,13 +155,13 @@ let layout =  {
   autosize: true,
   paper_bgcolor: colors['grey'],
   plot_bgcolor: colors['grey'],
-  width: 500,
+  //width: 500,
   height: 350,
   margin: {
-    l: 50,
-    r: 50,
-    b: 50,
-    t: 50,
+    l: 30,
+    r: 10,
+    b: 10,
+    t: 10,
     pad: 5
   },
   xaxis: {
@@ -195,10 +185,6 @@ let layout =  {
       color: '#FFF'
     }}
 }
-
-let config = {responsive: true, displayModeBar: false}
-
-
 
 //update store level charts based on selected store
 async function updateCharts () {
@@ -398,7 +384,7 @@ async function populateBaseCharts() {
     text: pctSales
   };
 
-  totalSales = [sales18, sales19, sales20]
+  let totalSales = [sales18, sales19, sales20]
 
   let gc19 = {
     x: weeks,
@@ -423,7 +409,7 @@ async function populateBaseCharts() {
     text: pctGC
   };
 
-  totalGC = [gc19, gc20]
+  let totalGC = [gc19, gc20]
 
   let cumul18 = {
     x: weeks,
@@ -459,7 +445,7 @@ async function populateBaseCharts() {
     text: pctCumul
   };
 
-  totalCumul = [cumul18, cumul19, cumul20]
+  let totalCumul = [cumul18, cumul19, cumul20]
 
 
   Plotly.newPlot( 'total-sales-chart', totalSales, layout, config);
