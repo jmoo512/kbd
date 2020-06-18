@@ -11,7 +11,7 @@
 {% block content %}
 
 
-  <div class="grid">
+
     <div class="header">
       <div class="form-div">
         <form id="store-picker" class="" action="index.html" method="post">
@@ -74,11 +74,12 @@
           <div id="total-cumul-sales-data" class="data-box">KN YTD Sales
           </div>
 
+
+
     </div>
-  </div>
 
 {% endblock %}
 
 {% block js %}
-  <script type="module" src="{{url_for('static',filename='sales.js')}}"></script>
+  <script src="{{url_for('static',filename='sales.js')}}"></script>
 {% endblock %}
