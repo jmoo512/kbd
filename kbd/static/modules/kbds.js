@@ -222,7 +222,6 @@ async function getTacoData(api) {
     tmpQuarters.push(obj.quarter);
   });
 
-
   //find current week from array of weeks in dataset
   let currWeek = Math.max.apply(null, tmpWeekOfYear)
 
@@ -250,6 +249,7 @@ async function getTacoData(api) {
     }
   })
 
+
   let sum2 = tmpMonthSeconds.reduce((a,b) => a + b, 0);
   let tmpMonthTacoAvg = (sum2 / tmpMonthSeconds.length) || 0;
   let monthTacoAvg = tmpMonthTacoAvg.toFixed(0);
@@ -274,20 +274,22 @@ async function getTacoData(api) {
   let tmpWeekAvgSeconds = [];
 
   uniqueWeeks.forEach(week => {
-    let tempSeconds = [];
+    let tmpSeconds = [];
     data.forEach(obj => {
 
       if (obj.week_of_year === week) {
-        tempSeconds.push(obj.score);
+        tmpSeconds.push(obj.time_in_seconds);
         }
       })
 
-      let sum4 = _.sum(tempSeconds)
+      let sum4 = _.sum(tmpSeconds)
 
-      let tempWeekTacoAvg = (sum4 / tempSeconds.length) || 0;
-      let tempWeekTacoAvgRound = tempWeekTacoAvg.toFixed(2)
-      tmpWeekAvgSeconds.push(tempWeekTacoAvgRound)
+      let tmpWeekTacoAvg = (sum4 / tmpSeconds.length) || 0;
+      let tmpWeekTacoAvgRound = tmpWeekTacoAvg.toFixed(2)
+      tmpWeekAvgSeconds.push(tmpWeekTacoAvgRound)
+      
   })
+
 
   return {convertedWeekTacoAvg, convertedMonthTacoAvg, convertedQuarterTacoAvg, uniqueWeeks, tmpWeekAvgSeconds};
 }
