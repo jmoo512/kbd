@@ -36,6 +36,23 @@ def ce(chosen_location):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+@speed.route('/taco/<chosen_location>')
+def taco(chosen_location):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    taco_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, time_in_seconds FROM tacotimes WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM tacotimes) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    cur.close()
+    conn.close()
+
+    df=taco_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
+
 @speed.route('/taco_add',methods=['POST'])
 def taco_add():
 
@@ -93,7 +110,7 @@ def taco_add():
 
         if form.sec_four.data:
             taco=TacoTimes(
-                time_in_seconds=(form.min_one.data*60)+form.sec_one.data,
+                time_in_seconds=(form.min_four.data*60)+form.sec_four.data,
                 date_measured=form.date_measured_four.data,
                 location=form.location.data,
                 concept='Rudys',
@@ -109,7 +126,7 @@ def taco_add():
 
         if form.sec_five.data:
             taco=TacoTimes(
-                time_in_seconds=(form.min_one.data*60)+form.sec_one.data,
+                time_in_seconds=(form.min_five.data*60)+form.sec_five.data,
                 date_measured=form.date_measured_five.data,
                 location=form.location.data,
                 concept='Rudys',
@@ -125,7 +142,7 @@ def taco_add():
 
         if form.sec_six.data:
             taco=TacoTimes(
-                time_in_seconds=(form.min_one.data*60)+form.sec_one.data,
+                time_in_seconds=(form.min_six.data*60)+form.sec_six.data,
                 date_measured=form.date_measured_six.data,
                 location=form.location.data,
                 concept='Rudys',
@@ -141,7 +158,7 @@ def taco_add():
 
         if form.sec_seven.data:
             taco=TacoTimes(
-                time_in_seconds=(form.min_one.data*60)+form.sec_one.data,
+                time_in_seconds=(form.min_seven.data*60)+form.sec_seven.data,
                 date_measured=form.date_measured_seven.data,
                 location=form.location.data,
                 concept='Rudys',
