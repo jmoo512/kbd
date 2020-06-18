@@ -1,6 +1,6 @@
 //import modules
 import {selectStore, getInspData, getGFData, getInspConceptData, getGFConceptData} from './modules/kbds.js'
-import {colors, ranges, inspLayout, gfLayout, config, staticConfig} from './modules/chartConfig.js'
+import {colors, ranges, inspLayout, gfLayout, config} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
 
@@ -54,8 +54,8 @@ async function updateCharts () {
   let gfSpark = [gfChartData]
 
 
-  Plotly.react('insp-chart', inspSpark, inspLayout, staticConfig);
-  Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
+  Plotly.react('insp-chart', inspSpark, inspLayout, config);
+  Plotly.react('gf-chart', gfSpark, gfLayout, config);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
@@ -94,8 +94,8 @@ async function populateBaseCharts () {
 let startingData = []
 
 //instantiate empty charts to DOM
-Plotly.newPlot( 'insp-chart', startingData, inspLayout, staticConfig);
-Plotly.newPlot( 'gf-chart', startingData, gfLayout, staticConfig);
+Plotly.newPlot( 'insp-chart', startingData, inspLayout, config);
+Plotly.newPlot( 'gf-chart', startingData, gfLayout, config);
 //Plotly.newPlot( 'taco-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'cu-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
