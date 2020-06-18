@@ -63,15 +63,3 @@ def create_app(config_class=Config):
 
 #else:
 #    app.config.from_object('config.ProductionConfig')
-
-#db = SQLAlchemy(app)
-#Migrate(app,db)
-
-#import blueprints
-#from kbd.core.views import core
-#from kbd.speed.views import speed
-
-
-#register blueprints
-#app.register_blueprint(core)
-#app.register_blueprint(speed)

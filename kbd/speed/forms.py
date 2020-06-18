@@ -74,7 +74,6 @@ class CEForm(FlaskForm):
 
 
 class TacoForm(FlaskForm):
-    date_measured=DateField('Date Measured', format='%Y-%m-%d')
     location=SelectField('Location', choices=[
                                                 ('183','North'),
                                                 ('360','South'),
@@ -86,18 +85,32 @@ class TacoForm(FlaskForm):
                                                 ('MF3','MF3'),
                                                 ('MF4','MF4')
                                             ])
+    date_measured_one=DateField('Date Measured', format='%Y-%m-%d')
     min_one=IntegerField('Min: ')
     sec_one=IntegerField('Sec: ')
+
+    date_measured_two=DateField('Date Measured', format='%Y-%m-%d')
     min_two=IntegerField('Min: ')
     sec_two=IntegerField('Sec: ')
+
+    date_measured_three=DateField('Date Measured', format='%Y-%m-%d')
     min_three=IntegerField('Min: ')
     sec_three=IntegerField('Sec: ')
+
+    date_measured_four=DateField('Date Measured', format='%Y-%m-%d')
     min_four=IntegerField('Min: ')
     sec_four=IntegerField('Sec: ')
+
+    date_measured_five=DateField('Date Measured', format='%Y-%m-%d')
     min_five=IntegerField('Min: ')
     sec_five=IntegerField('Sec: ')
+
+    date_measured_six=DateField('Date Measured', format='%Y-%m-%d')
     min_six=IntegerField('Min: ')
     sec_six=IntegerField('Sec: ')
+
+    date_measured_seven=DateField('Date Measured', format='%Y-%m-%d')
     min_seven=IntegerField('Min: ')
     sec_seven=IntegerField('Sec: ')
+
     submit=SubmitField('Add')

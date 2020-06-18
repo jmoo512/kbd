@@ -100,4 +100,9 @@ let config = {responsive: true,
               displayModeBar: false
             }
 
-export {colors, ranges, inspLayout, gfLayout, config}
+let staticConfig = {responsive: true,
+                    displayModeBar: false,
+                    staticPlot: true
+            }
+
+export {colors, ranges, inspLayout, gfLayout, config, staticConfig}
