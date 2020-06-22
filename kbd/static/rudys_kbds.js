@@ -75,7 +75,7 @@ async function updateCharts () {
 
   Plotly.react('insp-chart', inspSpark, inspLayout, staticConfig);
   Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
-  Plotly.react('taco-times-chart', tacoSpark, tacoLayout, staticConfig);
+  Plotly.react('taco-times-chart', tacoSpark, tacoLayout, config);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';

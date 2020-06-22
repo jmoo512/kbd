@@ -15,7 +15,7 @@ let colors = {
 let ranges = {
   "insp":[3.4, 3.8],
   "gf":[60,100],
-  "taco":[0,180]
+  "taco":[0,120]
 }
 
 let inspLayout =  {
@@ -126,7 +126,7 @@ let tacoLayout =  {
       zeroline: false,
       showline: false,
       autotick: false,
-      dtick: 90,
+      dtick: 60,
       ticks: '',
       showticklabels: true,
       range: ranges["taco"]

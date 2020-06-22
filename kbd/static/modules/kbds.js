@@ -287,7 +287,13 @@ async function getTacoData(api) {
       let tmpWeekTacoAvg = (sum4 / tmpSeconds.length) || 0;
       let tmpWeekTacoAvgRound = tmpWeekTacoAvg.toFixed(2)
       tmpWeekAvgSeconds.push(tmpWeekTacoAvgRound)
-      
+
+  })
+
+  let convertedSeconds = tmpWeekAvgSeconds.map(Number)
+
+  convertedSeconds.forEach(i => {
+    console.log(i)
   })
 
 
