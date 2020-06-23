@@ -248,4 +248,79 @@ body {
   .form-div{
     display: none;
   }
+
+  .header{
+    grid-area: header;
+  }
+
+  .left-col {
+    grid-area: left-col;
+  }
+
+  .right-col {
+    grid-area: right-col;
+  }
+
+  .grid {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header header"
+      "left-col right-col";
+    background-color: var(--bg);
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .header{
+    display: flex;
+    flex-flow: row nowrap;
+    width: auto;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #chosen-store{
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    border: 3px solid;
+    border-radius: 3px;
+    border-color: var(--text);
+  }
+
+  #store-select {
+    margin: 3px;
+    height: 34px;
+    font-size: 20px;
+  }
+
+  .data-box {
+    border: 3px solid;
+    border-radius: 3px;
+    border-color: var(--text);
+  }
+
+  .data-row {
+    flex-flow: row wrap;
+    border: 2px solid;
+    border-radius: 3px;
+    border-color: var(--text);
+  }
+
+  .data-card {
+    padding: 4px;
+    order: 1;
+    width: 49%;
+  }
+
+  .chart {
+    order: 2;
+    width: 98%;
+    margin-top: 5px;
+  }
 }
