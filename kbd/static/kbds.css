@@ -248,21 +248,4 @@ body {
   .form-div{
     display: none;
   }
-
-  .grid {
-    width: 1056px;
-    height: 816px;
-  }
-
-  .data-row {
-    flex-flow: row wrap;
-  }
-
-  .data-card {
-    order: 1;
-  }
-
-  .chart {
-    width: 176px;
-    order: 2;
-  }
+}
