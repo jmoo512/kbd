@@ -25,8 +25,6 @@ function selectStore() {
   return {inspAPI, gfAPI, tacoAPI, bagTimesAPI}
 }
 
-
-
 //grab inspection data from api
 async function getInspData(api) {
   const response = await fetch(api);
@@ -573,20 +571,9 @@ async function getBagTimesConceptData(api) {
     tmpQuarterScores.push(obj.concept_quarter_avg);
   });
 
-    //find current week from array of weeks in dataset
-  //let currWeek = Math.max.apply(null, tmpWeekOfYear)
-
-  //find current month from array of weeks in dataset
-//  let currMonth = Math.max.apply(null, tmpMonths)
-
-  //find current quarter from array of weeks in dataset
-  //let currQuarter = Math.max.apply(null, tmpQuarters)
 
   //find current week average
-
-  console.log(tmpWeekScores)
   let weekBagTimesAvg = Math.max.apply(null, tmpWeekScores);
-  console.log(weekBagTimesAvg)
 
   //find current month average
   let monthBagTimesAvg = Math.max.apply(null, tmpMonthScores);
