@@ -79,11 +79,7 @@ class TacoForm(FlaskForm):
                                                 ('360','South'),
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
-                                                ('Lamar','Lamar'),
-                                                ('MF1','MF1'),
-                                                ('MF2','MF2'),
-                                                ('MF3','MF3'),
-                                                ('MF4','MF4')
+                                                ('Lamar','Lamar')
                                             ])
     date_measured_one=DateField('Date Measured', format='%Y-%m-%d')
     min_one=IntegerField('Min: ')
