@@ -20,8 +20,9 @@ function selectStore() {
   let inspAPI="/insp/" + store
   let gfAPI="/gf/" + store
   let tacoAPI="/taco/" + store
+  let bagTimesAPI="/bag_times/" + store
 
-  return {inspAPI, gfAPI, tacoAPI}
+  return {inspAPI, gfAPI, tacoAPI, bagTimesAPI}
 }
 
 
@@ -240,7 +241,7 @@ async function getTacoData(api) {
   let sum1 = tmpWeekSeconds.reduce((a, b) => a + b, 0);
   let tmpWeekTacoAvg = (sum1 / tmpWeekSeconds.length) || 0;
   let weekTacoAvg = tmpWeekTacoAvg.toFixed(0);
-  
+
 
   //find current month average
   data.forEach(obj => {
@@ -291,6 +292,98 @@ async function getTacoData(api) {
   })
 
   return {weekTacoAvg, monthTacoAvg, quarterTacoAvg, uniqueWeeks, tmpWeekAvgSeconds};
+}
+
+async function getBagTimesData(api) {
+  const response = await fetch(api)
+  const data = await response.json()
+
+  let tmpScores = [];
+  let tmpWeekOfYear = [];
+  let tmpMonths = [];
+  let tmpQuarters = [];
+  let tmpBagTimesWeek = [];
+  let tmpWeekOfMonth = [];
+  let tmpWeekScores = [];
+  let tmpMonthScores = [];
+  let tmpQuarterScores = [];
+
+  data.forEach(obj => {
+    tmpScores.push(obj.week_avg);
+    tmpWeekOfMonth.push(obj.week_of_month);
+    tmpWeekOfYear.push(obj.week_of_year);
+    tmpMonths.push(obj.fiscal_month);
+    tmpQuarters.push(obj.quarter);
+  });
+
+
+  //find current week from array of weeks in dataset
+  let currWeek = Math.max.apply(null, tmpWeekOfYear)
+
+  //find current month from array of weeks in dataset
+  let currMonth = Math.max.apply(null, tmpMonths)
+
+  //find current quarter from array of weeks in dataset
+  let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find current week average
+  data.forEach(obj => {
+    if (obj.week_of_year === currWeek){
+      tmpWeekScores.push(obj.week_avg)
+    }
+  })
+  let sum1 = tmpWeekScores.reduce((a, b) => a + b, 0);
+  let tmpWeekBagTimesAvg = (sum1 / tmpWeekScores.length) || 0;
+  let weekBagTimesAvg = tmpWeekBagTimesAvg.toFixed(2);
+
+  //find current month average
+  data.forEach(obj => {
+    if (obj.fiscal_month == currMonth){
+      tmpMonthScores.push(obj.month_avg)
+    }
+  })
+
+  let sum2 = tmpMonthScores.reduce((a,b) => a + b, 0);
+  let tmpMonthBagTimesAvg = (sum2 / tmpMonthScores.length) || 0;
+  let monthBagTimesAvg = tmpMonthBagTimesAvg.toFixed(2);
+
+  //find current quarter average
+  data.forEach(obj => {
+    if (obj.quarter == currQuarter){
+      tmpQuarterScores.push(obj.quarter_avg)
+    }
+  })
+
+  let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
+  let tmpQuarterBagTimesAvg = (sum3 / tmpQuarterScores.length) || 0;
+  let quarterBagTimesAvg = tmpQuarterBagTimesAvg.toFixed(2);
+
+
+  //find weekly averages
+  let uniqueWeeks = _.uniq(tmpWeekOfYear, true)
+
+  let tmpWeekAvgScores = [];
+
+  uniqueWeeks.forEach(week => {
+    let tempScores = [];
+    data.forEach(obj => {
+
+      if (obj.week_of_year === week) {
+        tempScores.push(obj.week_avg);
+          }
+      })
+
+      let sum4 = _.sum(tempScores)
+
+      let tempWeekBagTimesAvg = (sum4 / tempScores.length) || 0;
+      let tempWeekBagTimesAvgRound = tempWeekBagTimesAvg.toFixed(2)
+      tmpWeekAvgScores.push(tempWeekBagTimesAvgRound)
+  })
+
+  let convertedWeekScores = tmpWeekAvgScores.map(Number)
+
+
+  return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg, uniqueWeeks, tmpWeekAvgScores};
 }
 
 //grap insp data for concept from api
@@ -481,4 +574,4 @@ async function getTacoConceptData(concept) {
 
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getInspConceptData, getGFConceptData, getTacoConceptData, fancyTimeFormat}
+export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getInspConceptData, getGFConceptData, getTacoConceptData, fancyTimeFormat}

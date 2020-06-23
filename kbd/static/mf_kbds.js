@@ -1,6 +1,6 @@
 //import modules
-import {selectStore, getInspData, getGFData, getInspConceptData, getGFConceptData} from './modules/kbds.js'
-import {colors, ranges, inspLayout, gfLayout, config, staticConfig} from './modules/chartConfig.js'
+import {fancyTimeFormat, selectStore, getInspData, getGFData, getBagTimesData, getInspConceptData, getGFConceptData} from './modules/kbds.js'
+import {colors, ranges, inspLayout, gfLayout, bagTimesLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
 
@@ -12,10 +12,12 @@ async function updateCharts () {
   const getAPI = await selectStore();
   const inspData = await getInspData(getAPI.inspAPI);
   const gfData = await getGFData(getAPI.gfAPI);
+  const bagTimesData = await getBagTimesData(getAPI.bagTimesAPI);
 
 
   let inspWeeks = inspData.uniqueWeeks;
   let gfMonths = gfData.uniqueMonths;
+  let bagTimesWeeks = bagTimesData.uniqueWeeks;
 
   let inspScores = inspData.tmpWeekAvgScores;
   let inspAvgWeek = inspData.weekInspAvg;
@@ -26,6 +28,11 @@ async function updateCharts () {
   let gfScores = gfData.tmpMonthAvgScores;
   let gfAvgMonth = gfData.monthGFAvg;
   let gfAvgQuarter = gfData.quarterGFAvg;
+
+  let bagTimesScores = bagTimesData.tmpWeekAvgScores;
+  let bagTimesAvgWeek = fancyTimeFormat(bagTimesData.weekBagTimesAvg);
+  let bagTimesAvgMonth = fancyTimeFormat(bagTimesData.monthBagTimesAvg);
+  let bagTimesAvgQuarter = fancyTimeFormat(bagTimesData.quarterBagTimesAvg);
 
 
   let inspChartData = {
@@ -50,12 +57,25 @@ async function updateCharts () {
     },
   }
 
+  let bagTimesChartData = {
+    x: bagTimesWeeks,
+    y: bagTimesScores,
+    mode: 'lines',
+    line: {
+      color: colors['yellow'],
+      width: 2,
+      shape: 'spline'
+    },
+  }
+
   let inspSpark = [inspChartData]
   let gfSpark = [gfChartData]
+  let bagTimesSpark = [bagTimesChartData]
 
 
   Plotly.react('insp-chart', inspSpark, inspLayout, staticConfig);
   Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
+  Plotly.react('bag-times-chart', bagTimesSpark, bagTimesLayout, staticConfig);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
@@ -64,6 +84,10 @@ async function updateCharts () {
 
   document.getElementById("gf-month").innerHTML = gfAvgMonth + ' Mo';
   document.getElementById("gf-q").innerHTML = gfAvgQuarter + ' Q';
+
+  document.getElementById("bag-times-week-big").innerHTML = bagTimesAvgWeek + ' Wk';
+  document.getElementById("bag-times-month").innerHTML = bagTimesAvgMonth + ' Mo';
+  document.getElementById("bag-times-q").innerHTML = bagTimesAvgQuarter + 'Q';
 }
 
 async function populateBaseCharts () {
@@ -76,7 +100,6 @@ async function populateBaseCharts () {
   let inspConceptAvgQuarter = inspConceptData.quarterInspAvg;
 
   let gfConceptAvgMonth = gfConceptData.monthGFAvg;
-  console.log(gfConceptAvgMonth)
   let gfConceptAvgQuarter = gfConceptData.quarterGFAvg;
 
 
@@ -96,7 +119,7 @@ let startingData = []
 //instantiate empty charts to DOM
 Plotly.newPlot( 'insp-chart', startingData, inspLayout, staticConfig);
 Plotly.newPlot( 'gf-chart', startingData, gfLayout, staticConfig);
-//Plotly.newPlot( 'taco-times-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'bag-times-chart', startingData, bagTimesLayout, staticConfig);
 //Plotly.newPlot( 'cu-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'acc-chart', startingData, sparkLayout, config);

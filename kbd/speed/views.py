@@ -45,7 +45,7 @@ def taco(chosen_location):
         return table
 
     cur = conn.cursor()
-    taco_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, time_in_seconds FROM tacotimes WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM tacotimes) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    taco_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, time_in_seconds FROM tacotimes WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM tacotimes) OR quarter=(SELECT MAX(quarter)-1 FROM tacotimes) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 
@@ -67,6 +67,23 @@ def taco_concept(chosen_concept):
     conn.close()
 
     df=taco_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
+
+@speed.route('/bag_times/<chosen_location>')
+def bag_times(chosen_location):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    bag_times_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, week_avg, month_avg, quarter_avg FROM bagtimes WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM bagtimes) OR quarter=(SELECT MAX(quarter)-1 FROM bagtimes) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    cur.close()
+    conn.close()
+
+    df=bag_times_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
