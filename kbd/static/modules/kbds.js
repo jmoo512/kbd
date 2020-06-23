@@ -314,10 +314,11 @@ async function getBagTimesData(api) {
     tmpWeekOfYear.push(obj.week_of_year);
     tmpMonths.push(obj.fiscal_month);
     tmpQuarters.push(obj.quarter);
+    tmpMonthScores.push(obj.month_avg);
+    tmpQuarterScores.push(obj.quarter_avg);
   });
 
-
-  //find current week from array of weeks in dataset
+    //find current week from array of weeks in dataset
   let currWeek = Math.max.apply(null, tmpWeekOfYear)
 
   //find current month from array of weeks in dataset
@@ -337,26 +338,10 @@ async function getBagTimesData(api) {
   let weekBagTimesAvg = tmpWeekBagTimesAvg.toFixed(2);
 
   //find current month average
-  data.forEach(obj => {
-    if (obj.fiscal_month == currMonth){
-      tmpMonthScores.push(obj.month_avg)
-    }
-  })
-
-  let sum2 = tmpMonthScores.reduce((a,b) => a + b, 0);
-  let tmpMonthBagTimesAvg = (sum2 / tmpMonthScores.length) || 0;
-  let monthBagTimesAvg = tmpMonthBagTimesAvg.toFixed(2);
+  let monthBagTimesAvg = Math.max.apply(null, tmpMonthScores);
 
   //find current quarter average
-  data.forEach(obj => {
-    if (obj.quarter == currQuarter){
-      tmpQuarterScores.push(obj.quarter_avg)
-    }
-  })
-
-  let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
-  let tmpQuarterBagTimesAvg = (sum3 / tmpQuarterScores.length) || 0;
-  let quarterBagTimesAvg = tmpQuarterBagTimesAvg.toFixed(2);
+  let quarterBagTimesAvg = Math.max.apply(null, tmpQuarterScores);
 
 
   //find weekly averages
@@ -574,4 +559,43 @@ async function getTacoConceptData(concept) {
 
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getInspConceptData, getGFConceptData, getTacoConceptData, fancyTimeFormat}
+async function getBagTimesConceptData(api) {
+  const response = await fetch('/bag_times/MF1')
+  const data = await response.json()
+
+  let tmpWeekScores = [];
+  let tmpMonthScores = [];
+  let tmpQuarterScores = [];
+
+  data.forEach(obj => {
+    tmpWeekScores.push(obj.concept_week_avg);
+    tmpMonthScores.push(obj.concept_month_avg);
+    tmpQuarterScores.push(obj.concept_quarter_avg);
+  });
+
+    //find current week from array of weeks in dataset
+  //let currWeek = Math.max.apply(null, tmpWeekOfYear)
+
+  //find current month from array of weeks in dataset
+//  let currMonth = Math.max.apply(null, tmpMonths)
+
+  //find current quarter from array of weeks in dataset
+  //let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find current week average
+
+  console.log(tmpWeekScores)
+  let weekBagTimesAvg = Math.max.apply(null, tmpWeekScores);
+  console.log(weekBagTimesAvg)
+
+  //find current month average
+  let monthBagTimesAvg = Math.max.apply(null, tmpMonthScores);
+
+  //find current quarter average
+  let quarterBagTimesAvg = Math.max.apply(null, tmpQuarterScores);
+
+
+  return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg};
+}
+
+export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, fancyTimeFormat}

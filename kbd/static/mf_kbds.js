@@ -1,5 +1,5 @@
 //import modules
-import {fancyTimeFormat, selectStore, getInspData, getGFData, getBagTimesData, getInspConceptData, getGFConceptData} from './modules/kbds.js'
+import {fancyTimeFormat, selectStore, getInspData, getGFData, getBagTimesData, getInspConceptData, getGFConceptData, getBagTimesConceptData} from './modules/kbds.js'
 import {colors, ranges, inspLayout, gfLayout, bagTimesLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
@@ -87,13 +87,14 @@ async function updateCharts () {
 
   document.getElementById("bag-times-week-big").innerHTML = bagTimesAvgWeek + ' Wk';
   document.getElementById("bag-times-month").innerHTML = bagTimesAvgMonth + ' Mo';
-  document.getElementById("bag-times-q").innerHTML = bagTimesAvgQuarter + 'Q';
+  document.getElementById("bag-times-q").innerHTML = bagTimesAvgQuarter + ' Q';
 }
 
 async function populateBaseCharts () {
   let concept = 'Mighty Fine'
   const inspConceptData = await getInspConceptData(concept);
   const gfConceptData = await getGFConceptData(concept);
+  const bagTimesConceptData = await getBagTimesConceptData(concept);
 
   let inspConceptAvgWeek = inspConceptData.weekInspAvg;
   let inspConceptAvgMonth = inspConceptData.monthInspAvg;
@@ -102,6 +103,9 @@ async function populateBaseCharts () {
   let gfConceptAvgMonth = gfConceptData.monthGFAvg;
   let gfConceptAvgQuarter = gfConceptData.quarterGFAvg;
 
+  let bagTimesConceptAvgWeek = fancyTimeFormat(bagTimesConceptData.weekBagTimesAvg);
+  let bagTimesConceptAvgMonth = fancyTimeFormat(bagTimesConceptData.monthBagTimesAvg);
+  let bagTimesConceptAvgQuarter = fancyTimeFormat(bagTimesConceptData.quarterBagTimesAvg);
 
   document.getElementById("insp-concept-big").innerHTML = inspConceptAvgWeek + ' Wk';
   document.getElementById("insp-concept-month").innerHTML = inspConceptAvgMonth + ' Mo';
@@ -110,6 +114,10 @@ async function populateBaseCharts () {
 
   document.getElementById("gf-concept-month").innerHTML = gfConceptAvgMonth + ' Mo';
   document.getElementById("gf-concept-q").innerHTML = gfConceptAvgQuarter + ' Q';
+
+  document.getElementById("bag-times-concept-big").innerHTML = bagTimesConceptAvgWeek + ' Wk';
+  document.getElementById("bag-times-concept-month").innerHTML = bagTimesConceptAvgMonth + ' Mo';
+  document.getElementById("bag-times-concept-q").innerHTML = bagTimesConceptAvgQuarter + ' Q';
 }
 
 
