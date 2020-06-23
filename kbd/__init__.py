@@ -40,12 +40,14 @@ def create_app(config_class=Config):
         from kbd.sales.views import sales
         from kbd.clean.views import clean
         from kbd.txh.views import txh
+        from kbd.accuracy.views import accuracy
         #register blueprints
         app.register_blueprint(core)
         app.register_blueprint(speed)
         app.register_blueprint(sales)
         app.register_blueprint(clean)
         app.register_blueprint(txh)
+        app.register_blueprint(accuracy)
 
 
 
