@@ -53,6 +53,23 @@ def taco(chosen_location):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+@speed.route('/taco_concept/<chosen_concept>')
+def taco_concept(chosen_concept):
+
+    conn=psycopg2.connect(**params)
+    def create_pandas_table(sql_query, database = conn):
+        table = pd.read_sql_query(sql_query, database)
+        return table
+
+    cur = conn.cursor()
+    taco_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, time_in_seconds FROM tacotimes WHERE concept = '" + chosen_concept + "' AND quarter=(SELECT MAX(quarter) FROM tacotimes) OR quarter=(SELECT MAX(quarter)-1 FROM tacotimes) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    cur.close()
+    conn.close()
+
+    df=taco_data
+
+    return Response(df.to_json(orient="records"), mimetype='application/json')
+
 @speed.route('/taco_add',methods=['POST'])
 def taco_add():
 

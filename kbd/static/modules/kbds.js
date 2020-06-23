@@ -240,7 +240,7 @@ async function getTacoData(api) {
   let sum1 = tmpWeekSeconds.reduce((a, b) => a + b, 0);
   let tmpWeekTacoAvg = (sum1 / tmpWeekSeconds.length) || 0;
   let weekTacoAvg = tmpWeekTacoAvg.toFixed(0);
-  let convertedWeekTacoAvg = fancyTimeFormat(weekTacoAvg);
+  
 
   //find current month average
   data.forEach(obj => {
@@ -253,7 +253,7 @@ async function getTacoData(api) {
   let sum2 = tmpMonthSeconds.reduce((a,b) => a + b, 0);
   let tmpMonthTacoAvg = (sum2 / tmpMonthSeconds.length) || 0;
   let monthTacoAvg = tmpMonthTacoAvg.toFixed(0);
-  let convertedMonthTacoAvg = fancyTimeFormat(monthTacoAvg);
+
 
   //find current quarter average
   data.forEach(obj => {
@@ -265,7 +265,7 @@ async function getTacoData(api) {
   let sum3 = tmpQuarterSeconds.reduce((a,b) => a + b, 0);
   let tmpQuarterTacoAvg = (sum3 / tmpQuarterSeconds.length) || 0;
   let quarterTacoAvg = tmpQuarterTacoAvg.toFixed(0);
-  let convertedQuarterTacoAvg = fancyTimeFormat(quarterTacoAvg);
+
 
 
   //find weekly averages
@@ -290,14 +290,7 @@ async function getTacoData(api) {
 
   })
 
-  let convertedSeconds = tmpWeekAvgSeconds.map(Number)
-
-  convertedSeconds.forEach(i => {
-    console.log(i)
-  })
-
-
-  return {convertedWeekTacoAvg, convertedMonthTacoAvg, convertedQuarterTacoAvg, uniqueWeeks, tmpWeekAvgSeconds};
+  return {weekTacoAvg, monthTacoAvg, quarterTacoAvg, uniqueWeeks, tmpWeekAvgSeconds};
 }
 
 //grap insp data for concept from api
@@ -419,4 +412,73 @@ async function getGFConceptData(concept) {
 
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getInspConceptData, getGFConceptData}
+//grap taco data for concept from api
+async function getTacoConceptData(concept) {
+  const response = await fetch('/taco_concept/' + concept);
+  const data = await response.json();
+
+  let tmpScores = [];
+  let tmpWeekOfYear = [];
+  let tmpMonths = [];
+  let tmpQuarters = [];
+  let tmpTacoWeek = [];
+  let tmpWeekOfMonth = [];
+  let tmpWeekScores = [];
+  let tmpMonthScores = [];
+  let tmpQuarterScores = [];
+
+  data.forEach(obj => {
+    tmpScores.push(obj.time_in_seconds);
+    tmpWeekOfMonth.push(obj.week_of_month);
+    tmpWeekOfYear.push(obj.week_of_year);
+    tmpMonths.push(obj.fiscal_month);
+    tmpQuarters.push(obj.quarter);
+  });
+
+  //find current week from array of weeks in dataset
+  let currWeek = Math.max.apply(null, tmpWeekOfYear)
+
+  //find current month from array of weeks in dataset
+  let currMonth = Math.max.apply(null, tmpMonths)
+
+  //find current quarter from array of weeks in dataset
+  let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find current week average
+  data.forEach(obj => {
+    if (obj.week_of_year === currWeek){
+      tmpWeekScores.push(obj.time_in_seconds)
+    }
+  })
+  let sum1 = tmpWeekScores.reduce((a, b) => a + b, 0);
+  let tmpWeekTacoAvg = (sum1 / tmpWeekScores.length) || 0;
+  let weekTacoAvg = tmpWeekTacoAvg.toFixed(2);
+
+  //find current month average
+  data.forEach(obj => {
+    if (obj.fiscal_month == currMonth){
+      tmpMonthScores.push(obj.time_in_seconds)
+    }
+  })
+
+  let sum2 = tmpMonthScores.reduce((a,b) => a + b, 0);
+  let tmpMonthTacoAvg = (sum2 / tmpMonthScores.length) || 0;
+  let monthTacoAvg = tmpMonthTacoAvg.toFixed(2);
+
+  //find current quarter average
+  data.forEach(obj => {
+    if (obj.quarter == currQuarter){
+      tmpQuarterScores.push(obj.time_in_seconds)
+    }
+  })
+
+  let sum3 = tmpQuarterScores.reduce((a,b) => a + b, 0);
+  let tmpQuarterTacoAvg = (sum3 / tmpQuarterScores.length) || 0;
+  let quarterTacoAvg = tmpQuarterTacoAvg.toFixed(2);
+
+
+  return {weekTacoAvg, monthTacoAvg, quarterTacoAvg};
+
+}
+
+export {selectStore, getInspData, getGFData, getTacoData, getInspConceptData, getGFConceptData, getTacoConceptData, fancyTimeFormat}

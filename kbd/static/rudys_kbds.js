@@ -1,5 +1,5 @@
 //import modules
-import {selectStore, getInspData, getGFData, getTacoData, getInspConceptData, getGFConceptData} from './modules/kbds.js'
+import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getInspConceptData, getGFConceptData, getTacoConceptData} from './modules/kbds.js'
 import {colors, ranges, inspLayout, gfLayout, tacoLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
@@ -30,9 +30,9 @@ async function updateCharts () {
   let gfAvgQuarter = gfData.quarterGFAvg;
 
   let tacoSeconds = tacoData.tmpWeekAvgSeconds;
-  let tacoAvgWeek = tacoData.convertedWeekTacoAvg;
-  let tacoAvgMonth = tacoData.convertedMonthTacoAvg;
-  let tacoAvgQuarter = tacoData.convertedQuarterTacoAvg;
+  let tacoAvgWeek = fancyTimeFormat(tacoData.weekTacoAvg);
+  let tacoAvgMonth = fancyTimeFormat(tacoData.monthTacoAvg);
+  let tacoAvgQuarter = fancyTimeFormat(tacoData.quarterTacoAvg);
 
 
   let inspChartData = {
@@ -75,7 +75,7 @@ async function updateCharts () {
 
   Plotly.react('insp-chart', inspSpark, inspLayout, staticConfig);
   Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
-  Plotly.react('taco-times-chart', tacoSpark, tacoLayout, config);
+  Plotly.react('taco-times-chart', tacoSpark, tacoLayout, staticConfig);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
@@ -96,6 +96,7 @@ async function populateBaseCharts () {
   let concept = 'Rudys'
   const inspConceptData = await getInspConceptData(concept);
   const gfConceptData = await getGFConceptData(concept);
+  const tacoConceptData = await getTacoConceptData(concept);
 
   let inspConceptAvgWeek = inspConceptData.weekInspAvg;
   let inspConceptAvgMonth = inspConceptData.monthInspAvg;
@@ -103,6 +104,12 @@ async function populateBaseCharts () {
 
   let gfConceptAvgMonth = gfConceptData.monthGFAvg;
   let gfConceptAvgQuarter = gfConceptData.quarterGFAvg;
+
+  let tacoConceptAvgWeek = fancyTimeFormat(tacoConceptData.weekTacoAvg);
+  let tacoConceptAvgMonth = fancyTimeFormat(tacoConceptData.monthTacoAvg);
+  let tacoConceptAvgQuarter = fancyTimeFormat(tacoConceptData.quarterTacoAvg);
+
+
 
 
   document.getElementById("insp-concept-big").innerHTML = inspConceptAvgWeek + ' Wk';
@@ -112,6 +119,10 @@ async function populateBaseCharts () {
 
   document.getElementById("gf-concept-month").innerHTML = gfConceptAvgMonth + ' Mo';
   document.getElementById("gf-concept-q").innerHTML = gfConceptAvgQuarter + ' Q';
+
+  document.getElementById("taco-times-concept-big").innerHTML = tacoConceptAvgWeek + ' Wk';
+  document.getElementById("taco-times-concept-month").innerHTML = tacoConceptAvgMonth + ' Mo';
+  document.getElementById("taco-times-concept-q").innerHTML = tacoConceptAvgQuarter + ' Q';
 }
 
 
@@ -121,8 +132,7 @@ let startingData = []
 //instantiate empty charts to DOM
 Plotly.newPlot( 'insp-chart', startingData, inspLayout, staticConfig);
 Plotly.newPlot( 'gf-chart', startingData, gfLayout, staticConfig);
-Plotly.newPlot( 'taco-times-chart', startingData, tacoLayout, config);
-//Plotly.newPlot( 'cu-times-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'taco-times-chart', startingData, tacoLayout, staticConfig);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'acc-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
