@@ -24,15 +24,18 @@ async function updateCharts () {
   let inspAvgWeek = inspData.weekInspAvg;
   let inspAvgMonth = inspData.monthInspAvg;
   let inspAvgQuarter = inspData.quarterInspAvg;
+  let inspLastUpdated = inspData.lastUpdated;
 
   let gfScores = gfData.tmpMonthAvgScores;
   let gfAvgMonth = gfData.monthGFAvg;
   let gfAvgQuarter = gfData.quarterGFAvg;
+  let gfLastUpdated = gfData.lastUpdated;
 
   let tacoSeconds = tacoData.tmpWeekAvgSeconds;
   let tacoAvgWeek = fancyTimeFormat(tacoData.weekTacoAvg);
   let tacoAvgMonth = fancyTimeFormat(tacoData.monthTacoAvg);
   let tacoAvgQuarter = fancyTimeFormat(tacoData.quarterTacoAvg);
+  let tacoLastUpdated = tacoData.lastUpdated;
 
 
   let inspChartData = {
@@ -80,14 +83,17 @@ async function updateCharts () {
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
   document.getElementById("insp-q").innerHTML = inspAvgQuarter + ' Q';
+  document.getElementById("insp-title").innerHTML = "&nbsp as of " + inspLastUpdated;
 
 
   document.getElementById("gf-month").innerHTML = gfAvgMonth + ' Mo';
   document.getElementById("gf-q").innerHTML = gfAvgQuarter + ' Q';
+  //document.getElementById("gf-title").innerHTML = "Game Films as of " + gfLastUpdated;
 
   document.getElementById("taco-times-week-big").innerHTML = tacoAvgWeek + ' Wk';
   document.getElementById("taco-times-month").innerHTML = tacoAvgMonth + ' Mo';
   document.getElementById("taco-times-q").innerHTML = tacoAvgQuarter + ' Q';
+  document.getElementById("taco-title").innerHTML = "&nbsp as of " + tacoLastUpdated
 }
 
 

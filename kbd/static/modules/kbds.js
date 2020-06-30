@@ -39,6 +39,7 @@ async function getInspData(api) {
   let tmpWeekScores = [];
   let tmpMonthScores = [];
   let tmpQuarterScores = [];
+  let tmpDates = [];
 
   data.forEach(obj => {
     tmpScores.push(obj.score);
@@ -46,10 +47,10 @@ async function getInspData(api) {
     tmpWeekOfYear.push(obj.week_of_year);
     tmpMonths.push(obj.fiscal_month);
     tmpQuarters.push(obj.quarter);
+    tmpDates.push(obj.date_measured);
   });
 
-
-  //find current week from array of weeks in dataset
+    //find current week from array of weeks in dataset
   let currWeek = Math.max.apply(null, tmpWeekOfYear)
 
   //find current month from array of weeks in dataset
@@ -57,6 +58,12 @@ async function getInspData(api) {
 
   //find current quarter from array of weeks in dataset
   let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find last updated date
+  let date = Math.max.apply(null, tmpDates)
+
+  let lastUpdated = moment.utc(date).format('MM/DD')
+
 
   //find current week average
   data.forEach(obj => {
@@ -113,7 +120,7 @@ async function getInspData(api) {
   })
 
 
-  return {weekInspAvg, monthInspAvg, quarterInspAvg, uniqueWeeks, tmpWeekAvgScores};
+  return {weekInspAvg, monthInspAvg, quarterInspAvg, uniqueWeeks, tmpWeekAvgScores, lastUpdated};
 }
 
 //grab gf data from api
@@ -131,6 +138,7 @@ async function getGFData(api) {
   let tmpWeekScores = [];
   let tmpMonthScores = [];
   let tmpQuarterScores = [];
+  let tmpDates = [];
 
   data.forEach(obj => {
     tmpScores.push(obj.score);
@@ -139,8 +147,8 @@ async function getGFData(api) {
     tmpMonthOfYear.push(obj.fiscal_month);
     tmpMonths.push(obj.fiscal_month);
     tmpQuarters.push(obj.quarter);
+    tmpDates.push(obj.date_measured);
   });
-
 
   //find current week from array of weeks in dataset
   let currWeek = Math.max.apply(null, tmpWeekOfYear)
@@ -150,6 +158,11 @@ async function getGFData(api) {
 
   //find current quarter from array of weeks in dataset
   let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find last updated date
+  let date = Math.max.apply(null, tmpDates)
+
+  let lastUpdated = moment.utc(date).format('MM/DD')
 
   //find current month average
   data.forEach(obj => {
@@ -195,7 +208,7 @@ async function getGFData(api) {
       tmpMonthAvgScores.push(tempMonthGFAvgRound)
   })
 
-  return {monthGFAvg, quarterGFAvg, uniqueMonths, tmpMonthAvgScores};
+  return {monthGFAvg, quarterGFAvg, uniqueMonths, tmpMonthAvgScores, lastUpdated};
 }
 
 //grab taco data from api
@@ -212,6 +225,7 @@ async function getTacoData(api) {
   let tmpWeekSeconds = [];
   let tmpMonthSeconds = [];
   let tmpQuarterSeconds = [];
+  let tmpDates = [];
 
   data.forEach(obj => {
     tmpSeconds.push(obj.time_in_seconds);
@@ -219,6 +233,7 @@ async function getTacoData(api) {
     tmpWeekOfYear.push(obj.week_of_year);
     tmpMonths.push(obj.fiscal_month);
     tmpQuarters.push(obj.quarter);
+    tmpDates.push(obj.date_measured);
   });
 
   //find current week from array of weeks in dataset
@@ -229,6 +244,11 @@ async function getTacoData(api) {
 
   //find current quarter from array of weeks in dataset
   let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find last updated date
+  let date = Math.max.apply(null, tmpDates)
+
+  let lastUpdated = moment.utc(date).format('MM/DD')
 
   //find current week average
   data.forEach(obj => {
@@ -289,7 +309,7 @@ async function getTacoData(api) {
 
   })
 
-  return {weekTacoAvg, monthTacoAvg, quarterTacoAvg, uniqueWeeks, tmpWeekAvgSeconds};
+  return {weekTacoAvg, monthTacoAvg, quarterTacoAvg, uniqueWeeks, tmpWeekAvgSeconds, lastUpdated};
 }
 
 async function getBagTimesData(api) {
@@ -305,6 +325,7 @@ async function getBagTimesData(api) {
   let tmpWeekScores = [];
   let tmpMonthScores = [];
   let tmpQuarterScores = [];
+  let tmpDates = [];
 
   data.forEach(obj => {
     tmpScores.push(obj.week_avg);
@@ -314,9 +335,10 @@ async function getBagTimesData(api) {
     tmpQuarters.push(obj.quarter);
     tmpMonthScores.push(obj.month_avg);
     tmpQuarterScores.push(obj.quarter_avg);
+    tmpDates.push(obj.week_ending);
   });
 
-    //find current week from array of weeks in dataset
+  //find current week from array of weeks in dataset
   let currWeek = Math.max.apply(null, tmpWeekOfYear)
 
   //find current month from array of weeks in dataset
@@ -324,6 +346,13 @@ async function getBagTimesData(api) {
 
   //find current quarter from array of weeks in dataset
   let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find last updated date
+  let date = Math.max.apply(null, tmpDates)
+
+
+  let lastUpdated = moment.utc(date).format('MM/DD')
+
 
   //find current week average
   data.forEach(obj => {
@@ -366,7 +395,7 @@ async function getBagTimesData(api) {
   let convertedWeekScores = tmpWeekAvgScores.map(Number)
 
 
-  return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg, uniqueWeeks, tmpWeekAvgScores};
+  return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg, uniqueWeeks, tmpWeekAvgScores, lastUpdated};
 }
 
 //grap insp data for concept from api

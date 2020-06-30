@@ -35,7 +35,7 @@
         Cleanliness
       </div>
       <div class="data-box-title">
-        Inspections
+        <div class="big-title">Inspections</div><div class="small-title" id="insp-title"></div>
       </div>
       <div class="data-row" id="insp-row">
 
@@ -86,7 +86,7 @@
         Speed of Service
       </div>
       <div class="data-box-title">
-        Bag Times
+        <div class="big-title">Bag Times</div><div class="small-title" id="bag-times-title"></div>
       </div>
       <div class="data-row" id="bag-times-row">
 
@@ -130,7 +130,7 @@
       </div>
 
       <div class="data-box-title">
-        Cashier Efficiency
+        <div class="big-title">Cashier Efficiency</div><div class="small-title" id="ce-title"></div>
       </div>
       <div class="data-row" id="ce-row">
 
@@ -186,7 +186,7 @@
         Tx Hospitality
       </div>
       <div class="data-box-title">
-        Game Films
+        <div class="big-title">Game Films</div><div class="small-title" id="gf-title"></div>
       </div>
       <div class="data-row" id="gf-row">
 
@@ -236,7 +236,7 @@
         Accuracy
       </div>
       <div class="data-box-title">
-        Order Accuracy
+        <div class="big-title">Order Accuracy</div><div class="small-title" id="acc-title"></div>
       </div>
       <div class="data-row" id="acc-row">
 
@@ -287,7 +287,7 @@
         Value
       </div>
       <div class="data-box-title">
-        Labor %
+        <div class="big-title">Labor %</div><div clasa="small-title" id="labor-title"></div>
       </div>
       <div class="data-row" id="labor-row">
 
@@ -338,5 +338,6 @@
 
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+<script src="{{url_for('static',filename='moment.min.js')}}"></script>
 <script type="module" src="{{url_for('static',filename='mf_kbds.js')}}"></script>
 {% endblock %}

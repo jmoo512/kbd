@@ -23,16 +23,19 @@ async function updateCharts () {
   let inspAvgWeek = inspData.weekInspAvg;
   let inspAvgMonth = inspData.monthInspAvg;
   let inspAvgQuarter = inspData.quarterInspAvg;
+  let inspLastUpdated = inspData.lastUpdated;
 
 
   let gfScores = gfData.tmpMonthAvgScores;
   let gfAvgMonth = gfData.monthGFAvg;
   let gfAvgQuarter = gfData.quarterGFAvg;
+  let gfLastUpdated = gfData.lastUpdated;
 
   let bagTimesScores = bagTimesData.tmpWeekAvgScores;
   let bagTimesAvgWeek = fancyTimeFormat(bagTimesData.weekBagTimesAvg);
   let bagTimesAvgMonth = fancyTimeFormat(bagTimesData.monthBagTimesAvg);
   let bagTimesAvgQuarter = fancyTimeFormat(bagTimesData.quarterBagTimesAvg);
+  let bagTimesLastUpdated = bagTimesData.lastUpdated;
 
 
   let inspChartData = {
@@ -80,6 +83,7 @@ async function updateCharts () {
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
   document.getElementById("insp-q").innerHTML = inspAvgQuarter + ' Q';
+  document.getElementById("insp-title").innerHTML = "&nbsp as of " + inspLastUpdated;
 
 
   document.getElementById("gf-month").innerHTML = gfAvgMonth + ' Mo';
@@ -88,6 +92,7 @@ async function updateCharts () {
   document.getElementById("bag-times-week-big").innerHTML = bagTimesAvgWeek + ' Wk';
   document.getElementById("bag-times-month").innerHTML = bagTimesAvgMonth + ' Mo';
   document.getElementById("bag-times-q").innerHTML = bagTimesAvgQuarter + ' Q';
+  document.getElementById("bag-times-title").innerHTML = "&nbsp as of " + bagTimesLastUpdated;
 }
 
 async function populateBaseCharts () {

@@ -54,7 +54,7 @@ def insp(chosen_location):
         return table
 
     cur = conn.cursor()
-    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, score FROM inspections WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM inspections) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, date_measured, quarter, score FROM inspections WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM inspections) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 
@@ -71,7 +71,7 @@ def insp_concept(chosen_concept):
         return table
 
     cur = conn.cursor()
-    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, score FROM inspections WHERE concept = '" + chosen_concept + "' AND quarter=(SELECT MAX(quarter) FROM inspections) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    insp_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, date_measured, quarter, score FROM inspections WHERE concept = '" + chosen_concept + "' AND quarter=(SELECT MAX(quarter) FROM inspections) OR quarter=(SELECT MAX(quarter)-1 FROM inspections) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 

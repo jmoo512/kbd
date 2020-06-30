@@ -34,7 +34,7 @@
         Cleanliness
       </div>
       <div class="data-box-title">
-        Inspections
+        <div class="big-title">Inspections</div><div class="small-title" id="insp-title"></div>
       </div>
       <div class="data-row" id="insp-row">
 
@@ -85,7 +85,7 @@
         Speed of Service
       </div>
       <div class="data-box-title">
-        Taco Times
+        <div class="big-title">Taco Times</div> <div class="small-title" id="taco-title"></div>
       </div>
       <div class="data-row" id="taco-times-row">
 
@@ -129,7 +129,7 @@
       </div>
 
       <div class="data-box-title">
-        OLO Times
+        <div class="big-title">OLO Times</div><div class="small-title" id="olo-title"></div>
       </div>
       <div class="data-row" id="olo-times-row">
 
@@ -183,8 +183,8 @@
       <div class="data-box-header">
         Tx Hospitality
       </div>
-      <div class="data-box-title">
-        Game Films
+      <div class="data-box-title"  id="gf-title">
+        <div class="big-title">Game Films</div><div class="small-title" id="gf-title"></div>
       </div>
       <div class="data-row" id="gf-row">
 
@@ -234,7 +234,7 @@
         Accuracy
       </div>
       <div class="data-box-title">
-        Order Accuracy
+        <div class="big-title">Order Accuracy</div><div class="small-title" id="acc-title"></div>
       </div>
       <div class="data-row" id="acc-row">
 
@@ -278,7 +278,7 @@
       </div>
 
       <div class="data-box-title">
-        To-Go Labels
+        <div class="big-title">To-Go Labels</div><div class="small-title" id="tgl-title"></div>
       </div>
       <div class="data-row" id="tgl-row">
 
@@ -329,7 +329,7 @@
         Value
       </div>
       <div class="data-box-title">
-        Labor %
+        <div class="big-title">Labor %</div><div class="small-title" id="labor-title"></div>
       </div>
       <div class="data-row" id="labor-row">
 
@@ -385,5 +385,6 @@
 
 {% block js %}
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+<script src="{{url_for('static',filename='moment.min.js')}}"></script>
 <script type="module" src="{{url_for('static',filename='rudys_kbds.js')}}"></script>
 {% endblock %}
