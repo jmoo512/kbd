@@ -11,6 +11,38 @@ function fancyTimeFormat(time){
     return ret;
 }
 
+function createCalendar(data) {
+  let tmpWeekOfYear = [];
+  let tmpMonths = [];
+  let tmpQuarters = [];
+  let tmpDates = [];
+
+  data.forEach(obj => {
+    tmpWeekOfYear.push(obj.week_of_year);
+    tmpMonths.push(obj.fiscal_month);
+    tmpQuarters.push(obj.quarter);
+    tmpDates.push(obj.date_measured);
+  });
+
+  //find current week from array of weeks in dataset
+  let currWeek = Math.max.apply(null, tmpWeekOfYear)
+
+  //find current month from array of weeks in dataset
+  let currMonth = Math.max.apply(null, tmpMonths)
+
+  //find current quarter from array of weeks in dataset
+  let currQuarter = Math.max.apply(null, tmpQuarters)
+
+  //find last updated date
+  let date = Math.max.apply(null, tmpDates)
+  let lastUpdated = moment.utc(date).format('MM/DD')
+
+  //find weekly averages
+  let uniqueWeeks = _.uniq(tmpWeekOfYear, true)
+
+  return {currWeek, currMonth, currQuarter, lastUpdated, uniqueWeeks}
+}
+
 
 //use selector to modify api address per store selected
 function selectStore() {
@@ -31,43 +63,24 @@ async function getInspData(api) {
   const data = await response.json();
 
   let tmpScores = [];
-  let tmpWeekOfYear = [];
-  let tmpMonths = [];
-  let tmpQuarters = [];
   let tmpInspWeek = [];
   let tmpWeekOfMonth = [];
   let tmpWeekScores = [];
   let tmpMonthScores = [];
   let tmpQuarterScores = [];
-  let tmpDates = [];
 
   data.forEach(obj => {
     tmpScores.push(obj.score);
     tmpWeekOfMonth.push(obj.week_of_month);
-    tmpWeekOfYear.push(obj.week_of_year);
-    tmpMonths.push(obj.fiscal_month);
-    tmpQuarters.push(obj.quarter);
-    tmpDates.push(obj.date_measured);
   });
 
-    //find current week from array of weeks in dataset
-  let currWeek = Math.max.apply(null, tmpWeekOfYear)
+  const calendar = createCalendar(data)
 
-  //find current month from array of weeks in dataset
-  let currMonth = Math.max.apply(null, tmpMonths)
-
-  //find current quarter from array of weeks in dataset
-  let currQuarter = Math.max.apply(null, tmpQuarters)
-
-  //find last updated date
-  let date = Math.max.apply(null, tmpDates)
-
-  let lastUpdated = moment.utc(date).format('MM/DD')
-
+  let lastUpdated = calendar.lastUpdated
 
   //find current week average
   data.forEach(obj => {
-    if (obj.week_of_year === currWeek){
+    if (obj.week_of_year === calendar.currWeek){
       tmpWeekScores.push(obj.score)
     }
   })
@@ -77,7 +90,7 @@ async function getInspData(api) {
 
   //find current month average
   data.forEach(obj => {
-    if (obj.fiscal_month == currMonth){
+    if (obj.fiscal_month == calendar.currMonth){
       tmpMonthScores.push(obj.score)
     }
   })
@@ -86,9 +99,10 @@ async function getInspData(api) {
   let tmpMonthInspAvg = (sum2 / tmpMonthScores.length) || 0;
   let monthInspAvg = tmpMonthInspAvg.toFixed(2);
 
+
   //find current quarter average
   data.forEach(obj => {
-    if (obj.quarter == currQuarter){
+    if (obj.quarter == calendar.currQuarter){
       tmpQuarterScores.push(obj.score)
     }
   })
@@ -97,13 +111,9 @@ async function getInspData(api) {
   let tmpQuarterInspAvg = (sum3 / tmpQuarterScores.length) || 0;
   let quarterInspAvg = tmpQuarterInspAvg.toFixed(2);
 
-
-  //find weekly averages
-  let uniqueWeeks = _.uniq(tmpWeekOfYear, true)
-
   let tmpWeekAvgScores = [];
 
-  uniqueWeeks.forEach(week => {
+  let uniqueWeeks = calendar.uniqueWeeks.forEach(week => {
     let tempScores = [];
     data.forEach(obj => {
 
@@ -217,42 +227,24 @@ async function getTacoData(api) {
   const data = await response.json();
 
   let tmpSeconds = [];
-  let tmpWeekOfYear = [];
-  let tmpMonths = [];
-  let tmpQuarters = [];
   let tmpTacoWeek = [];
   let tmpWeekOfMonth = [];
   let tmpWeekSeconds = [];
   let tmpMonthSeconds = [];
   let tmpQuarterSeconds = [];
-  let tmpDates = [];
 
   data.forEach(obj => {
     tmpSeconds.push(obj.time_in_seconds);
     tmpWeekOfMonth.push(obj.week_of_month);
-    tmpWeekOfYear.push(obj.week_of_year);
-    tmpMonths.push(obj.fiscal_month);
-    tmpQuarters.push(obj.quarter);
-    tmpDates.push(obj.date_measured);
   });
 
-  //find current week from array of weeks in dataset
-  let currWeek = Math.max.apply(null, tmpWeekOfYear)
+  const calendar = createCalendar(data)
 
-  //find current month from array of weeks in dataset
-  let currMonth = Math.max.apply(null, tmpMonths)
-
-  //find current quarter from array of weeks in dataset
-  let currQuarter = Math.max.apply(null, tmpQuarters)
-
-  //find last updated date
-  let date = Math.max.apply(null, tmpDates)
-
-  let lastUpdated = moment.utc(date).format('MM/DD')
+  let lastUpdated = calendar.lastUpdated
 
   //find current week average
   data.forEach(obj => {
-    if (obj.week_of_year === currWeek){
+    if (obj.week_of_year === calendar.currWeek){
       tmpWeekSeconds.push(obj.time_in_seconds)
     }
   })
@@ -263,7 +255,7 @@ async function getTacoData(api) {
 
   //find current month average
   data.forEach(obj => {
-    if (obj.fiscal_month == currMonth){
+    if (obj.fiscal_month == calendar.currMonth){
       tmpMonthSeconds.push(obj.time_in_seconds)
     }
   })
@@ -276,7 +268,7 @@ async function getTacoData(api) {
 
   //find current quarter average
   data.forEach(obj => {
-    if (obj.quarter == currQuarter){
+    if (obj.quarter == calendar.currQuarter){
       tmpQuarterSeconds.push(obj.time_in_seconds)
     }
   })
@@ -285,14 +277,9 @@ async function getTacoData(api) {
   let tmpQuarterTacoAvg = (sum3 / tmpQuarterSeconds.length) || 0;
   let quarterTacoAvg = tmpQuarterTacoAvg.toFixed(0);
 
-
-
-  //find weekly averages
-  let uniqueWeeks = _.uniq(tmpWeekOfYear, true)
-
   let tmpWeekAvgSeconds = [];
 
-  uniqueWeeks.forEach(week => {
+  let uniqueWeeks = calendar.uniqueWeeks.forEach(week => {
     let tmpSeconds = [];
     data.forEach(obj => {
 
@@ -317,9 +304,6 @@ async function getBagTimesData(api) {
   const data = await response.json()
 
   let tmpScores = [];
-  let tmpWeekOfYear = [];
-  let tmpMonths = [];
-  let tmpQuarters = [];
   let tmpBagTimesWeek = [];
   let tmpWeekOfMonth = [];
   let tmpWeekScores = [];
@@ -330,33 +314,21 @@ async function getBagTimesData(api) {
   data.forEach(obj => {
     tmpScores.push(obj.week_avg);
     tmpWeekOfMonth.push(obj.week_of_month);
-    tmpWeekOfYear.push(obj.week_of_year);
-    tmpMonths.push(obj.fiscal_month);
-    tmpQuarters.push(obj.quarter);
     tmpMonthScores.push(obj.month_avg);
     tmpQuarterScores.push(obj.quarter_avg);
     tmpDates.push(obj.week_ending);
   });
 
-  //find current week from array of weeks in dataset
-  let currWeek = Math.max.apply(null, tmpWeekOfYear)
-
-  //find current month from array of weeks in dataset
-  let currMonth = Math.max.apply(null, tmpMonths)
-
-  //find current quarter from array of weeks in dataset
-  let currQuarter = Math.max.apply(null, tmpQuarters)
+  const calendar = createCalendar(data)
 
   //find last updated date
   let date = Math.max.apply(null, tmpDates)
-
-
   let lastUpdated = moment.utc(date).format('MM/DD')
 
 
   //find current week average
   data.forEach(obj => {
-    if (obj.week_of_year === currWeek){
+    if (obj.week_of_year === calendar.currWeek){
       tmpWeekScores.push(obj.week_avg)
     }
   })
@@ -371,12 +343,9 @@ async function getBagTimesData(api) {
   let quarterBagTimesAvg = Math.max.apply(null, tmpQuarterScores);
 
 
-  //find weekly averages
-  let uniqueWeeks = _.uniq(tmpWeekOfYear, true)
-
   let tmpWeekAvgScores = [];
 
-  uniqueWeeks.forEach(week => {
+  let uniqueWeeks = calendar.uniqueWeeks.forEach(week => {
     let tempScores = [];
     data.forEach(obj => {
 
@@ -404,9 +373,6 @@ async function getInspConceptData(concept) {
   const data = await response.json();
 
   let tmpScores = [];
-  let tmpWeekOfYear = [];
-  let tmpMonths = [];
-  let tmpQuarters = [];
   let tmpInspWeek = [];
   let tmpWeekOfMonth = [];
   let tmpWeekScores = [];
@@ -416,23 +382,14 @@ async function getInspConceptData(concept) {
   data.forEach(obj => {
     tmpScores.push(obj.score);
     tmpWeekOfMonth.push(obj.week_of_month);
-    tmpWeekOfYear.push(obj.week_of_year);
-    tmpMonths.push(obj.fiscal_month);
-    tmpQuarters.push(obj.quarter);
   });
 
-  //find current week from array of weeks in dataset
-  let currWeek = Math.max.apply(null, tmpWeekOfYear)
+  const calendar = createCalendar(data)
 
-  //find current month from array of weeks in dataset
-  let currMonth = Math.max.apply(null, tmpMonths)
-
-  //find current quarter from array of weeks in dataset
-  let currQuarter = Math.max.apply(null, tmpQuarters)
 
   //find current week average
   data.forEach(obj => {
-    if (obj.week_of_year === currWeek){
+    if (obj.week_of_year === calendar.currWeek){
       tmpWeekScores.push(obj.score)
     }
   })
@@ -442,7 +399,7 @@ async function getInspConceptData(concept) {
 
   //find current month average
   data.forEach(obj => {
-    if (obj.fiscal_month == currMonth){
+    if (obj.fiscal_month == calendar.currMonth){
       tmpMonthScores.push(obj.score)
     }
   })
@@ -453,7 +410,7 @@ async function getInspConceptData(concept) {
 
   //find current quarter average
   data.forEach(obj => {
-    if (obj.quarter == currQuarter){
+    if (obj.quarter == calendar.currQuarter){
       tmpQuarterScores.push(obj.score)
     }
   })
@@ -523,9 +480,6 @@ async function getTacoConceptData(concept) {
   const data = await response.json();
 
   let tmpScores = [];
-  let tmpWeekOfYear = [];
-  let tmpMonths = [];
-  let tmpQuarters = [];
   let tmpTacoWeek = [];
   let tmpWeekOfMonth = [];
   let tmpWeekScores = [];
@@ -535,23 +489,13 @@ async function getTacoConceptData(concept) {
   data.forEach(obj => {
     tmpScores.push(obj.time_in_seconds);
     tmpWeekOfMonth.push(obj.week_of_month);
-    tmpWeekOfYear.push(obj.week_of_year);
-    tmpMonths.push(obj.fiscal_month);
-    tmpQuarters.push(obj.quarter);
   });
 
-  //find current week from array of weeks in dataset
-  let currWeek = Math.max.apply(null, tmpWeekOfYear)
-
-  //find current month from array of weeks in dataset
-  let currMonth = Math.max.apply(null, tmpMonths)
-
-  //find current quarter from array of weeks in dataset
-  let currQuarter = Math.max.apply(null, tmpQuarters)
+  const calendar = createCalendar(data)
 
   //find current week average
   data.forEach(obj => {
-    if (obj.week_of_year === currWeek){
+    if (obj.week_of_year === calendar.currWeek){
       tmpWeekScores.push(obj.time_in_seconds)
     }
   })
@@ -561,7 +505,7 @@ async function getTacoConceptData(concept) {
 
   //find current month average
   data.forEach(obj => {
-    if (obj.fiscal_month == currMonth){
+    if (obj.fiscal_month == calendar.currMonth){
       tmpMonthScores.push(obj.time_in_seconds)
     }
   })
@@ -572,7 +516,7 @@ async function getTacoConceptData(concept) {
 
   //find current quarter average
   data.forEach(obj => {
-    if (obj.quarter == currQuarter){
+    if (obj.quarter == calendar.currQuarter){
       tmpQuarterScores.push(obj.time_in_seconds)
     }
   })

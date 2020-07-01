@@ -41,7 +41,7 @@ let inspLayout =  {
       autotick: true,
       ticks: '',
       showticklabels: false,
-
+      //fixedrange: true
     },
     yaxis: {
       //autorange: true,
@@ -52,7 +52,8 @@ let inspLayout =  {
       dtick: 0.2,
       ticks: '',
       showticklabels: true,
-      range: ranges["insp"]
+      range: ranges["insp"],
+      //fixedrange: true
     },
     legend: {
     }
