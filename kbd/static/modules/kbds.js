@@ -21,7 +21,12 @@ function createCalendar(data) {
     tmpWeekOfYear.push(obj.week_of_year);
     tmpMonths.push(obj.fiscal_month);
     tmpQuarters.push(obj.quarter);
-    tmpDates.push(obj.date_measured);
+    if ('week_ending' in obj) {
+      tmpDates.push(obj.week_ending);
+      }
+    else {
+      tmpDates.push(obj.date_measured)
+      }
   });
 
   //find current week from array of weeks in dataset
@@ -418,7 +423,7 @@ async function getTGLData(api) {
   let sumMonth2 = tmpMonthPassed.reduce((a, b) => a + b, 0);
   let tmpMonthTGL = (sumMonth2 / sumMonth1) || 0;
   let monthTGLAvg = tmpMonthTGL.toFixed(2) * 100;
-  
+
   //find current quarter score
   let tmpQMeasured = [];
   let tmpQPassed = [];
@@ -652,4 +657,73 @@ async function getBagTimesConceptData(api) {
   return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg};
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, fancyTimeFormat}
+//grap insp data for concept from api
+async function getTGLConceptData() {
+  const response = await fetch('/tgl_concept');
+  const data = await response.json();
+
+  let tmpNumberMeasured = [];
+  let tmpNumberPassed = [];
+  let tmpTGLWeek = [];
+  let tmpWeekOfMonth = [];
+  let tmpWeekScores = [];
+  let tmpMonthScores = [];
+  let tmpQuarterScores = [];
+
+  data.forEach(obj => {
+    tmpNumberMeasured.push(obj.number_measured);
+    tmpNumberPassed.push(obj.number_passed);
+    tmpWeekOfMonth.push(obj.week_of_month);
+  });
+
+  const calendar = createCalendar(data)
+
+  let lastUpdated = calendar.lastUpdated
+
+  //find current week score
+  let tmpWeekMeasured = [];
+  let tmpWeekPassed = [];
+  data.forEach(obj => {
+    if (obj.week_of_year === calendar.currWeek){
+      tmpWeekMeasured.push(obj.number_measured);
+      tmpWeekPassed.push(obj.number_passed);
+    }
+  })
+  let sumWeek1 = tmpWeekMeasured.reduce((a, b) => a + b, 0);
+  let sumWeek2 = tmpWeekPassed.reduce((a, b) => a + b, 0);
+  let tmpWeekTGL = (sumWeek2 / sumWeek1) || 0;
+  let weekTGLAvg = tmpWeekTGL.toFixed(2) * 100;
+
+  //find current month score
+  let tmpMonthMeasured = [];
+  let tmpMonthPassed = [];
+  data.forEach(obj => {
+    if (obj.fiscal_month == calendar.currMonth){
+      tmpMonthMeasured.push(obj.number_measured);
+      tmpMonthPassed.push(obj.number_passed);
+    }
+  })
+  let sumMonth1 = tmpMonthMeasured.reduce((a, b) => a + b, 0);
+  let sumMonth2 = tmpMonthPassed.reduce((a, b) => a + b, 0);
+  let tmpMonthTGL = (sumMonth2 / sumMonth1) || 0;
+  let monthTGLAvg = tmpMonthTGL.toFixed(2) * 100;
+
+  //find current quarter score
+  let tmpQMeasured = [];
+  let tmpQPassed = [];
+  data.forEach(obj => {
+    if (obj.quarter === calendar.currQuarter){
+      tmpQMeasured.push(obj.number_measured);
+      tmpQPassed.push(obj.number_passed);
+    }
+  })
+  let sumQ1 = tmpQMeasured.reduce((a, b) => a + b, 0);
+  let sumQ2 = tmpQPassed.reduce((a, b) => a + b, 0);
+  let tmpQTGL = (sumQ2 / sumQ1) || 0;
+  let quarterTGLAvg = tmpQTGL.toFixed(2) * 100;
+
+  return {weekTGLAvg, monthTGLAvg, quarterTGLAvg};
+
+}
+
+export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, getTGLConceptData, fancyTimeFormat}

@@ -1,5 +1,5 @@
 //import modules
-import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData} from './modules/kbds.js'
+import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData, getTGLConceptData} from './modules/kbds.js'
 import {colors, ranges, inspLayout, gfLayout, tacoLayout, tglLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
@@ -45,7 +45,7 @@ async function updateCharts () {
  let tglAvgQuarter = tglData.quarterTGLAvg;
  let tglLastUpdated = tglData.lastUpdated;
 
-  let inspChartData = {
+let inspChartData = {
     x: inspWeeks,
     y: inspScores,
     mode: 'lines',
@@ -113,11 +113,12 @@ async function updateCharts () {
   document.getElementById("taco-times-week-big").innerHTML = tacoAvgWeek + ' Wk';
   document.getElementById("taco-times-month").innerHTML = tacoAvgMonth + ' Mo';
   document.getElementById("taco-times-q").innerHTML = tacoAvgQuarter + ' Q';
-  document.getElementById("taco-title").innerHTML = "&nbsp as of " + tacoLastUpdated
+  document.getElementById("taco-title").innerHTML = "&nbsp as of " + tacoLastUpdated;
 
   document.getElementById("tgl-week-big").innerHTML = tglAvgWeek + '% Wk';
   document.getElementById("tgl-month").innerHTML = tglAvgMonth + '% Mo';
   document.getElementById("tgl-q").innerHTML = tglAvgQuarter + '% Q';
+  document.getElementById("tgl-title").innerHTML = "&nbsp as of " + tglLastUpdated;
 }
 
 
@@ -127,6 +128,7 @@ async function populateBaseCharts () {
   const inspConceptData = await getInspConceptData(concept);
   const gfConceptData = await getGFConceptData(concept);
   const tacoConceptData = await getTacoConceptData(concept);
+  const tglConceptData = await getTGLConceptData();
 
   let inspConceptAvgWeek = inspConceptData.weekInspAvg;
   let inspConceptAvgMonth = inspConceptData.monthInspAvg;
@@ -138,6 +140,10 @@ async function populateBaseCharts () {
   let tacoConceptAvgWeek = fancyTimeFormat(tacoConceptData.weekTacoAvg);
   let tacoConceptAvgMonth = fancyTimeFormat(tacoConceptData.monthTacoAvg);
   let tacoConceptAvgQuarter = fancyTimeFormat(tacoConceptData.quarterTacoAvg);
+
+  let tglConceptAvgWeek = tglConceptData.weekTGLAvg;
+  let tglConceptAvgMonth = tglConceptData.monthTGLAvg;
+  let tglConceptAvgQuarter = tglConceptData.quarterTGLAvg;
 
 
   document.getElementById("insp-concept-big").innerHTML = inspConceptAvgWeek + ' Wk';
@@ -151,6 +157,10 @@ async function populateBaseCharts () {
   document.getElementById("taco-times-concept-big").innerHTML = tacoConceptAvgWeek + ' Wk';
   document.getElementById("taco-times-concept-month").innerHTML = tacoConceptAvgMonth + ' Mo';
   document.getElementById("taco-times-concept-q").innerHTML = tacoConceptAvgQuarter + ' Q';
+
+  document.getElementById("tgl-concept-big").innerHTML = tglConceptAvgWeek + '% Wk';
+  document.getElementById("tgl-concept-month").innerHTML = tglConceptAvgMonth + '% Mo';
+  document.getElementById("tgl-concept-q").innerHTML = tglConceptAvgQuarter + '% Q';
 }
 
 
