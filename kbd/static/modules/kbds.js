@@ -46,15 +46,15 @@ function createCalendar(data) {
 
 //use selector to modify api address per store selected
 function selectStore() {
-  let baseAPI = "http://127.0.0.1:5000"
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
   let inspAPI="/insp/" + store
   let gfAPI="/gf/" + store
   let tacoAPI="/taco/" + store
   let bagTimesAPI="/bag_times/" + store
+  let tglAPI="/tgl/" + store
 
-  return {inspAPI, gfAPI, tacoAPI, bagTimesAPI}
+  return {inspAPI, gfAPI, tacoAPI, bagTimesAPI, tglAPI}
 }
 
 //grab inspection data from api
@@ -115,6 +115,7 @@ async function getInspData(api) {
 
   let uniqueWeeks = calendar.uniqueWeeks.forEach(week => {
     let tempScores = [];
+
     data.forEach(obj => {
 
       if (obj.week_of_year === week) {
@@ -367,6 +368,99 @@ async function getBagTimesData(api) {
   return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg, uniqueWeeks, tmpWeekAvgScores, lastUpdated};
 }
 
+//grab to-go label data from api
+async function getTGLData(api) {
+  const response = await fetch(api);
+  const data = await response.json();
+
+  let tmpNumberMeasured = [];
+  let tmpNumberPassed = [];
+  let tmpTGLWeek = [];
+  let tmpWeekOfMonth = [];
+  let tmpWeekScores = [];
+  let tmpMonthScores = [];
+  let tmpQuarterScores = [];
+
+  data.forEach(obj => {
+    tmpNumberMeasured.push(obj.number_measured);
+    tmpNumberPassed.push(obj.number_passed);
+    tmpWeekOfMonth.push(obj.week_of_month);
+  });
+
+  const calendar = createCalendar(data)
+
+  let lastUpdated = calendar.lastUpdated
+
+  //find current week score
+  let tmpWeekMeasured = [];
+  let tmpWeekPassed = [];
+  data.forEach(obj => {
+    if (obj.week_of_year === calendar.currWeek){
+      tmpWeekMeasured.push(obj.number_measured);
+      tmpWeekPassed.push(obj.number_passed);
+    }
+  })
+  let sumWeek1 = tmpWeekMeasured.reduce((a, b) => a + b, 0);
+  let sumWeek2 = tmpWeekPassed.reduce((a, b) => a + b, 0);
+  let tmpWeekTGL = (sumWeek2 / sumWeek1) || 0;
+  let weekTGLAvg = tmpWeekTGL.toFixed(2) * 100;
+
+  //find current month score
+  let tmpMonthMeasured = [];
+  let tmpMonthPassed = [];
+  data.forEach(obj => {
+    if (obj.fiscal_month == calendar.currMonth){
+      tmpMonthMeasured.push(obj.number_measured);
+      tmpMonthPassed.push(obj.number_passed);
+    }
+  })
+  let sumMonth1 = tmpMonthMeasured.reduce((a, b) => a + b, 0);
+  let sumMonth2 = tmpMonthPassed.reduce((a, b) => a + b, 0);
+  let tmpMonthTGL = (sumMonth2 / sumMonth1) || 0;
+  let monthTGLAvg = tmpMonthTGL.toFixed(2) * 100;
+  
+  //find current quarter score
+  let tmpQMeasured = [];
+  let tmpQPassed = [];
+  data.forEach(obj => {
+    if (obj.quarter === calendar.currQuarter){
+      tmpQMeasured.push(obj.number_measured);
+      tmpQPassed.push(obj.number_passed);
+    }
+  })
+  let sumQ1 = tmpQMeasured.reduce((a, b) => a + b, 0);
+  let sumQ2 = tmpQPassed.reduce((a, b) => a + b, 0);
+  let tmpQTGL = (sumQ2 / sumQ1) || 0;
+  let quarterTGLAvg = tmpQTGL.toFixed(2) * 100;
+
+  //create array of weekly scores for chart
+  let tmpWeekAvgScores = [];
+
+  let uniqueWeeks = calendar.uniqueWeeks.forEach(week => {
+    let tempMeasured = [];
+    let tempPassed = [];
+
+    data.forEach(obj => {
+
+      if (obj.week_of_year === week) {
+        tempMeasured.push(obj.number_measured);
+        tempPassed.push(obj.number_passed);
+        }
+      })
+
+      let sumMeasured = _.sum(tempMeasured)
+      let sumPassed = _.sum(tempPassed)
+
+      let tempWeekTGL = (sumPassed / sumMeasured) || 0;
+      let tempWeekTGLAvgRound = tempWeekTGL.toFixed(2) * 100
+      tmpWeekAvgScores.push(tempWeekTGLAvgRound)
+  })
+
+
+
+  return {weekTGLAvg, monthTGLAvg, quarterTGLAvg, uniqueWeeks, tmpWeekAvgScores, lastUpdated};
+}
+
 //grap insp data for concept from api
 async function getInspConceptData(concept) {
   const response = await fetch('/insp_concept/' + concept);
@@ -558,4 +652,4 @@ async function getBagTimesConceptData(api) {
   return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg};
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, fancyTimeFormat}
+export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, fancyTimeFormat}

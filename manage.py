@@ -7,6 +7,7 @@ from kbd import db
 from kbd.speed import models
 from kbd.sales import models
 from kbd.txh import models
+from kbd.accuracy import models
 
 #Migrate(app,db)
 

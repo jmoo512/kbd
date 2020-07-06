@@ -62,7 +62,7 @@ def taco_concept(chosen_concept):
         return table
 
     cur = conn.cursor()
-    taco_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, time_in_seconds FROM tacotimes WHERE concept = '" + chosen_concept + "' AND quarter=(SELECT MAX(quarter) FROM tacotimes) OR quarter=(SELECT MAX(quarter)-1 FROM tacotimes) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    taco_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, time_in_seconds FROM tacotimes WHERE concept = '" + chosen_concept + "' AND (quarter=(SELECT MAX(quarter) FROM tacotimes) OR quarter=(SELECT MAX(quarter)-1 FROM tacotimes)) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 
@@ -79,7 +79,7 @@ def bag_times(chosen_location):
         return table
 
     cur = conn.cursor()
-    bag_times_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, week_ending, week_avg, month_avg, quarter_avg, concept_week_avg, concept_month_avg, concept_quarter_avg FROM bagtimes WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM bagtimes) OR quarter=(SELECT MAX(quarter)-1 FROM bagtimes) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    bag_times_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, week_ending, week_avg, month_avg, quarter_avg, concept_week_avg, concept_month_avg, concept_quarter_avg FROM bagtimes WHERE location = '" + chosen_location + "' AND (quarter=(SELECT MAX(quarter) FROM bagtimes) OR quarter=(SELECT MAX(quarter)-1 FROM bagtimes)) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 

@@ -78,8 +78,6 @@ async function getSalesData(api) {
 
   });
 
-  console.log(tmpOloRatio)
-
   return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC, tmpPctBBQGC, tmpPctTacosGC, tmpBBQRatio, tmpTacosRatio, tmpOloRatio, tmpDoorDashRatio};
 }
 

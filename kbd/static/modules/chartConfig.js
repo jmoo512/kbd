@@ -16,7 +16,8 @@ let ranges = {
   "insp":[3.4, 3.8],
   "gf":[60,100],
   "taco":[30,90],
-  "bagTimes":[240,360]
+  "bagTimes":[240,360],
+  "tgl":[0,100]
 }
 
 let inspLayout =  {
@@ -176,6 +177,45 @@ let bagTimesLayout =  {
     }
   }
 
+  let tglLayout =  {
+      autosize: true,
+      paper_bgcolor: '#FFFFFF',
+      plot_bgcolor: '#FFFFFF',
+      //width: 300,
+      height: 100,
+      hovermode: false,
+      margin: {
+        l: 32,
+        r: 10,
+        b: 10,
+        t: 10,
+        pad: 5
+      },
+      xaxis: {
+        //autorange: true,
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        autotick: true,
+        ticks: '',
+        showticklabels: false,
+
+      },
+      yaxis: {
+        //autorange: true,
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        autotick: false,
+        dtick: 50,
+        ticks: '',
+        showticklabels: true,
+        range: ranges["tgl"]
+      },
+      legend: {
+      }
+    }
+
 let config = {responsive: true,
               displayModeBar: false
             }
@@ -185,4 +225,4 @@ let staticConfig = {responsive: true,
                     staticPlot: true
             }
 
-export {colors, ranges, inspLayout, gfLayout, tacoLayout, bagTimesLayout, config, staticConfig}
+export {colors, ranges, inspLayout, gfLayout, tacoLayout, bagTimesLayout, tglLayout, config, staticConfig}

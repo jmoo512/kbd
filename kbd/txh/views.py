@@ -52,7 +52,7 @@ def gf(chosen_location):
         return table
 
     cur = conn.cursor()
-    gf_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, date_measured, score FROM gamefilm WHERE location = '" + chosen_location + "' AND quarter=(SELECT MAX(quarter) FROM gamefilm) OR quarter=(SELECT MAX(quarter)-1 FROM gamefilm) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    gf_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, date_measured, score FROM gamefilm WHERE location = '" + chosen_location + "' AND (quarter=(SELECT MAX(quarter) FROM gamefilm) OR quarter=(SELECT MAX(quarter)-1 FROM gamefilm)) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 
@@ -69,7 +69,7 @@ def gf_concept(chosen_concept):
         return table
 
     cur = conn.cursor()
-    gf_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, date_measured, score FROM gamefilm WHERE concept = '" + chosen_concept + "' AND quarter=(SELECT MAX(quarter) FROM gamefilm) OR quarter=(SELECT MAX(quarter)-1 FROM gamefilm) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    gf_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, date_measured, score FROM gamefilm WHERE concept = '" + chosen_concept + "' AND (quarter=(SELECT MAX(quarter) FROM gamefilm) OR quarter=(SELECT MAX(quarter)-1 FROM gamefilm)) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 
