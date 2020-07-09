@@ -150,7 +150,6 @@ async function populateBaseCharts () {
   document.getElementById("insp-concept-month").innerHTML = inspConceptAvgMonth + ' Mo';
   document.getElementById("insp-concept-q").innerHTML = inspConceptAvgQuarter + ' Q';
 
-
   document.getElementById("gf-concept-month").innerHTML = gfConceptAvgMonth + ' Mo';
   document.getElementById("gf-concept-q").innerHTML = gfConceptAvgQuarter + ' Q';
 
@@ -168,10 +167,10 @@ async function populateBaseCharts () {
 let startingData = []
 
 //instantiate empty charts to DOM
-Plotly.newPlot( 'insp-chart', startingData, inspLayout, staticConfig);
-Plotly.newPlot( 'gf-chart', startingData, gfLayout, staticConfig);
-Plotly.newPlot( 'taco-times-chart', startingData, tacoLayout, staticConfig);
-Plotly.newPlot( 'tgl-chart', startingData, tglLayout, staticConfig);
+Plotly.newPlot('insp-chart', startingData, inspLayout, staticConfig);
+Plotly.newPlot('gf-chart', startingData, gfLayout, staticConfig);
+Plotly.newPlot('taco-times-chart', startingData, tacoLayout, staticConfig);
+Plotly.newPlot('tgl-chart', startingData, tglLayout, staticConfig);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'acc-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
