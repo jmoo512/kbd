@@ -333,20 +333,13 @@ async function getBagTimesData(api) {
 
 
   //find current week average
-  data.forEach(obj => {
-    if (obj.week_of_year === calendar.currWeek){
-      tmpWeekScores.push(obj.week_avg)
-    }
-  })
-  let sum1 = tmpWeekScores.reduce((a, b) => a + b, 0);
-  let tmpWeekBagTimesAvg = (sum1 / tmpWeekScores.length) || 0;
-  let weekBagTimesAvg = tmpWeekBagTimesAvg.toFixed(2);
+  let weekBagTimesAvg = tmpScores[tmpScores.length - 1];
 
   //find current month average
-  let monthBagTimesAvg = Math.max.apply(null, tmpMonthScores);
+  let monthBagTimesAvg = tmpMonthScores[tmpMonthScores.length - 1];
 
   //find current quarter average
-  let quarterBagTimesAvg = Math.max.apply(null, tmpQuarterScores);
+  let quarterBagTimesAvg = tmpQuarterScores[tmpQuarterScores.length - 1];
 
 
   let tmpWeekAvgScores = [];
@@ -630,7 +623,7 @@ async function getTacoConceptData(concept) {
 }
 
 async function getBagTimesConceptData(api) {
-  const response = await fetch('/bag_times/MF1')
+  const response = await fetch('/bag_times/Concept')
   const data = await response.json()
 
   let tmpWeekScores = [];
@@ -645,13 +638,13 @@ async function getBagTimesConceptData(api) {
 
 
   //find current week average
-  let weekBagTimesAvg = Math.max.apply(null, tmpWeekScores);
+  let weekBagTimesAvg = tmpWeekScores[tmpWeekScores.length - 1];
 
   //find current month average
-  let monthBagTimesAvg = Math.max.apply(null, tmpMonthScores);
+  let monthBagTimesAvg = tmpMonthScores[tmpMonthScores.length - 1];
 
   //find current quarter average
-  let quarterBagTimesAvg = Math.max.apply(null, tmpQuarterScores);
+  let quarterBagTimesAvg = tmpQuarterScores[tmpQuarterScores.length -1];
 
 
   return {weekBagTimesAvg, monthBagTimesAvg, quarterBagTimesAvg};
