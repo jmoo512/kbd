@@ -21,7 +21,12 @@ class ToGoLabel(db.Model):
 class OrderAccuracy(db.Model):
     __tablename__='orderaccuracy'
     id=db.Column(db.Integer,primary_key=True)
-    month_ending=db.Column(db.Date)
+    week_ending=db.Column(db.Date)
     fiscal_month=db.Column(db.String(20))
-    location=db.Column(db.String(20))
-    score=db.Column(db.Float)
+    fiscal_year=db.Column(db.Integer)
+    week_of_month=db.Column(db.Integer)
+    week_of_year=db.Column(db.Integer)
+    quarter=db.Column(db.Integer)
+    location=db.Column(db.String(15))
+    concept=db.Column(db.String(15))
+    inaccurate_count=db.Column(db.Integer)

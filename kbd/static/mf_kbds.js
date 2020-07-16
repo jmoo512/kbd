@@ -1,6 +1,6 @@
 //import modules
 import {fancyTimeFormat, selectStore, getInspData, getGFData, getBagTimesData, getInspConceptData, getGFConceptData, getBagTimesConceptData} from './modules/kbds.js'
-import {colors, ranges, inspLayout, gfLayout, bagTimesLayout, config, staticConfig} from './modules/chartConfig.js'
+import {colors, ranges, inspLayout, gfLayout, bagTimesLayout, mfAccLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
 

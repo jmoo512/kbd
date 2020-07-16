@@ -8,8 +8,8 @@ from kbd.clean.forms import InspForm
 from kbd.clean.models import Inspections
 from kbd.txh.models import GameFilm
 from kbd.txh.forms import GFForm
-from kbd.accuracy.models import ToGoLabel
-from kbd.accuracy.forms import TGLForm
+from kbd.accuracy.models import ToGoLabel, OrderAccuracy
+from kbd.accuracy.forms import TGLForm, OrderAccuracyForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 import pandas as pd
@@ -30,8 +30,9 @@ def add():
     gf_form=GFForm()
     taco_form=TacoForm()
     tgl_form=TGLForm()
+    acc_form=OrderAccuracyForm()
 
-    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form, gf_form=gf_form, taco_form=taco_form, tgl_form=tgl_form)
+    return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form, gf_form=gf_form, taco_form=taco_form, tgl_form=tgl_form, acc_form=acc_form)
 
 @core.route('/c3js')
 def c3():

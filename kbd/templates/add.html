@@ -79,7 +79,7 @@
     </div>
 
     <div class="item">
-      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-acc" disabled>Add</button>
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-acc">Add</button>
       <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-taco" disabled>Edit</button>
       <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-taco" disabled>Delete</button>
     </div>
@@ -262,6 +262,7 @@
           {{gf_form.csrf_token}}
           {{gf_form.date_measured.label}} {{gf_form.date_measured}}
           {{gf_form.location.label}} {{gf_form.location}}
+          <hr>
           {{gf_form.type.label}} {{gf_form.type}}
           {{gf_form.score.label}} {{gf_form.score(size=5)}}
 
@@ -334,22 +335,22 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Accuracy Data</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Order Accuracy Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url_for('speed.taco_add')}}" method="post">
-          {{gf_form.csrf_token}}
-          {{gf_form.date_measured.label}} {{gf_form.date_measured}}
-          {{gf_form.location.label}} {{gf_form.location}}
-          {{gf_form.type.label}} {{gf_form.type}}
-          {{gf_form.score.label}} {{gf_form.score(size=5)}}
+        <form action="{{url_for('accuracy.acc_add')}}" method="post">
+          {{acc_form.csrf_token}}
+          {{acc_form.week_ending.label}} {{acc_form.week_ending}}
+          {{acc_form.location.label}} {{acc_form.location}}
+          {{acc_form.inaccurate_count.label}} {{acc_form.inaccurate_count(size=3)}}
+
 
       </div>
       <div class="modal-footer">
-        {{gf_form.submit(class_='btn btn-primary')}}
+        {{acc_form.submit(class_='btn btn-primary')}}
 
       </form>
 

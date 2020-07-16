@@ -1,6 +1,6 @@
 //import modules
-import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData, getTGLConceptData} from './modules/kbds.js'
-import {colors, ranges, inspLayout, gfLayout, tacoLayout, tglLayout, config, staticConfig} from './modules/chartConfig.js'
+import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getTGLConceptData} from './modules/kbds.js'
+import {colors, ranges, inspLayout, gfLayout, tacoLayout, tglLayout, rudysAccLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
 
@@ -15,12 +15,14 @@ async function updateCharts () {
   const gfData = await getGFData(getAPI.gfAPI);
   const tacoData = await getTacoData(getAPI.tacoAPI);
   const tglData = await getTGLData(getAPI.tglAPI);
+  const accData = await getAccData(getAPI.accAPI);
 
 
   let inspWeeks = inspData.uniqueWeeks;
   let gfMonths = gfData.uniqueMonths;
   let tacoWeeks = tacoData.uniqueWeeks;
   let tglWeeks = tglData.uniqueWeeks;
+  let accWeeks = accData.uniqueWeeks;
 
   let inspScores = inspData.tmpWeekAvgScores;
   let inspAvgWeek = inspData.weekInspAvg;
@@ -44,6 +46,12 @@ async function updateCharts () {
  let tglAvgMonth = tglData.monthTGLAvg;
  let tglAvgQuarter = tglData.quarterTGLAvg;
  let tglLastUpdated = tglData.lastUpdated;
+
+ let accScores = accData.tempWeekScores;
+ let accWeek = accData.weekAcc;
+ let accMonth = accData.monthAcc;
+ let accQuarter = accData.quarterAcc;
+ let accLastUpdated = accData.lastUpdated;
 
 let inspChartData = {
     x: inspWeeks,
@@ -89,16 +97,29 @@ let inspChartData = {
     },
   }
 
+  let accChartData = {
+    x: accWeeks,
+    y: accScores,
+    mode: 'lines',
+    line: {
+      color: colors['yellow'],
+      width: 2,
+      shape: 'spline'
+    },
+  }
+
   let inspSpark = [inspChartData]
   let gfSpark = [gfChartData]
   let tacoSpark = [tacoChartData]
   let tglSpark = [tglChartData]
+  let accSpark = [accChartData]
 
 
   Plotly.react('insp-chart', inspSpark, inspLayout, staticConfig);
   Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
   Plotly.react('taco-times-chart', tacoSpark, tacoLayout, staticConfig);
   Plotly.react('tgl-chart', tglSpark, tglLayout, staticConfig);
+  Plotly.react('acc-chart', accSpark, rudysAccLayout, staticConfig);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
@@ -119,6 +140,12 @@ let inspChartData = {
   document.getElementById("tgl-month").innerHTML = tglAvgMonth + '% Mo';
   document.getElementById("tgl-q").innerHTML = tglAvgQuarter + '% Q';
   document.getElementById("tgl-title").innerHTML = "&nbsp as of " + tglLastUpdated;
+
+  document.getElementById("acc-week-big").innerHTML = accWeek + '% Wk';
+  document.getElementById("acc-month").innerHTML = accMonth + '% Mo';
+  document.getElementById("acc-q").innerHTML = accQuarter + '% Q';
+  document.getElementById("acc-title").innerHTML = "&nbsp as of " + accLastUpdated;
+
 }
 
 
@@ -172,7 +199,7 @@ Plotly.newPlot('gf-chart', startingData, gfLayout, staticConfig);
 Plotly.newPlot('taco-times-chart', startingData, tacoLayout, staticConfig);
 Plotly.newPlot('tgl-chart', startingData, tglLayout, staticConfig);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
-//Plotly.newPlot( 'acc-chart', startingData, sparkLayout, config);
+Plotly.newPlot( 'acc-chart', startingData, rudysAccLayout, config);
 //Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
 
 

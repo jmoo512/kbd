@@ -142,6 +142,10 @@ body {
   height: 50px;
 }
 
+.acc-text {
+  font-size: 14px;
+}
+
 @media only screen and (max-width: 1345px){
 
   .big-number{
@@ -158,6 +162,10 @@ body {
 
   .data-card {
     padding: 5px;
+  }
+
+  .acc-text {
+    font-size: 16px;
   }
 }
 
@@ -188,6 +196,10 @@ body {
 
   .data-card {
     padding: 10px;
+  }
+
+  .acc-text {
+    font-size: 16px;
   }
 
 }
@@ -251,6 +263,10 @@ body {
     order: 2;
     width: 98%;
     margin-top: 5px;
+  }
+
+  .acc-text {
+    font-size: 16px;
   }
 
 }

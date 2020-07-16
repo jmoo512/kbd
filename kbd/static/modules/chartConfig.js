@@ -17,7 +17,9 @@ let ranges = {
   "gf":[60,100],
   "taco":[30,90],
   "bagTimes":[240,360],
-  "tgl":[0,100]
+  "tgl":[0,100],
+  "rudysAcc":[99.96,100],
+  "mfAcc":[99.5,100]
 }
 
 let inspLayout =  {
@@ -216,6 +218,83 @@ let bagTimesLayout =  {
       }
     }
 
+  let rudysAccLayout =  {
+      autosize: true,
+      paper_bgcolor: '#FFFFFF',
+      plot_bgcolor: '#FFFFFF',
+      //width: 300,
+      height: 100,
+      hovermode: false,
+      margin: {
+        l: 42,
+        r: 10,
+        b: 10,
+        t: 10,
+        pad: 5
+      },
+      xaxis: {
+        //autorange: true,
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        autotick: true,
+        ticks: '',
+        showticklabels: false,
+
+      },
+      yaxis: {
+        //autorange: true,
+        showgrid: false,
+        zeroline: false,
+        showline: false,
+        autotick: false,
+        dtick: 0.02,
+        ticks: '',
+        showticklabels: true,
+        range: ranges["rudysAcc"]
+      },
+      legend: {
+      }
+    }
+    let mfAccLayout =  {
+        autosize: true,
+        paper_bgcolor: '#FFFFFF',
+        plot_bgcolor: '#FFFFFF',
+        //width: 300,
+        height: 100,
+        hovermode: false,
+        margin: {
+          l: 32,
+          r: 10,
+          b: 10,
+          t: 10,
+          pad: 5
+        },
+        xaxis: {
+          //autorange: true,
+          showgrid: false,
+          zeroline: false,
+          showline: false,
+          autotick: true,
+          ticks: '',
+          showticklabels: false,
+
+        },
+        yaxis: {
+          //autorange: true,
+          showgrid: false,
+          zeroline: false,
+          showline: false,
+          autotick: false,
+          dtick: 50,
+          ticks: '',
+          showticklabels: true,
+          range: ranges["mfAcc"]
+        },
+        legend: {
+        }
+      }
+
 let config = {responsive: true,
               displayModeBar: false
             }
@@ -225,4 +304,4 @@ let staticConfig = {responsive: true,
                     staticPlot: true
             }
 
-export {colors, ranges, inspLayout, gfLayout, tacoLayout, bagTimesLayout, tglLayout, config, staticConfig}
+export {colors, ranges, inspLayout, gfLayout, tacoLayout, bagTimesLayout, tglLayout, rudysAccLayout, mfAccLayout, config, staticConfig}

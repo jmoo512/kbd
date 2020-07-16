@@ -58,8 +58,9 @@ function selectStore() {
   let tacoAPI="/taco/" + store
   let bagTimesAPI="/bag_times/" + store
   let tglAPI="/tgl/" + store
+  let accAPI="acc/" + store
 
-  return {inspAPI, gfAPI, tacoAPI, bagTimesAPI, tglAPI}
+  return {inspAPI, gfAPI, tacoAPI, bagTimesAPI, tglAPI, accAPI}
 }
 
 //grab inspection data from api
@@ -459,6 +460,86 @@ async function getTGLData(api) {
   return {weekTGLAvg, monthTGLAvg, quarterTGLAvg, uniqueWeeks, tmpWeekAvgScores, lastUpdated};
 }
 
+//grab order accuracy data from api
+async function getAccData(api){
+  const response = await fetch(api);
+  const data = await response.json()
+
+  let tmpScores = [];
+  let tmpAccWeek = [];
+  let tmpWeekOfMonth = [];
+  let tmpWeekScores = [];
+  let tmpWeekGC = [];
+  let tmpMonthScores = [];
+  let tmpMonthGC = [];
+  let tmpQuarterScores = [];
+  let tmpQuarterGC = [];
+
+  const calendar = createCalendar(data)
+  let lastUpdated = calendar.lastUpdated
+
+  //find current week accuracy rate
+  data.forEach(obj => {
+    if (obj.week_of_year === calendar.currWeek){
+      tmpWeekScores.push(obj.inaccurate_count);
+      tmpWeekGC.push(obj.total_guest_count);
+    }
+  })
+
+  let weekInaccSum = tmpWeekScores.reduce((a, b) => a + b, 0);
+  let weekGCSum = tmpWeekGC.reduce((a, b) => a + b, 0);
+  let weekAcc = ((weekGCSum - weekInaccSum)/weekGCSum*100).toFixed(3)
+
+  //find current month accuracy rate
+  data.forEach(obj => {
+    if (obj.fiscal_month == calendar.currMonth){
+      tmpMonthScores.push(obj.inaccurate_count);
+      tmpMonthGC.push(obj.total_guest_count);
+    }
+  })
+
+
+  let monthInnacSum = tmpMonthScores.reduce((a,b) => a + b, 0);
+  let monthGCSum = tmpMonthGC.reduce((a,b) => a + b, 0);
+  let monthAcc = ((monthGCSum - monthInnacSum)/monthGCSum*100).toFixed(3)
+
+  //find current quarter accuracy rate
+  data.forEach(obj => {
+    if (obj.quarter === calendar.currQuarter){
+      tmpQuarterScores.push(obj.inaccurate_count);
+      tmpQuarterGC.push(obj.total_guest_count);
+    }
+  })
+
+  let quarterInnacSum = tmpQuarterScores.reduce((a,b) => a + b, 0);
+  let quarterGCSum = tmpQuarterGC.reduce((a,b) => a + b, 0);
+  let quarterAcc = ((quarterGCSum - quarterInnacSum)/quarterGCSum*100).toFixed(3)
+
+  let tempWeekScores = [];
+
+  let uniqueWeeks = calendar.uniqueWeeks.forEach(week => {
+    let tempScores = [];
+    let tempGC = [];
+
+    data.forEach(obj => {
+
+      if (obj.week_of_year === week) {
+        tempScores.push(obj.inaccurate_count);
+        tempGC.push(obj.total_guest_count);
+        }
+      })
+
+      let tempInnacSum = _.sum(tempScores)
+      let tempGCSum = _.sum(tempGC)
+      let tempAcc = ((tempGCSum - tempInnacSum)/tempGCSum*100).toFixed(3)
+      tempWeekScores.push(tempAcc)
+  })
+
+  return {weekAcc, monthAcc, quarterAcc, uniqueWeeks, tempWeekScores, lastUpdated}
+
+
+}
+
 //grap insp data for concept from api
 async function getInspConceptData(concept) {
   const response = await fetch('/insp_concept/' + concept);
@@ -719,4 +800,4 @@ async function getTGLConceptData() {
 
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, getTGLConceptData, fancyTimeFormat}
+export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, getTGLConceptData, fancyTimeFormat}

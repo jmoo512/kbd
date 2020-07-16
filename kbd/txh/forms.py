@@ -62,9 +62,11 @@ class GFForm(FlaskForm):
     date_measured=DateField('Date of Game Film', format='%Y-%m-%d')
 
     type=SelectField('Game Film Type', choices=[
-                                                ('olo','OLO'),
-                                                ('rookie','Rookie'),
-                                                ('repeat','Repeat')
+                                                ('MF','MF'),
+                                                ('MF Phone','MF Phone'),
+                                                ('MF Pickup','MF Pickup'),
+                                                ('Rudys Phone','Rudys Phone'),
+                                                ('Rudys Pick Up','Rudys Pick Up')
                                                 ])
     score=FloatField('Score')
     submit=SubmitField('Add')
