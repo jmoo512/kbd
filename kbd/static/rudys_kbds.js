@@ -129,7 +129,7 @@ let inspChartData = {
 
   document.getElementById("gf-month").innerHTML = gfAvgMonth + ' Mo';
   document.getElementById("gf-q").innerHTML = gfAvgQuarter + ' Q';
-  //document.getElementById("gf-title").innerHTML = "Game Films as of " + gfLastUpdated;
+  document.getElementById("gf-title").innerHTML = "&nbsp as of " + gfLastUpdated;
 
   document.getElementById("taco-times-week-big").innerHTML = tacoAvgWeek + ' Wk';
   document.getElementById("taco-times-month").innerHTML = tacoAvgMonth + ' Mo';

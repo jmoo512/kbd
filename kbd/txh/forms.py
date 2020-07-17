@@ -66,7 +66,9 @@ class GFForm(FlaskForm):
                                                 ('MF Phone','MF Phone'),
                                                 ('MF Pickup','MF Pickup'),
                                                 ('Rudys Phone','Rudys Phone'),
-                                                ('Rudys Pick Up','Rudys Pick Up')
+                                                ('Rudys Pick Up','Rudys Pick Up'),
+                                                ('BBQ Rookie', 'BBQ Rookie'),
+                                                ('Taco Rookie', 'Taco Rookie') 
                                                 ])
     score=FloatField('Score')
     submit=SubmitField('Add')

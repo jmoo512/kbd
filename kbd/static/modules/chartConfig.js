@@ -19,7 +19,7 @@ let ranges = {
   "bagTimes":[240,360],
   "tgl":[0,100],
   "rudysAcc":[99.96,100],
-  "mfAcc":[99.5,100]
+  "mfAcc":[99.6,100]
 }
 
 let inspLayout =  {
@@ -264,7 +264,7 @@ let bagTimesLayout =  {
         height: 100,
         hovermode: false,
         margin: {
-          l: 32,
+          l: 36,
           r: 10,
           b: 10,
           t: 10,
@@ -286,7 +286,7 @@ let bagTimesLayout =  {
           zeroline: false,
           showline: false,
           autotick: false,
-          dtick: 50,
+          dtick: 0.2,
           ticks: '',
           showticklabels: true,
           range: ranges["mfAcc"]
