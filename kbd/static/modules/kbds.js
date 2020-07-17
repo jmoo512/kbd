@@ -800,4 +800,59 @@ async function getTGLConceptData() {
 
 }
 
-export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, getTGLConceptData, fancyTimeFormat}
+//grap insp data for concept from api
+async function getAccConceptData(concept) {
+  const response = await fetch('/acc_concept/'+concept);
+  const data = await response.json();
+
+  let tmpWeekOfMonth = [];
+  let tmpAccWeek = [];
+  let tmpGCWeek = [];
+  let tmpAccMonth = [];
+  let tmpGCMonth = [];
+  let tmpAccQuarter = [];
+  let tmpGCQuarter = [];
+
+  const calendar = createCalendar(data)
+  let lastUpdated = calendar.lastUpdated
+
+  //find current week accuracy rate
+  data.forEach(obj => {
+    if (obj.week_of_year === calendar.currWeek){
+      tmpAccWeek.push(obj.inaccurate_count);
+      tmpGCWeek.push(obj.total_guest_count);
+    }
+  })
+
+  let weekInaccSum = tmpAccWeek.reduce((a, b) => a + b, 0);
+  let weekGCSum = tmpGCWeek.reduce((a, b) => a + b, 0);
+  let weekAccAvg = ((weekGCSum - weekInaccSum)/weekGCSum*100).toFixed(3)
+
+  //find current month accuracy rate
+  data.forEach(obj => {
+    if (obj.fiscal_month == calendar.currMonth){
+      tmpAccMonth.push(obj.inaccurate_count);
+      tmpGCMonth.push(obj.total_guest_count);
+    }
+  })
+
+  let monthInaccSum = tmpAccMonth.reduce((a, b) => a + b, 0);
+  let monthGCSum = tmpGCMonth.reduce((a, b) => a + b, 0);
+  let monthAccAvg = ((monthGCSum - monthInaccSum)/monthGCSum*100).toFixed(3)
+
+  //find current quarter accuracy rate
+  data.forEach(obj => {
+    if (obj.quarter === calendar.currQuarter){
+      tmpAccQuarter.push(obj.inaccurate_count);
+      tmpGCQuarter.push(obj.total_guest_count);
+    }
+  })
+
+  let quarterInaccSum = tmpAccQuarter.reduce((a, b) => a + b, 0);
+  let quarterGCSum = tmpGCQuarter.reduce((a, b) => a + b, 0);
+  let quarterAccAvg = ((quarterGCSum - quarterInaccSum)/quarterGCSum*100).toFixed(3)
+
+  return {weekAccAvg, monthAccAvg, quarterAccAvg};
+}
+
+export {selectStore, getInspData, getGFData, getTacoData, getBagTimesData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getBagTimesConceptData, getTGLConceptData, getAccConceptData, fancyTimeFormat}

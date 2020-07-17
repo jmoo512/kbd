@@ -1,5 +1,5 @@
 //import modules
-import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getTGLConceptData} from './modules/kbds.js'
+import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getTGLConceptData, getAccConceptData} from './modules/kbds.js'
 import {colors, ranges, inspLayout, gfLayout, tacoLayout, tglLayout, rudysAccLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
@@ -156,6 +156,7 @@ async function populateBaseCharts () {
   const gfConceptData = await getGFConceptData(concept);
   const tacoConceptData = await getTacoConceptData(concept);
   const tglConceptData = await getTGLConceptData();
+  const accConceptData = await getAccConceptData(concept);
 
   let inspConceptAvgWeek = inspConceptData.weekInspAvg;
   let inspConceptAvgMonth = inspConceptData.monthInspAvg;
@@ -172,6 +173,9 @@ async function populateBaseCharts () {
   let tglConceptAvgMonth = tglConceptData.monthTGLAvg;
   let tglConceptAvgQuarter = tglConceptData.quarterTGLAvg;
 
+  let accConceptWeek = accConceptData.weekAccAvg;
+  let accConceptMonth = accConceptData.monthAccAvg;
+  let accConceptQuarter = accConceptData.quarterAccAvg;
 
   document.getElementById("insp-concept-big").innerHTML = inspConceptAvgWeek + ' Wk';
   document.getElementById("insp-concept-month").innerHTML = inspConceptAvgMonth + ' Mo';
@@ -187,6 +191,10 @@ async function populateBaseCharts () {
   document.getElementById("tgl-concept-big").innerHTML = tglConceptAvgWeek + '% Wk';
   document.getElementById("tgl-concept-month").innerHTML = tglConceptAvgMonth + '% Mo';
   document.getElementById("tgl-concept-q").innerHTML = tglConceptAvgQuarter + '% Q';
+
+  document.getElementById("acc-concept-big").innerHTML = accConceptWeek + '% Wk';
+  document.getElementById("acc-concept-month").innerHTML = accConceptMonth + '% M';
+  document.getElementById("acc-concept-q").innerHTML = accConceptQuarter + '% Q';
 }
 
 
