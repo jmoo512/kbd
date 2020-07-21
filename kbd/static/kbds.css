@@ -146,6 +146,10 @@ body {
   font-size: 14px;
 }
 
+#value-box, #ce-title, #ce-row, #olo-title, #olo-times-row{
+  opacity: 0.4;
+}
+
 @media only screen and (max-width: 1345px){
 
   .big-number{

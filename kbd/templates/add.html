@@ -10,8 +10,6 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-ce">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -24,8 +22,6 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-sales" >Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-ce" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#edit-ce" disabled>Delete</button>
     </div>
 
   </div>
@@ -38,8 +34,6 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-insp">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-insp" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-insp" disabled>Delete</button>
     </div>
 
   </div>
@@ -52,8 +46,6 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-gf">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-gf" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-gf" disabled>Delete</button>
     </div>
 
   </div>
@@ -66,8 +58,6 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-taco">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-taco" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-taco" disabled>Delete</button>
     </div>
 
   </div>
@@ -80,8 +70,6 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-acc">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-taco" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-taco" disabled>Delete</button>
     </div>
 
   </div>
@@ -94,8 +82,18 @@
 
     <div class="item">
       <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-tgl">Add</button>
-      <button type="button" name="button" class=" btn btn-warning" data-toggle="modal" data-target="#edit-taco" disabled>Edit</button>
-      <button type="button" name="button" class=" btn btn-danger" data-toggle="modal" data-target="#delete-taco" disabled>Delete</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="item-title">
+      Bag Times
+    </div>
+
+    <div class="item">
+      <button type="button" name="button" class=" btn btn-primary" data-toggle="modal" data-target="#add-bag-times">Add</button>
     </div>
 
   </div>
@@ -361,7 +359,6 @@
 </div>
 
 <!--MODAL TO ADD TGL-->
-
 <div class="modal fade" id="add-tgl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -382,7 +379,39 @@
 
       </div>
       <div class="modal-footer">
-        {{gf_form.submit(class_='btn btn-primary')}}
+        {{tgl_form.submit(class_='btn btn-primary')}}
+
+      </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL TO ADD BAG TIMES-->
+<div class="modal fade" id="add-bag-times" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Bag Times</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url_for('speed.bag_times_add')}}" method="post">
+          {{bag_times_form.csrf_token}}
+          {{bag_times_form.week_ending.label}} {{bag_times_form.week_ending}}
+          {{bag_times_form.location.label}} {{bag_times_form.location}}
+          <hr>
+          {{bag_times_form.week_avg.label}} {{bag_times_form.week_avg(size=4)}}<br>
+          {{bag_times_form.month_avg.label}} {{bag_times_form.month_avg(size=4)}}<br>
+          {{bag_times_form.quarter_avg.label}} {{bag_times_form.quarter_avg(size=4)}}
+
+      </div>
+      <div class="modal-footer">
+        {{bag_times_form.submit(class_='btn btn-primary')}}
 
       </form>
 

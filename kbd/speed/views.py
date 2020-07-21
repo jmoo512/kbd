@@ -1,8 +1,8 @@
 from flask import current_app
 from kbd import db
 from kbd.models import FiscalCalendar
-from .models import CashierEfficiency, TacoTimes
-from .forms import CEForm, TacoForm
+from .models import CashierEfficiency, TacoTimes, BagTimes
+from .forms import CEForm, TacoForm, BagTimesForm
 from flask import render_template,request,Blueprint,redirect,url_for, request, jsonify,Response
 import pandas as pd
 from psql_config import config
@@ -79,7 +79,7 @@ def bag_times(chosen_location):
         return table
 
     cur = conn.cursor()
-    bag_times_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, week_ending, week_avg, month_avg, quarter_avg, concept_week_avg, concept_month_avg, concept_quarter_avg FROM bagtimes WHERE location = '" + chosen_location + "' AND (quarter=(SELECT MAX(quarter) FROM bagtimes) OR quarter=(SELECT MAX(quarter)-1 FROM bagtimes)) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
+    bag_times_data = create_pandas_table("SELECT fiscal_year, fiscal_month, week_of_month, week_of_year, quarter, week_ending, week_avg, month_avg, quarter_avg FROM bagtimes WHERE location = '" + chosen_location + "' AND (quarter=(SELECT MAX(quarter) FROM bagtimes) OR quarter=(SELECT MAX(quarter)-1 FROM bagtimes)) ORDER BY fiscal_year, quarter, fiscal_month, week_of_month")
     cur.close()
     conn.close()
 
@@ -344,3 +344,28 @@ def ce_add():
 
     return redirect(url_for('core.add'))
     return render_template('index.html',form=form)
+
+@speed.route('/bag_times_add/', methods=['POST'])
+def bag_times_add():
+
+    form=BagTimesForm()
+
+    calendar=FiscalCalendar.query.filter(FiscalCalendar.date==form.week_ending.data).first_or_404()
+
+    bag_times=BagTimes(
+            week_ending=form.week_ending.data,
+            location=form.location.data,
+            fiscal_month=calendar.fiscal_month,
+            fiscal_year=calendar.fiscal_year,
+            week_of_month=calendar.week_of_month,
+            week_of_year=calendar.fiscal_week,
+            quarter=calendar.fiscal_quarter,
+            week_avg=form.week_avg.data,
+            month_avg=form.month_avg.data,
+            quarter_avg=form.quarter_avg.data
+    )
+
+    db.session.add(bag_times)
+    db.session.commit()
+
+    return redirect(url_for('core.add'))

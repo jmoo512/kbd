@@ -110,3 +110,19 @@ class TacoForm(FlaskForm):
     sec_seven=IntegerField('Sec: ')
 
     submit=SubmitField('Add')
+
+
+class BagTimesForm(FlaskForm):
+    week_ending=DateField('Week Ending: ', format='%Y-%m-%d')
+    location=SelectField('Location', choices=[
+                                                ('MF1','MF1'),
+                                                ('MF2','MF2'),
+                                                ('MF3','MF3'),
+                                                ('MF4','MF4'),
+                                                ('Concept','Concept')
+                                            ])
+    week_avg=IntegerField('Week Average in Seconds: ')
+    month_avg=IntegerField('Month Average in Seconds: ')
+    quarter_avg=IntegerField('Quarter Average in Seconds: ')
+
+    submit=SubmitField('Add')

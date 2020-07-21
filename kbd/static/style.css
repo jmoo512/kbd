@@ -4,7 +4,7 @@ body {
 
 .container{
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   padding: 2px;
   font-size: 24px;
   font-weight: bold;
@@ -16,11 +16,12 @@ body {
   flex-direction: row;
   justify-content: space-between;
   background-color: LightSteelBlue;
-  padding: 5px;
-  margin: 3px 0px 3px 0px;
+  padding: 3px;
+  margin: 3px;
   border-radius: 3px;
   align-items: center;
   border: solid 2px black;
+  width: 45%;
 }
 .item{
   padding: 5px;

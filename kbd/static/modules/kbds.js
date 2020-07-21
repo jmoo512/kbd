@@ -712,9 +712,9 @@ async function getBagTimesConceptData(api) {
   let tmpQuarterScores = [];
 
   data.forEach(obj => {
-    tmpWeekScores.push(obj.concept_week_avg);
-    tmpMonthScores.push(obj.concept_month_avg);
-    tmpQuarterScores.push(obj.concept_quarter_avg);
+    tmpWeekScores.push(obj.week_avg);
+    tmpMonthScores.push(obj.month_avg);
+    tmpQuarterScores.push(obj.quarter_avg);
   });
 
 
