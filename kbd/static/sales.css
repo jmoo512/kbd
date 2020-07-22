@@ -2,6 +2,25 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.chart, .data-box, #chosen-store{
+  border: solid 2px;
+  border-color: Black;
+  border-radius: 3px;
+  border-color: var(--text);
+  background-color: var(--blue);
+}
+
+.data-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.data-box, #chosen-store {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .header{
   display: flex;
   flex-flow: row nowrap;
@@ -19,178 +38,42 @@ body {
 .chart-grid{
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto ;
-  grid-gap: 3px;
+  grid-template-rows: repeat(6, 1fr) ;
+  grid-gap: 2px;
   width: auto;
-  max-width: 400px;
   height: auto;
 
 }
 
-.chart, .data-box, #chosen-store{
-  border: solid 2px;
-  border-color: Black;
-  border-radius: 3px;
-  border-color: var(--text);
-  background-color: var(--blue);
-}
 
-.data-box{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.data-box, #chosen-store {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-#sales-chart {
+#weekly-sales {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 }
 
-#guest-count-chart {
+#weekly-guest-count {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+#weekly-cumul-sales {
   grid-column: 1 / 2;
   grid-row: 3 / 4;
 }
 
-#cumul-sales-chart {
-  grid-column: 1 / 2;
-  grid-row: 5 / 6;
-}
-
-#total-sales-chart{
-  grid-column: 1 / 2;
-  grid-row: 7 / 8;
-}
-
-#total-guest-count-chart {
-  grid-column: 1 / 2;
-  grid-row: 9 / 10;
-}
-
-#total-cumul-sales-chart {
-  grid-column: 1 / 2;
-  grid-row: 11 / 12;
-}
-
-#sales-data {
-  grid-column: 1 / 2;
-  grid-row: 2/ 3;
-}
-
-#guest-count-data {
+#weekly-sales-total {
   grid-column: 1 / 2;
   grid-row: 4 / 5;
 }
 
-#total-sales-data {
+#weekly-guest-count-total {
   grid-column: 1 / 2;
-  grid-row: 8 / 9;
+  grid-row: 5 / 6;
 }
 
-#total-guest-count-data {
-  grid-column: 1 / 2;
-  grid-row: 10 / 11;
-}
-
-#cumul-sales-data{
+#weeklly-cumul-sales-total {
   grid-column: 1 / 2;
   grid-row: 6 / 7;
-}
-
-#total-cumul-sales-data {
-  grid-column: 1 / 2;
-  grid-row: 12 / 13;
-}
-
-@media only screen and (min-width: 992px){
-  .header{
-    display: flex;
-    flex-flow: row nowrap;
-    width: auto;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #chosen-store{
-    width: 100%;
-    margin: 5px;
-    text-align: center;
-    border-color: var(--text);
-    background-color: var(--blue);
-  }
-  .chart-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr auto 1fr auto 1fr auto;
-    grid-gap: 5px;
-    width: auto;
-    height: auto;
-    max-height: 900;
-  }
-
-  #sales-chart {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-  }
-
-  #guest-count-chart {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-  }
-
-  #cumul-sales-chart {
-    grid-column: 1 / 2;
-    grid-row: 5 / 6;
-  }
-
-  #total-sales-chart{
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-  }
-
-  #total-guest-count-chart {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-  }
-
-  #total-cumul-sales-chart {
-    grid-column: 2 / 3;
-    grid-row: 5 / 6;
-  }
-
-  #sales-data {
-    grid-column: 1 / 2;
-    grid-row: 2/ 3;
-  }
-
-  #guest-count-data {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-  }
-
-  #total-sales-data {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-  }
-
-  #total-guest-count-data {
-    grid-column: 2 / 3;
-    grid-row: 4 / 5;
-  }
-
-  #cumul-sales-data{
-    grid-column: 1 / 2;
-    grid-row: 6 / 7;
-  }
-
-  #total-cumul-sales-data {
-    grid-column: 2 / 3;
-    grid-row: 6 / 7;
-  }
 }
 
 @media only screen and (min-width: 1350px){
@@ -198,7 +81,7 @@ body {
     display: flex;
     flex-flow: row nowrap;
     width: auto;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
   }
 
@@ -210,28 +93,44 @@ body {
     background-color: var(--blue);
   }
 
-  .chart-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr auto 1fr auto;
-    grid-gap: 5px;
-    width: auto;
-    height: auto;
-    max-height: 900;
+  .main {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center;
+    width: 100%;
   }
 
-  #sales-chart {
+  .chart-box {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    height: 400px;
+  }
+
+  .chart-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2px;
+    height: auto;
+    width: auto;
+    max-height: 900px;
+  }
+
+  #weekly-sales {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
   }
 
-  #guest-count-chart {
+  #weekly-guest-count {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
   }
 
-  #cumul-sales-chart {
-    grid-column: 3/4;
+  #weekly-cumul-sales {
+    grid-column: 3 / 4;
     grid-row: 1 / 2;
   }
 
@@ -240,44 +139,19 @@ body {
     grid-row: 3 / 4;
   }
 
-  #total-guest-count-chart {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-  }
-
-  #total-cumul-sales-chart {
-    grid-column: 3 / 4;
-    grid-row: 3 / 4;
-  }
-
-  #sales-data {
+  #weekly-sales-total {
     grid-column: 1 / 2;
-    grid-row: 2/ 3;
+    grid-row: 2 / 3;
   }
 
-  #guest-count-data {
+  #weekly-guest-count-total {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
   }
 
-  #total-sales-data {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-  }
-
-  #total-guest-count-data {
+  #weeklly-cumul-sales-total {
     grid-column: 2 / 3;
-    grid-row: 4 / 5;
-  }
-
-  #cumul-sales-data{
-    grid-column: 3 / 4;
-    grid-row: 2 / 3;
-  }
-
-  #total-cumul-sales-data {
-    grid-column: 3 / 4;
-    grid-row: 4 / 5;
+    grid-row: 3 / 4;
   }
 }
 

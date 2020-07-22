@@ -1,0 +1,288 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.header{
+  display: flex;
+  flex-flow: row nowrap;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+#chosen-store{
+  width: 100%;
+  margin: 5px;
+  text-align: center;
+  background-color: #00adb5;
+}
+.chart-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr auto ;
+  grid-gap: 3px;
+  width: auto;
+  max-width: 400px;
+  height: auto;
+
+}
+
+.chart, .data-box, #chosen-store{
+  border: solid 2px;
+  border-color: Black;
+  border-radius: 3px;
+  border-color: var(--text);
+  background-color: var(--blue);
+}
+
+.data-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.data-box, #chosen-store {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#sales-chart {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+#guest-count-chart {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+#cumul-sales-chart {
+  grid-column: 1 / 2;
+  grid-row: 5 / 6;
+}
+
+#total-sales-chart{
+  grid-column: 1 / 2;
+  grid-row: 7 / 8;
+}
+
+#total-guest-count-chart {
+  grid-column: 1 / 2;
+  grid-row: 9 / 10;
+}
+
+#total-cumul-sales-chart {
+  grid-column: 1 / 2;
+  grid-row: 11 / 12;
+}
+
+#sales-data {
+  grid-column: 1 / 2;
+  grid-row: 2/ 3;
+}
+
+#guest-count-data {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+}
+
+#total-sales-data {
+  grid-column: 1 / 2;
+  grid-row: 8 / 9;
+}
+
+#total-guest-count-data {
+  grid-column: 1 / 2;
+  grid-row: 10 / 11;
+}
+
+#cumul-sales-data{
+  grid-column: 1 / 2;
+  grid-row: 6 / 7;
+}
+
+#total-cumul-sales-data {
+  grid-column: 1 / 2;
+  grid-row: 12 / 13;
+}
+
+@media only screen and (min-width: 992px){
+  .header{
+    display: flex;
+    flex-flow: row nowrap;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #chosen-store{
+    width: 100%;
+    margin: 5px;
+    text-align: center;
+    border-color: var(--text);
+    background-color: var(--blue);
+  }
+  .chart-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto 1fr auto 1fr auto;
+    grid-gap: 5px;
+    width: auto;
+    height: auto;
+    max-height: 900;
+  }
+
+  #sales-chart {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  #guest-count-chart {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  #cumul-sales-chart {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+  }
+
+  #total-sales-chart{
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+
+  #total-guest-count-chart {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
+
+  #total-cumul-sales-chart {
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+  }
+
+  #sales-data {
+    grid-column: 1 / 2;
+    grid-row: 2/ 3;
+  }
+
+  #guest-count-data {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
+
+  #total-sales-data {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  #total-guest-count-data {
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+  }
+
+  #cumul-sales-data{
+    grid-column: 1 / 2;
+    grid-row: 6 / 7;
+  }
+
+  #total-cumul-sales-data {
+    grid-column: 2 / 3;
+    grid-row: 6 / 7;
+  }
+}
+
+@media only screen and (min-width: 1350px){
+  .header{
+    display: flex;
+    flex-flow: row nowrap;
+    width: auto;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #chosen-store{
+    width: 300px;
+    margin: 5px;
+    text-align: center;
+    border-color: var(--text);
+    background-color: var(--blue);
+  }
+
+  .chart-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr auto 1fr auto;
+    grid-gap: 5px;
+    width: auto;
+    height: auto;
+    max-height: 900;
+  }
+
+  #sales-chart {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  #guest-count-chart {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+
+  #cumul-sales-chart {
+    grid-column: 3/4;
+    grid-row: 1 / 2;
+  }
+
+  #total-sales-chart{
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  #total-guest-count-chart {
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+  }
+
+  #total-cumul-sales-chart {
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+  }
+
+  #sales-data {
+    grid-column: 1 / 2;
+    grid-row: 2/ 3;
+  }
+
+  #guest-count-data {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  #total-sales-data {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
+
+  #total-guest-count-data {
+    grid-column: 2 / 3;
+    grid-row: 4 / 5;
+  }
+
+  #cumul-sales-data{
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+  }
+
+  #total-cumul-sales-data {
+    grid-column: 3 / 4;
+    grid-row: 4 / 5;
+  }
+}
+
+@media print{
+  .form-div{
+    display: none;
+  }
+}

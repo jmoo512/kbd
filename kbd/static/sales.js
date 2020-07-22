@@ -159,28 +159,45 @@ let colors = {
   "2020":"#47ca3e"
   }
 
+let width = window.innerWidth;
+
+function calcChartWidth(width) {
+  if (width > 495) {
+    let chartWidth = 496
+    return chartWidth
+  }
+  else {
+    let chartWidth = width-4
+    return chartWidth
+  }
+}
+
+calcChartWidth(width)
+
 //default layout for charts
 
 let layout =  {
   autosize: true,
   paper_bgcolor: colors['grey'],
   plot_bgcolor: colors['grey'],
-  width: 500,
+  width: calcChartWidth(width),
   height: 350,
   margin: {
     l: 50,
     r: 50,
     b: 50,
     t: 50,
-    pad: 5
+    pad: 2
   },
   xaxis: {
+    fixedrange: true,
     tickcolor: '#FFF',
     tickfont: {
       color: "#FFF"
     },
   },
   yaxis: {
+    fixedrange: true,
     tickcolor: '#FFF',
     tickfont: {
       color: "#FFF"
@@ -196,7 +213,7 @@ let layout =  {
     }}
 }
 
-let config = {responsive: true, displayModeBar: false}
+let config = {displayModeBar: false}
 
 
 
