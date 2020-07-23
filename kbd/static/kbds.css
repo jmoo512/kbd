@@ -341,17 +341,31 @@ body {
     border: 2px solid;
     border-radius: 3px;
     border-color: var(--text);
+    justify-content: space-around;
   }
 
   .data-card {
     padding: 4px;
     order: 1;
-    width: 49%;
+    width: auto;
+    max-width: 300px;
+  }
+
+  .big-number {
+    font-size: 20px;
+  }
+
+  .little-number {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
   }
 
   .chart {
-    order: 2;
-    width: 98%;
+    order: 1;
+    width: 300px;
     margin-top: 5px;
   }
 }

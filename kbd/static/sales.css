@@ -169,15 +169,7 @@ body {
     justify-content: center;
     align-items: center;
   }
-  .main {
-
-  }
-  .chart-grid{
-
-  }
-  .chart-box{
-
-  }
+  
   #weekly-sales {
     grid-column: 1 / 2;
     grid-row: 1 / 2;

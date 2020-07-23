@@ -190,6 +190,7 @@ let layout =  {
     pad: 2
   },
   xaxis: {
+    showgrid: false,
     fixedrange: true,
     tickcolor: '#FFF',
     tickfont: {
@@ -197,6 +198,7 @@ let layout =  {
     },
   },
   yaxis: {
+    showgrid: false,
     fixedrange: true,
     tickcolor: '#FFF',
     tickfont: {
@@ -479,9 +481,9 @@ async function populateBaseCharts() {
   totalCumul = [cumul18, cumul19, cumul20]
 
 
-  Plotly.newPlot( 'total-sales-chart', totalSales, layout, config);
-  Plotly.newPlot( 'total-guest-count-chart', totalGC, layout, config);
-  Plotly.newPlot( 'total-cumul-sales-chart', totalCumul, layout, config);
+  Plotly.react( 'total-sales-chart', totalSales, layout, config);
+  Plotly.react( 'total-guest-count-chart', totalGC, layout, config);
+  Plotly.react( 'total-cumul-sales-chart', totalCumul, layout, config);
 
   let currentSales = chartSales20[chartSales20.length-1]
   let currentGC = chartGC20[chartGC20.length-1]
@@ -503,6 +505,10 @@ let startingData = []
 Plotly.newPlot( 'sales-chart', startingData, layout, config);
 Plotly.newPlot( 'guest-count-chart', startingData, layout, config);
 Plotly.newPlot( 'cumul-sales-chart', startingData, layout, config);
+Plotly.newPlot( 'total-sales-chart', startingData, layout, config);
+Plotly.newPlot( 'total-guest-count-chart', startingData, layout, config);
+Plotly.newPlot( 'total-cumul-sales-chart', startingData, layout, config);
+
 
 //call function to instantiate company level charts on page load
 populateBaseCharts()
