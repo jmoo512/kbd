@@ -342,6 +342,8 @@ body {
     border-radius: 3px;
     border-color: var(--text);
     justify-content: space-around;
+    height: 110px;
+    align-items: center;
   }
 
   .data-card {

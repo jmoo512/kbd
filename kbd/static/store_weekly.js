@@ -171,13 +171,28 @@ let colors = {
   "tickColor":"#FFF"
   }
 
+  let width = window.innerWidth;
+
+  function calcChartWidth(width) {
+    if (width > 495) {
+      let chartWidth = 400
+      return chartWidth
+    }
+    else {
+      let chartWidth = width-4
+      return chartWidth
+    }
+  }
+
+  calcChartWidth(width)
+
 //default layout for charts
 
 let layout1 =  {
   //autosize: true,
   paper_bgcolor: colors['grey'],
   plot_bgcolor: colors['grey'],
-  width: 390,
+  width: calcChartWidth(width),
   height: 260,
   margin: {
     l: 50,
@@ -187,12 +202,16 @@ let layout1 =  {
     pad: 5
   },
   xaxis: {
+    showgrid: false,
+    fixedrange: true,
     tickcolor: colors['tickColor'],
     tickfont: {
       color: colors['tickColor']
     },
   },
   yaxis: {
+    showgrid: false,
+    fixedrange: true,
     tickcolor: colors['tickColor'],
     tickfont: {
       color: colors['tickColor']

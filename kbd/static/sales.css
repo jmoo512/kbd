@@ -169,7 +169,11 @@ body {
     justify-content: center;
     align-items: center;
   }
-  
+
+  .chart-grid {
+    max-height: 816px;
+  }
+
   #weekly-sales {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
