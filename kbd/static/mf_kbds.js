@@ -50,7 +50,7 @@ async function updateCharts () {
     y: inspScores,
     mode: 'lines',
     line: {
-      color: colors['2020'],
+      color: colors['spline'],
       width: 2,
       shape: 'spline'
     },
@@ -61,7 +61,7 @@ async function updateCharts () {
     y: gfScores,
     mode: 'lines',
     line: {
-      color: colors['2020'],
+      color: colors['spline'],
       width: 2,
       shape: 'spline'
     },
@@ -72,7 +72,7 @@ async function updateCharts () {
     y: bagTimesScores,
     mode: 'lines',
     line: {
-      color: colors['2020'],
+      color: colors['spline'],
       width: 2,
       shape: 'spline'
     },
@@ -83,7 +83,7 @@ async function updateCharts () {
     y: accScores,
     mode: 'lines',
     line: {
-      color: colors['2020'],
+      color: colors['spline'],
       width: 2,
       shape: 'spline'
     },
