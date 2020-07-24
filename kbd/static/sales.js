@@ -364,9 +364,9 @@ async function updateCharts () {
   let currentPctGC = pctGC[pctGC.length-1]
   let currentCumul = pctCumul[pctCumul.length-1]
 
-  document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
-  document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
-  document.getElementById("cumul-sales-data").innerHTML = 'YTD Sales Growth: ' + currentCumul + '%';
+  document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales;
+  document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC;
+  document.getElementById("cumul-sales-data").innerHTML = 'YTD Sales Growth: ' + currentCumul;
 }
 
 //load company level charts on page load
@@ -505,9 +505,9 @@ async function populateBaseCharts() {
   let currentPctGC = pctGC[pctGC.length-1]
   let currentCumul = pctCumul[pctCumul.length-1]
 
-  document.getElementById("total-sales-data").innerHTML = 'KN Sales: $' + currentSales + ' | ' + currentPctSales + '%'
-  document.getElementById("total-guest-count-data").innerHTML = 'KN Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
-  document.getElementById("total-cumul-sales-data").innerHTML = 'KN YTD Growth: ' + currentCumul + '%';
+  document.getElementById("total-sales-data").innerHTML = 'KN Sales: $' + currentSales + ' | ' + currentPctSales;
+  document.getElementById("total-guest-count-data").innerHTML = 'KN Guest Count: ' + currentGC + ' | ' + currentPctGC;
+  document.getElementById("total-cumul-sales-data").innerHTML = 'KN YTD Growth: ' + currentCumul;
 
 
 }
