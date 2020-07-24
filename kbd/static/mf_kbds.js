@@ -50,7 +50,7 @@ async function updateCharts () {
     y: inspScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -61,7 +61,7 @@ async function updateCharts () {
     y: gfScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -72,7 +72,7 @@ async function updateCharts () {
     y: bagTimesScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -83,7 +83,7 @@ async function updateCharts () {
     y: accScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -119,7 +119,7 @@ async function updateCharts () {
   document.getElementById("acc-month").innerHTML = accMonth + '% Mo';
   document.getElementById("acc-q").innerHTML = accQuarter + '% Q';
   document.getElementById("acc-title").innerHTML = "&nbsp as of " + accLastUpdated;
-  
+
 }
 
 async function populateBaseCharts () {

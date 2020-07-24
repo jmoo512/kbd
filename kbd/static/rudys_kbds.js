@@ -58,7 +58,7 @@ let inspChartData = {
     y: inspScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -69,7 +69,7 @@ let inspChartData = {
     y: gfScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -80,7 +80,7 @@ let inspChartData = {
     y: tacoSeconds,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -91,7 +91,7 @@ let inspChartData = {
     y: tglScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },
@@ -102,7 +102,7 @@ let inspChartData = {
     y: accScores,
     mode: 'lines',
     line: {
-      color: colors['yellow'],
+      color: colors['2020'],
       width: 2,
       shape: 'spline'
     },

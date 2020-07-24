@@ -164,11 +164,11 @@ let colors = {
   "blue":"#488a99",
   "bgColor":"#dadada",
   "text":"#20283e",
-  "grey":"#484848",
-  "2018":"#ac3e31",
-  "2019":"#dbae58",
-  "2020":"#47ca3e",
-  "tickColor":"#FFF"
+  "grey":"#999999",
+  "2018":"#999999",
+  "2019":"#999999",
+  "2020":"#333333",
+  "tickColor":"#000"
   }
 
   let width = window.innerWidth;
@@ -190,8 +190,8 @@ let colors = {
 
 let layout1 =  {
   //autosize: true,
-  paper_bgcolor: colors['grey'],
-  plot_bgcolor: colors['grey'],
+  paper_bgcolor: colors['blue'],
+  plot_bgcolor: colors['blue'],
   width: calcChartWidth(width),
   height: 260,
   margin: {
@@ -224,7 +224,8 @@ let layout1 =  {
     y:1.3,
     font: {
       color: colors['tickColor']
-    }
+    },
+    bgcolor: 'rgba(0,0,0,0)'
   }
 }
 
@@ -256,7 +257,8 @@ let layout2 =  {
   legend: {
     font: {
       color: colors['tickColor']
-    }
+    },
+    bgcolor: 'rgba(0,0,0,0)'
   }
 }
 
@@ -330,6 +332,7 @@ async function updateCharts () {
     line: {
       color: colors['2018'],
       width: 2,
+      dash: 'dashdot'
     },
     name: '2018'
   };
@@ -341,6 +344,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   };
@@ -351,7 +355,7 @@ async function updateCharts () {
     mode: 'lines',
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctSales
@@ -367,6 +371,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -378,7 +383,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctGC
@@ -394,6 +399,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -405,7 +411,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctBBQGC
@@ -421,6 +427,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -432,7 +439,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctTacosGC
@@ -448,6 +455,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -459,7 +467,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020'
   }
@@ -474,6 +482,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -485,7 +494,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020'
   }
@@ -500,6 +509,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: 'OLO'
   }
@@ -510,8 +520,9 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: colors['orange'],
+      color: colors['2019'],
       width: 2,
+      dash: 'dashdot'
     },
     name: 'DoorDash'
   }
@@ -522,8 +533,9 @@ async function updateCharts () {
     mode: 'lines'
     ,
     line: {
-      color: colors['2018'],
+      color: colors['2020'],
       width: 2,
+      dash: 'dot'
     },
     name: 'BBQ'
   }
@@ -536,6 +548,7 @@ async function updateCharts () {
     line: {
       color: colors['2020'],
       width: 2,
+      dash: 'dashdot'
     },
     name: 'Tacos'
   }
@@ -625,10 +638,10 @@ async function updateCharts () {
   let currentDoorDashPct = doorDashRatio[doorDashRatio.length-1]
 
 
-  document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales + '%'
-  document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC + '%'
-  document.getElementById("bbq-data").innerHTML = 'BBQ Guest Count: ' + currentBBQGC + ' | ' + currentPctBBQGC + '%'
-  document.getElementById("tacos-data").innerHTML = 'Taco Guest Count: ' + currentTacoGC + ' | ' + currentPctTacosGC + '%'
+  document.getElementById("sales-data").innerHTML = 'Weekly Sales: $' + currentSales + ' | ' + currentPctSales
+  document.getElementById("guest-count-data").innerHTML = 'Weekly Guest Count: ' + currentGC + ' | ' + currentPctGC
+  document.getElementById("bbq-data").innerHTML = 'BBQ Guest Count: ' + currentBBQGC + ' | ' + currentPctBBQGC
+  document.getElementById("tacos-data").innerHTML = 'Taco Guest Count: ' + currentTacoGC + ' | ' + currentPctTacosGC
   document.getElementById("olo-data").innerHTML = 'OLO Sales: $' + currentOlo
   document.getElementById("dd-data").innerHTML = 'DoorDash Sales: $' + currentDoorDash
   document.getElementById("ratio-data").innerHTML = 'BBQ: ' + currentBBQPct + '% | Tacos: ' + currentTacosPct + '% | OLO: ' + currentOloPct + '% | DD: ' + currentDoorDashPct + '%'

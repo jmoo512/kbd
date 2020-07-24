@@ -153,10 +153,11 @@ let colors = {
   "blue":"#488a99",
   "bgColor":"#dadada",
   "text":"#20283e",
-  "grey":"#484848",
-  "2018":"#ac3e31",
-  "2019":"#dbae58",
-  "2020":"#47ca3e"
+  "oldgrey":"#484848",
+  "grey":"#999999",
+  "2018":"#999999",
+  "2019":"#999999",
+  "2020":"#333333"
   }
 
 let width = window.innerWidth;
@@ -178,8 +179,8 @@ calcChartWidth(width)
 
 let layout =  {
   autosize: true,
-  paper_bgcolor: colors['grey'],
-  plot_bgcolor: colors['grey'],
+  paper_bgcolor: colors['blue'],
+  plot_bgcolor: colors['blue'],
   width: calcChartWidth(width),
   height: 350,
   margin: {
@@ -192,17 +193,18 @@ let layout =  {
   xaxis: {
     showgrid: false,
     fixedrange: true,
-    tickcolor: '#FFF',
+    showticklabels: true,
+    tickcolor: '#000',
     tickfont: {
-      color: "#FFF"
+      color: "#000"
     },
   },
   yaxis: {
     showgrid: false,
     fixedrange: true,
-    tickcolor: '#FFF',
+    tickcolor: '#000',
     tickfont: {
-      color: "#FFF"
+      color: "#000"
     },
   },
   legend: {
@@ -211,8 +213,10 @@ let layout =  {
     xanchor:"left",
     y:1.3,
     font: {
-      color: '#FFF'
-    }}
+      color: '#000'
+    },
+    bgcolor: 'rgba(0,0,0,0)'
+  }
 }
 
 let config = {displayModeBar: false}
@@ -249,6 +253,7 @@ async function updateCharts () {
     line: {
       color: colors['2018'],
       width: 2,
+      dash: 'dashdot'
     },
     name: '2018'
   };
@@ -260,8 +265,9 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
-    name: '2019'
+    name: '2019',
   };
 
   let sales20 = {
@@ -270,7 +276,7 @@ async function updateCharts () {
     mode: 'lines',
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctSales
@@ -286,6 +292,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -297,7 +304,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctGC
@@ -313,6 +320,7 @@ async function updateCharts () {
     line: {
       color: colors['2018'],
       width: 2,
+      dash: 'dashdot'
     },
     name: '2018'
   }
@@ -325,6 +333,7 @@ async function updateCharts () {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   }
@@ -336,7 +345,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctCumul
@@ -390,6 +399,7 @@ async function populateBaseCharts() {
     line: {
       color: colors['2018'],
       width: 2,
+      dash: 'dashdot'
     },
     name: '2018'
   };
@@ -401,6 +411,7 @@ async function populateBaseCharts() {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   };
@@ -411,7 +422,7 @@ async function populateBaseCharts() {
     mode: 'lines',
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctSales
@@ -426,6 +437,7 @@ async function populateBaseCharts() {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dashdot'
     },
     name: '2019'
   };
@@ -436,7 +448,7 @@ async function populateBaseCharts() {
     mode: 'lines',
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctGC
@@ -451,6 +463,7 @@ async function populateBaseCharts() {
     line: {
       color: colors['2018'],
       width: 2,
+      dash: 'dashdot'
     },
     name: '2018'
   };
@@ -462,6 +475,7 @@ async function populateBaseCharts() {
     line: {
       color: colors['2019'],
       width: 2,
+      dash: 'dot'
     },
     name: '2019'
   };
@@ -472,7 +486,7 @@ async function populateBaseCharts() {
     mode: 'lines',
     line: {
       color: colors['2020'],
-      width: 2,
+      width: 3,
     },
     name: '2020',
     text: pctCumul
