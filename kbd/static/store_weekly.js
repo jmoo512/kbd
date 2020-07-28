@@ -504,7 +504,7 @@ async function updateCharts () {
   let oloRatios = {
     x: weeks,
     y: oloRatio,
-    mode: 'lines'
+    mode: 'lines+markers'
     ,
     line: {
       color: colors['2019'],
@@ -517,7 +517,7 @@ async function updateCharts () {
   let doorDashRatios = {
     x: weeks,
     y: doorDashRatio,
-    mode: 'lines'
+    mode: 'lines+markers'
     ,
     line: {
       color: colors['2019'],
@@ -534,8 +534,7 @@ async function updateCharts () {
     ,
     line: {
       color: colors['2020'],
-      width: 2,
-      dash: 'dot'
+      width: 2
     },
     name: 'BBQ'
   }
@@ -548,7 +547,7 @@ async function updateCharts () {
     line: {
       color: colors['2020'],
       width: 2,
-      dash: 'dashdot'
+      dash: 'dash'
     },
     name: 'Tacos'
   }
