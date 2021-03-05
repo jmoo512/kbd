@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-
+#USERS DB MODEL FOR LOGIN
 class Users(UserMixin, db.Model):
     __tablename__='users'
     id=db.Column(db.Integer,primary_key=True)
@@ -25,7 +25,7 @@ def load_user(id):
 
 
 
-
+#FOOD VARIANCE DB MODEL
 class FoodVariance(db.Model):
     __tablename__='foodvariance'
     id=db.Column(db.Integer,primary_key=True)
@@ -34,6 +34,7 @@ class FoodVariance(db.Model):
     location=db.Column(db.String(20))
     score=db.Column(db.Float)
 
+#STORE ASSESSMENT DB MODEL
 class StoreAssessments(db.Model):
     __tablename__='storeassessments'
     id=db.Column(db.Integer,primary_key=True)
@@ -43,7 +44,7 @@ class StoreAssessments(db.Model):
     score=db.Column(db.Float)
 
 
-
+#FISCAL CALENDAR DB MODEL
 class FiscalCalendar(db.Model):
     __tablename__='fiscalcalendar'
     id=db.Column(db.Integer,primary_key=True)

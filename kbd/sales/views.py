@@ -14,12 +14,10 @@ params=config()
 
 sales=Blueprint('sales',__name__)
 
+#ADD SALES DATA
 @sales.route('/sales_add/',methods=['POST'])
 #@login_required
 def sales_add():
-
-
-
 
     form=SalesForm()
 
@@ -53,7 +51,7 @@ def sales_add():
 
     return redirect(url_for('core.add'))
 
-#api for store level sales and guest count
+#GET SALES AND GUEST COUNT FOR CHOSEN LOCATION
 @sales.route('/sales/<chosen_location>')
 #@login_required
 def sales_gc(chosen_location):
@@ -92,7 +90,7 @@ def sales_gc(chosen_location):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
-#api for store level cumulative sales
+#GET CUMULATIVE SALES FOR CHOSEN LOCATION YTD
 @sales.route('/cumul/<chosen_location>')
 #@login_required
 def cumul(chosen_location):
@@ -149,7 +147,7 @@ def cumul(chosen_location):
 
     return Response(result.to_json(orient="records"), mimetype='application/json')
 
-#api to gather company level sales and guest counts
+#GET COMPANY TOTAL SALES AND GUEST COUNT
 @sales.route('/total_sales')
 #@login_required
 def total_sales():
@@ -202,7 +200,7 @@ def total_sales():
 
     return Response(df_total.to_json(orient="records"), mimetype='application/json')
 
-#api for company level cumulative sales
+#GET COMPANY CUMULATIVE SALES YTD
 @sales.route('/total_cumul')
 #@login_required
 def total_cumul():
@@ -258,7 +256,7 @@ def total_cumul():
     return Response(result.to_json(orient="records"), mimetype='application/json')
 
 
-#api for weekly store sales and guest count
+#GET WEEKLY SALES AND GUEST COUNT FOR CHOSEN LOCATION
 @sales.route('/weekly/<chosen_location>')
 #@login_required
 def weekly(chosen_location):

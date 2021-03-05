@@ -2,6 +2,9 @@ from kbd import db
 from datetime import datetime
 
 
+
+#INSPECTIONS DB MODEL
+
 class Inspections(db.Model):
     __tablename__='inspections'
     id=db.Column(db.Integer,primary_key=True)

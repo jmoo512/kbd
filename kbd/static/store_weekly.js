@@ -17,7 +17,7 @@ function selectStore() {
 }
 
 
-//grab sales and guest count data from api
+//get sales and guest count data from api
 async function getSalesData(api) {
   const response = await fetch(api);
   const data = await response.json();
@@ -36,14 +36,14 @@ async function getSalesData(api) {
   let tmpDoorDash19 = [];
   let tmpDoorDash20 = [];
   let tmpWeeks = [];
-  let tmpPctSales = []
-  let tmpPctGC = []
-  let tmpPctBBQGC = []
-  let tmpPctTacosGC = []
-  let tmpBBQRatio = []
-  let tmpTacosRatio = []
-  let tmpOloRatio = []
-  let tmpDoorDashRatio = []
+  let tmpPctSales = [];
+  let tmpPctGC = [];
+  let tmpPctBBQGC = [];
+  let tmpPctTacosGC = [];
+  let tmpBBQRatio = [];
+  let tmpTacosRatio = [];
+  let tmpOloRatio = [];
+  let tmpDoorDashRatio = [];
 
   data.forEach( obj => {
     if (obj.fiscal_year === 2018){
@@ -81,7 +81,7 @@ async function getSalesData(api) {
   return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpOloSales19, tmpOloSales20, tmpDoorDash19, tmpDoorDash20, tmpBBQGC19, tmpBBQGC20, tmpTacoGC19, tmpTacoGC20, tmpWeeks, tmpPctSales, tmpPctGC, tmpPctBBQGC, tmpPctTacosGC, tmpBBQRatio, tmpTacosRatio, tmpOloRatio, tmpDoorDashRatio};
 }
 
-//grab inspection data from api
+//get inspection data from api
 async function getInspData(api) {
   const response = await fetch(api);
   const data = await response.json();
@@ -117,7 +117,7 @@ async function getInspData(api) {
   return {inspAvg, inspWeekAvg};
 }
 
-//grab ce data from api
+//get ce data from api
 async function getCEData(api) {
   const response = await fetch(api);
   const data = await response.json();
@@ -273,6 +273,7 @@ var inspLayout = { width: 350,
   }
  };
 
+//base config for charts
 let config = {responsive: true, displayModeBar: false}
 
 

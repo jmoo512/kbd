@@ -4,7 +4,7 @@ document.getElementById("store-select").addEventListener("change",updateCharts);
 
 
 
-//use selector to modify api address per store selected
+//use selector to get route by store selected
 function selectStore() {
   let store = document.getElementById("store-select").value;
   document.getElementById("chosen-store").innerHTML = 'Location: ' + store;
@@ -15,7 +15,7 @@ function selectStore() {
 }
 
 
-//grab sales and guest count data from api
+//get sales and guest count data from api
 async function getSalesData(api) {
   const response = await fetch(api);
   const data = await response.json();
@@ -51,7 +51,7 @@ async function getSalesData(api) {
   return {tmpSales18, tmpSales19, tmpSales20, tmpGC19, tmpGC20, tmpWeeks, tmpPctSales, tmpPctGC};
 }
 
-//grab cumulative sales data from api
+//get cumulative sales data from api
 
 async function getCumulData(api) {
   const response = await fetch(api);
@@ -80,7 +80,7 @@ async function getCumulData(api) {
   return {tmpCumul18, tmpCumul19, tmpCumul20, tmpPctCumul};
 }
 
-//grab total sales and guest count data from api
+//get total sales and guest count data from api
 
 async function getTotalSales() {
   const response = await fetch('/total_sales');
@@ -116,7 +116,7 @@ async function getTotalSales() {
   return {tmpSales18, tmpSales19, tmpSales20, tmpWeeks, tmpGC19, tmpGC20, tmpPctSales, tmpPctGC}
 }
 
-//grab total cumulative sales from api
+//get total cumulative sales from api
 
 async function getTotalCumul() {
   const response = await fetch('/total_cumul');
@@ -176,7 +176,6 @@ function calcChartWidth(width) {
 calcChartWidth(width)
 
 //default layout for charts
-
 let layout =  {
   autosize: true,
   paper_bgcolor: colors['blue'],
@@ -219,6 +218,7 @@ let layout =  {
   }
 }
 
+//default config for charts
 let config = {displayModeBar: false}
 
 

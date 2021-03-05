@@ -4,6 +4,8 @@ from wtforms.validators import DataRequired, Email
 from wtforms import ValidationError
 from wtforms.fields.html5 import DateField
 
+#FLASK-FORM TO VALIDATE GAME FILM DATA
+
 class GFForm(FlaskForm):
     week_ending=DateField('Week Ending: ', format='%Y-%m-%d')
     fiscal_month=SelectField('Fiscal Month', choices=[

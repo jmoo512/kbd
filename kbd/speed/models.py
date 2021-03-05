@@ -1,6 +1,9 @@
 from kbd import db
 from datetime import datetime
 
+
+#CASHIER EFFICIENCY DB MODEL
+
 class CashierEfficiency(db.Model):
     __tablename__='ce'
     id=db.Column(db.Integer,primary_key=True)
@@ -33,6 +36,8 @@ class CashierEfficiency(db.Model):
         self.mod_one=mod_one
         self.mod_two=mod_two
 
+#GROUP MEAL TIMES DB MODEL
+
 class GMTimes(db.Model):
     __tablename__='gmtimes'
     id=db.Column(db.Integer,primary_key=True)
@@ -44,6 +49,9 @@ class GMTimes(db.Model):
     order_type=db.Column(db.String(20))
     score=db.Column(db.Integer)
     paid=db.Column(db.Boolean)
+
+
+#LINE TIMES DB MODEL
 
 class LineTimes(db.Model):
     __tablename__='linetimes'
@@ -59,6 +67,8 @@ class LineTimes(db.Model):
     pm_out=db.Column(db.Integer)
     pm_over_11=db.Column(db.Integer)
 
+#TACO TIMES DB MODEL
+
 class TacoTimes(db.Model):
     __tablename__='tacotimes'
     id=db.Column(db.Integer,primary_key=True)
@@ -73,6 +83,8 @@ class TacoTimes(db.Model):
     date_measured=db.Column(db.Date)
     score=db.Column(db.DateTime(40))
     time_in_seconds=db.Column(db.Integer)
+
+#BAG TIMES DB MODEL
 
 class BagTimes(db.Model):
     __tablename__='bagtimes'

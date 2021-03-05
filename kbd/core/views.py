@@ -17,9 +17,15 @@ from flask_login import login_required
 
 core = Blueprint('core',__name__)
 
+
+#HOME
+
 @core.route('/')
 def index():
     return render_template('index.html')
+
+
+#ROUTE TO ADD ALL DATA
 
 @core.route('/add')
 #@login_required
@@ -35,29 +41,34 @@ def add():
 
     return render_template('add.html',ceform=ceform, sales_form=sales_form, insp_form=insp_form, gf_form=gf_form, taco_form=taco_form, tgl_form=tgl_form, acc_form=acc_form, bag_times_form=bag_times_form)
 
-@core.route('/c3js')
-def c3():
-    return render_template('c3js.html')
+# @core.route('/c3js')
+# def c3():
+#     return render_template('c3js.html')
 
+
+#VIEW SALES DATA
 @core.route('/sales')
 #@login_required
 def sales():
     return render_template('/sales.html')
 
+#VIEW WEEKLY STORE RELATED DATA
 @core.route('/store_weekly')
 #@login_required
 def store_weekly():
     return render_template('store_weekly.html')
 
+#VIEW MIGHTY FINE KBDS
 @core.route('/mf_kbds')
 def mf_kbds():
     return render_template('mf_kbds.html')
 
+#VIEW RUDY'S KBDS
 @core.route('/rudys_kbds')
 def rudys_kbds():
     return render_template('rudys_kbds.html')
 
-
+#ROUTE TO HANDLE LOGIN
 @core.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -71,6 +82,7 @@ def login():
         return redirect(url_for('core.index'))
     return render_template('login.html', title='Sign In', form=form)
 
+#ROUTE TO HANDLE LOGOUT
 @core.route('/logout')
 def logout():
     logout_user()

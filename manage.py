@@ -9,7 +9,7 @@ from kbd.sales import models
 from kbd.txh import models
 from kbd.accuracy import models
 
-#Migrate(app,db)
+#RUN DB ALEMBIC COMMANDS FROM THE CL
 
 manager=Manager(create_app)
 manager.add_command('db',MigrateCommand)

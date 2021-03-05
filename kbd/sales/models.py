@@ -1,6 +1,7 @@
 from kbd import db
 from datetime import datetime
 
+#SALES DB MODEL
 class Sales(db.Model):
     __tablename__='sales'
 

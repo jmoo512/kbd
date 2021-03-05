@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from wtforms.fields.html5 import DateField
 
+#FLASK-FORM TO VALIDATE CASHIER EFFICIENCY DATA
 class CEForm(FlaskForm):
     week_ending=DateField('Week Ending', format='%Y-%m-%d')
     week_of_month=SelectField('Week of Month', choices=[
@@ -73,6 +74,7 @@ class CEForm(FlaskForm):
     submit=SubmitField('Add')
 
 
+#FLASK-FORM TO VALIDATE TACO TIMES DATA
 class TacoForm(FlaskForm):
     location=SelectField('Location', choices=[
                                                 ('183','North'),
@@ -112,6 +114,7 @@ class TacoForm(FlaskForm):
     submit=SubmitField('Add')
 
 
+#FLASK-FORM TO VALIDATE BAG TIMES DATA
 class BagTimesForm(FlaskForm):
     week_ending=DateField('Week Ending: ', format='%Y-%m-%d')
     location=SelectField('Location', choices=[

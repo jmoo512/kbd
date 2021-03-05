@@ -4,6 +4,8 @@ from wtforms import validators, StringField, SelectField, IntegerField, FloatFie
 #from wtforms import ValidationError
 from wtforms.fields.html5 import DateField
 
+#FLASK-FORM TO VALIDATE TO-GO LABEL DATA
+
 class TGLForm(FlaskForm):
     week_ending=DateField('Week Ending: ', format='%Y-%m-%d')
     location=SelectField('Location', choices=[
@@ -17,6 +19,9 @@ class TGLForm(FlaskForm):
     number_passed=IntegerField('# Perfect:')
 
     submit=SubmitField('Add')
+
+
+#FLASK-FORM TO VALIDATE ORDER ACCURACY DATA
 
 class OrderAccuracyForm(FlaskForm):
     week_ending=DateField('Week Ending: ', format='%Y-%m-%d')

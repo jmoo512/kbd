@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_login import LoginManager
 from flask_cors import CORS
-#from flask_praetorian import Praetorian
 from config import Config
 
 APP_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -14,7 +13,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 login=LoginManager()
 login.login_view = 'core.login'
-#guard=Praetorian()
 cors=CORS()
 
 def create_app(config_class=Config):

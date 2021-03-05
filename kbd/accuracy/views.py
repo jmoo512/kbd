@@ -13,6 +13,9 @@ params=config()
 
 accuracy=Blueprint('accuracy',__name__)
 
+
+#ADD TO-GO LABEL DATA TO DB
+
 @accuracy.route('/tgl_add/', methods=['POST'])
 def tgl_add():
     form=TGLForm()
@@ -35,6 +38,9 @@ def tgl_add():
     db.session.commit()
 
     return redirect(url_for('core.add'))
+
+
+#ADD ORDER ACCURACY DATA TO DB
 
 @accuracy.route('/acc_add/', methods=['POST'])
 def acc_add():
@@ -59,6 +65,8 @@ def acc_add():
 
 
 
+#GET TO-GO LABEL DATA FROM DB FOR CHOSEN LOCATION
+
 @accuracy.route('/tgl/<chosen_location>')
 def tgl(chosen_location):
 
@@ -75,6 +83,9 @@ def tgl(chosen_location):
     df=tgl_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+
+#GET TO-GO LABEL DATA FORM DB FOR CHOSEN CONCEPT
 
 @accuracy.route('/tgl_concept')
 def tgl_concept():
@@ -93,6 +104,9 @@ def tgl_concept():
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+
+#GET ORDER ACCURACY DATA FROM DB FOR CHOSEN LOCATION
+
 @accuracy.route('/acc/<chosen_location>')
 def acc(chosen_location):
 
@@ -109,6 +123,9 @@ def acc(chosen_location):
     df=acc_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+
+#GET ORDER ACCURACY DATA FROM DB FOR CHOSEN CONCEPT
 
 @accuracy.route('/acc_concept/<chosen_concept>')
 def acc_concept(chosen_concept):

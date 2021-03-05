@@ -1,6 +1,7 @@
 from kbd import db
 from datetime import datetime
 
+#GAME FILM DB MODEL
 class GameFilm(db.Model):
     __tablename__='gamefilm'
     id=db.Column(db.Integer,primary_key=True)

@@ -13,11 +13,16 @@ params=config()
 
 speed = Blueprint('speed',__name__)
 
-@speed.route('/speed/ce')
-def index():
-    form=CEForm()
-    result=CashierEfficiency.query.all()
-    return render_template('index.html',form=form,result=result)
+
+
+# @speed.route('/speed/ce')
+# def index():
+#     form=CEForm()
+#     result=CashierEfficiency.query.all()
+#     return render_template('index.html',form=form,result=result)
+
+
+#GET CASHIER EFFICIENCY DATA FOR CHOSEN LOCATION FROM DB
 
 @speed.route('/ce/<chosen_location>')
 def ce(chosen_location):
@@ -36,6 +41,9 @@ def ce(chosen_location):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+
+#GET TACO TIMES DATA FOR CHOSEN LOCATION FROM DB
+
 @speed.route('/taco/<chosen_location>')
 def taco(chosen_location):
 
@@ -52,6 +60,8 @@ def taco(chosen_location):
     df=taco_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
+
+#GET TACO TIMES DATA FROM CHOSEN CONCEPT FROM DB
 
 @speed.route('/taco_concept/<chosen_concept>')
 def taco_concept(chosen_concept):
@@ -70,6 +80,8 @@ def taco_concept(chosen_concept):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+#GET BAG TIMES DATA FOR CHOSEN LOCATION FROM DB
+
 @speed.route('/bag_times/<chosen_location>')
 def bag_times(chosen_location):
 
@@ -87,6 +99,7 @@ def bag_times(chosen_location):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+#ADD TACO TIMES DATA TO DB
 @speed.route('/taco_add',methods=['POST'])
 def taco_add():
 
@@ -207,6 +220,9 @@ def taco_add():
             db.session.commit()
 
     return redirect(url_for('core.add'))
+
+
+#ADD CASHIER EFFICIENCY DATA TO DB
 
 @speed.route('/ce_add',methods=['GET','POST'])
 def ce_add():
@@ -344,6 +360,8 @@ def ce_add():
 
     return redirect(url_for('core.add'))
     return render_template('index.html',form=form)
+
+#ADD BAG TIMES DATA TO DB
 
 @speed.route('/bag_times_add/', methods=['POST'])
 def bag_times_add():

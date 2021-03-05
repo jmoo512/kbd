@@ -2,6 +2,9 @@ from kbd import db
 from datetime import datetime
 
 
+
+#TO-GO LABEL DB MODEL
+
 class ToGoLabel(db.Model):
     __tablename__='tgl'
     id=db.Column(db.Integer,primary_key=True)
@@ -17,6 +20,7 @@ class ToGoLabel(db.Model):
     number_passed=db.Column(db.Integer)
 
 
+#ORDER ACCURACT DB MODEL
 
 class OrderAccuracy(db.Model):
     __tablename__='orderaccuracy'

@@ -14,7 +14,7 @@ params=config()
 
 clean=Blueprint('clean',__name__)
 
-
+#ADD INSPECTION DATA TO DB
 @clean.route('/clean_add/',methods=['POST'])
 #@login_required
 def clean_add():
@@ -45,6 +45,9 @@ def clean_add():
 
     return redirect(url_for('core.add'))
 
+
+#GET INSPECTION DATA FOR CHOSEN LOCATION
+
 @clean.route('/insp/<chosen_location>')
 def insp(chosen_location):
 
@@ -61,6 +64,9 @@ def insp(chosen_location):
     df=insp_data
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
+    
+
+#GET INSPECTION DATA FOR CHOSEN CONCEPT
 
 @clean.route('/insp_concept/<chosen_concept>')
 def insp_concept(chosen_concept):

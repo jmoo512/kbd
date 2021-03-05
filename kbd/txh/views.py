@@ -13,6 +13,8 @@ params=config()
 
 txh=Blueprint('txh',__name__)
 
+#ADD GAME FILM DATA TO DB
+
 @txh.route('/gf_add/',methods=['POST'])
 def gf_add():
 
@@ -43,6 +45,7 @@ def gf_add():
 
     return redirect(url_for('core.add'))
 
+#GET GAME FILM DATA FOR CHOSEN LOCATION FROM DB
 @txh.route('/gf/<chosen_location>')
 def gf(chosen_location):
 
@@ -60,6 +63,7 @@ def gf(chosen_location):
 
     return Response(df.to_json(orient="records"), mimetype='application/json')
 
+#GET GAME FILM DATA FOR CHOSEN CONCEPT FROM DB
 @txh.route('/gf_concept/<chosen_concept>')
 def gf_concept(chosen_concept):
 
