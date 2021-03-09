@@ -9,13 +9,13 @@ This app was designed to track and visualize sales growth and key metrics result
 
 Monolithic app
 
-Vanilla JavaScript used to navigate pages, fetch data for selected locations, and prepare data for chart creation.
-plotly.js used to create charts.
-Python and Flask used to create endpoints for each data fetch.
-pandas used to wrangle data.
+* Vanilla JavaScript used to navigate pages, fetch data for selected locations, and prepare data for chart creation.
+* [plotly.js](https://plotly.com/javascript/) used to create charts.
+* Python and Flask used to create endpoints for each data fetch.
+* [pandas](https://pandas.pydata.org/) used to wrangle data.
 
-* [plotly.js](https://plotly.com/javascript/)
-* [pandas](https://pandas.pydata.org/)
+
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
