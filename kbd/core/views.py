@@ -58,15 +58,15 @@ def sales():
 def store_weekly():
     return render_template('store_weekly.html')
 
-#VIEW MIGHTY FINE KBDS
-@core.route('/mf_kbds')
-def mf_kbds():
-    return render_template('mf_kbds.html')
+#VIEW Concept B KBDS
+@core.route('/Concept B_kbds')
+def Concept B_kbds():
+    return render_template('Concept B_kbds.html')
 
-#VIEW RUDY'S KBDS
-@core.route('/rudys_kbds')
-def rudys_kbds():
-    return render_template('rudys_kbds.html')
+#VIEW Concept A KBDS
+@core.route('/Concept A_kbds')
+def Concept A_kbds():
+    return render_template('Concept A_kbds.html')
 
 #ROUTE TO HANDLE LOGIN
 @core.route('/login', methods=['GET', 'POST'])

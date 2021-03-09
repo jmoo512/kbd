@@ -35,10 +35,10 @@ class CEForm(FlaskForm):
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
                                                 ('Lamar','Lamar'),
-                                                ('MF1','MF1'),
-                                                ('MF2','MF2'),
-                                                ('MF3','MF3'),
-                                                ('MF4','MF4')
+                                                ('Concept B1','Concept B1'),
+                                                ('Concept B2','Concept B2'),
+                                                ('Concept B3','Concept B3'),
+                                                ('Concept B4','Concept B4')
                                             ])
     date_measured=DateField('Date Measured', format='%Y-%m-%d')
     tm_name_one=StringField('TM Name: ')
@@ -118,10 +118,10 @@ class TacoForm(FlaskForm):
 class BagTimesForm(FlaskForm):
     week_ending=DateField('Week Ending: ', format='%Y-%m-%d')
     location=SelectField('Location', choices=[
-                                                ('MF1','MF1'),
-                                                ('MF2','MF2'),
-                                                ('MF3','MF3'),
-                                                ('MF4','MF4'),
+                                                ('Concept B1','Concept B1'),
+                                                ('Concept B2','Concept B2'),
+                                                ('Concept B3','Concept B3'),
+                                                ('Concept B4','Concept B4'),
                                                 ('Concept','Concept')
                                             ])
     week_avg=IntegerField('Week Average in Seconds: ')

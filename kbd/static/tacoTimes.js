@@ -67,7 +67,7 @@ async function updateCharts () {
 }
 
 async function populateBaseCharts () {
-  let concept = 'Mighty Fine'
+  let concept = 'Concept B'
   const inspConceptData = await getInspConceptData(concept);
   const gfConceptData = await getGFConceptData(concept);
 

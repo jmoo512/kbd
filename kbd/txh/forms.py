@@ -45,8 +45,8 @@ class GFForm(FlaskForm):
                                                 ])
 
     concept=SelectField('Concept', choices=[
-                                                ('Rudys','Rudy\'s'),
-                                                ('Mighty Fine','Mighty Fine')
+                                                ('Concept A','Concept A\'s'),
+                                                ('Concept B','Concept B')
                                                 ])
 
     location=SelectField('Location', choices=[
@@ -55,20 +55,20 @@ class GFForm(FlaskForm):
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
                                                 ('Lamar','Lamar'),
-                                                ('MF1','MF1'),
-                                                ('MF2','MF2'),
-                                                ('MF3','MF3'),
-                                                ('MF4','MF4'),
-                                                ('MFT2','MFT2')
+                                                ('Concept B1','Concept B1'),
+                                                ('Concept B2','Concept B2'),
+                                                ('Concept B3','Concept B3'),
+                                                ('Concept B4','Concept B4'),
+                                                ('Concept BT2','Concept BT2')
                                             ])
     date_measured=DateField('Date of Game Film', format='%Y-%m-%d')
 
     type=SelectField('Game Film Type', choices=[
-                                                ('MF','MF'),
-                                                ('MF Phone','MF Phone'),
-                                                ('MF Pickup','MF Pickup'),
-                                                ('Rudys Phone','Rudys Phone'),
-                                                ('Rudys Pick Up','Rudys Pick Up'),
+                                                ('Concept B','Concept B'),
+                                                ('Concept B Phone','Concept B Phone'),
+                                                ('Concept B Pickup','Concept B Pickup'),
+                                                ('Concept A Phone','Concept A Phone'),
+                                                ('Concept A Pick Up','Concept A Pick Up'),
                                                 ('BBQ Rookie', 'BBQ Rookie'),
                                                 ('Taco Rookie', 'Taco Rookie') 
                                                 ])

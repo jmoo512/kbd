@@ -22,9 +22,9 @@ def sales_add():
     form=SalesForm()
 
     if form.location.data in ['183','360','Round Rock','620','Lamar']:
-        concept='Rudys'
+        concept='a'
     else:
-        concept='Mighty Fine'
+        concept='b'
 
     calendar=FiscalCalendar.query.filter(FiscalCalendar.week_ending==form.week_ending.data).first_or_404()
 

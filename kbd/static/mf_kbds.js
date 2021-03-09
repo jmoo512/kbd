@@ -1,6 +1,6 @@
 //import modules
 import {fancyTimeFormat, selectStore, getInspData, getGFData, getAccData, getBagTimesData, getTacoConceptData, getInspConceptData, getGFConceptData, getBagTimesConceptData, getAccConceptData} from './modules/kbds.js'
-import {colors, ranges, inspLayout, gfLayout, bagTimesLayout, mfAccLayout, config, staticConfig} from './modules/chartConfig.js'
+import {colors, ranges, inspLayout, gfLayout, bagTimesLayout, Concept BAccLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
 
@@ -98,7 +98,7 @@ async function updateCharts () {
   Plotly.react('insp-chart', inspSpark, inspLayout, staticConfig);
   Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
   Plotly.react('bag-times-chart', bagTimesSpark, bagTimesLayout, staticConfig);
-  Plotly.react('acc-chart', accSpark, mfAccLayout, staticConfig);
+  Plotly.react('acc-chart', accSpark, Concept BAccLayout, staticConfig);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
@@ -123,7 +123,7 @@ async function updateCharts () {
 }
 
 async function populateBaseCharts () {
-  let concept = 'Mighty Fine'
+  let concept = 'Concept B'
   const inspConceptData = await getInspConceptData(concept);
   const gfConceptData = await getGFConceptData(concept);
   const bagTimesConceptData = await getBagTimesConceptData(concept);
@@ -171,7 +171,7 @@ Plotly.newPlot( 'gf-chart', startingData, gfLayout, staticConfig);
 Plotly.newPlot( 'bag-times-chart', startingData, bagTimesLayout, staticConfig);
 //Plotly.newPlot( 'cu-times-chart', startingData, sparkLayout, config);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
-Plotly.newPlot( 'acc-chart', startingData, mfAccLayout, config);
+Plotly.newPlot( 'acc-chart', startingData, Concept BAccLayout, config);
 //Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
 
 

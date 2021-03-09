@@ -31,11 +31,11 @@ class OrderAccuracyForm(FlaskForm):
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
                                                 ('Lamar','Lamar'),
-                                                ('MF1','MF1'),
-                                                ('MF2','MF2'),
-                                                ('MF3','MF3'),
-                                                ('MF4','MF4'),
-                                                ('MFT2','MFT2')
+                                                ('Concept B1','Concept B1'),
+                                                ('Concept B2','Concept B2'),
+                                                ('Concept B3','Concept B3'),
+                                                ('Concept B4','Concept B4'),
+                                                ('Concept BT2','Concept BT2')
                                             ])
     inaccurate_count=IntegerField('# of Inaccurate Orders: ')
     submit=SubmitField('Add')

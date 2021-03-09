@@ -1,6 +1,6 @@
 //import modules
 import {fancyTimeFormat, selectStore, getInspData, getGFData, getTacoData, getTGLData, getAccData, getInspConceptData, getGFConceptData, getTacoConceptData, getTGLConceptData, getAccConceptData} from './modules/kbds.js'
-import {colors, ranges, inspLayout, gfLayout, tacoLayout, tglLayout, rudysAccLayout, config, staticConfig} from './modules/chartConfig.js'
+import {colors, ranges, inspLayout, gfLayout, tacoLayout, tglLayout, Concept AAccLayout, config, staticConfig} from './modules/chartConfig.js'
 
 //Add event listener to selector to call update functions
 
@@ -119,7 +119,7 @@ let inspChartData = {
   Plotly.react('gf-chart', gfSpark, gfLayout, staticConfig);
   Plotly.react('taco-times-chart', tacoSpark, tacoLayout, staticConfig);
   Plotly.react('tgl-chart', tglSpark, tglLayout, staticConfig);
-  Plotly.react('acc-chart', accSpark, rudysAccLayout, staticConfig);
+  Plotly.react('acc-chart', accSpark, Concept AAccLayout, staticConfig);
 
   document.getElementById("insp-week-big").innerHTML = inspAvgWeek + ' Wk';
   document.getElementById("insp-month").innerHTML = inspAvgMonth + ' Mo';
@@ -151,7 +151,7 @@ let inspChartData = {
 
 
 async function populateBaseCharts () {
-  let concept = 'Rudys'
+  let concept = 'Concept A'
   const inspConceptData = await getInspConceptData(concept);
   const gfConceptData = await getGFConceptData(concept);
   const tacoConceptData = await getTacoConceptData(concept);
@@ -207,7 +207,7 @@ Plotly.newPlot('gf-chart', startingData, gfLayout, staticConfig);
 Plotly.newPlot('taco-times-chart', startingData, tacoLayout, staticConfig);
 Plotly.newPlot('tgl-chart', startingData, tglLayout, staticConfig);
 //Plotly.newPlot( 'olo-times-chart', startingData, sparkLayout, config);
-Plotly.newPlot( 'acc-chart', startingData, rudysAccLayout, config);
+Plotly.newPlot( 'acc-chart', startingData, Concept AAccLayout, config);
 //Plotly.newPlot( 'labor-chart', startingData, sparkLayout, config);
 
 

@@ -21,9 +21,9 @@ def gf_add():
     form=GFForm()
 
     if form.location.data in ['183','360','Round Rock','620','Lamar']:
-        concept='Rudys'
+        concept='Concept A'
     else:
-        concept='Mighty Fine'
+        concept='Concept B'
 
     calendar=FiscalCalendar.query.filter(FiscalCalendar.date==form.date_measured.data).first_or_404()
 

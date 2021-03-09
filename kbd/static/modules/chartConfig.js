@@ -19,8 +19,8 @@ let ranges = {
   "taco":[30,90],
   "bagTimes":[240,360],
   "tgl":[0,100],
-  "rudysAcc":[99.96,100],
-  "mfAcc":[99.6,100]
+  "Concept AAcc":[99.96,100],
+  "Concept BAcc":[99.6,100]
 }
 
 let inspLayout =  {
@@ -219,7 +219,7 @@ let bagTimesLayout =  {
       }
     }
 
-  let rudysAccLayout =  {
+  let Concept AAccLayout =  {
       autosize: true,
       paper_bgcolor: '#FFFFFF',
       plot_bgcolor: '#FFFFFF',
@@ -252,12 +252,12 @@ let bagTimesLayout =  {
         dtick: 0.02,
         ticks: '',
         showticklabels: true,
-        range: ranges["rudysAcc"]
+        range: ranges["Concept AAcc"]
       },
       legend: {
       }
     }
-    let mfAccLayout =  {
+    let Concept BAccLayout =  {
         autosize: true,
         paper_bgcolor: '#FFFFFF',
         plot_bgcolor: '#FFFFFF',
@@ -290,7 +290,7 @@ let bagTimesLayout =  {
           dtick: 0.2,
           ticks: '',
           showticklabels: true,
-          range: ranges["mfAcc"]
+          range: ranges["Concept BAcc"]
         },
         legend: {
         }
@@ -305,4 +305,4 @@ let staticConfig = {responsive: true,
                     staticPlot: true
             }
 
-export {colors, ranges, inspLayout, gfLayout, tacoLayout, bagTimesLayout, tglLayout, rudysAccLayout, mfAccLayout, config, staticConfig}
+export {colors, ranges, inspLayout, gfLayout, tacoLayout, bagTimesLayout, tglLayout, Concept AAccLayout, Concept BAccLayout, config, staticConfig}

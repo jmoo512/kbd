@@ -46,8 +46,8 @@ class InspForm(FlaskForm):
                                                 ])
 
     concept=SelectField('Concept', choices=[
-                                                ('Rudys','Rudy\'s'),
-                                                ('Mighty Fine','Mighty Fine')
+                                                ('Concept A','Concept A\'s'),
+                                                ('Concept B','Concept B')
                                                 ])
 
     location=SelectField('Location', choices=[
@@ -56,11 +56,11 @@ class InspForm(FlaskForm):
                                                 ('Round Rock','Round Rock'),
                                                 ('620','620'),
                                                 ('Lamar','Lamar'),
-                                                ('MF1','MF1'),
-                                                ('MF2','MF2'),
-                                                ('MF3','MF3'),
-                                                ('MF4','MF4'),
-                                                ('MFT2','MFT2')
+                                                ('Concept B1','Concept B1'),
+                                                ('Concept B2','Concept B2'),
+                                                ('Concept B3','Concept B3'),
+                                                ('Concept B4','Concept B4'),
+                                                ('Concept BT2','Concept BT2')
                                             ])
     date_measured=DateField('Date of Inspection', format='%Y-%m-%d')
     score=FloatField('Score')
