@@ -9,13 +9,13 @@ This app was designed to track and visualize sales growth and key metrics result
 At this point in my developer learning journey I was very focused on data wrangling and visualizations.
 
 
-#Technologies
+# Technologies
+Front end: Vanilla JavaScript used to navigate pages, fetch data for selected locations, and prepare data for chart creation. Charts created using plotly.
 
-Front end: Vanilla JavaScript used to navigate pages, fetch data for selected locations, and produce charts of sales and metrics. Charts created using [plotly](https://plotly.com/javascript/)
+Back end: Python and Flask used to create API endpoints for each data fetch. Data wrangled using Pandas.
 
-Back end: Python and Flask used to create API endpoints for each fetch for data. Data 
-
-
+* [plotly.js](https://plotly.com/javascript/)
+* [pandas](https://pandas.pydata.org/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
