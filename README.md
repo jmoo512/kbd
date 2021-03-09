@@ -5,7 +5,10 @@
 
 This app was designed to track and visualize sales growth and key metrics results through charts. It was intended for use internally by a now bought out company. Though it was never deployed or used, certain details have been altered to avoid identification of the company.
 
+# Images
+
 ![KBD1](https://user-images.githubusercontent.com/49797086/110536447-18fd8280-80e7-11eb-9014-b25b50df541a.jpg)
+
 ![KBD2](https://user-images.githubusercontent.com/49797086/110536450-19961900-80e7-11eb-9f69-6242cd6f53f7.jpg)
 
 
