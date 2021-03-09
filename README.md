@@ -20,6 +20,6 @@ Monolithic app
 * [plotly.js](https://plotly.com/javascript/) used to create charts.
 * Python and Flask used to create endpoints for each data fetch.
 * [pandas](https://pandas.pydata.org/) used to wrangle data.
-* 
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
