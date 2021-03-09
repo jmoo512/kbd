@@ -8,3 +8,7 @@ config.py
 database.ini
 *.cfg
 psql_config.py
+migrations/
+lib/
+.ipynb_checkpoints/
+Scripts/
