@@ -2,3 +2,9 @@ venv
 *.pyc
 .DS_Store
 .env
+*.ipynb
+db_conn.txt
+config.py
+database.ini
+*.cfg
+psql_config.py
