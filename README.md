@@ -3,7 +3,7 @@
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/jmoo512/kbd)
 
-This app was designed to track and visualize sales growth and key metrics results through charts. It was intended for use internally by a now bought out company. Though it was never deployed or used, certain details have been altered to avoid identification of the company.
+This app was designed to track and visualize sales growth and key metrics results through charts. It was intended for use internally by a now bought out company, and certain details have been altered to avoid identification of the company.
 
 # Images
 
